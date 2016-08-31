@@ -166,15 +166,6 @@ public class HobbyLexer {
                     token = new StringToken(lineNum, toStringLiteral(first));
                 } else {
                     switch (first) {
-                        case TypeToken.INT:
-                            token = new TypeToken(lineNum, HobbyToken.INT);
-                            break;
-                        case TypeToken.FLOAT:
-                            token = new TypeToken(lineNum, HobbyToken.FLOAT);
-                            break;
-                        case TypeToken.STRING:
-                            token = new TypeToken(lineNum, HobbyToken.STRING);
-                            break;
                         case BoolToken.TRUE:
                             token = new BoolToken(lineNum, BoolToken.BoolType.TRUE);
                             break;
