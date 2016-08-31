@@ -15,8 +15,11 @@ public class HobbyObject {
      */
     protected EnvironmentCallBack env;
 
-    public HobbyObject(EnvironmentCallBack env) {
+    protected ClassInfo info;
+
+    public HobbyObject(EnvironmentCallBack env, ClassInfo info) {
         this.env = env;
+        this.info = info;
     }
 
     @Override

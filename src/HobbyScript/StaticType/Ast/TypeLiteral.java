@@ -3,6 +3,8 @@ package HobbyScript.StaticType.Ast;
 import HobbyScript.Ast.AstLeaf;
 import HobbyScript.Token.HobbyToken;
 
+import static HobbyScript.StaticType.Literal.Type.convert;
+
 /**
  * 类型Tag
  *
@@ -16,7 +18,7 @@ public class TypeLiteral extends AstLeaf {
     }
 
     public String type() {
-        return VarStmt.convert(tag);
+        return convert(tag);
     }
 
 }

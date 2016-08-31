@@ -26,6 +26,11 @@ public class ClassStmt extends AstList {
         return (ClassBody) this.child(childCount() - 1);
     }
 
+    @Override
+    public int hashCode() {
+        return name().hashCode();
+    }
+
     /**
      * 获取超类
      *

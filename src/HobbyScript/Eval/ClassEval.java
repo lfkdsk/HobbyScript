@@ -53,7 +53,7 @@ public class ClassEval {
                 // 注意是从body拿出来的env,classInfo的env用来获取外层的环境
                 LocalEnvironment thisEnv = new LocalEnvironment(info.env());
                 // 创建this指针指向该对象
-                HobbyObject object = new HobbyObject(thisEnv);
+                HobbyObject object = new HobbyObject(thisEnv, info);
 
                 thisEnv.put(THIS_POINT, object);
                 // 实例化
@@ -94,7 +94,7 @@ public class ClassEval {
                                      EnvironmentCallBack env) {
         if (info.getSuperClass() != null) {
 
-            HobbyObject superObject = new HobbyObject(env);
+            HobbyObject superObject = new HobbyObject(env, info);
             env.put(ScriptParser.SUPER_TOKEN, superObject);
 
             initialObject(info.getSuperClass(), env);
@@ -120,7 +120,7 @@ public class ClassEval {
                 FunctionEval.postfix(expr, 0) instanceof Dot) {
             Object t = FunctionEval.evalSubExpr(env, expr, 1);
             if (!(t instanceof HobbyObject)) {
-                t = new HobbyObject(env);
+                t = new HobbyObject(env, null);
             }
             return setField((HobbyObject) t,
                     (Dot) FunctionEval.postfix(expr, 0),

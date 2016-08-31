@@ -15,7 +15,7 @@ class lfkdsk {
 lfk = "";
 // 提供了两种写法 构造带括号 就会使用构造
 // 不带括号就要没有构造
-lfi = lfkdsk.Initial();
+lfi = lfkdsk.Initial;
 
 lfi.Ssdut();
 // lfi.ll;

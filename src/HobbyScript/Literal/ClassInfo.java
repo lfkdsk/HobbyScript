@@ -53,6 +53,11 @@ public class ClassInfo {
         return definition.name();
     }
 
+    @Override
+    public int hashCode() {
+        return definition.hashCode();
+    }
+
     public ClassBody body() {
         return definition.body();
     }

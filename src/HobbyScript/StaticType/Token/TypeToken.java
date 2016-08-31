@@ -1,6 +1,7 @@
-package HobbyScript.Token;
+package HobbyScript.StaticType.Token;
 
-import HobbyScript.StaticType.Ast.VarStmt;
+import HobbyScript.StaticType.Literal.Type;
+import HobbyScript.Token.HobbyToken;
 
 /**
  * 静态类型的类型声明
@@ -9,10 +10,11 @@ import HobbyScript.StaticType.Ast.VarStmt;
  *         Created by liufengkai on 16/8/8.
  */
 public class TypeToken extends HobbyToken {
-
     public static final String INT = "Int",
             FLOAT = "Float",
-            STRING = "String";
+            STRING = "String",
+            OBJECT = "Object";
+
 
     public TypeToken(int lineNumber, int type) {
         super(lineNumber, type);
@@ -20,7 +22,7 @@ public class TypeToken extends HobbyToken {
 
     @Override
     public String getText() {
-        return VarStmt.convert(tag);
+        return Type.convert(tag);
     }
 
     public boolean isType() {

@@ -13,12 +13,18 @@ import HobbyScript.Token.HobbyToken;
  *         Created by liufengkai on 16/7/11.
  */
 public class IdLiteral extends AstLeaf {
+
     public IdLiteral(HobbyToken token) {
         super(token);
     }
 
     public String name() {
         return token().getText();
+    }
+
+    @Override
+    public HobbyToken token() {
+        return token;
     }
 
     @Override

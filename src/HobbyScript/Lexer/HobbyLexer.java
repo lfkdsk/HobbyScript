@@ -2,6 +2,7 @@ package HobbyScript.Lexer;
 
 import HobbyScript.ApplicationTest.CodeDialog;
 import HobbyScript.Exception.ParseException;
+import HobbyScript.StaticType.Token.TypeToken;
 import HobbyScript.Token.*;
 import HobbyScript.Utils.logger.Logger;
 

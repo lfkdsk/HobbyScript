@@ -6,9 +6,10 @@ import HobbyScript.Ast.AstNode;
 import HobbyScript.Eval.Env.EnvironmentCallBack;
 import HobbyScript.Eval.Env.EvalCallBack;
 import HobbyScript.Token.HobbyToken;
-import HobbyScript.Token.TypeToken;
 
 import java.util.List;
+
+import static HobbyScript.StaticType.Literal.Type.convert;
 
 /**
  * Var 的创建过程
@@ -18,25 +19,6 @@ import java.util.List;
  *         Created by liufengkai on 16/8/8.
  */
 public class VarStmt extends AstList implements EvalCallBack {
-
-    /**
-     * 类型转换
-     *
-     * @param tag HobbyTag
-     * @return 类型Token
-     */
-    public static String convert(int tag) {
-        switch (tag) {
-            case HobbyToken.FLOAT:
-                return TypeToken.FLOAT;
-            case HobbyToken.INT:
-                return TypeToken.INT;
-            case HobbyToken.STRING:
-                return TypeToken.STRING;
-            default:
-                return null;
-        }
-    }
 
     public VarStmt(List<AstNode> children) {
         super(children, HobbyToken.VAR);

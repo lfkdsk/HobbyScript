@@ -28,7 +28,7 @@ public class ScriptInterpreter {
         if (fileName.equals("")) {
             lexer = new HobbyLexer(new CodeDialog());
         } else {
-            lexer = new HobbyLexer(new FileReader("../hobby_script/Test/" + fileName));
+            lexer = new HobbyLexer(new FileReader("Test/" + fileName));
         }
 
         Logger.init("Interpreter");
