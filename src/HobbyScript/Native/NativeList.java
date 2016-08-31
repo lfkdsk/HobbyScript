@@ -7,7 +7,6 @@ import HobbyScript.Literal.HobbyObject;
 import HobbyScript.Literal.NaiveFunction;
 import HobbyScript.Utils.logger.Logger;
 
-import java.io.BufferedReader;
 import java.lang.reflect.Method;
 
 
@@ -27,6 +26,7 @@ public class NativeList {
      * @param params     参数
      */
     public static void addNativeFunction(EnvironmentCallBack env,
+                                         String chName,
                                          String nativeName,
                                          Class<?> clazz,
                                          Class<?>... params) {
@@ -38,7 +38,7 @@ public class NativeList {
             throw new HobbyException("can not found native function :" + nativeName);
         }
 
-        env.put(nativeName, new NaiveFunction(nativeName, method));
+        env.put(chName, new NaiveFunction(nativeName, method));
     }
 
     /**
@@ -106,21 +106,21 @@ public class NativeList {
     public EnvironmentCallBack env(EnvironmentCallBack env) {
         topFloorEnvironment = (LocalEnvironment) env;
 
-        addNativeFunction(env, "logInfo", NativeList.class, String.class);
-        addNativeFunction(env, "println", NativeList.class, String.class);
-        addNativeFunction(env, "length", NativeList.class, Object[].class);
-        addNativeFunction(env, "stringLength", NativeList.class, String.class);
-        addNativeFunction(env, "print", NativeList.class, String.class);
-        addNativeFunction(env, "createArray", NativeList.class, Integer.class);
+        addNativeFunction(env, "打印", "logInfo", NativeList.class, String.class);
+        addNativeFunction(env, "输出", "println", NativeList.class, String.class);
+//        addNativeFunction(env, "length", NativeList.class, Object[].class);
+//        addNativeFunction(env, "stringLength", NativeList.class, String.class);
+//        addNativeFunction(env, "print", NativeList.class, String.class);
+//        addNativeFunction(env, "createArray", NativeList.class, Integer.class);
 //        addNativeFunction(env, "createScanner", InputMethod.class, null);
 //        addNativeFunction(env, "getNextLine", InputMethod.class, Scanner.class);
 //        addNativeFunction(env, "endScanner", InputMethod.class, Scanner.class);
 //        addNativeFunction(env, "hasNext", InputMethod.class, Scanner.class);
-        addNativeFunction(env, "charAtPoint", InputMethod.class, String.class, Integer.class);
-        addNativeFunction(env, "openReader", InputMethod.class, null);
-        addNativeFunction(env, "read", InputMethod.class, BufferedReader.class);
-        addNativeFunction(env, "readNextLine", InputMethod.class, BufferedReader.class);
-        addNativeFunction(env, "closeReader", InputMethod.class, BufferedReader.class);
+//        addNativeFunction(env, "charAtPoint", InputMethod.class, String.class, Integer.class);
+//        addNativeFunction(env, "openReader", InputMethod.class, null);
+//        addNativeFunction(env, "read", InputMethod.class, BufferedReader.class);
+//        addNativeFunction(env, "readNextLine", InputMethod.class, BufferedReader.class);
+//        addNativeFunction(env, "closeReader", InputMethod.class, BufferedReader.class);
 //        addNativeFunction(env, "parser", InputMethod.class, BufferedReader.class);
 //        addNativeFunction(env, "getLocalEnv", NativeList.class, String.class);
         return env;

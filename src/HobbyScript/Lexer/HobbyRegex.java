@@ -30,19 +30,19 @@ public class HobbyRegex {
     /**
      * 变量名的正则
      */
-    public static final String variableReg = "[A-Z_a-z][A-Z_a-z0-9]*";
+    public static final String variableReg = "[\u4E00-\u9FA5_\u4E00-\u9FA5][\u4E00-\u9FA5_\u4E00-\u9FA50-9]*";
 
     /**
      * 布尔表达式的正则
      */
-    public static final String booleanReg = "==|<=|>=|!=|&&|\\|\\|";
+    public static final String booleanReg = "等于|小于等于|大于等于|不等于|与|或";
 
     /**
      * 任意符号的正则匹配
      */
     public static final String symbolReg = "\\p{Punct}";
 
-    public static final String bool = "true|false|null";
+    public static final String bool = "真|假|空";
 
     /**
      * string 类型的正则
