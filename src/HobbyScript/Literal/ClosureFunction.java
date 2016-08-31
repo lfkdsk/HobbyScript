@@ -1,7 +1,7 @@
 package HobbyScript.Literal;
 
 import HobbyScript.Ast.BlockStmnt;
-import HobbyScript.Ast.ParameterList;
+import HobbyScript.StaticType.Ast.ParameterList;
 import HobbyScript.Eval.Env.EnvironmentCallBack;
 
 /**

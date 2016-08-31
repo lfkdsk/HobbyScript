@@ -1,5 +1,6 @@
-package HobbyScript.Ast;
+package HobbyScript.StaticType.Ast;
 
+import HobbyScript.Ast.*;
 import HobbyScript.Compile.CodeLine;
 import HobbyScript.Eval.Env.EnvironmentCallBack;
 import HobbyScript.Eval.FunctionEval;
@@ -9,11 +10,14 @@ import java.util.List;
 
 /**
  * 函数定义
+ * <p>
+ * Typed修改版本
  *
  * @author liufengkai
  *         Created by liufengkai on 16/7/15.
  */
 public class FuncStmt extends AstList {
+
     public FuncStmt(List<AstNode> children) {
         super(children, HobbyToken.FUNCTION);
     }
@@ -48,7 +52,7 @@ public class FuncStmt extends AstList {
         line.startCompileFunction(code);
         int begin = line.newLine();
         int end = line.newLine();
-        line.addSpecCode("",begin);
+        line.addSpecCode("", begin);
 
         body().compile(line, begin, end);
 

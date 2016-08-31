@@ -1,7 +1,7 @@
 package HobbyScript.Compile;
 
 import HobbyScript.Ast.AstNode;
-import HobbyScript.Ast.FuncStmt;
+import HobbyScript.StaticType.Ast.FuncStmt;
 import HobbyScript.Ast.NullStmt;
 import HobbyScript.Exception.ParseException;
 import HobbyScript.Lexer.HobbyLexer;

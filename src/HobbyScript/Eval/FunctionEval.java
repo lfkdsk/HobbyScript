@@ -6,6 +6,8 @@ import HobbyScript.Eval.Env.LocalEnvironment;
 import HobbyScript.Exception.HobbyException;
 import HobbyScript.Literal.*;
 import HobbyScript.Parser.ScriptParser;
+import HobbyScript.StaticType.Ast.FuncStmt;
+import HobbyScript.StaticType.Ast.ParameterList;
 
 /**
  * 添加函数方法之后

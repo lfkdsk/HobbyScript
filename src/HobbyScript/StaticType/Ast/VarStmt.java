@@ -11,10 +11,20 @@ import HobbyScript.Token.TypeToken;
 import java.util.List;
 
 /**
- * Created by liufengkai on 16/8/8.
+ * Var 的创建过程
+ * 0类型 1Token 2Initial
+ *
+ * @author liufengkai
+ *         Created by liufengkai on 16/8/8.
  */
 public class VarStmt extends AstList implements EvalCallBack {
 
+    /**
+     * 类型转换
+     *
+     * @param tag HobbyTag
+     * @return 类型Token
+     */
     public static String convert(int tag) {
         switch (tag) {
             case HobbyToken.FLOAT:

@@ -12,6 +12,8 @@ import HobbyScript.Utils.logger.Logger;
 /**
  * 静态类型版本
  * 这个当然还需要对应的Eval版本支持
+ * <p>
+ * Typed修改版
  *
  * @author liufengkai
  *         Created by liufengkai on 16/7/16.
@@ -28,7 +30,9 @@ public class StaticTypeParser extends FunctionParser {
     // var = type id = expr;
     ///////////////////////////////////////////////////////////////////////////
     BnfParser variable = BnfParser.rule(VarStmt.class)
-            .ast(type).identifier(reserved).sep("=").ast(expr);
+            .ast(type).identifier(reserved)
+            .maybe(BnfParser.rule().sep(ASSIGN_TOKEN).ast(expr));
+
 
     private StaticTypeParser() {
         // param = type id

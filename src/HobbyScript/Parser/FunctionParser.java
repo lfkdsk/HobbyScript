@@ -4,6 +4,8 @@ import HobbyScript.ApplicationTest.CodeDialog;
 import HobbyScript.Ast.*;
 import HobbyScript.Exception.ParseException;
 import HobbyScript.Lexer.HobbyLexer;
+import HobbyScript.StaticType.Ast.FuncStmt;
+import HobbyScript.StaticType.Ast.ParameterList;
 import HobbyScript.Token.HobbyToken;
 import HobbyScript.Utils.logger.Logger;
 
