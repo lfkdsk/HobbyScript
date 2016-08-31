@@ -30,7 +30,7 @@ public class StaticTypeParser extends FunctionParser {
     BnfParser variable = BnfParser.rule(VarStmt.class)
             .ast(type).identifier(reserved).sep("=").ast(expr);
 
-    public StaticTypeParser() {
+    private StaticTypeParser() {
         // param = type id
         param.reset().ast(type).identifier(reserved);
 
