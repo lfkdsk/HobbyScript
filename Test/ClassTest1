@@ -19,6 +19,7 @@ lfi = lfkdsk.Initial;
 
 lfi.Ssdut();
 // lfi.ll;
+lfi.Ss = 100000;
 
 logInfo(lfi.Ss + lfk);
 

@@ -119,9 +119,9 @@ public class ClassEval {
         if (FunctionEval.hasPostfix(expr, 0) &&
                 FunctionEval.postfix(expr, 0) instanceof Dot) {
             Object t = FunctionEval.evalSubExpr(env, expr, 1);
-            if (!(t instanceof HobbyObject)) {
-                t = new HobbyObject(env, null);
-            }
+//            if (!(t instanceof HobbyObject)) {
+//                t = new HobbyObject(env, null);
+//            }
             return setField((HobbyObject) t,
                     (Dot) FunctionEval.postfix(expr, 0),
                     value);

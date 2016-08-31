@@ -34,6 +34,7 @@ public class ParameterList extends AstList {
      */
     public String name(int i) {
         // 拿Typed的ID
+        // 有类型 ..get(i).child(1)
         return ((AstLeaf) children.get(i).child(1)).token().getText();
     }
 
