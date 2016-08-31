@@ -1,0 +1,23 @@
+i = 301;
+
+class lfkdsk {
+    Ss = i;
+
+    function Initial(x){
+        Ss = i;
+    }
+
+    Ssdut = closure(){
+        Ss = 1000;
+    };
+}
+
+class lfk extend lfkdsk {
+    function Lfkddd(){
+        super.Ssdut();
+    }
+}
+
+lfi = lfk.Initial(200);
+
+logInfo(lfi.Lfkddd() + "  " + lfi.Ss);

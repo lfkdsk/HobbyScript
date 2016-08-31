@@ -1,0 +1,15 @@
+class Input {
+    reader = openReader();
+
+    function Initial(){
+
+    }
+
+    function Read(){
+        read(reader);
+    }
+
+    function Close(){
+        closeReader(reader);
+    }
+};

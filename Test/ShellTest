@@ -1,0 +1,21 @@
+class scanner {
+    scanner = createScanner();
+
+    function Initial(){
+
+    }
+
+    function HasNext(){
+        hasNext(scanner);
+    }
+
+    function GetNextLine(){
+        getNextLine(scanner);
+    }
+}
+
+scan = scanner.Initial();
+
+while(scan.HasNext()){
+    logInfo(scan.GetNextLine());
+}

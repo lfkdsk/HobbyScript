@@ -1,0 +1,20 @@
+class lfkdsk {
+    Ss = 100;
+
+    function Initial(x){
+        this.Ss = x;
+    }
+
+    Ssdut = closure(){
+        this.Ss = 1000;
+    };
+}
+
+lfk = "";
+lfi = lfkdsk.Initial(200);
+
+lfi.Ssdut();
+
+
+
+logInfo(lfi.Ss + lfk);
