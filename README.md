@@ -6,7 +6,28 @@ Exercise for learn knowledge about computer language compile.
 >
 > Dev TimeLine :  [TimeLine](TimeLine.md)
 
+[![](https://jitpack.io/v/lfkdsk/HobbyScript.svg)](https://jitpack.io/#lfkdsk/HobbyScript)
 
+### With Gradle
+
+Step 1. Add the JitPack repository to your build file
+
+``` groovy
+	allprojects {
+		repositories {
+			...
+			maven { url "https://jitpack.io" }
+		}
+	}
+```
+
+Step 2. Add the dependency
+
+``` groovy
+	dependencies {
+	        compile 'com.github.lfkdsk:HobbyScript:v1.0'
+	}
+```
 
 
 
