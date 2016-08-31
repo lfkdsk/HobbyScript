@@ -5,6 +5,8 @@ Exercise for learn knowledge about computer language compile.
 > Transport from my another lib [CodeParser](https://github.com/lfkdsk/CodeParse).
 >
 > Dev TimeLine :  [TimeLine](TimeLine.md)
+>
+> 科科 所谓中文编程233333
 
 [![](https://jitpack.io/v/lfkdsk/HobbyScript.svg)](https://jitpack.io/#lfkdsk/HobbyScript)
 
@@ -29,7 +31,9 @@ Step 2. Add the dependency
 	}
 ```
 
+### Pic
 
+![zh](Tmp/zh.png)
 
 ## License
 
