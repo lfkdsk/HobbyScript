@@ -21,6 +21,7 @@ import java.io.FileReader;
  *         Created by liufengkai on 16/7/15.
  */
 public class ScriptInterpreter {
+
     static void run(String fileName, ScriptParser parser, EnvironmentCallBack env) throws ParseException, FileNotFoundException {
 
         HobbyLexer lexer;
