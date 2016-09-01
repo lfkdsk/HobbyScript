@@ -6,6 +6,8 @@ import HobbyScript.Eval.Env.EnvironmentCallBack;
 import HobbyScript.Eval.ScriptEval;
 import HobbyScript.Literal.IdLiteral;
 import HobbyScript.Parser.ScriptParser;
+import HobbyScript.StaticType.Exception.TypeException;
+import HobbyScript.StaticType.Literal.Type;
 import HobbyScript.Token.HobbyToken;
 
 import java.util.List;
@@ -17,6 +19,12 @@ import java.util.List;
  *         Created by liufengkai on 16/7/12.
  */
 public class BinaryExpr extends AstList {
+
+    /**
+     * 等号的左右类型
+     * 在TypeCheck的阶段才会填充
+     */
+    protected Type leftType = null, rightType = null;
 
     public BinaryExpr(List<AstNode> children) {
         super(children, HobbyToken.BINARY);
@@ -98,7 +106,20 @@ public class BinaryExpr extends AstList {
 
 
     @Override
+    public Type check(EnvironmentCallBack env) throws TypeException {
+        return super.check(env);
+    }
+
+    @Override
     public Object eval(EnvironmentCallBack env) {
         return ScriptEval.binaryEval(env, this);
+    }
+
+    public void setLeftType(Type leftType) {
+        this.leftType = leftType;
+    }
+
+    public void setRightType(Type rightType) {
+        this.rightType = rightType;
     }
 }

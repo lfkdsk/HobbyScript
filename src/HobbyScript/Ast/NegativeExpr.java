@@ -3,6 +3,9 @@ package HobbyScript.Ast;
 import HobbyScript.Compile.CodeLine;
 import HobbyScript.Eval.Env.EnvironmentCallBack;
 import HobbyScript.Eval.ScriptEval;
+import HobbyScript.StaticType.Check.TypedCheck;
+import HobbyScript.StaticType.Exception.TypeException;
+import HobbyScript.StaticType.Literal.Type;
 import HobbyScript.Token.HobbyToken;
 
 import java.util.List;
@@ -29,6 +32,11 @@ public class NegativeExpr extends AstList {
     @Override
     public String compile(CodeLine line, int th, int nx) {
         return toString();
+    }
+
+    @Override
+    public Type check(EnvironmentCallBack env) throws TypeException {
+        return TypedCheck.negativeExprCheck(env, this);
     }
 
     @Override

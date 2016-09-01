@@ -1,6 +1,7 @@
 package HobbyScript.StaticType.Typed;
 
 import HobbyScript.Eval.Env.EnvironmentCallBack;
+import HobbyScript.StaticType.Exception.TypeException;
 import HobbyScript.StaticType.Literal.Type;
 
 /**
@@ -10,5 +11,5 @@ import HobbyScript.StaticType.Literal.Type;
  *         Created by liufengkai on 16/8/31.
  */
 public interface CheckCallBack {
-    Type check(EnvironmentCallBack env);
+    Type check(EnvironmentCallBack env) throws TypeException;
 }

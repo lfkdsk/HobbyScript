@@ -4,6 +4,7 @@ import HobbyScript.Compile.CodeLine;
 import HobbyScript.Compile.CompileCallBack;
 import HobbyScript.Eval.Env.EnvironmentCallBack;
 import HobbyScript.Eval.Env.EvalCallBack;
+import HobbyScript.StaticType.Exception.TypeException;
 import HobbyScript.StaticType.Literal.Type;
 import HobbyScript.StaticType.Typed.CheckCallBack;
 
@@ -66,7 +67,7 @@ public abstract class AstNode implements Iterable<AstNode>,
     }
 
     @Override
-    public Type check(EnvironmentCallBack env) {
+    public Type check(EnvironmentCallBack env) throws TypeException {
         return null;
     }
 
