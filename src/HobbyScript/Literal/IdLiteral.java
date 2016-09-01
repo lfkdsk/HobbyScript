@@ -4,6 +4,7 @@ import HobbyScript.Ast.AstLeaf;
 import HobbyScript.Compile.CodeLine;
 import HobbyScript.Eval.Env.EnvironmentCallBack;
 import HobbyScript.Eval.ScriptEval;
+import HobbyScript.StaticType.Check.TypedCheck;
 import HobbyScript.StaticType.Literal.Type;
 import HobbyScript.Token.HobbyToken;
 
@@ -36,6 +37,11 @@ public class IdLiteral extends AstLeaf {
     @Override
     public HobbyToken token() {
         return token;
+    }
+
+    @Override
+    public Type check(EnvironmentCallBack env) {
+        return TypedCheck.idCheck(env, this);
     }
 
     @Override

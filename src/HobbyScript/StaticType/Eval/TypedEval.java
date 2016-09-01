@@ -15,7 +15,7 @@ public class TypedEval {
     ///////////////////////////////////////////////////////////////////////////
     public static Object varEval(EnvironmentCallBack env,
                                  VarStmt varStmt) {
-        Object value = null;
+        Object value;
 
         if (varStmt.hasInitializer()) {
             value = varStmt.initializer().eval(env);

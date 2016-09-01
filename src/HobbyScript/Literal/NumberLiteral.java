@@ -4,6 +4,8 @@ import HobbyScript.Ast.AstLeaf;
 import HobbyScript.Compile.CodeLine;
 import HobbyScript.Eval.Env.EnvironmentCallBack;
 import HobbyScript.Eval.ScriptEval;
+import HobbyScript.StaticType.Check.TypedCheck;
+import HobbyScript.StaticType.Literal.Type;
 import HobbyScript.Token.HobbyToken;
 import HobbyScript.Token.NumberToken;
 
@@ -21,6 +23,11 @@ public class NumberLiteral extends AstLeaf {
 
     public int getTag() {
         return token.getTag();
+    }
+
+    @Override
+    public Type check(EnvironmentCallBack env) {
+        return TypedCheck.numCheck(env, this);
     }
 
     @Override

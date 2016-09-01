@@ -4,6 +4,8 @@ import HobbyScript.Ast.AstLeaf;
 import HobbyScript.Compile.CodeLine;
 import HobbyScript.Eval.Env.EnvironmentCallBack;
 import HobbyScript.Eval.ScriptEval;
+import HobbyScript.StaticType.Check.TypedCheck;
+import HobbyScript.StaticType.Literal.Type;
 import HobbyScript.Token.HobbyToken;
 
 /**
@@ -17,6 +19,11 @@ public class StringLiteral extends AstLeaf {
 
     public String value() {
         return token.getText();
+    }
+
+    @Override
+    public Type check(EnvironmentCallBack env) {
+        return TypedCheck.stringCheck(env, this);
     }
 
     @Override

@@ -32,6 +32,7 @@ public class TypedCheck {
 
     public static Type idCheck(EnvironmentCallBack env,
                                IdLiteral id) {
-        return OBJECT_TYPE;
+        // type的生成在生成树之后 所以这里已经能拿到Type 了
+        return id.getType();
     }
 }
