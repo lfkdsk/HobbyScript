@@ -47,6 +47,11 @@ public class Type {
         return this;
     }
 
+    public static boolean isInnerType(Type type) {
+        return type.equals(INT_TYPE) || type.equals(FLOAT_TYPE)
+                || type.equals(STRING_TYPE);
+    }
+
     /**
      * 类型转换
      *
@@ -61,8 +66,23 @@ public class Type {
                 return INT;
             case HobbyToken.STRING:
                 return STRING;
-            case HobbyToken.ID:
+            case HobbyToken.OBJECT:
                 return OBJECT;
+            default:
+                return null;
+        }
+    }
+
+    public static Type convertToType(int tag) {
+        switch (tag) {
+            case HobbyToken.FLOAT:
+                return FLOAT_TYPE;
+            case HobbyToken.INT:
+                return INT_TYPE;
+            case HobbyToken.STRING:
+                return STRING_TYPE;
+            case HobbyToken.OBJECT:
+                return OBJECT_TYPE;
             default:
                 return null;
         }

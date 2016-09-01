@@ -2,10 +2,13 @@ package HobbyScript.Parser;
 
 import HobbyScript.ApplicationTest.CodeDialog;
 import HobbyScript.Ast.AstNode;
+import HobbyScript.Ast.ClassStmt;
+import HobbyScript.Ast.NullStmt;
 import HobbyScript.Exception.ParseException;
 import HobbyScript.Lexer.HobbyLexer;
 import HobbyScript.StaticType.Ast.TypeLiteral;
 import HobbyScript.StaticType.Ast.VarStmt;
+import HobbyScript.StaticType.Literal.ClassRegisterInfo;
 import HobbyScript.Token.HobbyToken;
 import HobbyScript.Utils.logger.Logger;
 
@@ -18,7 +21,7 @@ import HobbyScript.Utils.logger.Logger;
  * @author liufengkai
  *         Created by liufengkai on 16/7/16.
  */
-public class StaticTypeParser extends FunctionParser {
+public class StaticTypeParser extends ArrayParser {
 
     ///////////////////////////////////////////////////////////////////////////
     // type = Int / Float / String
@@ -60,11 +63,21 @@ public class StaticTypeParser extends FunctionParser {
         while (lexer.peek(0) != HobbyToken.EOF) {
             AstNode node = parser.parse(lexer);
 
-//            if (!(node instanceof NullStmt)){
-//                PrintUtils.printAstTreeGraph(node);
-//            }
+            // 处理完类信息
+            if (node instanceof ClassStmt) {
 
-            Logger.v(" => " + node.toString() + "  ");
+                // 添加一个新的可检测类信息
+
+                lexer.registerClassInfo(
+                        new ClassRegisterInfo(((ClassStmt) node).name(),
+                                node.hashCode()));
+
+
+            }
+
+            if (!(node instanceof NullStmt)) {
+                Logger.v(" => " + node.toString() + "  ");
+            }
         }
     }
 }

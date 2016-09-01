@@ -3,6 +3,7 @@ package HobbyScript.Lexer;
 import HobbyScript.ApplicationTest.CodeDialog;
 import HobbyScript.Exception.ParseException;
 import HobbyScript.StaticType.Token.TypeToken;
+import HobbyScript.StaticType.Literal.ClassRegisterInfo;
 import HobbyScript.Token.*;
 import HobbyScript.Utils.logger.Logger;
 
@@ -21,8 +22,15 @@ import java.util.regex.Pattern;
  */
 public class HobbyLexer {
     private Pattern regPattern = Pattern.compile(HobbyRegex.hobbyReg);
-
+    /**
+     * Token 队列
+     */
     private ArrayList<HobbyToken> queue = new ArrayList<>();
+
+    /**
+     * 注册Class信息
+     */
+    private ArrayList<ClassRegisterInfo> registerInfos = new ArrayList<>();
 
     private boolean hasMore;
 
@@ -146,10 +154,6 @@ public class HobbyLexer {
     private void addToken(int lineNum, Matcher matcher) {
         String first = matcher.group(HobbyRegex.RegType.NOT_EMPTY_INDEX.indexNum);
 
-//        for (int i = 0; i < matcher.groupCount(); i++) {
-//            System.out.println(matcher.group(i));
-//        }
-
         if (first != null) {
             // 不是空格
             if (matcher.group(HobbyRegex.RegType.ANNOTATION_INDEX.indexNum) == null) {
@@ -166,33 +170,68 @@ public class HobbyLexer {
                 } else if (first.equals("\"\"") || matcher.group(HobbyRegex.RegType.STRING_INDEX.indexNum) != null) {
                     token = new StringToken(lineNum, toStringLiteral(first));
                 } else {
-                    switch (first) {
-                        case TypeToken.INT:
-                            token = new TypeToken(lineNum, HobbyToken.INT);
-                            break;
-                        case TypeToken.FLOAT:
-                            token = new TypeToken(lineNum, HobbyToken.FLOAT);
-                            break;
-                        case TypeToken.STRING:
-                            token = new TypeToken(lineNum, HobbyToken.STRING);
-                            break;
-                        case BoolToken.TRUE:
-                            token = new BoolToken(lineNum, BoolToken.BoolType.TRUE);
-                            break;
-                        case BoolToken.FALSE:
-                            token = new BoolToken(lineNum, BoolToken.BoolType.FALSE);
-                            break;
-                        case NullToken.NULL:
-                            token = new NullToken(lineNum);
-                            break;
-                        default:
-                            token = new IdToken(lineNum, first);
-                            break;
-                    }
+                    token = findToken(first, lineNum);
                 }
                 queue.add(token);
             }
         }
+    }
+
+
+    /**
+     * Token 的判断方法
+     *
+     * @param first   token string
+     * @param lineNum 行号
+     * @return token
+     */
+    private HobbyToken findToken(String first, int lineNum) {
+        HobbyToken token;
+        switch (first) {
+            case TypeToken.INT:
+                token = new TypeToken(lineNum, HobbyToken.INT);
+                break;
+            case TypeToken.FLOAT:
+                token = new TypeToken(lineNum, HobbyToken.FLOAT);
+                break;
+            case TypeToken.STRING:
+                token = new TypeToken(lineNum, HobbyToken.STRING);
+                break;
+            case BoolToken.TRUE:
+                token = new BoolToken(lineNum, BoolToken.BoolType.TRUE);
+                break;
+            case BoolToken.FALSE:
+                token = new BoolToken(lineNum, BoolToken.BoolType.FALSE);
+                break;
+            case NullToken.NULL:
+                token = new NullToken(lineNum);
+                break;
+            default:
+
+                // 注册类对象
+                for (ClassRegisterInfo info : registerInfos) {
+                    if (first.equals(info.getClassName())) {
+                        token = new TypeToken(lineNum, HobbyToken.OBJECT,
+                                info.getClassName(),
+                                info.getClassHashCode());
+                        return token;
+                    }
+                }
+
+                // 普通的id token
+                token = new IdToken(lineNum, first);
+                break;
+        }
+        return token;
+    }
+
+    /**
+     * 添加新的注册类信息
+     *
+     * @param info 类注册信息
+     */
+    public void registerClassInfo(ClassRegisterInfo info) {
+        registerInfos.add(info);
     }
 
     /**

@@ -20,7 +20,7 @@ public abstract class HobbyToken {
             POSTFIX = 284, PRIMARY = 285, FOR = 286, CLOSURE = 287,
             CLASS_TOKEN = 288, CLASS_BODY_TOKEN = 289, ARRAY = 290,
             CREATE_ARRAY = 291, OPTION = 292, IMPORT = 293, BOOL = 294,
-            VAR = 295, INT = 296, FLOAT = 297, TYPE = 298,
+            VAR = 295, INT = 296, FLOAT = 297, TYPE = 298, OBJECT = 299,
             EOF_TAG = -1, EOL_TAG = -2;
 
     /**

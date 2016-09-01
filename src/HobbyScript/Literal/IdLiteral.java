@@ -4,6 +4,7 @@ import HobbyScript.Ast.AstLeaf;
 import HobbyScript.Compile.CodeLine;
 import HobbyScript.Eval.Env.EnvironmentCallBack;
 import HobbyScript.Eval.ScriptEval;
+import HobbyScript.StaticType.Literal.Type;
 import HobbyScript.Token.HobbyToken;
 
 /**
@@ -14,8 +15,18 @@ import HobbyScript.Token.HobbyToken;
  */
 public class IdLiteral extends AstLeaf {
 
+    protected Type type;
+
     public IdLiteral(HobbyToken token) {
         super(token);
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public String name() {

@@ -15,9 +15,29 @@ public class TypeToken extends HobbyToken {
             STRING = "String",
             OBJECT = "Object";
 
+    /**
+     * Object 对应的哈希值
+     */
+    private int hashCode;
+
+    private String name;
 
     public TypeToken(int lineNumber, int type) {
         super(lineNumber, type);
+    }
+
+    public TypeToken(int lineNumber, int tag, String name, int hashCode) {
+        super(lineNumber, tag);
+        this.hashCode = hashCode;
+        this.name = name;
+    }
+
+    public int getHashCode() {
+        return hashCode;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
