@@ -5,6 +5,8 @@ Exercise for learn knowledge about computer language compile.
 > Transport from my another lib [CodeParser](https://github.com/lfkdsk/CodeParse).
 >
 > Dev TimeLine :  [TimeLine](TimeLine.md)
+>
+> Runtime version（with static type）
 
 [![](https://jitpack.io/v/lfkdsk/HobbyScript.svg)](https://jitpack.io/#lfkdsk/HobbyScript)
 
