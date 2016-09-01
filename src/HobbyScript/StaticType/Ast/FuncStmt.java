@@ -1,12 +1,19 @@
 package HobbyScript.StaticType.Ast;
 
-import HobbyScript.Ast.*;
+import HobbyScript.Ast.AstLeaf;
+import HobbyScript.Ast.AstList;
+import HobbyScript.Ast.AstNode;
+import HobbyScript.Ast.BlockStmnt;
 import HobbyScript.Compile.CodeLine;
 import HobbyScript.Eval.Env.EnvironmentCallBack;
 import HobbyScript.Eval.FunctionEval;
+import HobbyScript.Literal.IdLiteral;
+import HobbyScript.StaticType.Literal.ObjectType;
 import HobbyScript.Token.HobbyToken;
 
 import java.util.List;
+
+import static HobbyScript.StaticType.Literal.Type.isInnerType;
 
 /**
  * 函数定义
@@ -20,10 +27,29 @@ public class FuncStmt extends AstList {
 
     public FuncStmt(List<AstNode> children) {
         super(children, HobbyToken.FUNCTION);
+
+        IdLiteral id = id();
+        TypeLiteral type = ty();
+
+        // 根据是内部提供的数据类型 还是注册的Object类型进行设定类型
+        if (isInnerType(type.getType())) {
+            id.setType(type.getType());
+        } else {
+            id.setType(new ObjectType(type.name(), type.hashCode()));
+        }
+        // 在生成的过程中就自动设定了类型
+    }
+
+    public IdLiteral id() {
+        return (IdLiteral) child(1);
     }
 
     public String name() {
-        return ((AstLeaf) child(0)).token().getText();
+        return ((AstLeaf) child(1)).token().getText();
+    }
+
+    public TypeLiteral ty() {
+        return (TypeLiteral) child(0);
     }
 
     public ParameterList parameters() {
@@ -40,7 +66,7 @@ public class FuncStmt extends AstList {
     }
 
     public String toString() {
-        return "(func " + name() + " " + parameters() + " "
+        return "(func " + ty() + " " + name() + " " + parameters() + " "
                 + body() + " )";
     }
 

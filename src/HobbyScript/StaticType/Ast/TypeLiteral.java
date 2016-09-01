@@ -41,6 +41,11 @@ public class TypeLiteral extends AstLeaf {
         return ty;
     }
 
+    @Override
+    public String toString() {
+        return type();
+    }
+
     public String name() {
         return ((TypeToken) token()).getName();
     }

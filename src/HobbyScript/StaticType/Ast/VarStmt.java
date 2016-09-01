@@ -6,6 +6,7 @@ import HobbyScript.Ast.AstNode;
 import HobbyScript.Eval.Env.EnvironmentCallBack;
 import HobbyScript.Eval.Env.EvalCallBack;
 import HobbyScript.Literal.IdLiteral;
+import HobbyScript.StaticType.Eval.TypedEval;
 import HobbyScript.StaticType.Literal.ObjectType;
 import HobbyScript.Token.HobbyToken;
 
@@ -64,7 +65,7 @@ public class VarStmt extends AstList implements EvalCallBack {
 
     @Override
     public Object eval(EnvironmentCallBack env) {
-        return super.eval(env);
+        return TypedEval.varEval(env, this);
     }
 
     @Override

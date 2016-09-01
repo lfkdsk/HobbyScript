@@ -28,6 +28,7 @@ public class FunctionEval {
      */
     public static String functionEval(EnvironmentCallBack env, FuncStmt stmt) {
         Function function;
+        // 判断类内类外
         if (env.contains(ScriptParser.THIS_POINT)) {
             function = new ClassFunction(stmt.parameters(), stmt.body(), env);
         } else {
