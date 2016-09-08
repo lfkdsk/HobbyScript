@@ -32,28 +32,28 @@ public class ScriptParser {
     public static final String TRUE_TOKEN = "真",
             FALSE_TOKEN = "假";
 
-    public static final String SEMICOLON_TOKEN = "分号";
+    public static final String SEMICOLON_TOKEN = ";";
 
-    public static final String LP_TOKEN = "左括号", RP_TOKEN = "右括号";
+    public static final String LP_TOKEN = "(", RP_TOKEN = ")";
 
-    public static final String LC_TOKEN = "左大括号", RC_TOKEN = "右大括号";
+    public static final String LC_TOKEN = "{", RC_TOKEN = "}";
 
     public static final String LK_TOKEN = "\'";
 
-    public static final String ASSIGN_TOKEN = "赋值";
+    public static final String ASSIGN_TOKEN = "=";
 
-    public static final String EQ_TOKEN = "等于",
-            UQ_TOKEN = "不等于", GEQ_TOKEN = "大于等于", LE_TOKEN = "小于等于";
+    public static final String EQ_TOKEN = "==",
+            UQ_TOKEN = "!=", GEQ_TOKEN = ">=", LE_TOKEN = "<=";
 
-    public static final String LOGICAL_AND_TOKEN = "与",
-            LOGICAL_OR_TOKEN = "或", LOGICAL_F_TOKEN = "!";
+    public static final String LOGICAL_AND_TOKEN = "&&",
+            LOGICAL_OR_TOKEN = "||", LOGICAL_F_TOKEN = "!";
 
-    public static final String GT_TOKEN = "小于", GE_TOKEN = "大于";
+    public static final String GT_TOKEN = "<", GE_TOKEN = ">";
 
     public static final String ADD = "加", SUB = "减",
             MUL = "乘", DIV = "除", MOD = "取膜";
 
-    public static final String COMMA = "逗号";
+    public static final String COMMA = ",";
 
     public static final String FOR_TOKEN = "计次循环";
 
