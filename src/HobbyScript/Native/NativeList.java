@@ -106,7 +106,7 @@ public class NativeList {
     public EnvironmentCallBack env(EnvironmentCallBack env) {
         topFloorEnvironment = (LocalEnvironment) env;
 
-        addNativeFunction(env, "打印", "logInfo", NativeList.class, String.class);
+        addNativeFunction(env, "谈笑风生", "logInfo", NativeList.class, String.class);
         addNativeFunction(env, "输出", "println", NativeList.class, String.class);
 //        addNativeFunction(env, "length", NativeList.class, Object[].class);
 //        addNativeFunction(env, "stringLength", NativeList.class, String.class);

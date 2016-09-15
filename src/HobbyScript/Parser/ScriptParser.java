@@ -21,16 +21,16 @@ import java.util.HashSet;
  */
 public class ScriptParser {
 
-    public static final String IF_TOKEN = "如果";
+    public static final String IF_TOKEN = "如果你一定要问我";
 
-    public static final String ELSE_TOKEN = "那么";
+    public static final String ELSE_TOKEN = "否则";
 
-    public static final String WHILE_TOKEN = "循环";
+    public static final String WHILE_TOKEN = "问来问去";
 
-    public static final String FUNCTION_TOKEN = "函数";
+    public static final String FUNCTION_TOKEN = "搞个大新闻";
 
-    public static final String TRUE_TOKEN = "真",
-            FALSE_TOKEN = "假";
+    public static final String TRUE_TOKEN = "吼啊",
+            FALSE_TOKEN = "没听说过";
 
     public static final String SEMICOLON_TOKEN = ";";
 
@@ -50,30 +50,30 @@ public class ScriptParser {
 
     public static final String GT_TOKEN = "<", GE_TOKEN = ">";
 
-    public static final String ADD = "加", SUB = "减",
-            MUL = "乘", DIV = "除", MOD = "取膜";
+    public static final String ADD = "+", SUB = "-",
+            MUL = "*", DIV = "/", MOD = "%";
 
     public static final String COMMA = ",";
 
-    public static final String FOR_TOKEN = "计次循环";
+    public static final String FOR_TOKEN = "for";
 
-    public static final String BREAK_TOKEN = "跳出语句";
+    public static final String BREAK_TOKEN = "跑得比谁都快";
 
-    public static final String CLOSURE_TOKEN = "闭包函数";
+    public static final String CLOSURE_TOKEN = "人生经验";
 
-    public static final String CLASS_TOKEN = "类";
+    public static final String CLASS_TOKEN = "西方那一套";
 
-    public static final String EXTEND_TOKEN = "即成";
+    public static final String EXTEND_TOKEN = "extend";
 
-    public static final String DOT_TOKEN = "指向",
-            INITIAL = "初始化函数", THIS_POINT = "当前对象",
-            SUPER_TOKEN = "父类";
+    public static final String DOT_TOKEN = ".",
+            INITIAL = "扬州", THIS_POINT = "续",
+            SUPER_TOKEN = "长者";
 
-    public static final String LM_TOKEN = "左中括号", RM_TOKEN = "右中括号";
+    public static final String LM_TOKEN = "[", RM_TOKEN = "]";
 
-    public static final String LS_TOKEN = "小于", RS_TOKEN = "大于";
+    public static final String LS_TOKEN = "<", RS_TOKEN = ">";
 
-    public static final String IMPORT_TOKEN = "导入", NULL_TOKEN = "空";
+    public static final String IMPORT_TOKEN = "滋词", NULL_TOKEN = "null";
 
     /**
      * 保留关键字
