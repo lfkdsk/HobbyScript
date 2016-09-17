@@ -23,7 +23,7 @@ public class ScriptParser {
 
     public static final String IF_TOKEN = "如果你一定要问我";
 
-    public static final String ELSE_TOKEN = "否则";
+    public static final String ELSE_TOKEN = "我一句话不说也不好";
 
     public static final String WHILE_TOKEN = "问来问去";
 
