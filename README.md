@@ -10,6 +10,8 @@ Exercise for learn knowledge about computer language compile.
 
 [![](https://jitpack.io/v/lfkdsk/HobbyScript.svg)](https://jitpack.io/#lfkdsk/HobbyScript)
 
+![](Tmp/mo.png)
+
 ### With Gradle
 
 Step 1. Add the JitPack repository to your build file
