@@ -18,9 +18,9 @@ public class NativeList {
     private static LocalEnvironment topFloorEnvironment;
 
     /**
-     * 添加原声函数
+     * 添加原生函数
      *
-     * @param env        环境 fuck
+     * @param env        环境 
      * @param nativeName 函数名
      * @param clazz      需要反射拿到的类
      * @param params     参数
