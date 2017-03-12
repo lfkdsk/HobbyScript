@@ -92,6 +92,16 @@ public class ScriptEval {
         throw new HobbyException("bad type for -", expr);
     }
 
+    public static Object negativeBoolEval(EnvironmentCallBack env, NegativeBoolExpr expr) {
+        Object value = expr.operand().eval(env);
+
+        if (isBool(value)) {
+            return !(Boolean) value;
+        }
+
+        throw new HobbyException("bad type for -", expr);
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     // 布尔表达式节点
     ///////////////////////////////////////////////////////////////////////////
@@ -282,6 +292,10 @@ public class ScriptEval {
 
     private static boolean isFloat(Object v) {
         return v instanceof Double;
+    }
+
+    private static boolean isBool(Object v) {
+        return v instanceof Boolean;
     }
 
     ///////////////////////////////////////////////////////////////////////////

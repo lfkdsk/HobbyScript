@@ -117,7 +117,8 @@ public class ScriptParser {
     ///////////////////////////////////////////////////////////////////////////
 
     BnfParser factor = BnfParser.rule()
-            .or(BnfParser.rule(NegativeExpr.class).sep(SUB).ast(primary), primary);
+            .or(BnfParser.rule(NegativeExpr.class).sep(SUB).ast(primary),
+                    BnfParser.rule(NegativeBoolExpr.class).sep(LOGICAL_F_TOKEN).ast(primary), primary);
 
     ///////////////////////////////////////////////////////////////////////////
     // expr = factor { OP factor }
@@ -220,12 +221,10 @@ public class ScriptParser {
         reserved.add(LOGICAL_AND_TOKEN);
         reserved.add(TRUE_TOKEN);
         reserved.add(FALSE_TOKEN);
-//        reserved.add(LOGICAL_F_TOKEN);
+        reserved.add(LOGICAL_F_TOKEN);
         reserved.add(HobbyToken.EOL);
 
         operators.add(ASSIGN_TOKEN, 14, BnfParser.Operators.RIGHT);
-//        operators.add(LOGICAL_F_TOKEN, 1, BnfParser.Operators.RIGHT);
-
 
         operators.add(EQ_TOKEN, 7, BnfParser.Operators.LEFT);
         operators.add(UQ_TOKEN, 7, BnfParser.Operators.LEFT);
@@ -244,6 +243,7 @@ public class ScriptParser {
         operators.add(MUL, 3, BnfParser.Operators.LEFT);
         operators.add(DIV, 3, BnfParser.Operators.LEFT);
         operators.add(MOD, 3, BnfParser.Operators.LEFT);
+        operators.add(LOGICAL_F_TOKEN, 2, BnfParser.Operators.RIGHT);
     }
 
     public AstNode parse(HobbyLexer lexer) throws ParseException {
