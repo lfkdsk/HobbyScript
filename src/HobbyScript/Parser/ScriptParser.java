@@ -78,7 +78,7 @@ public class ScriptParser {
     /**
      * 保留关键字
      */
-    protected HashSet<String> reserved = new HashSet<>();
+    HashSet<String> reserved = new HashSet<>();
 
     ///////////////////////////////////////////////////////////////////////////
     // 书写 BNF 范式

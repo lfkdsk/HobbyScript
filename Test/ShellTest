@@ -17,5 +17,5 @@ class scanner {
 scan = scanner.Initial();
 
 while(scan.HasNext()){
-    logInfo(scan.GetNextLine());
+    parser(scan.GetNextLine());
 }

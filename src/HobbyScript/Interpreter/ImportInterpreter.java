@@ -14,7 +14,9 @@ import java.io.FileNotFoundException;
  *         Created by liufengkai on 16/7/26.
  */
 public class ImportInterpreter extends ArrayInterpreter {
+
     public static void main(String[] args) throws FileNotFoundException, ParseException {
-        run("ShellTest", new ImportParser(), new NativeList().env(new LocalEnvironment()));
+        run("Shell", new ImportParser(), new NativeList().env(new LocalEnvironment()));
     }
+
 }

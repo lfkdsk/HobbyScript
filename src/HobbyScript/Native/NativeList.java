@@ -106,6 +106,7 @@ public class NativeList {
 
     public EnvironmentCallBack env(EnvironmentCallBack env) {
         topFloorEnvironment = (LocalEnvironment) env;
+        Logger.init();
 
         addNativeFunction(env, "logInfo", NativeList.class, String.class);
         addNativeFunction(env, "println", NativeList.class, String.class);
