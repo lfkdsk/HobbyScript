@@ -29,10 +29,10 @@ public class FuncStmt extends AstList {
         return (ParameterList) child(1);
     }
 
-    public BlockStmnt body() {
+    public DefBlockStmnt body() {
         // no-type -> 2
         // type    -> 3
-        return (BlockStmnt) child(2);
+        return (DefBlockStmnt) child(2);
     }
 
     public String toString() {

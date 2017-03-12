@@ -1,0 +1,7 @@
+function fuckTest() {
+    return "lfkdsssssssss";
+}
+
+s = fuckTest();
+
+logInfo(s + "sss");

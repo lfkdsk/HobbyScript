@@ -59,6 +59,8 @@ public class ScriptParser {
 
     public static final String BREAK_TOKEN = "break";
 
+    public static final String RETURN_TOKRN = "return";
+
     public static final String CLOSURE_TOKEN = "closure";
 
     public static final String CLASS_TOKEN = "class";
@@ -195,11 +197,19 @@ public class ScriptParser {
             .sep(BREAK_TOKEN);
 
     ///////////////////////////////////////////////////////////////////////////
+    // return;
+    ///////////////////////////////////////////////////////////////////////////
+
+    BnfParser returnStatement = BnfParser.rule(ReturnStmt.class)
+            .sep(RETURN_TOKRN)
+            .ast(simple);
+
+    ///////////////////////////////////////////////////////////////////////////
     // statement = if (expr) block else block | while (expr) block
     ///////////////////////////////////////////////////////////////////////////
 
     BnfParser statement = statement0
-            .or(ifStatement, whileStatement, forStatement, breakStatement, simple);
+            .or(ifStatement, whileStatement, forStatement, breakStatement, returnStatement, simple);
 
     ///////////////////////////////////////////////////////////////////////////
     // program = statement | (; , end of line)

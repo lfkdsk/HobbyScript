@@ -35,12 +35,19 @@ public class FunctionParser extends ScriptParser {
             .maybe(params).sep(RP_TOKEN);
 
 
+    BnfParser defBlock = BnfParser.rule(DefBlockStmnt.class)
+            .sep(LC_TOKEN).option(statement0)
+            .repeat(BnfParser.rule().sep(SEMICOLON_TOKEN, HobbyToken.EOL)
+                    .option(statement0))
+            .sep(RC_TOKEN);
+
     ///////////////////////////////////////////////////////////////////////////
     // def = function xxx paramList { }
     ///////////////////////////////////////////////////////////////////////////
     BnfParser def = BnfParser.rule(FuncStmt.class)
             .sep(FUNCTION_TOKEN).identifier(reserved)
-            .ast(paramList).ast(block);
+            .ast(paramList).ast(defBlock);
+
 
     ///////////////////////////////////////////////////////////////////////////
     // args = expr, expr, expr 这属于调用参数

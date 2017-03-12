@@ -10,14 +10,95 @@ lineNumber = 0;
 
 function nextChar() {
     peekChar = input.Read();
+    if (peekChar != "") {
+        println(peekChar);
+    }
 }
 
 class Token {
     tag = -1;
 }
 
+class Number extend Token {
+    
+    value = -1;
+
+    function Initial() {
+        tag = 0;
+    }
+
+    function SetValue(v) {
+        value = v;
+    }
+
+    function GetValue() {
+        return value;
+    }
+}
+
 function handleOperator() {
     
+}
+
+function handleDigit() {
+    v = 0;
+
+    while(isDigit(peekChar)) {
+        v = 10 * v + stoi(peekChar);
+        nextChar();
+    }
+
+    if (peekChar == "e" || peekChar == "E") {
+        nextChar();
+        x = 0;
+        flag = false;
+        if (peekChar == "-") {
+            flag = true;
+            nextChar();
+        } else {
+            if (peekChar == "+") {
+                flag = false;
+                nextChar();
+            }
+        }
+
+        while(isDigit(peekChar)) {
+            x = 10 * x + stoi(peekChar);
+            nextChar();
+        }
+
+        if (flag) {
+            v = v * exp(-x);
+        } else {
+            v = v * exp(x);
+        }
+
+        double = Number.Initial();
+        double.SetValue(v);
+        println("double" + double);
+        return double;
+    } else {
+        if (peekChar != ".") {
+            int = Number.Initial();
+            int.SetValue(v);
+            println("int" + int);
+            return int;
+        }
+    }
+
+    x = v;
+    for (d = 10;;) {
+        nextChar();
+        if(!isDigit(peekChar)) {
+            break;
+        }
+        x = x + stoi(peekChar) / d;
+        d = d * 10;
+    }
+    real = Number.Initial();
+    real.SetValue(x);
+    println("real" + real);
+    return real;
 }
 
 function getNextToken() {
@@ -32,14 +113,18 @@ function getNextToken() {
             }
         }
     }
-    println("ssss " + peekChar);
+
+    if(isDigit(peekChar)) {
+        handleDigit();
+    }
+
+    println("ssssss");
 }
 
 
-getNextToken();
-getNextToken();
-getNextToken();
-
+while(nextChar() != -1) {
+    getNextToken();
+}
 
 
 

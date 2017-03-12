@@ -1,6 +1,6 @@
 package HobbyScript.Literal;
 
-import HobbyScript.Ast.BlockStmnt;
+import HobbyScript.Ast.DefBlockStmnt;
 import HobbyScript.Ast.ParameterList;
 import HobbyScript.Eval.Env.EnvironmentCallBack;
 
@@ -14,7 +14,7 @@ import HobbyScript.Eval.Env.EnvironmentCallBack;
 public class CreateClassFunction extends ClassFunction {
     private HobbyObject classObject;
 
-    public CreateClassFunction(ParameterList parameters, BlockStmnt body, EnvironmentCallBack env) {
+    public CreateClassFunction(ParameterList parameters, DefBlockStmnt body, EnvironmentCallBack env) {
         super(parameters, body, env);
     }
 

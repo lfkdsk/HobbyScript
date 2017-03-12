@@ -1,6 +1,6 @@
 package HobbyScript.Literal;
 
-import HobbyScript.Ast.BlockStmnt;
+import HobbyScript.Ast.DefBlockStmnt;
 import HobbyScript.Ast.ParameterList;
 import HobbyScript.Eval.Env.EnvironmentCallBack;
 
@@ -13,7 +13,7 @@ import HobbyScript.Eval.Env.EnvironmentCallBack;
 public class ClassFunction extends Function {
 
     public ClassFunction(ParameterList parameters,
-                         BlockStmnt body,
+                         DefBlockStmnt body,
                          EnvironmentCallBack env) {
         super(parameters, body, env);
     }

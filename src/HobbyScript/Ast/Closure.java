@@ -22,8 +22,8 @@ public class Closure extends AstList {
         return (ParameterList) child(0);
     }
 
-    public BlockStmnt body() {
-        return (BlockStmnt) child(1);
+    public DefBlockStmnt body() {
+        return (DefBlockStmnt) child(1);
     }
 
     @Override

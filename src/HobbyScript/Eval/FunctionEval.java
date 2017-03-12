@@ -7,6 +7,8 @@ import HobbyScript.Exception.HobbyException;
 import HobbyScript.Literal.*;
 import HobbyScript.Parser.ScriptParser;
 
+import java.util.Iterator;
+
 /**
  * 添加函数方法之后
  * Created by liufengkai on 16/7/16.
@@ -187,5 +189,25 @@ public class FunctionEval {
         }
 
         return function.invoke(newArgs, node);
+    }
+
+    public static Object blockEval(EnvironmentCallBack env, DefBlockStmnt expr) {
+        Object result = 0;
+        Iterator<AstNode> iterator = expr.iterator();
+        // 一句一句运行
+        while (iterator.hasNext()) {
+            AstNode node = iterator.next();
+
+            if (!(node instanceof NullStmt)) {
+                result = node.eval(env);
+
+                if (result instanceof ReturnStmt) {
+                    result = ((ReturnStmt) result).getResult();
+                    break;
+                }
+            }
+        }
+
+        return result;
     }
 }

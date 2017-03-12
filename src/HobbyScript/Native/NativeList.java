@@ -103,6 +103,17 @@ public class NativeList {
         throw new HobbyObject.AssessException("can not assess member: " + name);
     }
 
+    public static Boolean isDigit(String value) {
+        return value.length() == 1 && Character.isDigit(value.charAt(0));
+    }
+
+    public static Integer stoi(String value) {
+        return Integer.parseInt(value);
+    }
+
+    public static Double exp(Double value) {
+        return Math.exp(value);
+    }
 
     public EnvironmentCallBack env(EnvironmentCallBack env) {
         topFloorEnvironment = (LocalEnvironment) env;
@@ -125,6 +136,9 @@ public class NativeList {
         addNativeFunction(env, "closeReader", InputMethod.class, BufferedReader.class);
         addNativeFunction(env, "parser", InputMethod.class, BufferedReader.class);
         addNativeFunction(env, "getLocalEnv", NativeList.class, String.class);
+        addNativeFunction(env, "isDigit", NativeList.class, String.class);
+        addNativeFunction(env, "stoi", NativeList.class, String.class);
+        addNativeFunction(env, "exp", NativeList.class, Double.class);
         return env;
     }
 

@@ -142,6 +142,9 @@ public class ScriptEval {
         AstLeaf node = (AstLeaf) expr.left();
         int tag = node.token().getTag();
         if (tag == HobbyToken.ID) {
+            if (value instanceof ReturnStmt) {
+                value = ((ReturnStmt) value).getResult();
+            }
             // 重设值
             env.put(((IdLiteral) node).name(), value);
             return value;
@@ -334,6 +337,10 @@ public class ScriptEval {
 
             if (!(node instanceof NullStmt)) {
                 result = node.eval(env);
+
+                if (node instanceof ReturnStmt) {
+                    break;
+                }
 
                 if (result instanceof BreakStmt) {
                     break;

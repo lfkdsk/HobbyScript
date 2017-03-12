@@ -1,6 +1,6 @@
 package HobbyScript.Literal;
 
-import HobbyScript.Ast.BlockStmnt;
+import HobbyScript.Ast.DefBlockStmnt;
 import HobbyScript.Ast.ParameterList;
 import HobbyScript.Eval.Env.EnvironmentCallBack;
 import HobbyScript.Eval.Env.LocalEnvironment;
@@ -12,11 +12,11 @@ import HobbyScript.Eval.Env.LocalEnvironment;
 public class Function {
     protected ParameterList parameters;
 
-    protected BlockStmnt body;
+    protected DefBlockStmnt body;
 
     protected EnvironmentCallBack env;
 
-    public Function(ParameterList parameters, BlockStmnt body, EnvironmentCallBack env) {
+    public Function(ParameterList parameters, DefBlockStmnt body, EnvironmentCallBack env) {
         this.parameters = parameters;
         this.body = body;
         this.env = env;
@@ -26,7 +26,7 @@ public class Function {
         return parameters;
     }
 
-    public BlockStmnt body() {
+    public DefBlockStmnt body() {
         return body;
     }
 

@@ -38,9 +38,12 @@ public class NaiveFunction {
      */
     public Object invoke(Object[] args, AstNode tree) {
         try {
+            if (methodName.equals("exp")) {
+                args[0] = Double.parseDouble(args[0].toString());
+            }
             // static 方法 所以null
             return nativeMethod.invoke(null, args);
-        } catch (IllegalAccessException | InvocationTargetException e) {
+        } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
             throw new HobbyException(" call native function fail " + methodName, tree);
         }
     }

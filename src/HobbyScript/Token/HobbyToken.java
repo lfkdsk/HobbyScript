@@ -21,6 +21,7 @@ public abstract class HobbyToken {
             CLASS_TOKEN = 288, CLASS_BODY_TOKEN = 289, ARRAY = 290,
             CREATE_ARRAY = 291, OPTION = 292, IMPORT = 293, BOOL = 294,
             VAR = 295, INT = 296, FLOAT = 297, TYPE = 298, NEGATIVEBOOL = 295,
+            RETURN = 296,
             EOF_TAG = -1, EOL_TAG = -2;
 
     /**
