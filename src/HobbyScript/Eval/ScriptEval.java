@@ -368,8 +368,8 @@ public class ScriptEval {
                 || (c instanceof Double && (Double) c > 0)) {
 
             return ifStmnt.thenBlock().eval(newEnv);
-
         } else {
+
             AstNode node = ifStmnt.elseBlock();
             if (node == null) {
                 return 0;
@@ -449,6 +449,10 @@ public class ScriptEval {
                 }
             } else {
                 result = forStmt.body().eval(newEnv);
+                if (result instanceof BreakStmt) {
+                    result = ((BreakStmt) result).getResult();
+                    return result;
+                }
             }
 
             forStmt.step().eval(newEnv);
@@ -470,11 +474,10 @@ public class ScriptEval {
         return result;
     }
 
-    public static Object handlerBreak(AstNode node, EnvironmentCallBack newEnv) {
+    public static Object handleBreak(AstNode node, EnvironmentCallBack newEnv) {
         Object temp = node.eval(newEnv);
 
         if (temp instanceof BreakStmt) {
-
             return ((BreakStmt) temp).getResult();
         }
 

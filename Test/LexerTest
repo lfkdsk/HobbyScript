@@ -14,18 +14,33 @@ function nextChar() {
 
 class Token {
     tag = -1;
+}
+
+function handleOperator() {
     
 }
 
-for( ; ;nextChar()) {
-    if (peekChar = " " || peekChar = "\t") {
+function getNextToken() {
+    for( ; ;nextChar()) {
+        if (peekChar == " " || peekChar == "\t") {
 
-    } else {
-        if (peekChar == "\n") {
-            lineNumber = lineNumber + 1;
         } else {
-            break;
+            if (peekChar == "\n") {
+                lineNumber = lineNumber + 1;
+            } else {
+                break;
+            }
         }
     }
+    println("ssss " + peekChar);
 }
+
+
+getNextToken();
+getNextToken();
+getNextToken();
+
+
+
+
 
