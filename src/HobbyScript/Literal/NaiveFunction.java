@@ -41,7 +41,7 @@ public class NaiveFunction {
             // static 方法 所以null
             return nativeMethod.invoke(null, args);
         } catch (IllegalAccessException | InvocationTargetException e) {
-            throw new HobbyException(" call native function fail ", tree);
+            throw new HobbyException(" call native function fail " + methodName, tree);
         }
     }
 

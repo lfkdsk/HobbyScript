@@ -9,6 +9,7 @@ import HobbyScript.Utils.logger.Logger;
 
 import java.io.BufferedReader;
 import java.lang.reflect.Method;
+import java.util.Scanner;
 
 
 /**
@@ -112,17 +113,17 @@ public class NativeList {
         addNativeFunction(env, "stringLength", NativeList.class, String.class);
         addNativeFunction(env, "print", NativeList.class, String.class);
         addNativeFunction(env, "createArray", NativeList.class, Integer.class);
-//        addNativeFunction(env, "createScanner", InputMethod.class, null);
-//        addNativeFunction(env, "getNextLine", InputMethod.class, Scanner.class);
-//        addNativeFunction(env, "endScanner", InputMethod.class, Scanner.class);
-//        addNativeFunction(env, "hasNext", InputMethod.class, Scanner.class);
+        addNativeFunction(env, "createScanner", InputMethod.class, null);
+        addNativeFunction(env, "getNextLine", InputMethod.class, Scanner.class);
+        addNativeFunction(env, "endScanner", InputMethod.class, Scanner.class);
+        addNativeFunction(env, "hasNext", InputMethod.class, Scanner.class);
         addNativeFunction(env, "charAtPoint", InputMethod.class, String.class, Integer.class);
         addNativeFunction(env, "openReader", InputMethod.class, null);
         addNativeFunction(env, "read", InputMethod.class, BufferedReader.class);
         addNativeFunction(env, "readNextLine", InputMethod.class, BufferedReader.class);
         addNativeFunction(env, "closeReader", InputMethod.class, BufferedReader.class);
-//        addNativeFunction(env, "parser", InputMethod.class, BufferedReader.class);
-//        addNativeFunction(env, "getLocalEnv", NativeList.class, String.class);
+        addNativeFunction(env, "parser", InputMethod.class, BufferedReader.class);
+        addNativeFunction(env, "getLocalEnv", NativeList.class, String.class);
         return env;
     }
 

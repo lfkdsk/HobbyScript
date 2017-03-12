@@ -41,7 +41,7 @@ public class InputMethod {
     ///////////////////////////////////////////////////////////////////////////
 
     public static Object openReader() throws FileNotFoundException {
-        return new BufferedReader(new FileReader("../hobby_script/Test/LexerTest"));
+        return new BufferedReader(new FileReader("../HobbyScript/Test/LexerTest"));
     }
 
     public static String readNextLine(BufferedReader reader) throws IOException {
