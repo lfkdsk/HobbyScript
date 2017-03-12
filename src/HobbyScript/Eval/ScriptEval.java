@@ -4,10 +4,7 @@ import HobbyScript.Ast.*;
 import HobbyScript.Eval.Env.EnvironmentCallBack;
 import HobbyScript.Eval.Env.LocalEnvironment;
 import HobbyScript.Exception.HobbyException;
-import HobbyScript.Literal.IdLiteral;
-import HobbyScript.Literal.NullLiteral;
-import HobbyScript.Literal.NumberLiteral;
-import HobbyScript.Literal.StringLiteral;
+import HobbyScript.Literal.*;
 import HobbyScript.Parser.ScriptParser;
 import HobbyScript.Token.HobbyToken;
 import HobbyScript.Token.NumberToken;
@@ -89,7 +86,7 @@ public class ScriptEval {
             return -(Double) value;
         }
 
-        throw new HobbyException("bad type for -", expr);
+        throw new HobbyException("bad type for -" + value.toString(), expr);
     }
 
     public static Object negativeBoolEval(EnvironmentCallBack env, NegativeBoolExpr expr) {
@@ -99,7 +96,7 @@ public class ScriptEval {
             return !(Boolean) value;
         }
 
-        throw new HobbyException("bad type for -", expr);
+        throw new HobbyException("bad type for -" + value.toString(), expr);
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -202,6 +199,20 @@ public class ScriptEval {
             case ScriptParser.LOGICAL_OR_TOKEN:
                 return left == Boolean.TRUE ||
                         right == Boolean.TRUE;
+            case ScriptParser.IS_A:
+                if (!(left instanceof HobbyObject && right instanceof ClassInfo)) {
+                    break;
+                }
+
+                ClassInfo leftInfo = ((HobbyObject) left).getClassInfoMsg();
+                while (leftInfo != null) {
+                    if (leftInfo.name().equals(((ClassInfo) right).name())) {
+                        return true;
+                    }
+                    leftInfo = leftInfo.getSuperClass();
+                }
+
+                return false;
             default:
                 break;
         }

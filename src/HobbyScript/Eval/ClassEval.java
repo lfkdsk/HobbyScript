@@ -54,7 +54,8 @@ public class ClassEval {
                 LocalEnvironment thisEnv = new LocalEnvironment(info.env());
                 // 创建this指针指向该对象
                 HobbyObject object = new HobbyObject(thisEnv);
-
+                // set class info
+                object.setClassInfoMsg(info);
                 thisEnv.put(THIS_POINT, object);
                 // 实例化
                 initialObject(info, thisEnv);
@@ -96,9 +97,9 @@ public class ClassEval {
 
             HobbyObject superObject = new HobbyObject(env);
             env.put(ScriptParser.SUPER_TOKEN, superObject);
-
             initialObject(info.getSuperClass(), env);
         }
+
         info.body().eval(env);
     }
 

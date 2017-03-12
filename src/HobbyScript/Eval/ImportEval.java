@@ -29,7 +29,7 @@ public class ImportEval {
             if (file.exists()) {
                 env.putAll(parseLib(file));
             } else {
-                File libFile = new File("../hobby_script/src/Library/" + importLib.importLib().toString());
+                File libFile = new File("../HobbyScript/src/Library/" + importLib.importLib().toString());
                 if (libFile.exists()) {
                     env.putAll(parseLib(libFile));
                     return;

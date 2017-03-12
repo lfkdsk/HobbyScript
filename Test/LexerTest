@@ -1,0 +1,31 @@
+import "util/LinkedList.hhs";
+
+import "parser/Input.hhs";
+
+input = Input.Initial();
+list = LinkedList.Initial();
+
+peekChar = "";
+lineNumber = 0;
+
+function nextChar() {
+    peekChar = input.Read();
+}
+
+class Token {
+    tag = -1;
+    
+}
+
+for( ; ;nextChar()) {
+    if (peekChar = " " || peekChar = "\t") {
+
+    } else {
+        if (peekChar == "\n") {
+            lineNumber = lineNumber + 1;
+        } else {
+            break;
+        }
+    }
+}
+

@@ -65,6 +65,8 @@ public class ScriptParser {
 
     public static final String EXTEND_TOKEN = "extend";
 
+    public static final String CONTINUE_TOKEN = "continue";
+
     public static final String DOT_TOKEN = ".",
             INITIAL = "Initial", THIS_POINT = "this",
             SUPER_TOKEN = "super";
@@ -74,6 +76,8 @@ public class ScriptParser {
     public static final String LS_TOKEN = "<", RS_TOKEN = ">";
 
     public static final String IMPORT_TOKEN = "import", NULL_TOKEN = "null";
+
+    public static final String IS_A = "isa";
 
     /**
      * 保留关键字
@@ -113,7 +117,7 @@ public class ScriptParser {
             );
 
     ///////////////////////////////////////////////////////////////////////////
-    // factor = primary | - primary
+    // factor = primary | - primary | !primary
     ///////////////////////////////////////////////////////////////////////////
 
     BnfParser factor = BnfParser.rule()
@@ -236,6 +240,7 @@ public class ScriptParser {
         operators.add(LE_TOKEN, 6, BnfParser.Operators.LEFT);
         operators.add(GEQ_TOKEN, 6, BnfParser.Operators.LEFT);
         operators.add(GT_TOKEN, 6, BnfParser.Operators.LEFT);
+        operators.add(IS_A, 6, BnfParser.Operators.LEFT);
 
         operators.add(ADD, 4, BnfParser.Operators.LEFT);
         operators.add(SUB, 4, BnfParser.Operators.LEFT);
@@ -244,6 +249,7 @@ public class ScriptParser {
         operators.add(DIV, 3, BnfParser.Operators.LEFT);
         operators.add(MOD, 3, BnfParser.Operators.LEFT);
         operators.add(LOGICAL_F_TOKEN, 2, BnfParser.Operators.RIGHT);
+
     }
 
     public AstNode parse(HobbyLexer lexer) throws ParseException {

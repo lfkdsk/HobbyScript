@@ -15,6 +15,16 @@ public class HobbyObject {
      */
     protected EnvironmentCallBack env;
 
+    protected ClassInfo classInfoMsg;
+
+    public ClassInfo getClassInfoMsg() {
+        return classInfoMsg;
+    }
+
+    public void setClassInfoMsg(ClassInfo classInfoMsg) {
+        this.classInfoMsg = classInfoMsg;
+    }
+
     public HobbyObject(EnvironmentCallBack env) {
         this.env = env;
     }

@@ -57,18 +57,14 @@ class ArrayList {
     };
 
     function Get(index){
-        if(index > -1){
-            if(index < Size() + 1){
-                theItems[index];
-            }
+        if(index > -1 && index < Size() + 1){
+             theItems[index];
         }
     }
 
     function Set(index,value){
-        if (index > -1){
-            if(index < Size() + 1){
+        if (index > -1 && index < Size() + 1){
                 theItems[index] = value;
-            }
         }
     }
 
