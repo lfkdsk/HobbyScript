@@ -107,6 +107,10 @@ public class NativeList {
         return value.length() == 1 && Character.isDigit(value.charAt(0));
     }
 
+    public static Boolean isChar(String value) {
+        return value.length() == 1 && Character.isAlphabetic(value.codePointAt(0));
+    }
+
     public static Integer stoi(String value) {
         return Integer.parseInt(value);
     }
@@ -137,6 +141,7 @@ public class NativeList {
         addNativeFunction(env, "parser", InputMethod.class, BufferedReader.class);
         addNativeFunction(env, "getLocalEnv", NativeList.class, String.class);
         addNativeFunction(env, "isDigit", NativeList.class, String.class);
+        addNativeFunction(env, "isChar", NativeList.class, String.class);
         addNativeFunction(env, "stoi", NativeList.class, String.class);
         addNativeFunction(env, "exp", NativeList.class, Double.class);
         return env;

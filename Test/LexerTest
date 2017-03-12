@@ -17,6 +17,10 @@ function nextChar() {
 
 class Token {
     tag = -1;
+
+    function Initial() {
+        tag = -1;
+    }
 }
 
 class Number extend Token {
@@ -36,8 +40,30 @@ class Number extend Token {
     }
 }
 
+class ID extend Token {
+    Key = "";
+    Value = "";
+
+    function Initial() {
+        tag = 1;
+    }
+}
+
 function handleOperator() {
     
+}
+
+function handleToken() {
+    value = "";
+    while(peekChar != "" && isDigit(peekChar) || isChar(peekChar) || peekChar == "_") {
+        value = value + peekChar;
+        nextChar();
+    }
+
+    id = ID.Initial();
+    id.Key = value;
+    println("id " + id);
+    return id;
 }
 
 function handleDigit() {
@@ -101,6 +127,35 @@ function handleDigit() {
     return real;
 }
 
+function handleChar() {
+    if (peekChar == "\"") {
+        flag = false;
+        buffer = "";
+        lastChar = " ";
+        for(;;nextChar()) {
+            if (peekChar == "\"" && flag && lastChar != "\\") {
+                break;
+            } else {
+                if (peekChar == "\n") {
+                    lineNumber = lineNumber + 1;
+                } else {
+                    if (peekChar != "\"") {
+                        buffer = buffer + peekChar;
+                        lastChar = peekChar;
+                        flag = true;
+                    }
+                }
+            }
+        }
+        nextChar();
+
+        println("char " + buffer);
+
+        return buffer; 
+    }
+    return "";
+}
+
 function getNextToken() {
     for( ; ;nextChar()) {
         if (peekChar == " " || peekChar == "\t") {
@@ -114,13 +169,21 @@ function getNextToken() {
         }
     }
 
+    result = Token.Initial();
+
     if(isDigit(peekChar)) {
-        handleDigit();
+        result = handleDigit();
+        return result;
     }
 
-    println("ssssss");
-}
+    if(isChar(peekChar)) {
+        result = handleToken();
+        return result;
+    }
 
+    result = handleChar();
+    return result;
+}
 
 while(nextChar() != -1) {
     getNextToken();

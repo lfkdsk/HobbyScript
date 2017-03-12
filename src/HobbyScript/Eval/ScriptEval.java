@@ -6,6 +6,7 @@ import HobbyScript.Eval.Env.LocalEnvironment;
 import HobbyScript.Exception.HobbyException;
 import HobbyScript.Literal.*;
 import HobbyScript.Parser.ScriptParser;
+import HobbyScript.Token.BoolToken;
 import HobbyScript.Token.HobbyToken;
 import HobbyScript.Token.NumberToken;
 
@@ -139,7 +140,9 @@ public class ScriptEval {
     private static Object computeAssign(EnvironmentCallBack env,
                                         BinaryExpr expr,
                                         Object value) {
-        AstLeaf node = (AstLeaf) expr.left();
+        AstLeaf node;
+        node = (AstLeaf) expr.left();
+
         int tag = node.token().getTag();
         if (tag == HobbyToken.ID) {
             if (value instanceof ReturnStmt) {
@@ -406,11 +409,11 @@ public class ScriptEval {
         for (; ; ) {
             Object c = whileStmt.condition().eval(newEnv);
             // 判断几种通过的方式 true / value > 0 ( 和C类似的设定 )
-
-            if ((c instanceof Boolean &&
+            if (((c instanceof Boolean &&
                     ((Boolean) c).booleanValue() == Boolean.TRUE)
                     || (c instanceof Integer && (Integer) c > 0)
-                    || (c instanceof Double && (Double) c > 0)) {
+                    || (c instanceof Double && (Double) c > 0))
+                    || (c instanceof BoolToken && ((BoolToken) c).getType() == BoolToken.BoolType.TRUE)) {
                 Object temp = whileStmt.body().eval(newEnv);
 
                 if (temp instanceof BreakStmt) {
@@ -441,10 +444,11 @@ public class ScriptEval {
             // cache for循环的条件缺省
             if (c != null) {
                 // 判断几种通过的方式 true / value > 0 ( 和C类似的设定 )
-                if ((c instanceof Boolean &&
+                if (((c instanceof Boolean &&
                         ((Boolean) c).booleanValue() == Boolean.TRUE)
                         || (c instanceof Integer && (Integer) c > 0)
-                        || (c instanceof Double && (Double) c > 0)) {
+                        || (c instanceof Double && (Double) c > 0))
+                        || (c instanceof BoolToken && ((BoolToken) c).getType() == BoolToken.BoolType.TRUE)) {
                     Object temp = forStmt.body().eval(newEnv);
 
                     if (temp instanceof BreakStmt) {
