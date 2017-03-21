@@ -26,7 +26,10 @@ public class ReturnStmt extends AstList {
 
     @Override
     public Object eval(EnvironmentCallBack env) {
-        this.setResult(child(0));
+
+        if (result == null)
+            this.setResult(child(0).eval(env));
+
         return this;
     }
 }

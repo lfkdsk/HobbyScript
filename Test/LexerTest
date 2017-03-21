@@ -13,6 +13,7 @@ function nextChar() {
     if (peekChar != "") {
         println(peekChar);
     }
+    return peekChar;
 }
 
 class Token {
@@ -53,9 +54,14 @@ function handleOperator() {
     
 }
 
+function perserPeekChar(char) {
+    return char != "" && char != "\n" && (isDigit(char) || isChar(char) || char == "_");
+}
+
 function handleToken() {
     value = "";
-    while(peekChar != "" && isDigit(peekChar) || isChar(peekChar) || peekChar == "_") {
+
+    while(perserPeekChar(peekChar)) {
         value = value + peekChar;
         nextChar();
     }
@@ -157,7 +163,7 @@ function handleChar() {
 }
 
 function getNextToken() {
-    for( ; ;nextChar()) {
+    for( ; ; nextChar()) {
         if (peekChar == " " || peekChar == "\t") {
 
         } else {
