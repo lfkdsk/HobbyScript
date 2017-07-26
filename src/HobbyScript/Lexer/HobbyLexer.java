@@ -130,7 +130,6 @@ public class HobbyLexer {
             } else {
                 throw new ParseException("bad token at line " + lineNum);
             }
-
         }
 
         queue.add(new IdToken(lineNum, HobbyToken.EOL));

@@ -106,7 +106,7 @@ public class ScriptParser {
     BnfParser Null = BnfParser.rule().Null(NumberLiteral.class);
 
     ///////////////////////////////////////////////////////////////////////////
-    // primary = ( expr ) | number | id | string |bool | null
+    // primary = ( expr ) | number | id | string | bool | null
     ///////////////////////////////////////////////////////////////////////////
 
     BnfParser primary = BnfParser.rule(PrimaryExpr.class)
