@@ -1,4 +1,8 @@
-package hobbyscript.LLVM;
+package hobbyscript.LLVM.visitor;
+
+import hobbyscript.Ast.AstLeaf;
+import hobbyscript.Ast.AstList;
+import hobbyscript.Ast.AstNode;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -27,6 +31,16 @@ public interface VisitorBinder {
             } catch (IllegalAccessException | InvocationTargetException e) {
                 throw new UnsupportedOperationException(e);
             }
+        }
+
+        if (this instanceof AstNode) {
+            visitor.visitorAstNode((AstNode) this);
+            return;
+        } else if (this instanceof AstLeaf) {
+            visitor.visitorAstLeaf((AstLeaf) this);
+            return;
+        } else if (this instanceof AstList) {
+            visitor.visitorAstList((AstList) this);
         }
 
         throw new UnsupportedOperationException("cannot find method : " + "visit" + getClass().getSimpleName());

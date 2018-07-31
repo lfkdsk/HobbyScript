@@ -4,7 +4,7 @@ import hobbyscript.Compile.CodeLine;
 import hobbyscript.Compile.CompileCallBack;
 import hobbyscript.Eval.Env.EnvironmentCallBack;
 import hobbyscript.Eval.Env.EvalCallBack;
-import hobbyscript.LLVM.VisitorBinder;
+import hobbyscript.LLVM.visitor.VisitorBinder;
 
 import java.util.Iterator;
 import java.util.Objects;
