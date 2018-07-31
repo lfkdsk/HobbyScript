@@ -26,3 +26,8 @@ out/
 .idea/
 src/META-INF/MANIFEST.MF
 .DS_Store
+*.imi
+*.iml
+build/*
+gradle/*
+.gradle/*
