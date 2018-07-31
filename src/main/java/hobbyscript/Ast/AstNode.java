@@ -4,6 +4,7 @@ import hobbyscript.Compile.CodeLine;
 import hobbyscript.Compile.CompileCallBack;
 import hobbyscript.Eval.Env.EnvironmentCallBack;
 import hobbyscript.Eval.Env.EvalCallBack;
+import hobbyscript.LLVM.VisitorBinder;
 
 import java.util.Iterator;
 import java.util.Objects;
@@ -14,7 +15,7 @@ import java.util.function.Consumer;
  * Created by liufengkai on 16/7/11.
  */
 public abstract class AstNode implements Iterable<AstNode>,
-        EvalCallBack, CompileCallBack {
+        EvalCallBack, CompileCallBack, VisitorBinder {
     protected final int tag;
 
     protected AstNode(int tag) {
