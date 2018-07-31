@@ -1,5 +1,6 @@
 package hobbyscript.Ast;
 
+import com.google.gson.Gson;
 import hobbyscript.Compile.CodeLine;
 import hobbyscript.Compile.CompileCallBack;
 import hobbyscript.Eval.Env.EnvironmentCallBack;
@@ -16,7 +17,9 @@ import java.util.function.Consumer;
  */
 public abstract class AstNode implements Iterable<AstNode>,
         EvalCallBack, CompileCallBack, VisitorBinder {
+    public static final Gson gson = new Gson();
     protected final int tag;
+    protected final String type = this.getClass().getSimpleName();
 
     protected AstNode(int tag) {
         this.tag = tag;
@@ -72,5 +75,9 @@ public abstract class AstNode implements Iterable<AstNode>,
     @Override
     public String compile(CodeLine line, int th, int nx) {
         return null;
+    }
+
+    public String toJson() {
+        return gson.toJson(this);
     }
 }

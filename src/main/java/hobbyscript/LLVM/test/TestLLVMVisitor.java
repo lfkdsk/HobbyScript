@@ -11,26 +11,41 @@ import hobbyscript.Exception.ParseException;
 import hobbyscript.Interpreter.ImportInterpreter;
 import hobbyscript.LLVM.visitor.AstVisitor;
 import hobbyscript.Lexer.HobbyLexer;
+import hobbyscript.Literal.IdLiteral;
+import hobbyscript.Literal.NumberLiteral;
 import hobbyscript.Parser.ImportParser;
 import hobbyscript.Token.HobbyToken;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-public class TestLLVMVisitor implements AstVisitor {
+public class TestLLVMVisitor implements AstVisitor<Object> {
     @Override
-    public void visitorAstNode(AstNode node) {
-        System.out.println(node.toString());
+    public Object visitorAstNode(AstNode node) {
+        System.out.println(node.toJson());
+        return null;
     }
 
     @Override
-    public void visitorAstList(AstList list) {
-        System.out.println(list.toString());
+    public Object visitorAstList(AstList list) {
+        System.out.println(list.toJson());
+        return null;
     }
 
     @Override
-    public void visitorAstLeaf(AstLeaf leaf) {
-        System.out.println(leaf.toString());
+    public Object visitorAstLeaf(AstLeaf leaf) {
+        System.out.println(leaf.toJson());
+        return null;
+    }
+
+    @Override
+    public Object visitorNumberLiteral(NumberLiteral numberLiteral) {
+        return null;
+    }
+
+    @Override
+    public Object visitorIdLiteral(IdLiteral idLiteral) {
+        return null;
     }
 
     public static void main(String[] args) throws FileNotFoundException, ParseException {
@@ -41,6 +56,10 @@ public class TestLLVMVisitor implements AstVisitor {
 
         while (lexer.peek(0) != HobbyToken.EOF) {
             AstNode node = parser.parse(lexer);
+            if (node instanceof NullStmt) {
+                continue;
+            }
+
             node.accept(visitor);
         }
     }
