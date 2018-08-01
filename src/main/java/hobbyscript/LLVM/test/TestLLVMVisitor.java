@@ -77,7 +77,7 @@ public class TestLLVMVisitor implements AstVisitor<Object> {
             lines.add(node.accept(visitor).toString());
         }
 
-        Path file = Paths.get("result.ast");
+        Path file = Paths.get("./LLVM-Runner/result.ast");
         Files.write(file, lines, StandardCharsets.UTF_8,
                 StandardOpenOption.APPEND, StandardOpenOption.CREATE);
     }

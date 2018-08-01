@@ -1,6 +1,23 @@
-cmake_minimum_required(VERSION 3.12)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.12)
+
 project(LLVM_Runner)
 
-set(CMAKE_CXX_STANDARD 14)
+# flag line
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
-add_executable(LLVM_Runner main.cpp)
+FIND_PACKAGE(UnitTest++ REQUIRED)
+
+if (UnitTest++_FOUND)
+    MESSAGE(STATUS "UnitTest++" ${UnitTest++_CONFIG} ${UnitTest++_LIBRARY})
+    MESSAGE(STATUS ${UTPP_INCLUDE_DIRS} ${UnitTest++_DIR})
+    INCLUDE_DIRECTORIES(${UTPP_INCLUDE_DIRS})
+endif()
+
+# Add all source files under the directory src to SOURCE_FILES
+AUX_SOURCE_DIRECTORY(src SOURCE_FILES)
+AUX_SOURCE_DIRECTORY(src/visitor VISITOR)
+AUX_SOURCE_DIRECTORY(src/ast AST)
+
+ADD_EXECUTABLE(LLVM_Runner ${SOURCE_FILES})
+
+#TARGET_LINK_LIBRARIES(LLVM_Runner ${UnitTest++_LIBRARY})
