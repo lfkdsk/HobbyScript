@@ -1,5 +1,6 @@
 package hobbyscript.LLVM.test;
 
+import com.google.common.collect.Lists;
 import hobbyscript.ApplicationTest.CodeDialog;
 import hobbyscript.Ast.AstLeaf;
 import hobbyscript.Ast.AstList;
@@ -18,24 +19,36 @@ import hobbyscript.Token.HobbyToken;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.List;
 
 public class TestLLVMVisitor implements AstVisitor<Object> {
+    private static List<String> lines = Lists.newArrayList();
+
     @Override
     public Object visitorAstNode(AstNode node) {
-        System.out.println(node.toJson());
-        return null;
+        String result = node.toJson();
+        System.out.println(result);
+        return result;
     }
 
     @Override
     public Object visitorAstList(AstList list) {
-        System.out.println(list.toJson());
-        return null;
+        String result = list.toJson();
+        System.out.println(result);
+        return result;
     }
 
     @Override
     public Object visitorAstLeaf(AstLeaf leaf) {
-        System.out.println(leaf.toJson());
-        return null;
+        String result = leaf.toJson();
+        System.out.println(result);
+        return result;
     }
 
     @Override
@@ -48,11 +61,12 @@ public class TestLLVMVisitor implements AstVisitor<Object> {
         return null;
     }
 
-    public static void main(String[] args) throws FileNotFoundException, ParseException {
+    public static void main(String[] args) throws IOException, ParseException {
         HobbyLexer lexer = new HobbyLexer(new CodeDialog());
         ImportParser parser = new ImportParser();
         EnvironmentCallBack env = new BasicEnvironment();
         TestLLVMVisitor visitor = new TestLLVMVisitor();
+
 
         while (lexer.peek(0) != HobbyToken.EOF) {
             AstNode node = parser.parse(lexer);
@@ -60,7 +74,11 @@ public class TestLLVMVisitor implements AstVisitor<Object> {
                 continue;
             }
 
-            node.accept(visitor);
+            lines.add(node.accept(visitor).toString());
         }
+
+        Path file = Paths.get("result.ast");
+        Files.write(file, lines, StandardCharsets.UTF_8,
+                StandardOpenOption.APPEND, StandardOpenOption.CREATE);
     }
 }

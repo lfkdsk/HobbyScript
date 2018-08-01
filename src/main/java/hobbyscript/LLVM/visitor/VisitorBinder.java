@@ -22,25 +22,22 @@ public interface VisitorBinder {
     }
 
     @SuppressWarnings("unchecked")
-    default <E extends AstVisitor> void accept(E visitor)  {
+    default <T, E extends AstVisitor<T>> T accept(E visitor) {
         Method method = findVisitorMethod(visitor, getClass());
         if (method != null) {
             try {
-                method.invoke(visitor, this);
-                return;
+                return (T) method.invoke(visitor, this);
             } catch (IllegalAccessException | InvocationTargetException e) {
                 throw new UnsupportedOperationException(e);
             }
         }
 
         if (this instanceof AstNode) {
-            visitor.visitorAstNode((AstNode) this);
-            return;
+            return visitor.visitorAstNode((AstNode) this);
         } else if (this instanceof AstLeaf) {
-            visitor.visitorAstLeaf((AstLeaf) this);
-            return;
+            return visitor.visitorAstLeaf((AstLeaf) this);
         } else if (this instanceof AstList) {
-            visitor.visitorAstList((AstList) this);
+            return visitor.visitorAstList((AstList) this);
         }
 
         throw new UnsupportedOperationException("cannot find method : " + "visit" + getClass().getSimpleName());
