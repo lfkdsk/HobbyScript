@@ -7,10 +7,22 @@
 
 #include "AstNode.h"
 
+using string = std::string;
+using StringPointer = std::shared_ptr<string>;
+
+
 class AstLeaf : public AstNode {
-`public:
+public:
     AstLeaf(const json &load_json);
+
+    const json &get_token();
+
+    string get_text();
+
+private:
+    json token;
 };
 
+using AstLeafPointer = std::shared_ptr<AstLeaf>;
 
 #endif //LLVM_RUNNER_ASTLEAF_H

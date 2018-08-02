@@ -6,10 +6,8 @@
 #define LLVM_RUNNER_ASTNODES_H
 
 #include "AstNode.h"
+#include "AstLeaf.h"
+#include "AstList.h"
 #include "NumberLiteral.h"
-
-using AstNodePointer = std::shared_ptr<AstNode>;
-using NumberLiteralPointer = std::shared_ptr<NumberLiteral>;
-using AstLeafPointer = std::shared_ptr<AstLeaf>;
 
 #endif //LLVM_RUNNER_ASTNODES_H
