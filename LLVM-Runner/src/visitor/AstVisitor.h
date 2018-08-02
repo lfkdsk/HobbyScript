@@ -4,19 +4,19 @@
 
 #ifndef LLVM_RUNNER_ASTVISITOR_H
 #define LLVM_RUNNER_ASTVISITOR_H
-
 #include <nlohmann/json.hpp>
+#include "../ast/AstNode.h"
 using json = nlohmann::json;
 
 class AstVisitor {
 public:
-    AstVisitor(json load_json);
+    AstVisitor(const json& load_json);
     virtual ~AstVisitor();
-    json get_json();
-    void visit_ast_node(json json_object);
-    void visit_ast_leaf(json json_object);
-    void visit_ast_list(json json_object);
-    void visit_number(json json_object);
+    const json& get_json();
+    AstNode visit_ast_node(const json& json_object);
+    AstNode visit_ast_leaf(const json& json_object);
+    AstNode visit_ast_list(const json& json_object);
+    AstNode visit_number(const json& json_object);
 private:
     json load_json;
 };

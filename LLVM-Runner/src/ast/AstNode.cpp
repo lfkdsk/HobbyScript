@@ -3,3 +3,11 @@
 //
 
 #include "AstNode.h"
+
+AstNode::AstNode(const json &load_json) {
+    this->load_json = load_json;
+}
+
+const json &AstNode::get_json() {
+    return load_json;
+}

@@ -7,18 +7,30 @@
 #include "AstVisitor.h"
 #include <UnitTest++/UnitTest++.h>
 
-AstVisitor::AstVisitor(json load) {
-    this->load_json = std::move(load);
+AstVisitor::AstVisitor(const json& load) {
+    this->load_json = load;
 }
 
 AstVisitor::~AstVisitor() {
     this->load_json.clear();
 }
 
-json AstVisitor::get_json() {
+const json& AstVisitor::get_json() {
     return load_json;
 }
 
-void AstVisitor::visit_number(json json_object) {
+AstNode AstVisitor::visit_ast_node(const json& json_object) {
+
+}
+
+AstNode AstVisitor::visit_ast_leaf(const json& json_object) {
+
+}
+
+AstNode AstVisitor::visit_ast_list(const json& json_object) {
+
+}
+
+AstNode AstVisitor::visit_number(const json &json_object) {
 
 }
