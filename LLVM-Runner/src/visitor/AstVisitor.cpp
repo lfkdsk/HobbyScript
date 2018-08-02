@@ -42,9 +42,10 @@ AstNodePointer AstVisitor::visit_number(const json &json_object) {
 AstNodePointer AstVisitor::visit_binary_expr(const json &json_object) {
     std::vector<json> children = json_object["children"];
     auto left = visit(children[0]);
-    auto right = visit(children[2]);
     auto op = visit(children[1]);
-
+    auto right = visit(children[2]);
+    AstNodeListPointer pointer(new AstNodeList({left, op, right}));
+    return BinaryExprPointer(new BinaryExpr(json_object, pointer));
 }
 
 AstNodePointer AstVisitor::visit(const json &load_json) {

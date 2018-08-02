@@ -9,5 +9,6 @@
 #include "AstLeaf.h"
 #include "AstList.h"
 #include "NumberLiteral.h"
+#include "BinaryExpr.h"
 
 #endif //LLVM_RUNNER_ASTNODES_H
