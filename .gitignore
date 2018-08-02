@@ -33,3 +33,4 @@ gradle/*
 .gradle/*
 .DS_Store
 ./LLVM-Runner/cmake-build-debug/*
+LLVM-Runner/cmake-build-debug/*
