@@ -22,6 +22,10 @@ SUITE (TestCodeGen) {
         auto number = std::static_pointer_cast<NumberLiteral>(root);
         LLVMCodeGenVisitor visitor(root);
         auto result = visitor.visit_number(root);
+        auto result_float = (ConstantFP *) result;
+        UNITTEST_CHECK(result);
+        UNITTEST_CHECK(result_float);
+        UNITTEST_CHECK_EQUAL(1, result_float->getValueAPF().convertToDouble());
     }
 }
 

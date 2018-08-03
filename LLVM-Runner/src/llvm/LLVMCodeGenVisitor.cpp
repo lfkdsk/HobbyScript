@@ -35,3 +35,7 @@ ValuePointer LLVMCodeGenVisitor::visit(Pointer<AstNode> node) {
 
 ValuePointer LLVMCodeGenVisitor::visit() {
 }
+
+LLVMCodeGenVisitor::~LLVMCodeGenVisitor() {
+
+}
