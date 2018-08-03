@@ -9,20 +9,18 @@
 
 class BinaryExpr : public AstList {
 public:
-    BinaryExpr(const json &load_json, const AstNodeListPointer &children);
+    BinaryExpr(const json &load_json, const Pointer<AstNodeList> &children);
 
-    AstNodePointer get_left_node();
+    Pointer<AstNode> get_left_node();
 
-    AstNodePointer get_right_node();
+    Pointer<AstNode> get_right_node();
 
-    AstNodePointer get_mid_op();
+    Pointer<AstNode> get_mid_op();
 
 private:
-    AstNodePointer left_node;
-    AstNodePointer right_node;
-    AstNodePointer mid_op;
+    Pointer<AstNode> left_node;
+    Pointer<AstNode> right_node;
+    Pointer<AstNode> mid_op;
 };
-
-using BinaryExprPointer = std::shared_ptr<BinaryExpr>;
 
 #endif //LLVM_RUNNER_BINARYEXPR_H

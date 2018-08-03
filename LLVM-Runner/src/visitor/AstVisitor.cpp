@@ -16,41 +16,41 @@ const json &AstVisitor::get_json() {
     return load_json;
 }
 
-AstNodePointer AstVisitor::visit_ast_node(const json &json_object) {
+Pointer<AstNode> AstVisitor::visit_ast_node(const json &json_object) {
     return nullptr;
 }
 
-AstNodePointer AstVisitor::visit_ast_leaf(const json &json_object) {
-    return AstLeafPointer(new AstLeaf(json_object));
+Pointer<AstNode> AstVisitor::visit_ast_leaf(const json &json_object) {
+    return Pointer<AstLeaf>(new AstLeaf(json_object));
 }
 
-AstNodePointer AstVisitor::visit_ast_list(const json &json_object) {
+Pointer<AstNode> AstVisitor::visit_ast_list(const json &json_object) {
     jsonVector children = json_object["children"];
-    AstNodeListPointer children_list(new AstNodeList());
+    Pointer<AstNodeList> children_list(new AstNodeList());
     std::for_each(children.begin(), children.end(), [this, children_list](auto child_json) {
-        AstNodePointer child = visit(child_json);
+        Pointer<AstNode> child = visit(child_json);
         children_list->push_back(child);
     });
 
-    return AstListPointer(new AstList(json_object, children_list));
+    return Pointer<AstList>(new AstList(json_object, children_list));
 }
 
-AstNodePointer AstVisitor::visit_number(const json &json_object) {
-    return NumberLiteralPointer(new NumberLiteral(json_object));
+Pointer<AstNode> AstVisitor::visit_number(const json &json_object) {
+    return Pointer<NumberLiteral>(new NumberLiteral(json_object));
 }
 
-AstNodePointer AstVisitor::visit_binary_expr(const json &json_object) {
+Pointer<AstNode> AstVisitor::visit_binary_expr(const json &json_object) {
     std::vector<json> children = json_object["children"];
     auto left = visit(children[0]);
     auto op = visit(children[1]);
     auto right = visit(children[2]);
-    AstNodeListPointer pointer(new AstNodeList({left, op, right}));
-    return BinaryExprPointer(new BinaryExpr(json_object, pointer));
+    Pointer<AstNodeList> pointer(new AstNodeList({left, op, right}));
+    return Pointer<BinaryExpr>(new BinaryExpr(json_object, pointer));
 }
 
-AstNodePointer AstVisitor::visit(const json &load_json) {
+Pointer<AstNode> AstVisitor::visit(const json &load_json) {
     int tag = load_json["tag"];
-    AstNodePointer result;
+    Pointer<AstNode> result;
     switch (tag) {
         case BINARY_EXPR: {
             result = visit_binary_expr(load_json);
@@ -81,7 +81,7 @@ AstNodePointer AstVisitor::visit(const json &load_json) {
     return result;
 }
 
-AstNodePointer AstVisitor::visit() {
+Pointer<AstNode> AstVisitor::visit() {
     return visit(this->load_json);
 }
 

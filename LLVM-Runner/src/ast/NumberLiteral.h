@@ -19,6 +19,4 @@ private:
     double value;
 };
 
-using NumberLiteralPointer = std::shared_ptr<NumberLiteral>;
-
 #endif //LLVM_RUNNER_NUMBERLITERAL_H

@@ -25,19 +25,19 @@ public:
 
     const json &get_json();
 
-    AstNodePointer visit_ast_node(const json &json_object);
+    Pointer<AstNode> visit_ast_node(const json &json_object);
 
-    AstNodePointer visit_ast_leaf(const json &json_object);
+    Pointer<AstNode> visit_ast_leaf(const json &json_object);
 
-    AstNodePointer visit_binary_expr(const json &json_object);
+    Pointer<AstNode> visit_binary_expr(const json &json_object);
 
-    AstNodePointer visit_ast_list(const json &json_object);
+    Pointer<AstNode> visit_ast_list(const json &json_object);
 
-    AstNodePointer visit_number(const json &json_object);
+    Pointer<AstNode> visit_number(const json &json_object);
 
-    AstNodePointer visit(const json &json_object);
+    Pointer<AstNode> visit(const json &json_object);
 
-    AstNodePointer visit();
+    Pointer<AstNode> visit();
 
 private:
     json load_json;

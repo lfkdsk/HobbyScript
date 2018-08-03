@@ -8,6 +8,8 @@
 #include <nlohmann/json.hpp>
 
 using json=nlohmann::json;
+template<class T>
+using Pointer = std::shared_ptr<T>;
 
 class AstNode {
 public:
@@ -21,6 +23,5 @@ private:
     json load_json;
 };
 
-using AstNodePointer = std::shared_ptr<AstNode>;
 
 #endif //LLVM_RUNNER_ASTNODE_H

@@ -7,20 +7,19 @@
 
 #include "AstNode.h"
 
-using jsonVector = std::vector<json>;
-using AstNodeList = std::vector<AstNodePointer>;
-using AstNodeListPointer = std::shared_ptr<AstNodeList>;
+template<class T>
+using Vector = std::vector<T>;
+using jsonVector = Vector<json>;
+using AstNodeList = Vector<Pointer<AstNode>>;
 
 class AstList : public AstNode {
 public:
-    AstList(const json &load_json, AstNodeListPointer children);
+    AstList(const json &load_json, Pointer<AstNodeList> children);
 
-    AstNodeListPointer get_children();
+    Pointer<AstNodeList> get_children();
 
 private:
-    AstNodeListPointer children;
+    Pointer<AstNodeList> children;
 };
-
-using AstListPointer = std::shared_ptr<AstList>;
 
 #endif //LLVM_RUNNER_ASTLIST_H
