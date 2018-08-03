@@ -23,35 +23,40 @@ using LLVMContext = llvm::LLVMContext;
 using IRBuilder = llvm::IRBuilder<>;
 using Module = llvm::Module;
 
+template<class T, class P>
+constexpr auto Cast = std::static_pointer_cast<T, P>;
+
 template<class K, class V>
 using Map = std::map<K, V>;
 
-class LLVMVisitor : public Visitor<Pointer<Value>, Pointer<AstNode>> {
+class LLVMCodeGenVisitor : public Visitor<ValuePointer, Pointer<AstNode>> {
 public:
-    LLVMVisitor(const Pointer<AstNode> &root_node);
+    LLVMCodeGenVisitor(const Pointer<AstNode> &root_node);
+
+    virtual ~LLVMCodeGenVisitor();
 
     Pointer<AstNode> get_root_node();
 
-    Pointer<Value> visit_ast_node(Pointer<AstNode> node) override;
+    ValuePointer visit_ast_node(Pointer<AstNode> node) override;
 
-    Pointer<Value> visit_ast_leaf(Pointer<AstNode> node) override;
+    ValuePointer visit_ast_leaf(Pointer<AstNode> node) override;
 
-    Pointer<Value> visit_binary_expr(Pointer<AstNode> node) override;
+    ValuePointer visit_binary_expr(Pointer<AstNode> node) override;
 
-    Pointer<Value> visit_ast_list(Pointer<AstNode> node) override;
+    ValuePointer visit_ast_list(Pointer<AstNode> node) override;
 
-    Pointer<Value> visit_number(Pointer<AstNode> node) override;
+    ValuePointer visit_number(Pointer<AstNode> node) override;
 
-    Pointer<Value> visit(Pointer<AstNode> node) override;
+    ValuePointer visit(Pointer<AstNode> node) override;
 
-    Pointer<Value> visit() override;
+    ValuePointer visit() override;
 
 private:
     Pointer<AstNode> root_node;
     LLVMContext the_context;
     IRBuilder builder;
     Pointer<Module> the_module;
-    Map<string, Pointer<Value>> name_values;
+    Map<string, ValuePointer > name_values;
 };
 
 
