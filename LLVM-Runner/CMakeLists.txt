@@ -19,6 +19,11 @@ message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
 include_directories(${LLVM_INCLUDE_DIRS})
 add_definitions(${LLVM_DEFINITIONS})
 
+if(TARGET spdlog)
+    MESSAGE(STARUS "****")
+    # Part of the main project
+    add_library(spdlog::spdlog ALIAS spdlog)
+endif()
 
 # include src
 include_directories(includes)

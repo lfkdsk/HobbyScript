@@ -21,7 +21,38 @@ ValuePointer LLVMCodeGenVisitor::visit_ast_leaf(Pointer<AstNode> node) {
 
 ValuePointer LLVMCodeGenVisitor::visit_binary_expr(Pointer<AstNode> node) {
     auto binary_expr = Cast<BinaryExpr, AstNode>(node);
-    auto left = binary_expr->get_left_node();
+    auto left = visit(binary_expr->get_left_node());
+    auto right = visit(binary_expr->get_right_node());
+    auto op = Cast<AstLeaf, AstNode>(binary_expr->get_mid_op());
+    const char *op_text = op->get_text().c_str();
+
+    if (!left || !right) {
+        return nullptr;
+    }
+
+    switch (*op_text) {
+        case '+': {
+            return builder.CreateFAdd(left, right, "addtmp");
+        }
+
+        case '-': {
+            return builder.CreateFSub(left, right, "subtmp");
+        }
+
+        case '*': {
+            return builder.CreateFMul(left, right, "multmp");
+        }
+
+        case '<': {
+            left = builder.CreateFCmpULT(left, right, "cmptmp");
+            // Convert bool 0/1 to double 0.0 or 1.0
+            return builder.CreateUIToFP(left, Type::getDoubleTy(the_context), "booltmp");
+        }
+
+        default: {
+            
+        }
+    }
 }
 
 ValuePointer LLVMCodeGenVisitor::visit_ast_list(Pointer<AstNode> node) {
@@ -33,24 +64,25 @@ ValuePointer LLVMCodeGenVisitor::visit_number(Pointer<AstNode> node) {
 }
 
 ValuePointer LLVMCodeGenVisitor::visit(Pointer<AstNode> node) {
-    switch (node->) {
+    ValuePointer result = nullptr;
+    switch (node->get_tag()) {
         case BINARY_EXPR: {
-            result = visit_binary_expr(load_json);
+            result = visit_binary_expr(node);
             break;
         }
 
         case NUMBER_LITERAL: {
-            result = visit_number(load_json);
+            result = visit_number(node);
             break;
         }
 
         case AST_LEAF: {
-            result = visit_ast_leaf(load_json);
+            result = visit_ast_leaf(node);
             break;
         }
 
         case AST_LIST: {
-            result = visit_ast_list(load_json);
+            result = visit_ast_list(node);
             break;
         }
 
@@ -59,12 +91,11 @@ ValuePointer LLVMCodeGenVisitor::visit(Pointer<AstNode> node) {
         }
     }
 
-    std::cout << result->get_json().dump(4) << std::endl;
     return result;
 }
 
 ValuePointer LLVMCodeGenVisitor::visit() {
-
+    return visit(root_node);
 }
 
 LLVMCodeGenVisitor::~LLVMCodeGenVisitor() {

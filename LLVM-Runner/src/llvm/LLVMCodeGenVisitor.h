@@ -17,8 +17,10 @@
 #include <llvm/IR/Verifier.h>
 #include "../visitor/Visitor.h"
 #include "../ast/AstNodes.h"
+#include "../visitor/AstVisitor.h"
 
 using Value = llvm::Value;
+using Type = llvm::Type;
 using LLVMContext = llvm::LLVMContext;
 using IRBuilder = llvm::IRBuilder<>;
 using Module = llvm::Module;
