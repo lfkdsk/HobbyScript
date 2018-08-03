@@ -24,8 +24,11 @@ public:
 
     const json &get_json();
 
+    int get_tag() { return tag; };
+
 private:
     json load_json;
+    int tag;
 };
 
 

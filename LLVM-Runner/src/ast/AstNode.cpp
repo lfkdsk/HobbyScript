@@ -6,6 +6,7 @@
 
 AstNode::AstNode(const json &load_json) {
     this->load_json = load_json;
+    this->tag = load_json["tag"];
 }
 
 const json &AstNode::get_json() {
