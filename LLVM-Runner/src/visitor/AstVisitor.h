@@ -8,6 +8,7 @@
 #include <iostream>
 #include "json.hpp"
 #include "../ast/AstNodes.h"
+#include "Visitor.h"
 #include "unitcpp/UnitTest++.h"
 
 using json = nlohmann::json;
@@ -17,7 +18,7 @@ static const int NUMBER_LITERAL = 270;
 static const int AST_LEAF = 264;
 static const int AST_LIST = 277;
 
-class AstVisitor {
+class AstVisitor : public Visitor<Pointer<AstNode>, const json &> {
 public:
     AstVisitor(const json &load_json);
 
@@ -25,19 +26,19 @@ public:
 
     const json &get_json();
 
-    Pointer<AstNode> visit_ast_node(const json &json_object);
+    Pointer<AstNode> visit_ast_node(const json &node) override;
 
-    Pointer<AstNode> visit_ast_leaf(const json &json_object);
+    Pointer<AstNode> visit_ast_leaf(const json &node) override;
 
-    Pointer<AstNode> visit_binary_expr(const json &json_object);
+    Pointer<AstNode> visit_binary_expr(const json &node) override;
 
-    Pointer<AstNode> visit_ast_list(const json &json_object);
+    Pointer<AstNode> visit_ast_list(const json &node) override;
 
-    Pointer<AstNode> visit_number(const json &json_object);
+    Pointer<AstNode> visit_number(const json &node) override;
 
-    Pointer<AstNode> visit(const json &json_object);
+    Pointer<AstNode> visit(const json &node) override;
 
-    Pointer<AstNode> visit();
+    Pointer<AstNode> visit() override;
 
 private:
     json load_json;

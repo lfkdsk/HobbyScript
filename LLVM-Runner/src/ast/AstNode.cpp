@@ -11,3 +11,7 @@ AstNode::AstNode(const json &load_json) {
 const json &AstNode::get_json() {
     return load_json;
 }
+
+Pointer<Value> AstNode::code_gen(LLVMContext context) {
+    return Pointer<llvm::Value>();
+}

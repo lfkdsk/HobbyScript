@@ -12,14 +12,30 @@ Pointer<AstNode> LLVMVisitor::get_root_node() {
     return this->root_node;
 }
 
-Pointer<Value> LLVMVisitor::visit_number_literial(Pointer<NumberLiteral> node) {
-    return Pointer<Value>(ConstantFP::get(the_context, APFloat(node->getValue())));
+Pointer<llvm::Value> LLVMVisitor::visit_ast_node(Pointer<AstNode> node) {
+    return Visitor::visit_ast_node(node);
 }
 
-Pointer<Value> LLVMVisitor::visit_binary_expr(Pointer<BinaryExpr> node) {
-
+Pointer<llvm::Value> LLVMVisitor::visit_ast_leaf(Pointer<AstNode> node) {
+    return Visitor::visit_ast_leaf(node);
 }
 
-Pointer<Value> LLVMVisitor::visit_ast_leaf(Pointer<AstLeaf> node) {
+Pointer<llvm::Value> LLVMVisitor::visit_binary_expr(Pointer<AstNode> node) {
+    return Visitor::visit_binary_expr(node);
+}
 
+Pointer<llvm::Value> LLVMVisitor::visit_ast_list(Pointer<AstNode> node) {
+    return Visitor::visit_ast_list(node);
+}
+
+Pointer<llvm::Value> LLVMVisitor::visit_number(Pointer<AstNode> node) {
+    return Visitor::visit_number(node);
+}
+
+Pointer<llvm::Value> LLVMVisitor::visit(Pointer<AstNode> node) {
+    return Visitor::visit(node);
+}
+
+Pointer<llvm::Value> LLVMVisitor::visit() {
+    return Visitor::visit();
 }

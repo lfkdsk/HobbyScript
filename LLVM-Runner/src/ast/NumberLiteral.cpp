@@ -16,3 +16,9 @@ double NumberLiteral::getValue() {
     return this->value;
 }
 
+Pointer<Value> NumberLiteral::code_gen(LLVMContext context) {
+    return Pointer<Value>(ConstantFP::get(context, APFloat(this->getValue())));
+}
+
+
+
