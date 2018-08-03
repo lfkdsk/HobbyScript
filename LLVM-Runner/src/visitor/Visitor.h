@@ -8,19 +8,19 @@
 template <class R, class I>
 class Visitor {
 public:
-    virtual R visit_ast_node(I node);
+    virtual R visit_ast_node(I node) = 0;
 
-    virtual R visit_ast_leaf(I node);
+    virtual R visit_ast_leaf(I node) = 0;
 
-    virtual R visit_binary_expr(I node);
+    virtual R visit_binary_expr(I node) = 0;
 
-    virtual R visit_ast_list(I node);
+    virtual R visit_ast_list(I node) = 0;
 
-    virtual R visit_number(I node);
+    virtual R visit_number(I node) = 0;
 
-    virtual R visit(I node);
+    virtual R visit(I node) = 0;
 
-    virtual R visit();
+    virtual R visit() = 0;
 };
 
 #endif //LLVM_RUNNER_VISITOR_H

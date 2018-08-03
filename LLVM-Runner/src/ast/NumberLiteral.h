@@ -19,9 +19,6 @@ public:
     ~NumberLiteral() override;
 
     double getValue();
-
-    Pointer<Value> code_gen(LLVMContext context) override;
-
 private:
     double value;
 };

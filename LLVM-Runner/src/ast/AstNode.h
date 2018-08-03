@@ -23,8 +23,6 @@ public:
 
     const json &get_json();
 
-    virtual Pointer<Value> code_gen(LLVMContext context);
-
 private:
     json load_json;
 };

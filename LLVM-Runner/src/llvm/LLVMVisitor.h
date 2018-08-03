@@ -15,8 +15,8 @@
 #include <llvm/IR/Module.h>
 #include <llvm/IR/Type.h>
 #include <llvm/IR/Verifier.h>
-#include "../ast/AstNodes.h"
 #include "../visitor/Visitor.h"
+#include "../ast/AstNodes.h"
 
 using Value = llvm::Value;
 using LLVMContext = llvm::LLVMContext;
@@ -32,19 +32,19 @@ public:
 
     Pointer<AstNode> get_root_node();
 
-    Pointer<llvm::Value> visit_ast_node(Pointer<AstNode> node) override;
+    Pointer<Value> visit_ast_node(Pointer<AstNode> node) override;
 
-    Pointer<llvm::Value> visit_ast_leaf(Pointer<AstNode> node) override;
+    Pointer<Value> visit_ast_leaf(Pointer<AstNode> node) override;
 
-    Pointer<llvm::Value> visit_binary_expr(Pointer<AstNode> node) override;
+    Pointer<Value> visit_binary_expr(Pointer<AstNode> node) override;
 
-    Pointer<llvm::Value> visit_ast_list(Pointer<AstNode> node) override;
+    Pointer<Value> visit_ast_list(Pointer<AstNode> node) override;
 
-    Pointer<llvm::Value> visit_number(Pointer<AstNode> node) override;
+    Pointer<Value> visit_number(Pointer<AstNode> node) override;
 
-    Pointer<llvm::Value> visit(Pointer<AstNode> node) override;
+    Pointer<Value> visit(Pointer<AstNode> node) override;
 
-    Pointer<llvm::Value> visit() override;
+    Pointer<Value> visit() override;
 
 private:
     Pointer<AstNode> root_node;
