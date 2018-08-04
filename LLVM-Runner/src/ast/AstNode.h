@@ -5,9 +5,9 @@
 #ifndef LLVM_RUNNER_ASTNODE_H
 #define LLVM_RUNNER_ASTNODE_H
 
-#include <nlohmann/json.hpp>
 #include <llvm/IR/Value.h>
 #include <llvm/IR/LLVMContext.h>
+#include <json.hpp>
 
 using json=nlohmann::json;
 template<class T>
