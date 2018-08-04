@@ -10,11 +10,11 @@ class lfkdsk {
     };
 }
 
-lfk = "";
-lfi = lfkdsk.Initial(200);
+// lfk = "";
+// lfi = lfkdsk.Initial(200);
 
-lfi.Ssdut();
+// lfi.Ssdut();
 
 
 
-logInfo(lfi.Ss + lfk);
+// logInfo(lfi.Ss + lfk);

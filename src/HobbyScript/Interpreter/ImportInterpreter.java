@@ -16,7 +16,7 @@ import java.io.FileNotFoundException;
 public class ImportInterpreter extends ArrayInterpreter {
 
     public static void main(String[] args) throws FileNotFoundException, ParseException {
-        run("LexerTest", new ImportParser(), new NativeList().env(new LocalEnvironment()));
+        run("ClassThisPoint", new ImportParser(), new NativeList().env(new LocalEnvironment()));
     }
 
 }

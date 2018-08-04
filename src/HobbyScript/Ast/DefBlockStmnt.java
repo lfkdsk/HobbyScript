@@ -10,10 +10,10 @@ import java.util.List;
 /**
  * Created by liufengkai on 2017/3/12.
  */
-public class DefBlockStmnt extends AstList {
+public class DefBlockStmnt extends BlockStmnt {
 
     public DefBlockStmnt(List<AstNode> children) {
-        super(children, HobbyToken.BLOCK);
+        super(children);
     }
 
     @Override

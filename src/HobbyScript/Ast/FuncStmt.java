@@ -11,7 +11,7 @@ import java.util.List;
  * 函数定义
  *
  * @author liufengkai
- *         Created by liufengkai on 16/7/15.
+ * Created by liufengkai on 16/7/15.
  */
 public class FuncStmt extends AstList {
     public FuncStmt(List<AstNode> children) {
@@ -48,7 +48,7 @@ public class FuncStmt extends AstList {
         line.startCompileFunction(code);
         int begin = line.newLine();
         int end = line.newLine();
-        line.addSpecCode("",begin);
+        line.addSpecCode("", begin);
 
         body().compile(line, begin, end);
 
@@ -61,5 +61,13 @@ public class FuncStmt extends AstList {
     @Override
     public Object eval(EnvironmentCallBack env) {
         return FunctionEval.functionEval(env, this);
+    }
+
+    @Override
+    public boolean couldCache() {
+        String name = name();
+        return name.substring(0, 1).toCharArray()[0] >= 'A'
+                && name.substring(0, 1).toCharArray()[0] <= 'Z';
+
     }
 }

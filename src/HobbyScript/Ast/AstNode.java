@@ -1,5 +1,6 @@
 package HobbyScript.Ast;
 
+import HobbyScript.Cache.Cacheable;
 import HobbyScript.Compile.CodeLine;
 import HobbyScript.Compile.CompileCallBack;
 import HobbyScript.Eval.Env.EnvironmentCallBack;
@@ -14,7 +15,7 @@ import java.util.function.Consumer;
  * Created by liufengkai on 16/7/11.
  */
 public abstract class AstNode implements Iterable<AstNode>,
-        EvalCallBack, CompileCallBack {
+        EvalCallBack, CompileCallBack, Cacheable {
     protected final int tag;
 
     protected AstNode(int tag) {
@@ -71,5 +72,10 @@ public abstract class AstNode implements Iterable<AstNode>,
     @Override
     public String compile(CodeLine line, int th, int nx) {
         return null;
+    }
+
+    @Override
+    public boolean couldCache() {
+        return false;
     }
 }
