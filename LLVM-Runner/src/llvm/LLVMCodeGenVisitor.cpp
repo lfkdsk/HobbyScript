@@ -13,7 +13,7 @@ Pointer<AstNode> LLVMCodeGenVisitor::get_root_node() {
 }
 
 ValuePointer LLVMCodeGenVisitor::visit_ast_node(Pointer<AstNode> node) {
-    
+
 
 }
 
