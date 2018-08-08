@@ -103,3 +103,15 @@ ValuePointer LLVMCodeGenVisitor::visit() {
 LLVMCodeGenVisitor::~LLVMCodeGenVisitor() {
 
 }
+
+ValuePointer LLVMCodeGenVisitor::visit_fun_stmt(Pointer<AstNode> node) {
+    return nullptr;
+}
+
+ValuePointer LLVMCodeGenVisitor::visit_def_block(Pointer<AstNode> node) {
+    return nullptr;
+}
+
+ValuePointer LLVMCodeGenVisitor::visit_string(Pointer<AstNode> node) {
+    return nullptr;
+}

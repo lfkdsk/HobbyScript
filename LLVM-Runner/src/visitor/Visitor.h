@@ -5,7 +5,7 @@
 #ifndef LLVM_RUNNER_VISITOR_H
 #define LLVM_RUNNER_VISITOR_H
 
-template <class R, class I>
+template<class R, class I>
 class Visitor {
 public:
     virtual R visit_ast_node(I node) = 0;
@@ -15,6 +15,12 @@ public:
     virtual R visit_binary_expr(I node) = 0;
 
     virtual R visit_ast_list(I node) = 0;
+
+    virtual R visit_fun_stmt(I node) = 0;
+
+    virtual R visit_def_block(I node) = 0;
+
+    virtual R visit_string(I node) = 0;
 
     virtual R visit_number(I node) = 0;
 

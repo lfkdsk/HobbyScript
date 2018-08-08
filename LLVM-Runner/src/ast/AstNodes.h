@@ -10,5 +10,8 @@
 #include "AstList.h"
 #include "NumberLiteral.h"
 #include "BinaryExpr.h"
+#include "FuncStmt.h"
+#include "DefBlockStmt.h"
+#include "StringLiteral.h"
 
 #endif //LLVM_RUNNER_ASTNODES_H

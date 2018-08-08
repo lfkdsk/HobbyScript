@@ -46,9 +46,15 @@ public:
 
     ValuePointer visit_binary_expr(Pointer<AstNode> node) override;
 
+    ValuePointer visit_fun_stmt(Pointer<AstNode> node) override;
+
     ValuePointer visit_ast_list(Pointer<AstNode> node) override;
 
+    ValuePointer visit_def_block(Pointer<AstNode> node) override;
+
     ValuePointer visit_number(Pointer<AstNode> node) override;
+
+    ValuePointer visit_string(Pointer<AstNode> node) override;
 
     ValuePointer visit(Pointer<AstNode> node) override;
 

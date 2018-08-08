@@ -26,26 +26,32 @@ Pointer<AstNode> AstVisitor::visit_ast_leaf(const json &node) {
 
 Pointer<AstNode> AstVisitor::visit_binary_expr(const json &node) {
     std::vector<json> children = node["children"];
-    auto left = visit(children[0]);
-    auto op = visit(children[1]);
-    auto right = visit(children[2]);
-    Pointer<AstNodeList> pointer(new AstNodeList({left, op, right}));
-    return Pointer<BinaryExpr>(new BinaryExpr(node, pointer));
+    return Pointer<BinaryExpr>(new BinaryExpr(node, node_to_list(children)));
 }
 
 Pointer<AstNode> AstVisitor::visit_ast_list(const json &node) {
     jsonVector children = node["children"];
-    Pointer<AstNodeList> children_list(new AstNodeList());
-    std::for_each(children.begin(), children.end(), [this, children_list](auto child_json) {
-        Pointer<AstNode> child = visit(child_json);
-        children_list->push_back(child);
-    });
-
-    return Pointer<AstList>(new AstList(node, children_list));
+    return Pointer<AstList>(new AstList(node, node_to_list(children)));
 }
 
 Pointer<AstNode> AstVisitor::visit_number(const json &node) {
     return Pointer<NumberLiteral>(new NumberLiteral(node));
+}
+
+
+Pointer<AstNode> AstVisitor::visit_string(const json &node) {
+    return Pointer<StringLiteral>(new StringLiteral(node));
+}
+
+Pointer<AstNode> AstVisitor::visit_fun_stmt(const json &node) {
+    jsonVector children = node["children"];
+    return Pointer<FuncStmt>(new FuncStmt(node, node_to_list(children)));
+}
+
+
+Pointer<AstNode> AstVisitor::visit_def_block(const json &node) {
+    jsonVector children = node["children"];
+    return Pointer<DefBlockStmt>(new DefBlockStmt(node, this->node_to_list(children)));
 }
 
 Pointer<AstNode> AstVisitor::visit(const json &load_json) {
@@ -62,15 +68,30 @@ Pointer<AstNode> AstVisitor::visit(const json &load_json) {
             break;
         }
 
+        case STRING_LITERAL: {
+            result = visit_string(load_json);
+            break;
+        }
+
         case AST_LEAF: {
             result = visit_ast_leaf(load_json);
             break;
         }
 
+        case PARAMS_LIST:
         case AST_LIST: {
             result = visit_ast_list(load_json);
             break;
         }
+
+        case DEF_BLOCK: {
+            result = visit_def_block(load_json);
+            break;
+        }
+
+        case FUNCTION:
+            result = visit_fun_stmt(load_json);
+            break;
 
         default: {
             break;
@@ -85,3 +106,12 @@ Pointer<AstNode> AstVisitor::visit() {
     return visit(this->load_json);
 }
 
+Pointer<AstNodeList> AstVisitor::node_to_list(jsonVector &children) {
+    Pointer<AstNodeList> children_list(new AstNodeList());
+    std::for_each(children.begin(), children.end(), [this, children_list](auto child_json) {
+        Pointer<AstNode> child = visit(child_json);
+        children_list->push_back(child);
+    });
+
+    return children_list;
+}
