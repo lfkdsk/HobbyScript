@@ -5,7 +5,7 @@
 #include "LLVMCodeGenVisitor.h"
 
 LLVMCodeGenVisitor::LLVMCodeGenVisitor(const Pointer<AstNode> &root_node) : root_node(root_node), builder(the_context) {
-
+    the_module = llvm::make_unique<Module>("my cool jit", the_context);
 }
 
 Pointer<AstNode> LLVMCodeGenVisitor::get_root_node() {
@@ -50,7 +50,9 @@ ValuePointer LLVMCodeGenVisitor::visit_binary_expr(Pointer<AstNode> node) {
         }
 
         default: {
-            
+            auto err_logger = spdlog::stderr_color_mt("stderr");
+            err_logger->error("invalid binary operator");
+            return nullptr;
         }
     }
 }

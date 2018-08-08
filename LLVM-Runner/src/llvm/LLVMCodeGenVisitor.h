@@ -18,6 +18,7 @@
 #include "../visitor/Visitor.h"
 #include "../ast/AstNodes.h"
 #include "../visitor/AstVisitor.h"
+#include "spdlog/spdlog.h"
 
 using Value = llvm::Value;
 using Type = llvm::Type;
@@ -58,7 +59,7 @@ private:
     LLVMContext the_context;
     IRBuilder builder;
     Pointer<Module> the_module;
-    Map<string, ValuePointer > name_values;
+    Map<string, ValuePointer> name_values;
 };
 
 

@@ -77,7 +77,7 @@ Pointer<AstNode> AstVisitor::visit(const json &load_json) {
         }
     }
 
-    std::cout << result->get_json().dump(4) << std::endl;
+//    std::cout << result->get_json().dump(4) << std::endl;
     return result;
 }
 
