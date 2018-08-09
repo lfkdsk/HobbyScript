@@ -1,4 +1,5 @@
 import json
+from typing import List
 
 
 class AstNode:
@@ -25,11 +26,11 @@ class AstLeaf(AstNode):
 
 
 class AstList(AstNode):
-    children: list[AstNode] = None
+    children: List[AstNode] = None
 
     def __init__(self, load_json, children) -> None:
         super().__init__(load_json)
         self.children = children
 
-    def get_children(self) -> list[AstNode]:
+    def get_children(self) -> List[AstNode]:
         return self.children
