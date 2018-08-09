@@ -1,4 +1,4 @@
-from .base_ast import AstLeaf
+from ast.base_ast import AstLeaf
 
 
 class NumberLiteral(AstLeaf):

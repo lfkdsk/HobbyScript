@@ -3,7 +3,7 @@ from typing import List
 
 
 class AstNode:
-    load_json: json = None
+    load_json = None
 
     def __init__(self, load_json) -> None:
         super().__init__()
