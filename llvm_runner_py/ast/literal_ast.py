@@ -4,7 +4,7 @@ from ast.base_ast import AstLeaf
 class NumberLiteral(AstLeaf):
 
     def get_value(self):
-        return self.get_token()['value']
+        return self.get_token().get_value()
 
 
 class StringLiteral(AstLeaf):
