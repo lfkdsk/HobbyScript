@@ -1,7 +1,15 @@
 import json
 from typing import List
 from schematics import Model
-from schematics.types import StringType, IntType, PolyModelType, FloatType
+from schematics.types import (
+    StringType,
+    IntType,
+    PolyModelType,
+    MultiType,
+    FloatType,
+    ListType,
+    ModelType,
+)
 
 
 class Token(Model):
@@ -10,6 +18,7 @@ class Token(Model):
     tag = IntType()
     lineNumber = StringType()
     value = FloatType()
+    type = StringType()
 
     def get_tag(self):
         return self.tag
@@ -20,26 +29,35 @@ class Token(Model):
     def get_value(self):
         return self.value
 
+    def get_literal(self):
+        return self.literal
+
+    def get_type(self):
+        return self.type
+
 
 class AstNode(Model):
-    load_json = None
     tag = IntType()
+    type = StringType()
 
-    def __init__(self, load_json) -> None:
-        super().__init__(load_json)
-        self.load_json = load_json
+    # def __init__(self, load_json) -> None:
+    #     super().__init__(raw_data=load_json)
+    #     self.load_json = load_json
 
     def get_tag(self):
         return self.tag
 
+    def get_type(self):
+        return self.type
+
 
 class AstLeaf(AstNode):
-    token = PolyModelType(Token)
+    token = ModelType(Token)
     tag = IntType()
     type = StringType()
 
-    def __init__(self, load_json) -> None:
-        super().__init__(load_json)
+    # def __init__(self, load_json) -> None:
+    #     super().__init__(load_json)
 
     def get_token(self):
         return self.token
@@ -49,11 +67,13 @@ class AstLeaf(AstNode):
 
 
 class AstList(AstNode):
-    children: List[AstNode] = None
+    children = ListType(PolyModelType(AstNode))
 
-    def __init__(self, load_json, children) -> None:
-        super().__init__(load_json)
-        self.children = children
+    # def __init__(self, load_json) -> None:
+    #     super().__init__(load_json=load_json)
 
-    def get_children(self) -> List[AstNode]:
+    def get_children(self):
         return self.children
+
+    def children_size(self):
+        return len(self.get_children())

@@ -21,6 +21,24 @@ class TestAst(unittest.TestCase):
         self.assertEqual(number_literal.get_token().get_tag(), 270)
         self.assertEqual(number_literal.get_value(), 1)
 
+    def test_ast_list(self):
+        ast_list: AstList = AstList(
+            {
+                "type": "AstList",
+                "tag": "270",
+                "children": [
+                    {"token": {"text": "+", "lineNumber": 1, "tag": 264}, "tag": 264, "type": "AstLeaf"},
+                    {"token": {"text": "+", "lineNumber": 1, "tag": 264}, "tag": 264, "type": "AstLeaf"},
+                    {"token": {"text": "+", "lineNumber": 1, "tag": 264}, "tag": 264, "type": "AstLeaf"},
+                ],
+            }
+        )
+
+        self.assertIsNotNone(ast_list)
+        self.assertEqual(3, ast_list.children_size())
+        self.assertEqual(270, ast_list.get_tag())
+        self.assertEqual("AstList", ast_list.get_type())
+
     # def test_binary_expr(self):
     #     binary_expr_json = json.loads(
     #         r"""

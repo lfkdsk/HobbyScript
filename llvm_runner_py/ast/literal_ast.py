@@ -10,13 +10,13 @@ class NumberLiteral(AstLeaf):
 class StringLiteral(AstLeaf):
 
     def get_text(self) -> str:
-        return self.get_token()['literal']
+        return self.get_token().get_literal()
 
 
 class BoolLiteral(AstLeaf):
 
     def get_bool(self) -> bool:
-        if self.get_token()['type'] == 'TRUE':
+        if self.get_token().get_type() == 'TRUE':
             return True
         return False
 
@@ -24,6 +24,4 @@ class BoolLiteral(AstLeaf):
 class IDLiteral(AstLeaf):
 
     def get_text(self) -> str:
-        return self.get_token()['text']
-
-
+        return self.get_token().get_text()
