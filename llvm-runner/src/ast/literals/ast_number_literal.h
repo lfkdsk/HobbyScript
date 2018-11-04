@@ -17,6 +17,8 @@ public:
     ast_number_literal(const json &load_json);
 
     double get_value();
+
+    void generate_code() override;
 };
 
 #endif //LLVM_RUNNER_NUMBERLITERAL_H

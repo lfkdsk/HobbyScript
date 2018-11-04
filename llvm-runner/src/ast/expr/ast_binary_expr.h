@@ -5,22 +5,26 @@
 #ifndef LLVM_RUNNER_BINARYEXPR_H
 #define LLVM_RUNNER_BINARYEXPR_H
 
-#include "../common/ast_list.h"
+#include "ast/common/ast_value_leaf.h"
+#include "ast/common/ast_list.h"
+
 
 class ast_binary_expr : public ast_list {
 public:
     ast_binary_expr(const json &load_json, const pointer<ast_node_list> &children);
 
-    pointer<ast_node> get_left_node();
+    pointer<ast_value_leaf> get_left_node();
 
-    pointer<ast_node> get_right_node();
+    pointer<ast_value_leaf> get_right_node();
 
-    pointer<ast_node> get_mid_op();
+    pointer<ast_leaf> get_mid_op();
+
+    void generate_code() override;
 
 private:
-    pointer<ast_node> left_node;
-    pointer<ast_node> right_node;
-    pointer<ast_node> mid_op;
+    pointer<ast_value_leaf> left_node;
+    pointer<ast_value_leaf> right_node;
+    pointer<ast_leaf> mid_op;
 };
 
 #endif //LLVM_RUNNER_BINARYEXPR_H

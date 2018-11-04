@@ -15,7 +15,6 @@ pointer<ast_node> LLVMCodeGenVisitor::get_root_node() {
 
 value_pointer LLVMCodeGenVisitor::visit_ast_node(pointer<ast_node> node) {
 
-
 }
 
 value_pointer LLVMCodeGenVisitor::visit_ast_leaf(pointer<ast_node> node) {

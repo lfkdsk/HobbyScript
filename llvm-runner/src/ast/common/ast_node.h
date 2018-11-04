@@ -14,7 +14,6 @@ template<class T>
 using pointer = std::shared_ptr<T>;
 using value = llvm::Value;
 using value_pointer = value *;
-using llvm_context = llvm::LLVMContext;
 
 struct node_type {
 
@@ -42,7 +41,7 @@ private:
     int lineno, colno;
     node_type type;
 
-protected:
+public:
     virtual void generate_code();
 };
 

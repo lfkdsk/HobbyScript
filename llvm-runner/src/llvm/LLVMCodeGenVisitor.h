@@ -22,7 +22,6 @@
 
 using value = llvm::Value;
 using Type = llvm::Type;
-using llvm_context = llvm::LLVMContext;
 using IRBuilder = llvm::IRBuilder<>;
 using Module = llvm::Module;
 
@@ -62,7 +61,7 @@ public:
 
 private:
     pointer<ast_node> root_node;
-    llvm_context the_context;
+    llvm::LLVMContext the_context;
     IRBuilder builder;
     pointer<Module> the_module;
     Map<string, value_pointer> name_values;

@@ -4,9 +4,7 @@
 
 #include "ast_leaf.h"
 
-ast_leaf::ast_leaf(const json &load_json) : ast_node(load_json) {
-    this->token = load_json["token"];
-}
+ast_leaf::ast_leaf(const json &load_json) : ast_node(load_json) {}
 
 const json &ast_leaf::get_token() {
     return this->token;
