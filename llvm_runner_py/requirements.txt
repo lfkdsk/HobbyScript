@@ -1,2 +1,0 @@
-llvmlite==0.23.0
-schematics==2.1.0

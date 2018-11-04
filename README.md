@@ -4,7 +4,7 @@ Exercise for learn knowledge about computer language compile.
 
 > Transport from my another lib [CodeParser](https://github.com/lfkdsk/CodeParse).
 >
-> Dev TimeLine :  [TimeLine](TimeLine.md) [TimeLine2](TimeLine2.md) 
+> Dev TimeLine :  [TimeLine](doc/TimeLine.md) [TimeLine2](doc/TimeLine2.md) 
 
 [![](https://jitpack.io/v/lfkdsk/HobbyScript.svg)](https://jitpack.io/#lfkdsk/HobbyScript)
 
