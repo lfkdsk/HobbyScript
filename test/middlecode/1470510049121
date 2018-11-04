@@ -1,0 +1,6 @@
+L1 :
+L3 :iffalse (sss = 100) goto L4
+	saa=100
+	goto L2
+L4 :sss=1000
+L2 :

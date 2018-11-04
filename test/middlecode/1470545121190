@@ -1,0 +1,5 @@
+L1 :
+	iffalse (i < 100) goto L2
+L3 :iffalse (i > 100) goto L1
+L4 :goto L1
+L2 :

@@ -1,0 +1,23 @@
+import "util/LinkedList.hhs";
+
+list = LinkedList.Initial();
+
+list.Add("lfkdsk");
+
+list.Add("000111");
+
+list.PopFront();
+
+list.PrintList();
+
+
+
+list.PushFront("hahaha");
+
+list.PrintList();
+
+// logInfo(charAtPoint(list.Get(1),2));
+
+// getLocalEnv("list");
+
+// 搞定了双向链表

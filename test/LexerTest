@@ -1,0 +1,200 @@
+import "util/LinkedList.hhs";
+
+import "parser/Input.hhs";
+
+input = Input.Initial();
+list = LinkedList.Initial();
+
+peekChar = "";
+lineNumber = 0;
+
+function nextChar() {
+    peekChar = input.Read();
+    if (peekChar != "") {
+        println(peekChar);
+    }
+    return peekChar;
+}
+
+class Token {
+    tag = -1;
+
+    function Initial() {
+        tag = -1;
+    }
+}
+
+class Number extend Token {
+    
+    value = -1;
+
+    function Initial() {
+        tag = 0;
+    }
+
+    function SetValue(v) {
+        value = v;
+    }
+
+    function GetValue() {
+        return value;
+    }
+}
+
+class ID extend Token {
+    Key = "";
+    Value = "";
+
+    function Initial() {
+        tag = 1;
+    }
+}
+
+function handleOperator() {
+    
+}
+
+function perserPeekChar(char) {
+    return char != "" && char != "\n" && (isDigit(char) || isChar(char) || char == "_");
+}
+
+function handleToken() {
+    value = "";
+
+    while(perserPeekChar(peekChar)) {
+        value = value + peekChar;
+        nextChar();
+    }
+
+    id = ID.Initial();
+    id.Key = value;
+    println("id " + id);
+    return id;
+}
+
+function handleDigit() {
+    v = 0;
+
+    while(isDigit(peekChar)) {
+        v = 10 * v + stoi(peekChar);
+        nextChar();
+    }
+
+    if (peekChar == "e" || peekChar == "E") {
+        nextChar();
+        x = 0;
+        flag = false;
+        if (peekChar == "-") {
+            flag = true;
+            nextChar();
+        } else {
+            if (peekChar == "+") {
+                flag = false;
+                nextChar();
+            }
+        }
+
+        while(isDigit(peekChar)) {
+            x = 10 * x + stoi(peekChar);
+            nextChar();
+        }
+
+        if (flag) {
+            v = v * exp(-x);
+        } else {
+            v = v * exp(x);
+        }
+
+        double = Number.Initial();
+        double.SetValue(v);
+        println("double" + double);
+        return double;
+    } else {
+        if (peekChar != ".") {
+            int = Number.Initial();
+            int.SetValue(v);
+            println("int" + int);
+            return int;
+        }
+    }
+
+    x = v;
+    for (d = 10;;) {
+        nextChar();
+        if(!isDigit(peekChar)) {
+            break;
+        }
+        x = x + stoi(peekChar) / d;
+        d = d * 10;
+    }
+    real = Number.Initial();
+    real.SetValue(x);
+    println("real" + real);
+    return real;
+}
+
+function handleChar() {
+    if (peekChar == "\"") {
+        flag = false;
+        buffer = "";
+        lastChar = " ";
+        for(;;nextChar()) {
+            if (peekChar == "\"" && flag && lastChar != "\\") {
+                break;
+            } else {
+                if (peekChar == "\n") {
+                    lineNumber = lineNumber + 1;
+                } else {
+                    if (peekChar != "\"") {
+                        buffer = buffer + peekChar;
+                        lastChar = peekChar;
+                        flag = true;
+                    }
+                }
+            }
+        }
+        nextChar();
+
+        println("char " + buffer);
+
+        return buffer; 
+    }
+    return "";
+}
+
+function getNextToken() {
+    for( ; ; nextChar()) {
+        if (peekChar == " " || peekChar == "\t") {
+
+        } else {
+            if (peekChar == "\n") {
+                lineNumber = lineNumber + 1;
+            } else {
+                break;
+            }
+        }
+    }
+
+    result = Token.Initial();
+
+    if(isDigit(peekChar)) {
+        result = handleDigit();
+        return result;
+    }
+
+    if(isChar(peekChar)) {
+        result = handleToken();
+        return result;
+    }
+
+    result = handleChar();
+    return result;
+}
+
+while(nextChar() != -1) {
+    getNextToken();
+}
+
+
+
+

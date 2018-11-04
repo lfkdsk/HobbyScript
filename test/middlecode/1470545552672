@@ -1,0 +1,6 @@
+L1 :i=100
+	iffalse (i < 100) goto L2
+L3 :i=800
+	i=100
+	goto L1
+L2 :

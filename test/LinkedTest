@@ -1,0 +1,34 @@
+class Node {
+
+    value = 0;
+
+    next = 0;
+
+    function Initial(v){
+        value = v;
+    };
+
+    function GetV(){
+        value;
+    };
+
+    function SetV(v){
+        value = v;
+    };
+
+    function SetN(n){
+        next = n;
+    }
+
+    function GetN(){
+        next;
+    }
+}
+
+firstNode = Node.Initial(0);
+
+secondNode = Node.Initial(" fuck you");
+
+firstNode.SetN(secondNode);
+
+logInfo(firstNode.GetN().GetV() + " ");
