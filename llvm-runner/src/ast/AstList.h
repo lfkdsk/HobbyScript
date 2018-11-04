@@ -10,16 +10,16 @@
 template<class T>
 using Vector = std::vector<T>;
 using jsonVector = Vector<json>;
-using AstNodeList = Vector<Pointer<AstNode>>;
+using AstNodeList = Vector<pointer<AstNode>>;
 
 class AstList : public AstNode {
 public:
-    AstList(const json &load_json, Pointer<AstNodeList> children);
+    AstList(const json &load_json, pointer<AstNodeList> children);
 
-    Pointer<AstNodeList> get_children();
+    pointer<AstNodeList> get_children();
 
 private:
-    Pointer<AstNodeList> children;
+    pointer<AstNodeList> children;
 };
 
 #endif //LLVM_RUNNER_ASTLIST_H

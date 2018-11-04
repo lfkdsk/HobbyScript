@@ -9,7 +9,7 @@
 using json = nlohmann::json;
 
 SUITE (TestCodeGen) {
-    static Pointer<AstNode> toAst(const json &inputJson) {
+    static pointer<AstNode> toAst(const json &inputJson) {
         AstVisitor visitor(inputJson);
         return visitor.visit();
     }

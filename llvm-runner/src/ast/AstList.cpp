@@ -10,12 +10,12 @@
 
 #include "AstList.h"
 
-AstList::AstList(const json &load_json, Pointer<AstNodeList> children)
+AstList::AstList(const json &load_json, pointer<AstNodeList> children)
         : AstNode(load_json) {
     this->children = std::move(children);
 };
 
-Pointer<AstNodeList> AstList::get_children() {
+pointer<AstNodeList> AstList::get_children() {
     return children;
 }
 

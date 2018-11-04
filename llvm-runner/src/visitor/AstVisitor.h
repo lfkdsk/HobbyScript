@@ -22,7 +22,7 @@ static const int DEF_BLOCK = 278;
 static const int FUNCTION = 280;
 static const int PARAMS_LIST = 283;
 
-class AstVisitor : public Visitor<Pointer<AstNode>, const json &> {
+class AstVisitor : public Visitor<pointer<AstNode>, const json &> {
 public:
     AstVisitor(const json &load_json);
 
@@ -30,28 +30,28 @@ public:
 
     const json &get_json();
 
-    Pointer<AstNode> visit_ast_node(const json &node) override;
+    pointer<AstNode> visit_ast_node(const json &node) override;
 
-    Pointer<AstNode> visit_ast_leaf(const json &node) override;
+    pointer<AstNode> visit_ast_leaf(const json &node) override;
 
-    Pointer<AstNode> visit_binary_expr(const json &node) override;
+    pointer<AstNode> visit_binary_expr(const json &node) override;
 
-    Pointer<AstNode> visit_ast_list(const json &node) override;
+    pointer<AstNode> visit_ast_list(const json &node) override;
 
-    Pointer<AstNode> visit_fun_stmt(const json &node) override;
+    pointer<AstNode> visit_fun_stmt(const json &node) override;
 
-    Pointer<AstNode> visit_def_block(const json &node) override;
+    pointer<AstNode> visit_def_block(const json &node) override;
 
-    Pointer<AstNode> visit_number(const json &node) override;
+    pointer<AstNode> visit_number(const json &node) override;
 
-    Pointer<AstNode> visit_string(const json &node) override;
+    pointer<AstNode> visit_string(const json &node) override;
 
-    Pointer<AstNode> visit(const json &node) override;
+    pointer<AstNode> visit(const json &node) override;
 
-    Pointer<AstNode> visit() override;
+    pointer<AstNode> visit() override;
 
 protected:
-    Pointer<AstNodeList> node_to_list(jsonVector &children);
+    pointer<AstNodeList> node_to_list(jsonVector &children);
 
 private:
     json load_json;

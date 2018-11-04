@@ -4,24 +4,24 @@
 
 #include "LLVMCodeGenVisitor.h"
 
-LLVMCodeGenVisitor::LLVMCodeGenVisitor(const Pointer<AstNode> &root_node) : root_node(root_node), builder(the_context) {
+LLVMCodeGenVisitor::LLVMCodeGenVisitor(const pointer<AstNode> &root_node) : root_node(root_node), builder(the_context) {
     the_module = llvm::make_unique<Module>("my cool jit", the_context);
 }
 
-Pointer<AstNode> LLVMCodeGenVisitor::get_root_node() {
+pointer<AstNode> LLVMCodeGenVisitor::get_root_node() {
     return this->root_node;
 }
 
-ValuePointer LLVMCodeGenVisitor::visit_ast_node(Pointer<AstNode> node) {
+value_pointer LLVMCodeGenVisitor::visit_ast_node(pointer<AstNode> node) {
 
 
 }
 
-ValuePointer LLVMCodeGenVisitor::visit_ast_leaf(Pointer<AstNode> node) {
+value_pointer LLVMCodeGenVisitor::visit_ast_leaf(pointer<AstNode> node) {
 
 }
 
-ValuePointer LLVMCodeGenVisitor::visit_binary_expr(Pointer<AstNode> node) {
+value_pointer LLVMCodeGenVisitor::visit_binary_expr(pointer<AstNode> node) {
     auto binary_expr = Cast<BinaryExpr, AstNode>(node);
     auto left = visit(binary_expr->get_left_node());
     auto right = visit(binary_expr->get_right_node());
@@ -59,16 +59,16 @@ ValuePointer LLVMCodeGenVisitor::visit_binary_expr(Pointer<AstNode> node) {
     }
 }
 
-ValuePointer LLVMCodeGenVisitor::visit_ast_list(Pointer<AstNode> node) {
+value_pointer LLVMCodeGenVisitor::visit_ast_list(pointer<AstNode> node) {
 }
 
-ValuePointer LLVMCodeGenVisitor::visit_number(Pointer<AstNode> node) {
+value_pointer LLVMCodeGenVisitor::visit_number(pointer<AstNode> node) {
     auto number = Cast<NumberLiteral, AstNode>(node);
     return ConstantFP::get(the_context, APFloat(number->getValue()));
 }
 
-ValuePointer LLVMCodeGenVisitor::visit(Pointer<AstNode> node) {
-    ValuePointer result = nullptr;
+value_pointer LLVMCodeGenVisitor::visit(pointer<AstNode> node) {
+    value_pointer result = nullptr;
     switch (node->get_tag()) {
         case BINARY_EXPR: {
             result = visit_binary_expr(node);
@@ -98,7 +98,7 @@ ValuePointer LLVMCodeGenVisitor::visit(Pointer<AstNode> node) {
     return result;
 }
 
-ValuePointer LLVMCodeGenVisitor::visit() {
+value_pointer LLVMCodeGenVisitor::visit() {
     return visit(root_node);
 }
 
@@ -106,14 +106,14 @@ LLVMCodeGenVisitor::~LLVMCodeGenVisitor() {
 
 }
 
-ValuePointer LLVMCodeGenVisitor::visit_fun_stmt(Pointer<AstNode> node) {
+value_pointer LLVMCodeGenVisitor::visit_fun_stmt(pointer<AstNode> node) {
     return nullptr;
 }
 
-ValuePointer LLVMCodeGenVisitor::visit_def_block(Pointer<AstNode> node) {
+value_pointer LLVMCodeGenVisitor::visit_def_block(pointer<AstNode> node) {
     return nullptr;
 }
 
-ValuePointer LLVMCodeGenVisitor::visit_string(Pointer<AstNode> node) {
+value_pointer LLVMCodeGenVisitor::visit_string(pointer<AstNode> node) {
     return nullptr;
 }

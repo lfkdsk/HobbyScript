@@ -4,7 +4,7 @@
 
 #include "FuncStmt.h"
 
-FuncStmt::FuncStmt(const json &load_json, Pointer<AstNodeList> children)
+FuncStmt::FuncStmt(const json &load_json, pointer<AstNodeList> children)
         : AstList(load_json, children) {
     
 }

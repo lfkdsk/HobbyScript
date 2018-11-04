@@ -11,10 +11,10 @@
 
 using json=nlohmann::json;
 template<class T>
-using Pointer = std::shared_ptr<T>;
-using Value = llvm::Value;
-using ValuePointer = Value *;
-using LLVMContext = llvm::LLVMContext;
+using pointer = std::shared_ptr<T>;
+using value = llvm::Value;
+using value_pointer = value *;
+using llvm_context = llvm::LLVMContext;
 
 class AstNode {
 public:
