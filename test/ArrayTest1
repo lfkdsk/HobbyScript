@@ -1,0 +1,15 @@
+lfkdsk = [1,2,"fuck you"];
+
+logInfo(lfkdsk[2] + " ");
+
+lfk = [ ["llll",22],["sss",11] ];
+
+logInfo(lfk[0][1] + "");
+sss = 12;
+
+lll = < sss >;
+
+lll[11] = 88;
+
+logInfo(lll[11] + "");
+

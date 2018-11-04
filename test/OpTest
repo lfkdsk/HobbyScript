@@ -1,0 +1,11 @@
+lfkdsk = 100;
+
+if (lfkdsk == 100){
+    logInfo(lfkdsk + " ");
+}else{
+    logInfo("fuck you");
+}
+
+if (lfkdsk > 10 && false){
+    logInfo("sss");
+}

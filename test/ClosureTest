@@ -1,0 +1,10 @@
+function lfkdsk(c){
+    closure() { c = c + 1;};
+}
+
+c1 = lfkdsk(0);
+//c2 = lfkdsk(1);
+
+println(c1() + "");
+println(c1() + "");
+println(c1() + "");

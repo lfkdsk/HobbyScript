@@ -1,0 +1,23 @@
+class Reader {
+    reader = openReader();
+
+    function Initial(){
+
+    }
+
+    function ReadLine(){
+        readNextLine(reader);
+    }
+
+    function Close(){
+        closeReader(reader);
+    }
+
+    function Parser(){
+        parser(reader);
+    }
+}
+
+read = Reader.Initial();
+
+read.Parser();
