@@ -5,22 +5,22 @@
 #ifndef LLVM_RUNNER_BINARYEXPR_H
 #define LLVM_RUNNER_BINARYEXPR_H
 
-#include "../common/AstList.h"
+#include "../common/ast_list.h"
 
-class BinaryExpr : public AstList {
+class BinaryExpr : public ast_list {
 public:
-    BinaryExpr(const json &load_json, const pointer<AstNodeList> &children);
+    BinaryExpr(const json &load_json, const pointer<ast_node_list> &children);
 
-    pointer<AstNode> get_left_node();
+    pointer<ast_node> get_left_node();
 
-    pointer<AstNode> get_right_node();
+    pointer<ast_node> get_right_node();
 
-    pointer<AstNode> get_mid_op();
+    pointer<ast_node> get_mid_op();
 
 private:
-    pointer<AstNode> left_node;
-    pointer<AstNode> right_node;
-    pointer<AstNode> mid_op;
+    pointer<ast_node> left_node;
+    pointer<ast_node> right_node;
+    pointer<ast_node> mid_op;
 };
 
 #endif //LLVM_RUNNER_BINARYEXPR_H

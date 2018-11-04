@@ -5,13 +5,13 @@
 #ifndef LLVM_RUNNER_ASTLEAF_H
 #define LLVM_RUNNER_ASTLEAF_H
 
-#include "AstNode.h"
+#include "ast_node.h"
 
 using string = std::string;
 
-class AstLeaf : public AstNode {
+class ast_leaf : public ast_node {
 public:
-    AstLeaf(const json &load_json);
+    ast_leaf(const json &load_json);
 
     const json &get_token();
 

@@ -5,14 +5,14 @@
 #ifndef LLVM_RUNNER_NUMBERLITERAL_H
 #define LLVM_RUNNER_NUMBERLITERAL_H
 
-#include "../common/AstNode.h"
+#include "../common/ast_node.h"
 #include <llvm/ADT/APFloat.h>
 #include <llvm/IR/Constants.h>
 
 using APFloat = llvm::APFloat;
 using ConstantFP = llvm::ConstantFP;
 
-class NumberLiteral : public AstNode {
+class NumberLiteral : public ast_node {
 public:
     NumberLiteral(const json &load_json);
 

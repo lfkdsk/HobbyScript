@@ -2,17 +2,17 @@
 // Created by 刘丰恺 on 2018/8/2.
 //
 
-#include "AstLeaf.h"
+#include "ast_leaf.h"
 
-AstLeaf::AstLeaf(const json &load_json) : AstNode(load_json) {
+ast_leaf::ast_leaf(const json &load_json) : ast_node(load_json) {
     this->token = load_json["token"];
 }
 
-const json &AstLeaf::get_token() {
+const json &ast_leaf::get_token() {
     return this->token;
 }
 
-string AstLeaf::get_text() {
+string ast_leaf::get_text() {
     string text = token["text"];
     return text;
 }

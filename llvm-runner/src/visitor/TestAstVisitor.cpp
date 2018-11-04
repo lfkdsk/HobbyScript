@@ -21,10 +21,10 @@ TEST (TestPrintNumeric1) {
 
 TEST (TestPrintAstLeaf) {
     json testJson = json::parse(
-            R"({"token":{"text":"+","lineNumber":1,"tag":264},"tag":264,"type":"AstLeaf"})");
+            R"({"token":{"text":"+","lineNumber":1,"tag":264},"tag":264,"type":"ast_leaf"})");
     AstVisitor visitor(testJson);
     auto node_pointer = visitor.visit();
-    auto leaf = std::static_pointer_cast<AstLeaf>(node_pointer);
+    auto leaf = std::static_pointer_cast<ast_leaf>(node_pointer);
     UNITTEST_CHECK(leaf);
     UNITTEST_CHECK_EQUAL("+", leaf->get_text());
 }
@@ -51,7 +51,7 @@ TEST (TestPrintAstList) {
                 "tag":264
             },
             "tag":264,
-            "type":"AstLeaf"
+            "type":"ast_leaf"
         },
         {
             "token":{
@@ -64,13 +64,13 @@ TEST (TestPrintAstList) {
         }
     ],
     "tag":277,
-    "type":"AstList"
+    "type":"ast_list"
 }
             )");
 
     AstVisitor visitor(testJson);
     auto node_pointer = visitor.visit();
-    auto list = std::static_pointer_cast<AstList>(node_pointer);
+    auto list = std::static_pointer_cast<ast_list>(node_pointer);
     UNITTEST_CHECK(list);
     UNITTEST_CHECK_EQUAL(3, list->get_children()->size());
 }
@@ -97,7 +97,7 @@ TEST (TestPrintBinaryExpr) {
                 "tag":264
             },
             "tag":264,
-            "type":"AstLeaf"
+            "type":"ast_leaf"
         },
         {
             "token":{
@@ -110,7 +110,7 @@ TEST (TestPrintBinaryExpr) {
         }
     ],
     "tag":279,
-    "type":"AstList"
+    "type":"ast_list"
 }
             )");
 
@@ -124,7 +124,7 @@ TEST (TestPrintBinaryExpr) {
     UNITTEST_CHECK(literal);
     UNITTEST_CHECK_EQUAL(1, literal->getValue());
 
-    auto leaf = std::static_pointer_cast<AstLeaf>(binaryExpr->get_mid_op());
+    auto leaf = std::static_pointer_cast<ast_leaf>(binaryExpr->get_mid_op());
     UNITTEST_CHECK(leaf);
     UNITTEST_CHECK_EQUAL("+", leaf->get_text());
 
@@ -146,7 +146,7 @@ TEST (FunctionDefTest1) {
                 "tag":264
             },
             "tag":264,
-            "type":"AstLeaf"
+            "type":"ast_leaf"
         },
         {
             "afterPoint":0,
@@ -190,7 +190,7 @@ TEST (FunctionDefTest1) {
     UNITTEST_CHECK(func_stmt);
     UNITTEST_CHECK_EQUAL(3, func_stmt->get_children()->size());
 
-    auto name = std::static_pointer_cast<AstLeaf>(func_stmt->name());
+    auto name = std::static_pointer_cast<ast_leaf>(func_stmt->name());
     UNITTEST_CHECK(name);
     UNITTEST_CHECK_EQUAL("fuckTest", name->get_text());
 

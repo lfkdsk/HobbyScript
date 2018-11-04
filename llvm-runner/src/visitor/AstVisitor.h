@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include "json.hpp"
-#include "../ast/AstNodes.h"
+#include "ast/ast_nodes.h"
 #include "Visitor.h"
 #include "unitcpp/UnitTest++.h"
 
@@ -22,7 +22,7 @@ static const int DEF_BLOCK = 278;
 static const int FUNCTION = 280;
 static const int PARAMS_LIST = 283;
 
-class AstVisitor : public Visitor<pointer<AstNode>, const json &> {
+class AstVisitor : public Visitor<pointer<ast_node>, const json &> {
 public:
     AstVisitor(const json &load_json);
 
@@ -30,28 +30,28 @@ public:
 
     const json &get_json();
 
-    pointer<AstNode> visit_ast_node(const json &node) override;
+    pointer<ast_node> visit_ast_node(const json &node) override;
 
-    pointer<AstNode> visit_ast_leaf(const json &node) override;
+    pointer<ast_node> visit_ast_leaf(const json &node) override;
 
-    pointer<AstNode> visit_binary_expr(const json &node) override;
+    pointer<ast_node> visit_binary_expr(const json &node) override;
 
-    pointer<AstNode> visit_ast_list(const json &node) override;
+    pointer<ast_node> visit_ast_list(const json &node) override;
 
-    pointer<AstNode> visit_fun_stmt(const json &node) override;
+    pointer<ast_node> visit_fun_stmt(const json &node) override;
 
-    pointer<AstNode> visit_def_block(const json &node) override;
+    pointer<ast_node> visit_def_block(const json &node) override;
 
-    pointer<AstNode> visit_number(const json &node) override;
+    pointer<ast_node> visit_number(const json &node) override;
 
-    pointer<AstNode> visit_string(const json &node) override;
+    pointer<ast_node> visit_string(const json &node) override;
 
-    pointer<AstNode> visit(const json &node) override;
+    pointer<ast_node> visit(const json &node) override;
 
-    pointer<AstNode> visit() override;
+    pointer<ast_node> visit() override;
 
 protected:
-    pointer<AstNodeList> node_to_list(jsonVector &children);
+    pointer<ast_node_list> node_to_list(json_vector &children);
 
 private:
     json load_json;

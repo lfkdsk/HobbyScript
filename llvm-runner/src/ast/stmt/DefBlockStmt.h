@@ -5,13 +5,13 @@
 #ifndef LLVM_RUNNER_DEFBLOCKSTMT_H
 #define LLVM_RUNNER_DEFBLOCKSTMT_H
 
-#include "../common/AstList.h"
+#include "../common/ast_list.h"
 
-class DefBlockStmt : public AstList {
+class DefBlockStmt : public ast_list {
 public:
-    DefBlockStmt(const json &load_json, pointer<AstNodeList> children);
+    DefBlockStmt(const json &load_json, pointer<ast_node_list> children);
 
-    pointer<AstNodeList> expressions() {
+    pointer<ast_node_list> expressions() {
         return this->get_children();
     }
 };

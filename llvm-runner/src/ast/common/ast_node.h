@@ -16,11 +16,11 @@ using value = llvm::Value;
 using value_pointer = value *;
 using llvm_context = llvm::LLVMContext;
 
-class AstNode {
+class ast_node {
 public:
-    AstNode(const json &load_json);
+    ast_node(const json &load_json);
 
-    virtual ~AstNode() {}
+    virtual ~ast_node() {}
 
     const json &get_json();
 

@@ -5,7 +5,7 @@
 #include <iostream>
 #include "NumberLiteral.h"
 
-NumberLiteral::NumberLiteral(const json &load_json) : AstNode(load_json) {
+NumberLiteral::NumberLiteral(const json &load_json) : ast_node(load_json) {
     json token = load_json["token"];
     this->value = token["value"];
 }

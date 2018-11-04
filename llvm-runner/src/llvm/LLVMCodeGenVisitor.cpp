@@ -4,28 +4,28 @@
 
 #include "LLVMCodeGenVisitor.h"
 
-LLVMCodeGenVisitor::LLVMCodeGenVisitor(const pointer<AstNode> &root_node) : root_node(root_node), builder(the_context) {
+LLVMCodeGenVisitor::LLVMCodeGenVisitor(const pointer<ast_node> &root_node) : root_node(root_node), builder(the_context) {
     the_module = llvm::make_unique<Module>("my cool jit", the_context);
 }
 
-pointer<AstNode> LLVMCodeGenVisitor::get_root_node() {
+pointer<ast_node> LLVMCodeGenVisitor::get_root_node() {
     return this->root_node;
 }
 
-value_pointer LLVMCodeGenVisitor::visit_ast_node(pointer<AstNode> node) {
+value_pointer LLVMCodeGenVisitor::visit_ast_node(pointer<ast_node> node) {
 
 
 }
 
-value_pointer LLVMCodeGenVisitor::visit_ast_leaf(pointer<AstNode> node) {
+value_pointer LLVMCodeGenVisitor::visit_ast_leaf(pointer<ast_node> node) {
 
 }
 
-value_pointer LLVMCodeGenVisitor::visit_binary_expr(pointer<AstNode> node) {
-    auto binary_expr = Cast<BinaryExpr, AstNode>(node);
+value_pointer LLVMCodeGenVisitor::visit_binary_expr(pointer<ast_node> node) {
+    auto binary_expr = Cast<BinaryExpr, ast_node>(node);
     auto left = visit(binary_expr->get_left_node());
     auto right = visit(binary_expr->get_right_node());
-    auto op = Cast<AstLeaf, AstNode>(binary_expr->get_mid_op());
+    auto op = Cast<ast_leaf, ast_node>(binary_expr->get_mid_op());
     const char *op_text = op->get_text().c_str();
 
     if (!left || !right) {
@@ -59,15 +59,15 @@ value_pointer LLVMCodeGenVisitor::visit_binary_expr(pointer<AstNode> node) {
     }
 }
 
-value_pointer LLVMCodeGenVisitor::visit_ast_list(pointer<AstNode> node) {
+value_pointer LLVMCodeGenVisitor::visit_ast_list(pointer<ast_node> node) {
 }
 
-value_pointer LLVMCodeGenVisitor::visit_number(pointer<AstNode> node) {
-    auto number = Cast<NumberLiteral, AstNode>(node);
+value_pointer LLVMCodeGenVisitor::visit_number(pointer<ast_node> node) {
+    auto number = Cast<NumberLiteral, ast_node>(node);
     return ConstantFP::get(the_context, APFloat(number->getValue()));
 }
 
-value_pointer LLVMCodeGenVisitor::visit(pointer<AstNode> node) {
+value_pointer LLVMCodeGenVisitor::visit(pointer<ast_node> node) {
     value_pointer result = nullptr;
     switch (node->get_tag()) {
         case BINARY_EXPR: {
@@ -106,14 +106,14 @@ LLVMCodeGenVisitor::~LLVMCodeGenVisitor() {
 
 }
 
-value_pointer LLVMCodeGenVisitor::visit_fun_stmt(pointer<AstNode> node) {
+value_pointer LLVMCodeGenVisitor::visit_fun_stmt(pointer<ast_node> node) {
     return nullptr;
 }
 
-value_pointer LLVMCodeGenVisitor::visit_def_block(pointer<AstNode> node) {
+value_pointer LLVMCodeGenVisitor::visit_def_block(pointer<ast_node> node) {
     return nullptr;
 }
 
-value_pointer LLVMCodeGenVisitor::visit_string(pointer<AstNode> node) {
+value_pointer LLVMCodeGenVisitor::visit_string(pointer<ast_node> node) {
     return nullptr;
 }

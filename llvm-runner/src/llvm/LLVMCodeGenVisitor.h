@@ -16,7 +16,7 @@
 #include <llvm/IR/Type.h>
 #include <llvm/IR/Verifier.h>
 #include "../visitor/Visitor.h"
-#include "../ast/AstNodes.h"
+#include "../ast/ast_nodes.h"
 #include "../visitor/AstVisitor.h"
 #include "spdlog/spdlog.h"
 
@@ -32,36 +32,36 @@ constexpr auto Cast = std::static_pointer_cast<T, P>;
 template<class K, class V>
 using Map = std::map<K, V>;
 
-class LLVMCodeGenVisitor : public Visitor<value_pointer, pointer<AstNode>> {
+class LLVMCodeGenVisitor : public Visitor<value_pointer, pointer<ast_node>> {
 public:
-    LLVMCodeGenVisitor(const pointer<AstNode> &root_node);
+    LLVMCodeGenVisitor(const pointer<ast_node> &root_node);
 
     virtual ~LLVMCodeGenVisitor();
 
-    pointer<AstNode> get_root_node();
+    pointer<ast_node> get_root_node();
 
-    value_pointer visit_ast_node(pointer<AstNode> node) override;
+    value_pointer visit_ast_node(pointer<ast_node> node) override;
 
-    value_pointer visit_ast_leaf(pointer<AstNode> node) override;
+    value_pointer visit_ast_leaf(pointer<ast_node> node) override;
 
-    value_pointer visit_binary_expr(pointer<AstNode> node) override;
+    value_pointer visit_binary_expr(pointer<ast_node> node) override;
 
-    value_pointer visit_fun_stmt(pointer<AstNode> node) override;
+    value_pointer visit_fun_stmt(pointer<ast_node> node) override;
 
-    value_pointer visit_ast_list(pointer<AstNode> node) override;
+    value_pointer visit_ast_list(pointer<ast_node> node) override;
 
-    value_pointer visit_def_block(pointer<AstNode> node) override;
+    value_pointer visit_def_block(pointer<ast_node> node) override;
 
-    value_pointer visit_number(pointer<AstNode> node) override;
+    value_pointer visit_number(pointer<ast_node> node) override;
 
-    value_pointer visit_string(pointer<AstNode> node) override;
+    value_pointer visit_string(pointer<ast_node> node) override;
 
-    value_pointer visit(pointer<AstNode> node) override;
+    value_pointer visit(pointer<ast_node> node) override;
 
     value_pointer visit() override;
 
 private:
-    pointer<AstNode> root_node;
+    pointer<ast_node> root_node;
     llvm_context the_context;
     IRBuilder builder;
     pointer<Module> the_module;

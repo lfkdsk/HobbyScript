@@ -5,21 +5,21 @@
 #ifndef LLVM_RUNNER_FUNCSTMT_H
 #define LLVM_RUNNER_FUNCSTMT_H
 
-#include "../common/AstList.h"
-#include "../common/AstLeaf.h"
+#include "../common/ast_list.h"
+#include "../common/ast_leaf.h"
 #include "DefBlockStmt.h"
 
-class FuncStmt : public AstList {
+class FuncStmt : public ast_list {
 public:
-    FuncStmt(const json &load_json, pointer<AstNodeList> children);
+    FuncStmt(const json &load_json, pointer<ast_node_list> children);
 
 public:
-    pointer<AstLeaf> name() {
-        return std::static_pointer_cast<AstLeaf>(this->get_children()->at(0));
+    pointer<ast_leaf> name() {
+        return std::static_pointer_cast<ast_leaf>(this->get_children()->at(0));
     }
 
-    pointer<AstList> params_list() {
-        return std::static_pointer_cast<AstList>(this->get_children()->at(1));
+    pointer<ast_list> params_list() {
+        return std::static_pointer_cast<ast_list>(this->get_children()->at(1));
     }
 
     pointer<DefBlockStmt> def_blocks() {

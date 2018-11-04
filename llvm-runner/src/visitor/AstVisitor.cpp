@@ -16,47 +16,47 @@ const json &AstVisitor::get_json() {
     return load_json;
 }
 
-pointer<AstNode> AstVisitor::visit_ast_node(const json &node) {
+pointer<ast_node> AstVisitor::visit_ast_node(const json &node) {
     return nullptr;
 }
 
-pointer<AstNode> AstVisitor::visit_ast_leaf(const json &node) {
-    return pointer<AstLeaf>(new AstLeaf(node));
+pointer<ast_node> AstVisitor::visit_ast_leaf(const json &node) {
+    return pointer<ast_leaf>(new ast_leaf(node));
 }
 
-pointer<AstNode> AstVisitor::visit_binary_expr(const json &node) {
+pointer<ast_node> AstVisitor::visit_binary_expr(const json &node) {
     std::vector<json> children = node["children"];
     return pointer<BinaryExpr>(new BinaryExpr(node, node_to_list(children)));
 }
 
-pointer<AstNode> AstVisitor::visit_ast_list(const json &node) {
-    jsonVector children = node["children"];
-    return pointer<AstList>(new AstList(node, node_to_list(children)));
+pointer<ast_node> AstVisitor::visit_ast_list(const json &node) {
+    json_vector children = node["children"];
+    return pointer<ast_list>(new ast_list(node, node_to_list(children)));
 }
 
-pointer<AstNode> AstVisitor::visit_number(const json &node) {
+pointer<ast_node> AstVisitor::visit_number(const json &node) {
     return pointer<NumberLiteral>(new NumberLiteral(node));
 }
 
 
-pointer<AstNode> AstVisitor::visit_string(const json &node) {
+pointer<ast_node> AstVisitor::visit_string(const json &node) {
     return pointer<StringLiteral>(new StringLiteral(node));
 }
 
-pointer<AstNode> AstVisitor::visit_fun_stmt(const json &node) {
-    jsonVector children = node["children"];
+pointer<ast_node> AstVisitor::visit_fun_stmt(const json &node) {
+    json_vector children = node["children"];
     return pointer<FuncStmt>(new FuncStmt(node, node_to_list(children)));
 }
 
 
-pointer<AstNode> AstVisitor::visit_def_block(const json &node) {
-    jsonVector children = node["children"];
+pointer<ast_node> AstVisitor::visit_def_block(const json &node) {
+    json_vector children = node["children"];
     return pointer<DefBlockStmt>(new DefBlockStmt(node, this->node_to_list(children)));
 }
 
-pointer<AstNode> AstVisitor::visit(const json &load_json) {
+pointer<ast_node> AstVisitor::visit(const json &load_json) {
     int tag = load_json["tag"];
-    pointer<AstNode> result;
+    pointer<ast_node> result;
     switch (tag) {
         case BINARY_EXPR: {
             result = visit_binary_expr(load_json);
@@ -102,14 +102,14 @@ pointer<AstNode> AstVisitor::visit(const json &load_json) {
     return result;
 }
 
-pointer<AstNode> AstVisitor::visit() {
+pointer<ast_node> AstVisitor::visit() {
     return visit(this->load_json);
 }
 
-pointer<AstNodeList> AstVisitor::node_to_list(jsonVector &children) {
-    pointer<AstNodeList> children_list(new AstNodeList());
+pointer<ast_node_list> AstVisitor::node_to_list(json_vector &children) {
+    pointer<ast_node_list> children_list(new ast_node_list());
     std::for_each(children.begin(), children.end(), [this, children_list](auto child_json) {
-        pointer<AstNode> child = visit(child_json);
+        pointer<ast_node> child = visit(child_json);
         children_list->push_back(child);
     });
 

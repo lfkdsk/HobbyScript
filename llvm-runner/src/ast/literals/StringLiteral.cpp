@@ -4,7 +4,7 @@
 
 #include "StringLiteral.h"
 
-StringLiteral::StringLiteral(const json &load_json) : AstNode(load_json) {
+StringLiteral::StringLiteral(const json &load_json) : ast_node(load_json) {
     json token = load_json["token"];
     this->text = token["literal"];
 }

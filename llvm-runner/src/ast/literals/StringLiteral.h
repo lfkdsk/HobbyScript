@@ -5,11 +5,11 @@
 #ifndef LLVM_RUNNER_STRINGLITERAL_H
 #define LLVM_RUNNER_STRINGLITERAL_H
 
-#include "../common/AstNode.h"
+#include "../common/ast_node.h"
 
 using string = std::string;
 
-class StringLiteral : public AstNode {
+class StringLiteral : public ast_node {
 public:
     StringLiteral(const json &load_json);
 
