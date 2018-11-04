@@ -26,7 +26,7 @@ pointer<ast_node> AstVisitor::visit_ast_leaf(const json &node) {
 
 pointer<ast_node> AstVisitor::visit_binary_expr(const json &node) {
     std::vector<json> children = node["children"];
-    return pointer<BinaryExpr>(new BinaryExpr(node, node_to_list(children)));
+    return pointer<ast_binary_expr>(new ast_binary_expr(node, node_to_list(children)));
 }
 
 pointer<ast_node> AstVisitor::visit_ast_list(const json &node) {
@@ -35,12 +35,12 @@ pointer<ast_node> AstVisitor::visit_ast_list(const json &node) {
 }
 
 pointer<ast_node> AstVisitor::visit_number(const json &node) {
-    return pointer<NumberLiteral>(new NumberLiteral(node));
+    return pointer<number_literal>(new number_literal(node));
 }
 
 
 pointer<ast_node> AstVisitor::visit_string(const json &node) {
-    return pointer<StringLiteral>(new StringLiteral(node));
+    return pointer<string_literal>(new string_literal(node));
 }
 
 pointer<ast_node> AstVisitor::visit_fun_stmt(const json &node) {

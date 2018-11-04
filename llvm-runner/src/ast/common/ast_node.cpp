@@ -12,3 +12,12 @@ ast_node::ast_node(const json &load_json) {
 const json &ast_node::get_json() {
     return load_json;
 }
+
+void ast_node::set_location(int lineno, int colno) {
+    this->lineno = lineno;
+    this->colno = colno;
+}
+
+void ast_node::generate_code() {
+
+}

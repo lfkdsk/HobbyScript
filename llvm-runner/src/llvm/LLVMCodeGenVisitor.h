@@ -15,9 +15,9 @@
 #include <llvm/IR/Module.h>
 #include <llvm/IR/Type.h>
 #include <llvm/IR/Verifier.h>
-#include "../visitor/Visitor.h"
-#include "../ast/ast_nodes.h"
-#include "../visitor/AstVisitor.h"
+#include "visitor/Visitor.h"
+#include "ast/ast_nodes.h"
+#include "visitor/AstVisitor.h"
 #include "spdlog/spdlog.h"
 
 using value = llvm::Value;

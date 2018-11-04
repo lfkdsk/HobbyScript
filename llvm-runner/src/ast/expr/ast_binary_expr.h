@@ -7,9 +7,9 @@
 
 #include "../common/ast_list.h"
 
-class BinaryExpr : public ast_list {
+class ast_binary_expr : public ast_list {
 public:
-    BinaryExpr(const json &load_json, const pointer<ast_node_list> &children);
+    ast_binary_expr(const json &load_json, const pointer<ast_node_list> &children);
 
     pointer<ast_node> get_left_node();
 

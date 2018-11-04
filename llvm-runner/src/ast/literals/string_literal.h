@@ -9,9 +9,9 @@
 
 using string = std::string;
 
-class StringLiteral : public ast_node {
+class string_literal : public ast_node {
 public:
-    StringLiteral(const json &load_json);
+    string_literal(const json &load_json);
 
     string get_string() {
         return text;

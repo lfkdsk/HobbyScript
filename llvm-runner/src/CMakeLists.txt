@@ -4,6 +4,26 @@ project(LLVM_Runner)
 
 set(CMAKE_CXX_STANDARD 17)
 
+# import llvm
+find_package(LLVM REQUIRED CONFIG)
+
+message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
+message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
+
+# Set your project compile flags.
+# E.g. if using the C++ header files
+# you will need to enable C++11 support
+# for your compiler.
+
+include_directories(${LLVM_INCLUDE_DIRS})
+add_definitions(${LLVM_DEFINITIONS})
+
+if (TARGET spdlog)
+    MESSAGE(STARUS "****")
+    # Part of the main project
+    add_library(spdlog::spdlog ALIAS spdlog)
+endif ()
+
 INCLUDE_DIRECTORIES(.)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
@@ -23,7 +43,6 @@ AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR} MAIN_SOURCE)
 
 
 SET(SOURCE_FILES
-        ${SOURCE_FILES}
         ${AST_SOURCE}
         ${VISITOR_SOURCE}
         ${LLVM_SOURCE}

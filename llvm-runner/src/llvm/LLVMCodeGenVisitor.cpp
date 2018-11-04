@@ -22,7 +22,7 @@ value_pointer LLVMCodeGenVisitor::visit_ast_leaf(pointer<ast_node> node) {
 }
 
 value_pointer LLVMCodeGenVisitor::visit_binary_expr(pointer<ast_node> node) {
-    auto binary_expr = Cast<BinaryExpr, ast_node>(node);
+    auto binary_expr = Cast<ast_binary_expr, ast_node>(node);
     auto left = visit(binary_expr->get_left_node());
     auto right = visit(binary_expr->get_right_node());
     auto op = Cast<ast_leaf, ast_node>(binary_expr->get_mid_op());
@@ -63,7 +63,7 @@ value_pointer LLVMCodeGenVisitor::visit_ast_list(pointer<ast_node> node) {
 }
 
 value_pointer LLVMCodeGenVisitor::visit_number(pointer<ast_node> node) {
-    auto number = Cast<NumberLiteral, ast_node>(node);
+    auto number = Cast<number_literal, ast_node>(node);
     return ConstantFP::get(the_context, APFloat(number->getValue()));
 }
 

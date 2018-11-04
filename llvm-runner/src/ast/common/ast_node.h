@@ -26,9 +26,19 @@ public:
 
     int get_tag() { return tag; };
 
+    void set_location(int lineno, int colno);
+
+    int get_line_number() { return lineno; }
+
+    int get_column_number() { return colno; }
+
 private:
     json load_json;
     int tag;
+    int lineno, colno;
+
+protected:
+    virtual void generate_code();
 };
 
 

@@ -9,10 +9,10 @@
 #include "common/ast_leaf.h"
 #include "common/ast_list.h"
 
-#include "literals/NumberLiteral.h"
-#include "literals/StringLiteral.h"
+#include "ast/literals/number_literal.h"
+#include "ast/literals/string_literal.h"
 
-#include "expr/BinaryExpr.h"
+#include "ast/expr/ast_binary_expr.h"
 #include "stmt/FuncStmt.h"
 #include "stmt/DefBlockStmt.h"
 

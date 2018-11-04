@@ -12,11 +12,11 @@
 using APFloat = llvm::APFloat;
 using ConstantFP = llvm::ConstantFP;
 
-class NumberLiteral : public ast_node {
+class number_literal : public ast_node {
 public:
-    NumberLiteral(const json &load_json);
+    number_literal(const json &load_json);
 
-    ~NumberLiteral() override;
+    ~number_literal() override;
 
     double getValue();
 private:
