@@ -5,7 +5,7 @@
 #ifndef LLVM_RUNNER_STRINGLITERAL_H
 #define LLVM_RUNNER_STRINGLITERAL_H
 
-#include "AstNode.h"
+#include "../common/AstNode.h"
 
 using string = std::string;
 

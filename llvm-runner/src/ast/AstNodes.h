@@ -5,13 +5,13 @@
 #ifndef LLVM_RUNNER_ASTNODES_H
 #define LLVM_RUNNER_ASTNODES_H
 
-#include "AstNode.h"
-#include "AstLeaf.h"
-#include "AstList.h"
-#include "NumberLiteral.h"
-#include "BinaryExpr.h"
-#include "FuncStmt.h"
-#include "DefBlockStmt.h"
-#include "StringLiteral.h"
+#include "common/AstNode.h"
+#include "common/AstLeaf.h"
+#include "common/AstList.h"
+#include "literals/NumberLiteral.h"
+#include "expr/BinaryExpr.h"
+#include "stmt/FuncStmt.h"
+#include "stmt/DefBlockStmt.h"
+#include "literals/StringLiteral.h"
 
 #endif //LLVM_RUNNER_ASTNODES_H

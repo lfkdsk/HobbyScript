@@ -5,7 +5,7 @@
 #ifndef LLVM_RUNNER_DEFBLOCKSTMT_H
 #define LLVM_RUNNER_DEFBLOCKSTMT_H
 
-#include "AstList.h"
+#include "../common/AstList.h"
 
 class DefBlockStmt : public AstList {
 public:

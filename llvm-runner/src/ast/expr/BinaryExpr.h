@@ -5,7 +5,7 @@
 #ifndef LLVM_RUNNER_BINARYEXPR_H
 #define LLVM_RUNNER_BINARYEXPR_H
 
-#include "AstList.h"
+#include "../common/AstList.h"
 
 class BinaryExpr : public AstList {
 public:

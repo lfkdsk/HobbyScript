@@ -5,7 +5,7 @@
 #ifndef LLVM_RUNNER_NUMBERLITERAL_H
 #define LLVM_RUNNER_NUMBERLITERAL_H
 
-#include "AstNode.h"
+#include "../common/AstNode.h"
 #include <llvm/ADT/APFloat.h>
 #include <llvm/IR/Constants.h>
 

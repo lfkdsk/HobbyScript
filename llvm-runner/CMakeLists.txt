@@ -19,24 +19,13 @@ message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
 include_directories(${LLVM_INCLUDE_DIRS})
 add_definitions(${LLVM_DEFINITIONS})
 
-if(TARGET spdlog)
+if (TARGET spdlog)
     MESSAGE(STARUS "****")
     # Part of the main project
     add_library(spdlog::spdlog ALIAS spdlog)
-endif()
+endif ()
 
 # include src
 include_directories(includes)
 add_subdirectory(includes)
 add_subdirectory(src)
-
-message(STATUS ${SOURCE_FILES})
-
-add_executable(LLVM_Runner ${SOURCE_FILES})
-
-# Find the libraries that correspond to the LLVM components
-# that we wish to use
-llvm_map_components_to_libnames(llvm_libs support core irreader)
-
-# target link lib
-TARGET_LINK_LIBRARIES(LLVM_Runner UnitCppLib ${llvm_libs})

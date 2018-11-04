@@ -5,8 +5,8 @@
 #ifndef LLVM_RUNNER_FUNCSTMT_H
 #define LLVM_RUNNER_FUNCSTMT_H
 
-#include "AstList.h"
-#include "AstLeaf.h"
+#include "../common/AstList.h"
+#include "../common/AstLeaf.h"
 #include "DefBlockStmt.h"
 
 class FuncStmt : public AstList {
