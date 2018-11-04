@@ -1,9 +1,0 @@
-i = 100;
-
-k = 10;
-
-lfkdsk = createArray(i / k);
-
-lfkdsk[1] = 100;
-
-logInfo(lfkdsk[9] + "");

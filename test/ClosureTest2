@@ -1,7 +1,0 @@
-i = 10;
-
-lfkdsk = closure(){
-i = i + 100;
-};
-
-lfkdsk();

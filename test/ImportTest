@@ -1,8 +1,0 @@
-import "util/LinkedList.hhs";
-import "util/ArrayList.hhs";
-
-lfkdsk = LinkedList.Initial();
-
-lfkdsk.Add("fuck ...");
-
-lfkdsk.PrintList();

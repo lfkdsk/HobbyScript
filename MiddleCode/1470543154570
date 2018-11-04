@@ -1,5 +1,0 @@
-L1 :
-L3 :iffalse (i < 100) goto L2
-L4 :iffalse (j > 100) goto L2
-	i=100
-L2 :
