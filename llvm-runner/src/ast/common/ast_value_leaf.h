@@ -28,9 +28,12 @@ public:
 
     const value_literal &get_literal() const;
 
+    const llvm::Value *get_llvm_mem() const;
+
 protected:
     value_literal literal = {false};
     llvm::Value *llvm_value = nullptr;
+    llvm::Value *llvm_mem = nullptr;
 };
 
 
