@@ -1,0 +1,18 @@
+//
+// Created by 刘丰恺 on 2018/11/4.
+//
+
+#ifndef LLVM_RUNNER_AST_LITERAL_H
+#define LLVM_RUNNER_AST_LITERAL_H
+
+
+#include "ast/common/ast_value_leaf.h"
+
+class ast_literal : public ast_value_leaf {
+
+public:
+    ast_literal(const json &load_json);
+};
+
+
+#endif //LLVM_RUNNER_AST_LITERAL_H

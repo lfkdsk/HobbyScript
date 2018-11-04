@@ -5,9 +5,9 @@
 #ifndef LLVM_RUNNER_ASTNODE_H
 #define LLVM_RUNNER_ASTNODE_H
 
+#include <json.hpp>
 #include <llvm/IR/Value.h>
 #include <llvm/IR/LLVMContext.h>
-#include <json.hpp>
 
 using json=nlohmann::json;
 template<class T>
@@ -15,6 +15,10 @@ using pointer = std::shared_ptr<T>;
 using value = llvm::Value;
 using value_pointer = value *;
 using llvm_context = llvm::LLVMContext;
+
+struct node_type {
+
+};
 
 class ast_node {
 public:
@@ -36,6 +40,7 @@ private:
     json load_json;
     int tag;
     int lineno, colno;
+    node_type type;
 
 protected:
     virtual void generate_code();

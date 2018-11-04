@@ -35,12 +35,12 @@ pointer<ast_node> AstVisitor::visit_ast_list(const json &node) {
 }
 
 pointer<ast_node> AstVisitor::visit_number(const json &node) {
-    return pointer<number_literal>(new number_literal(node));
+    return pointer<ast_number_literal>(new ast_number_literal(node));
 }
 
 
 pointer<ast_node> AstVisitor::visit_string(const json &node) {
-    return pointer<string_literal>(new string_literal(node));
+    return pointer<ast_string_literal>(new ast_string_literal(node));
 }
 
 pointer<ast_node> AstVisitor::visit_fun_stmt(const json &node) {

@@ -4,7 +4,8 @@
 
 #include "LLVMCodeGenVisitor.h"
 
-LLVMCodeGenVisitor::LLVMCodeGenVisitor(const pointer<ast_node> &root_node) : root_node(root_node), builder(the_context) {
+LLVMCodeGenVisitor::LLVMCodeGenVisitor(const pointer<ast_node> &root_node) : root_node(root_node),
+                                                                             builder(the_context) {
     the_module = llvm::make_unique<Module>("my cool jit", the_context);
 }
 
@@ -63,8 +64,8 @@ value_pointer LLVMCodeGenVisitor::visit_ast_list(pointer<ast_node> node) {
 }
 
 value_pointer LLVMCodeGenVisitor::visit_number(pointer<ast_node> node) {
-    auto number = Cast<number_literal, ast_node>(node);
-    return ConstantFP::get(the_context, APFloat(number->getValue()));
+    auto number = Cast<ast_number_literal, ast_node>(node);
+    return ConstantFP::get(the_context, APFloat(number->get_value()));
 }
 
 value_pointer LLVMCodeGenVisitor::visit(pointer<ast_node> node) {

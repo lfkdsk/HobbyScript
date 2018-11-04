@@ -13,9 +13,9 @@ TEST (TestPrintNumeric1) {
             R"({"token":{"value":1,"lineNumber":1,"tag":270},"tag":270,"type":"NumberLiteral"})");
     AstVisitor visitor(testJson);
     auto node_pointer = visitor.visit();
-    auto literal = std::static_pointer_cast<number_literal>(node_pointer);
+    auto literal = std::static_pointer_cast<ast_number_literal>(node_pointer);
     UNITTEST_CHECK(literal);
-    UNITTEST_CHECK_EQUAL(1, literal->getValue());
+    UNITTEST_CHECK_EQUAL(1, literal->get_value());
 }
 
 
@@ -120,17 +120,17 @@ TEST (TestPrintBinaryExpr) {
     UNITTEST_CHECK(binaryExpr);
     UNITTEST_CHECK_EQUAL(3, binaryExpr->get_children()->size());
 
-    auto literal = std::static_pointer_cast<number_literal>(binaryExpr->get_left_node());
+    auto literal = std::static_pointer_cast<ast_number_literal>(binaryExpr->get_left_node());
     UNITTEST_CHECK(literal);
-    UNITTEST_CHECK_EQUAL(1, literal->getValue());
+    UNITTEST_CHECK_EQUAL(1, literal->get_value());
 
     auto leaf = std::static_pointer_cast<ast_leaf>(binaryExpr->get_mid_op());
     UNITTEST_CHECK(leaf);
     UNITTEST_CHECK_EQUAL("+", leaf->get_text());
 
-    auto literal2 = std::static_pointer_cast<number_literal>(binaryExpr->get_right_node());
+    auto literal2 = std::static_pointer_cast<ast_number_literal>(binaryExpr->get_right_node());
     UNITTEST_CHECK(literal2);
-    UNITTEST_CHECK_EQUAL(1111, literal2->getValue());
+    UNITTEST_CHECK_EQUAL(1111, literal2->get_value());
 }
 
 TEST (FunctionDefTest1) {
