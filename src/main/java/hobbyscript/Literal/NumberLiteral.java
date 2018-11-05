@@ -7,6 +7,8 @@ import hobbyscript.Eval.ScriptEval;
 import hobbyscript.Token.HobbyToken;
 import hobbyscript.Token.NumberToken;
 
+import static hobbyscript.Eval.ScriptEval.isNum;
+
 /**
  * Number字面量
  *
@@ -14,9 +16,11 @@ import hobbyscript.Token.NumberToken;
  *         Created by liufengkai on 16/7/11.
  */
 public class NumberLiteral extends AstLeaf {
+    private boolean isInteger;
 
     public NumberLiteral(HobbyToken token) {
         super(token);
+        this.isInteger = isNum(token.isNumber());
     }
 
     public int getTag() {

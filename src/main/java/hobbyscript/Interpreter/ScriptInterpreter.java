@@ -18,7 +18,7 @@ import java.io.FileReader;
  * Script解释器
  *
  * @author liufengkai
- *         Created by liufengkai on 16/7/15.
+ * Created by liufengkai on 16/7/15.
  */
 public class ScriptInterpreter {
 
@@ -40,6 +40,7 @@ public class ScriptInterpreter {
         while (lexer.peek(0) != HobbyToken.EOF) {
             AstNode node = parser.parse(lexer);
 
+            System.out.print(node.toJson());
             if (!(node instanceof NullStmt)) {
                 Object r = node.eval(env);
 //                PrintUtils.printAstTree(node);

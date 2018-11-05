@@ -37,6 +37,7 @@ public abstract class HobbyToken {
 
 
     private int lineNumber;
+    private int column;
 
     protected int tag;
 
@@ -45,6 +46,9 @@ public abstract class HobbyToken {
         this.tag = tag;
     }
 
+    public void setColumn(int column) {
+        this.column = column;
+    }
 
     public int getLineNumber() {
         return lineNumber;

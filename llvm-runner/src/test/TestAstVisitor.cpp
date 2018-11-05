@@ -3,7 +3,7 @@
 //
 
 #include "unitcpp/UnitTest++.h"
-#include "AstVisitor.h"
+#include "visitor/AstVisitor.h"
 #include "json.hpp"
 
 using json = nlohmann::json;

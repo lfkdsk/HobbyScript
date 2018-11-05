@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <gen/literals/generator_literals.h>
+#include <llvm/Support/raw_ostream.h>
 #include "spdlog/spdlog.h"
 #include "json.hpp"
 #include "unitcpp/UnitTest++.h"

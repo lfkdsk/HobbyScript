@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  * Lexer Hobby的词法分析器
  *
  * @author liufengkai
- *         Created by liufengkai on 16/7/11.
+ * Created by liufengkai on 16/7/11.
  */
 public class HobbyLexer {
     private Pattern regPattern = Pattern.compile(HobbyRegex.hobbyReg);
@@ -124,7 +124,7 @@ public class HobbyLexer {
             // 出现匹配
             if (matcher.lookingAt()) {
                 // add...
-                addToken(lineNum, matcher);
+                addToken(lineNum, start, matcher);
 
                 start = matcher.end();
             } else {
@@ -141,7 +141,7 @@ public class HobbyLexer {
      * @param lineNum 行号
      * @param matcher matcher
      */
-    private void addToken(int lineNum, Matcher matcher) {
+    private void addToken(int lineNum, int column, Matcher matcher) {
         String first = matcher.group(HobbyRegex.RegType.NOT_EMPTY_INDEX.indexNum);
 
 //        for (int i = 0; i < matcher.groupCount(); i++) {
@@ -179,6 +179,8 @@ public class HobbyLexer {
                             break;
                     }
                 }
+
+                token.setColumn(column);
                 queue.add(token);
             }
         }

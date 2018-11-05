@@ -11,11 +11,11 @@ import java.util.List;
  * AST 抽象语法树的枝干
  *
  * @author liufengkai
- *         Created by liufengkai on 16/7/11.
+ * Created by liufengkai on 16/7/11.
  */
 public class AstList extends AstNode {
     // break 存储位置
-    public int afterPoint = 0;
+    public transient int afterPoint = 0;
 
     public static AstList NullList = new AstList(null, -1);
 

@@ -303,7 +303,7 @@ public class ScriptEval {
         return tag == HobbyToken.STRING;
     }
 
-    private static boolean isNum(Object v) {
+    public static boolean isNum(Object v) {
         return v instanceof Integer;
     }
 

@@ -13,6 +13,7 @@
 
 using json = nlohmann::json;
 using string = std::string;
+
 static const int BINARY_EXPR = 279;
 static const int NUMBER_LITERAL = 270;
 static const int STRING_LITERAL = 276;
