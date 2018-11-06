@@ -2,7 +2,6 @@
 // Created by 刘丰恺 on 2018/8/2.
 //
 
-#include <json.hpp>
 #include "unitcpp/UnitTest++.h"
 #include "visitor/AstVisitor.h"
 #include "utils/JsonUtils.h"
@@ -10,7 +9,8 @@
 using json = rapidjson::Value;
 
 TEST (TestPrintNumeric1) {
-    json testJson = json::parse(
+    document testJson;
+    testJson.Parse(
             R"({"token":{"value":1,"lineNumber":1,"tag":270},"tag":270,"type":"NumberLiteral"})");
     auto node_pointer = ast_visitor.visit(testJson);
     auto literal = std::static_pointer_cast<ast_number_literal>(node_pointer);
@@ -20,7 +20,8 @@ TEST (TestPrintNumeric1) {
 
 
 TEST (TestPrintAstLeaf) {
-    json testJson = json::parse(
+    document testJson;
+    testJson.Parse(
             R"({"token":{"text":"+","lineNumber":1,"tag":264},"tag":264,"type":"ast_leaf"})");
     auto node_pointer = ast_visitor.visit(testJson);
     auto leaf = std::static_pointer_cast<ast_leaf>(node_pointer);
@@ -29,7 +30,8 @@ TEST (TestPrintAstLeaf) {
 }
 
 TEST (TestPrintAstList) {
-    json testJson = json::parse(
+    document testJson;
+    testJson.Parse(
             R"(
 {
     "afterPoint":0,
@@ -74,7 +76,8 @@ TEST (TestPrintAstList) {
 }
 
 TEST (TestPrintBinaryExpr) {
-    json testJson = json::parse(
+    document testJson;
+    testJson.Parse(
             R"(
 {
     "afterPoint":0,
@@ -131,7 +134,8 @@ TEST (TestPrintBinaryExpr) {
 }
 
 TEST (FunctionDefTest1) {
-    json testJson = json::parse(
+    document testJson;
+    testJson.Parse(
             R"(
 {
     "afterPoint":0,

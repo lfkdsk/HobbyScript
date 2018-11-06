@@ -9,7 +9,7 @@
 
 class DefBlockStmt : public ast_list {
 public:
-    DefBlockStmt(const json &load_json);
+    DefBlockStmt(json &load_json);
 
     pointer<ast_node_list> expressions() {
         return this->get_children();

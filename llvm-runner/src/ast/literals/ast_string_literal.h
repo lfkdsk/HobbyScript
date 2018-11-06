@@ -12,7 +12,7 @@ using string = std::string;
 
 class ast_string_literal : public ast_literal {
 public:
-    ast_string_literal(const json &load_json);
+    ast_string_literal(json &load_json);
 
     const string &get_string() {
         return literal.str_value;

@@ -11,7 +11,7 @@
 
 class FuncStmt : public ast_list {
 public:
-    FuncStmt(const json &load_json);
+    FuncStmt(json &load_json);
 
 public:
     pointer<ast_leaf> name() {

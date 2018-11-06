@@ -8,41 +8,41 @@ AstVisitor::AstVisitor() {}
 
 AstVisitor::~AstVisitor() {}
 
-pointer<ast_node> AstVisitor::visit_ast_node(const rapidjson::Value &node) {
+pointer<ast_node> AstVisitor::visit_ast_node(json &node) {
     return nullptr;
 }
 
-pointer<ast_node> AstVisitor::visit_ast_leaf(const rapidjson::Value &node) {
+pointer<ast_node> AstVisitor::visit_ast_leaf(json &node) {
     return pointer<ast_leaf>(new ast_leaf(node));
 }
 
-pointer<ast_node> AstVisitor::visit_binary_expr(const rapidjson::Value &node) {
+pointer<ast_node> AstVisitor::visit_binary_expr(json &node) {
     return pointer<ast_binary_expr>(new ast_binary_expr(node));
 }
 
-pointer<ast_node> AstVisitor::visit_ast_list(const rapidjson::Value &node) {
+pointer<ast_node> AstVisitor::visit_ast_list(json &node) {
     return pointer<ast_list>(new ast_list(node));
 }
 
-pointer<ast_node> AstVisitor::visit_number(const rapidjson::Value &node) {
+pointer<ast_node> AstVisitor::visit_number(json &node) {
     return pointer<ast_number_literal>(new ast_number_literal(node));
 }
 
 
-pointer<ast_node> AstVisitor::visit_string(const rapidjson::Value &node) {
+pointer<ast_node> AstVisitor::visit_string(json &node) {
     return pointer<ast_string_literal>(new ast_string_literal(node));
 }
 
-pointer<ast_node> AstVisitor::visit_fun_stmt(const rapidjson::Value &node) {
+pointer<ast_node> AstVisitor::visit_fun_stmt(json &node) {
     return pointer<FuncStmt>(new FuncStmt(node));
 }
 
 
-pointer<ast_node> AstVisitor::visit_def_block(const rapidjson::Value &node) {
+pointer<ast_node> AstVisitor::visit_def_block(json &node) {
     return pointer<DefBlockStmt>(new DefBlockStmt(node));
 }
 
-pointer<ast_node> AstVisitor::visit(const rapidjson::Value &load_json) {
+pointer<ast_node> AstVisitor::visit(json &load_json) {
     int tag = load_json["tag"].GetInt();
     pointer<ast_node> result;
     switch (tag) {

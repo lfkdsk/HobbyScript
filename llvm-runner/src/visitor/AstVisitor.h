@@ -6,7 +6,6 @@
 #define LLVM_RUNNER_ASTVISITOR_H
 
 #include <iostream>
-#include "json.hpp"
 #include "rapidjson/document.h"
 #include "ast/ast_nodes.h"
 #include "Visitor.h"
@@ -20,29 +19,29 @@ static const int DEF_BLOCK = 278;
 static const int FUNCTION = 280;
 static const int PARAMS_LIST = 283;
 
-class AstVisitor : public Visitor<pointer<ast_node>, const rapidjson::Value &> {
+class AstVisitor : public Visitor<pointer<ast_node>, rapidjson::Value &> {
 public:
     AstVisitor();
 
     virtual ~AstVisitor();
 
-    pointer<ast_node> visit_ast_node(const rapidjson::Value &node) override;
+    pointer<ast_node> visit_ast_node(rapidjson::Value &node) override;
 
-    pointer<ast_node> visit_ast_leaf(const rapidjson::Value &node) override;
+    pointer<ast_node> visit_ast_leaf(rapidjson::Value &node) override;
 
-    pointer<ast_node> visit_binary_expr(const rapidjson::Value &node) override;
+    pointer<ast_node> visit_binary_expr(rapidjson::Value &node) override;
 
-    pointer<ast_node> visit_ast_list(const rapidjson::Value &node) override;
+    pointer<ast_node> visit_ast_list(rapidjson::Value &node) override;
 
-    pointer<ast_node> visit_fun_stmt(const rapidjson::Value &node) override;
+    pointer<ast_node> visit_fun_stmt(rapidjson::Value &node) override;
 
-    pointer<ast_node> visit_def_block(const rapidjson::Value &node) override;
+    pointer<ast_node> visit_def_block(rapidjson::Value &node) override;
 
-    pointer<ast_node> visit_number(const rapidjson::Value &node) override;
+    pointer<ast_node> visit_number(rapidjson::Value &node) override;
 
-    pointer<ast_node> visit_string(const rapidjson::Value &node) override;
+    pointer<ast_node> visit_string(rapidjson::Value &node) override;
 
-    pointer<ast_node> visit(const rapidjson::Value &node) override;
+    pointer<ast_node> visit(rapidjson::Value &node) override;
 
     pointer<ast_node> visit() override;
 };

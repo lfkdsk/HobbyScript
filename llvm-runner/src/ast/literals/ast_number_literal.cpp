@@ -7,7 +7,7 @@
 #include <gen/literals/generator_literals.h>
 #include "ast_number_literal.h"
 
-ast_number_literal::ast_number_literal(const json &load_json) : ast_literal(load_json) {
+ast_number_literal::ast_number_literal(json &load_json) : ast_literal(load_json) {
     this->literal.value.real = token["value"].GetDouble();
     this->literal.apply = true;
 }

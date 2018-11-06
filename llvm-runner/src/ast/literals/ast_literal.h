@@ -11,7 +11,7 @@
 class ast_literal : public ast_value_leaf {
 
 public:
-    ast_literal(const json &load_json);
+    ast_literal(json &load_json);
 };
 
 

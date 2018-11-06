@@ -11,7 +11,7 @@
 
 class ast_number_literal : public ast_literal {
 public:
-    ast_number_literal(const json &load_json);
+    ast_number_literal(json &load_json);
 
     double get_value();
 

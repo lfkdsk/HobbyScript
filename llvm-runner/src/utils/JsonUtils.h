@@ -5,9 +5,3 @@
 using json_object = rapidjson::Value;
 using document = rapidjson::Document;
 
-static json_object &parse(char *input) {
-    document doc;
-    doc.Parse(input);
-    return doc;
-}
-

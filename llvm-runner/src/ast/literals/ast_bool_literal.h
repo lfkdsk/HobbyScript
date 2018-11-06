@@ -11,7 +11,7 @@
 class ast_bool_literal : ast_literal {
 
 public:
-    ast_bool_literal(const json &load_json);
+    ast_bool_literal(json &load_json);
 
     bool get_bool();
 };

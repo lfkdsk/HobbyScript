@@ -22,7 +22,7 @@ struct value_literal {
 class ast_value_leaf : public ast_leaf {
 public:
 
-    ast_value_leaf(const rapidjson::Value &load_json);
+    ast_value_leaf(json &load_json);
 
     llvm::Value *get_llvm_value() const;
 

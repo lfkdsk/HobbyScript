@@ -4,6 +4,6 @@
 
 #include "FuncStmt.h"
 
-FuncStmt::FuncStmt(const json &load_json) : ast_list(load_json) {
-    
+FuncStmt::FuncStmt(json &load_json) : ast_list(load_json) {
+
 }

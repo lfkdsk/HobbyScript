@@ -3,20 +3,15 @@
 #include <gen/literals/generator_literals.h>
 #include <llvm/Support/raw_ostream.h>
 #include "spdlog/spdlog.h"
-#include "json.hpp"
 #include "unitcpp/UnitTest++.h"
 #include "visitor/AstVisitor.h"
 #include "spdlog/sinks/stdout_sinks.h"
 #include "gen/generator_context.h"
 #include "llvm/IR/LegacyPassManager.h"
 
-#include "rapidjson/document.h"
+#include <rapidjson/document.h>
 
-using namespace rapidjson;
-
-using json = nlohmann::json;
-
-static pointer<ast_node> toAst(const json &inputJson) {
+static pointer<ast_node> toAst(json &inputJson) {
     return ast_visitor.visit(inputJson);
 }
 
@@ -47,12 +42,13 @@ int main(int, const char *[]) {
 
 //    return UnitTest::RunAllTests();
 
-    const char* str = R"({"token":{"text":"+","lineNumber":1,"tag":264},"tag":264,"type":"ast_leaf"})";
+    const char *str = R"({"token":{"text":"+","lineNumber":1,"tag":264},"tag":264,"type":"ast_leaf"})";
 
-    Document document;
-    document.Parse(str);
+    document doc;
+    doc.Parse(str);
 
-    std::cout << document["type"].GetString() << std::endl;
+    std::cout << doc["type"].GetString() << std::endl;
 
-    return 0;
+
+    return UnitTest::RunAllTests();
 }

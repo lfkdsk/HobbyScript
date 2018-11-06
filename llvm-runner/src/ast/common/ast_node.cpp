@@ -4,8 +4,7 @@
 
 #include "ast_node.h"
 
-ast_node::ast_node(const rapidjson::Value &load_json) {
-    this->load_json = load_json.GetObject();
+ast_node::ast_node(json &load_json) : load_json(load_json.Move()) {
     this->tag = load_json["tag"].GetInt();
 }
 

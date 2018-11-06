@@ -3,12 +3,19 @@
 //
 
 #include "ast_leaf.h"
+#include "rapidjson/pointer.h"
 
-ast_leaf::ast_leaf(const rapidjson::Value &load_json) : ast_node(load_json) {
-    this->token = load_json["token"].GetObject();
-}
+static json nothing;
 
-const rapidjson::Value &ast_leaf::get_token() {
+ast_leaf::ast_leaf(json &load_json)
+        : ast_node(load_json),
+          token{
+                  this->load_json.HasMember("token")
+                  ? this->load_json["token"].Move()
+                  : nothing
+          } {};
+
+const json &ast_leaf::get_token() {
     return this->token;
 }
 

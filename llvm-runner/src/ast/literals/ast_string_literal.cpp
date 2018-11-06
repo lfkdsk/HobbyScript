@@ -4,7 +4,7 @@
 
 #include "ast_string_literal.h"
 
-ast_string_literal::ast_string_literal(const json &load_json) : ast_literal(load_json) {
+ast_string_literal::ast_string_literal(json &load_json) : ast_literal(load_json) {
     this->literal.str_value = token["literal"].GetString();
     this->literal.apply = true;
 }

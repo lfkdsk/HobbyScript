@@ -4,4 +4,4 @@
 
 #include "ast_literal.h"
 
-ast_literal::ast_literal(const json &load_json) : ast_value_leaf(load_json) {}
+ast_literal::ast_literal(json &load_json) : ast_value_leaf(load_json) {}

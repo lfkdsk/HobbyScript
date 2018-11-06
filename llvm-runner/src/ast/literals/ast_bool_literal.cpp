@@ -5,7 +5,7 @@
 #include "ast/common/ast_value_leaf.h"
 #include "ast_bool_literal.h"
 
-ast_bool_literal::ast_bool_literal(const json &load_json) : ast_literal(load_json) {
+ast_bool_literal::ast_bool_literal(json &load_json) : ast_literal(load_json) {
     this->literal.value.boo = token["value"].GetBool();
     this->literal.apply = true;
 }

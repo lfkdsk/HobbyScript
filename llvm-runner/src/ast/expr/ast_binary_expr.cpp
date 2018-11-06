@@ -5,7 +5,7 @@
 #include "gen/expr/generator_expr.h"
 #include "ast_binary_expr.h"
 
-ast_binary_expr::ast_binary_expr(const rapidjson::Value &load_json)
+ast_binary_expr::ast_binary_expr(json &load_json)
         : ast_list(load_json) {
     this->left_node = std::dynamic_pointer_cast<ast_value_leaf>(this->get_children()->at(0));
     this->mid_op = std::dynamic_pointer_cast<ast_leaf>(this->get_children()->at(1));

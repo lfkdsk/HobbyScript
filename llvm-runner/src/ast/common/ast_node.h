@@ -5,16 +5,18 @@
 #ifndef LLVM_RUNNER_ASTNODE_H
 #define LLVM_RUNNER_ASTNODE_H
 
-#include <json.hpp>
+#include <rapidjson/document.h>
 #include <llvm/IR/Value.h>
 #include <llvm/IR/LLVMContext.h>
-#include <rapidjson/document.h>
 
-using json=rapidjson::Value;
-using document=rapidjson::Document;
+using json = rapidjson::Value;
+using document = rapidjson::Document;
+
 template<class T>
 using pointer = std::shared_ptr<T>;
+
 using value = llvm::Value;
+using string = std::string;
 using value_pointer = value *;
 
 struct node_type {
@@ -23,11 +25,11 @@ struct node_type {
 
 class ast_node {
 public:
-    ast_node(const rapidjson::Value &load_json);
+    ast_node(json &load_json);
 
     virtual ~ast_node() {}
 
-    const rapidjson::Value &get_json();
+    const json &get_json();
 
     int get_tag() { return tag; };
 
@@ -37,8 +39,9 @@ public:
 
     int get_column_number() { return colno; }
 
+protected:
+    rapidjson::Value &load_json;
 private:
-    rapidjson::Value load_json;
     int tag;
     int lineno, colno;
     node_type type;
