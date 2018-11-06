@@ -5,7 +5,7 @@
 #include <llvm/IR/Instructions.h>
 #include "ast_value_leaf.h"
 
-ast_value_leaf::ast_value_leaf(const json &load_json) : ast_leaf(load_json) {}
+ast_value_leaf::ast_value_leaf(const rapidjson::Value &load_json) : ast_leaf(load_json) {}
 
 llvm::Value *ast_value_leaf::get_llvm_value() const {
     return llvm_value;

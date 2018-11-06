@@ -8,8 +8,10 @@
 #include <json.hpp>
 #include <llvm/IR/Value.h>
 #include <llvm/IR/LLVMContext.h>
+#include <rapidjson/document.h>
 
-using json=nlohmann::json;
+using json=rapidjson::Value;
+using document=rapidjson::Document;
 template<class T>
 using pointer = std::shared_ptr<T>;
 using value = llvm::Value;
@@ -21,11 +23,11 @@ struct node_type {
 
 class ast_node {
 public:
-    ast_node(const json &load_json);
+    ast_node(const rapidjson::Value &load_json);
 
     virtual ~ast_node() {}
 
-    const json &get_json();
+    const rapidjson::Value &get_json();
 
     int get_tag() { return tag; };
 
@@ -36,7 +38,7 @@ public:
     int get_column_number() { return colno; }
 
 private:
-    json load_json;
+    rapidjson::Value load_json;
     int tag;
     int lineno, colno;
     node_type type;

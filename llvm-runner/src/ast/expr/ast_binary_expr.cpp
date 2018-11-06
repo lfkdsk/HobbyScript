@@ -5,11 +5,11 @@
 #include "gen/expr/generator_expr.h"
 #include "ast_binary_expr.h"
 
-ast_binary_expr::ast_binary_expr(const json &load_json, const pointer<ast_node_list> &children)
-        : ast_list(load_json, children) {
-    this->left_node = std::dynamic_pointer_cast<ast_value_leaf>(children->at(0));
-    this->mid_op = std::dynamic_pointer_cast<ast_leaf>(children->at(1));
-    this->right_node = std::dynamic_pointer_cast<ast_value_leaf>(children->at(2));
+ast_binary_expr::ast_binary_expr(const rapidjson::Value &load_json)
+        : ast_list(load_json) {
+    this->left_node = std::dynamic_pointer_cast<ast_value_leaf>(this->get_children()->at(0));
+    this->mid_op = std::dynamic_pointer_cast<ast_leaf>(this->get_children()->at(1));
+    this->right_node = std::dynamic_pointer_cast<ast_value_leaf>(this->get_children()->at(2));
 }
 
 pointer<ast_value_leaf> ast_binary_expr::get_left_node() {

@@ -2,17 +2,17 @@
 // Created by 刘丰恺 on 2018/8/2.
 //
 
+#include <json.hpp>
 #include "unitcpp/UnitTest++.h"
 #include "visitor/AstVisitor.h"
-#include "json.hpp"
+#include "utils/JsonUtils.h"
 
-using json = nlohmann::json;
+using json = rapidjson::Value;
 
 TEST (TestPrintNumeric1) {
     json testJson = json::parse(
             R"({"token":{"value":1,"lineNumber":1,"tag":270},"tag":270,"type":"NumberLiteral"})");
-    AstVisitor visitor(testJson);
-    auto node_pointer = visitor.visit();
+    auto node_pointer = ast_visitor.visit(testJson);
     auto literal = std::static_pointer_cast<ast_number_literal>(node_pointer);
     UNITTEST_CHECK(literal);
     UNITTEST_CHECK_EQUAL(1, literal->get_value());
@@ -22,8 +22,7 @@ TEST (TestPrintNumeric1) {
 TEST (TestPrintAstLeaf) {
     json testJson = json::parse(
             R"({"token":{"text":"+","lineNumber":1,"tag":264},"tag":264,"type":"ast_leaf"})");
-    AstVisitor visitor(testJson);
-    auto node_pointer = visitor.visit();
+    auto node_pointer = ast_visitor.visit(testJson);
     auto leaf = std::static_pointer_cast<ast_leaf>(node_pointer);
     UNITTEST_CHECK(leaf);
     UNITTEST_CHECK_EQUAL("+", leaf->get_text());
@@ -68,8 +67,7 @@ TEST (TestPrintAstList) {
 }
             )");
 
-    AstVisitor visitor(testJson);
-    auto node_pointer = visitor.visit();
+    auto node_pointer = ast_visitor.visit(testJson);
     auto list = std::static_pointer_cast<ast_list>(node_pointer);
     UNITTEST_CHECK(list);
     UNITTEST_CHECK_EQUAL(3, list->get_children()->size());
@@ -114,8 +112,7 @@ TEST (TestPrintBinaryExpr) {
 }
             )");
 
-    AstVisitor visitor(testJson);
-    auto node_pointer = visitor.visit();
+    auto node_pointer = ast_visitor.visit(testJson);
     auto binaryExpr = std::static_pointer_cast<ast_binary_expr>(node_pointer);
     UNITTEST_CHECK(binaryExpr);
     UNITTEST_CHECK_EQUAL(3, binaryExpr->get_children()->size());
@@ -184,8 +181,8 @@ TEST (FunctionDefTest1) {
     "type":"FuncStmt"
 }
             )");
-    AstVisitor visitor(testJson);
-    auto node_pointer = visitor.visit();
+
+    auto node_pointer = ast_visitor.visit(testJson);
     auto func_stmt = std::static_pointer_cast<FuncStmt>(node_pointer);
     UNITTEST_CHECK(func_stmt);
     UNITTEST_CHECK_EQUAL(3, func_stmt->get_children()->size());

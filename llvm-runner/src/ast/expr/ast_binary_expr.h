@@ -11,7 +11,7 @@
 
 class ast_binary_expr : public ast_list {
 public:
-    ast_binary_expr(const json &load_json, const pointer<ast_node_list> &children);
+    ast_binary_expr(const rapidjson::Value &load_json);
 
     pointer<ast_value_leaf> get_left_node();
 

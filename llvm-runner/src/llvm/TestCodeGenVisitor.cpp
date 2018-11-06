@@ -12,8 +12,7 @@ using json = nlohmann::json;
 
 SUITE (TestCodeGen) {
     static pointer<ast_node> toAst(const json &inputJson) {
-        AstVisitor visitor(inputJson);
-        return visitor.visit();
+        return ast_visitor.visit(inputJson);
     }
 
     TEST (NumberGenTest1) {

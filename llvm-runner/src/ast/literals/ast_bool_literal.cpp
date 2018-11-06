@@ -6,8 +6,7 @@
 #include "ast_bool_literal.h"
 
 ast_bool_literal::ast_bool_literal(const json &load_json) : ast_literal(load_json) {
-    json token = load_json["token"];
-    this->literal.value.boo = (bool) token["value"];
+    this->literal.value.boo = token["value"].GetBool();
     this->literal.apply = true;
 }
 

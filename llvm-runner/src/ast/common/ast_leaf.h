@@ -11,14 +11,14 @@ using string = std::string;
 
 class ast_leaf : public ast_node {
 public:
-    ast_leaf(const json &load_json);
+    ast_leaf(const rapidjson::Value &load_json);
 
-    const json &get_token();
+    const rapidjson::Value &get_token();
 
     string get_text();
 
-private:
-    json token;
+protected:
+    rapidjson::Value token;
 };
 
 #endif //LLVM_RUNNER_ASTLEAF_H

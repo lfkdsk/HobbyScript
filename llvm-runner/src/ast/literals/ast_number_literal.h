@@ -9,9 +9,6 @@
 #include <llvm/ADT/APFloat.h>
 #include <llvm/IR/Constants.h>
 
-using APFloat = llvm::APFloat;
-using ConstantFP = llvm::ConstantFP;
-
 class ast_number_literal : public ast_literal {
 public:
     ast_number_literal(const json &load_json);

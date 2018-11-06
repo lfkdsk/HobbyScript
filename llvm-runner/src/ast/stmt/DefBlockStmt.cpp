@@ -4,8 +4,6 @@
 
 #include "DefBlockStmt.h"
 
-DefBlockStmt::DefBlockStmt(const json &load_json,
-                           const pointer<ast_node_list> children) : ast_list(
-        load_json, children) {
+DefBlockStmt::DefBlockStmt(const json &load_json) : ast_list(load_json) {
 
 }

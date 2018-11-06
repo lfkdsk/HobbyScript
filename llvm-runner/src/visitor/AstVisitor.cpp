@@ -4,58 +4,46 @@
 
 #include "AstVisitor.h"
 
-AstVisitor::AstVisitor(const json &load) {
-    this->load_json = load;
-}
+AstVisitor::AstVisitor() {}
 
-AstVisitor::~AstVisitor() {
-    this->load_json.clear();
-}
+AstVisitor::~AstVisitor() {}
 
-const json &AstVisitor::get_json() {
-    return load_json;
-}
-
-pointer<ast_node> AstVisitor::visit_ast_node(const json &node) {
+pointer<ast_node> AstVisitor::visit_ast_node(const rapidjson::Value &node) {
     return nullptr;
 }
 
-pointer<ast_node> AstVisitor::visit_ast_leaf(const json &node) {
+pointer<ast_node> AstVisitor::visit_ast_leaf(const rapidjson::Value &node) {
     return pointer<ast_leaf>(new ast_leaf(node));
 }
 
-pointer<ast_node> AstVisitor::visit_binary_expr(const json &node) {
-    std::vector<json> children = node["children"];
-    return pointer<ast_binary_expr>(new ast_binary_expr(node, node_to_list(children)));
+pointer<ast_node> AstVisitor::visit_binary_expr(const rapidjson::Value &node) {
+    return pointer<ast_binary_expr>(new ast_binary_expr(node));
 }
 
-pointer<ast_node> AstVisitor::visit_ast_list(const json &node) {
-    json_vector children = node["children"];
-    return pointer<ast_list>(new ast_list(node, node_to_list(children)));
+pointer<ast_node> AstVisitor::visit_ast_list(const rapidjson::Value &node) {
+    return pointer<ast_list>(new ast_list(node));
 }
 
-pointer<ast_node> AstVisitor::visit_number(const json &node) {
+pointer<ast_node> AstVisitor::visit_number(const rapidjson::Value &node) {
     return pointer<ast_number_literal>(new ast_number_literal(node));
 }
 
 
-pointer<ast_node> AstVisitor::visit_string(const json &node) {
+pointer<ast_node> AstVisitor::visit_string(const rapidjson::Value &node) {
     return pointer<ast_string_literal>(new ast_string_literal(node));
 }
 
-pointer<ast_node> AstVisitor::visit_fun_stmt(const json &node) {
-    json_vector children = node["children"];
-    return pointer<FuncStmt>(new FuncStmt(node, node_to_list(children)));
+pointer<ast_node> AstVisitor::visit_fun_stmt(const rapidjson::Value &node) {
+    return pointer<FuncStmt>(new FuncStmt(node));
 }
 
 
-pointer<ast_node> AstVisitor::visit_def_block(const json &node) {
-    json_vector children = node["children"];
-    return pointer<DefBlockStmt>(new DefBlockStmt(node, this->node_to_list(children)));
+pointer<ast_node> AstVisitor::visit_def_block(const rapidjson::Value &node) {
+    return pointer<DefBlockStmt>(new DefBlockStmt(node));
 }
 
-pointer<ast_node> AstVisitor::visit(const json &load_json) {
-    int tag = load_json["tag"];
+pointer<ast_node> AstVisitor::visit(const rapidjson::Value &load_json) {
+    int tag = load_json["tag"].GetInt();
     pointer<ast_node> result;
     switch (tag) {
         case BINARY_EXPR: {
@@ -103,15 +91,5 @@ pointer<ast_node> AstVisitor::visit(const json &load_json) {
 }
 
 pointer<ast_node> AstVisitor::visit() {
-    return visit(this->load_json);
-}
-
-pointer<ast_node_list> AstVisitor::node_to_list(json_vector &children) {
-    pointer<ast_node_list> children_list(new ast_node_list());
-    std::for_each(children.begin(), children.end(), [this, children_list](auto child_json) {
-        pointer<ast_node> child = visit(child_json);
-        children_list->push_back(child);
-    });
-
-    return children_list;
+    throw std::runtime_error("illegal method call.");
 }

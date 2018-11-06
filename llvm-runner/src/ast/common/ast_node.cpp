@@ -4,12 +4,12 @@
 
 #include "ast_node.h"
 
-ast_node::ast_node(const json &load_json) {
-    this->load_json = load_json;
-    this->tag = load_json["tag"];
+ast_node::ast_node(const rapidjson::Value &load_json) {
+    this->load_json = load_json.GetObject();
+    this->tag = load_json["tag"].GetInt();
 }
 
-const json &ast_node::get_json() {
+const rapidjson::Value &ast_node::get_json() {
     return load_json;
 }
 

@@ -8,8 +8,7 @@
 #include "ast_number_literal.h"
 
 ast_number_literal::ast_number_literal(const json &load_json) : ast_literal(load_json) {
-    json token = load_json["token"];
-    this->literal.value.real = (double) token["value"];
+    this->literal.value.real = token["value"].GetDouble();
     this->literal.apply = true;
 }
 
