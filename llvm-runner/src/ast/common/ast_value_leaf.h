@@ -10,7 +10,6 @@
 
 struct value_literal {
     bool apply;
-    string str_value;
     union {
         int num;
         double real;

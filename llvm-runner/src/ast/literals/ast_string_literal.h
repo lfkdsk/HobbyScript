@@ -15,8 +15,11 @@ public:
     ast_string_literal(json &load_json);
 
     const string &get_string() {
-        return literal.str_value;
+        return str;
     }
+
+protected:
+    string str;
 };
 
 

@@ -8,7 +8,6 @@
 #include "spdlog/sinks/stdout_sinks.h"
 #include "gen/generator_context.h"
 #include "llvm/IR/LegacyPassManager.h"
-
 #include <rapidjson/document.h>
 
 static pointer<ast_node> toAst(json &inputJson) {

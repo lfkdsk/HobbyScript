@@ -8,7 +8,6 @@
 #include "ast_node.h"
 #include "ast_value_leaf.h"
 
-
 template<class T>
 using vector = std::vector<T>;
 using json_vector = vector<rapidjson::Value>;
