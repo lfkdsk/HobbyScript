@@ -5,7 +5,7 @@
 #include "ast_leaf.h"
 #include "rapidjson/pointer.h"
 
-static json nothing;
+static json nothing("nothing");
 
 ast_leaf::ast_leaf(json &load_json)
         : ast_node(load_json),

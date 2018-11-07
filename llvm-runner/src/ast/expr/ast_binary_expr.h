@@ -5,6 +5,7 @@
 #ifndef LLVM_RUNNER_BINARYEXPR_H
 #define LLVM_RUNNER_BINARYEXPR_H
 
+#include "ast/common/ast_leaf.h"
 #include "ast/common/ast_value_leaf.h"
 #include "ast/common/ast_list.h"
 

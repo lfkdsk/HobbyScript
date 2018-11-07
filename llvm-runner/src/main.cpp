@@ -41,13 +41,5 @@ int main(int, const char *[]) {
 
 //    return UnitTest::RunAllTests();
 
-    const char *str = R"({"token":{"text":"+","lineNumber":1,"tag":264},"tag":264,"type":"ast_leaf"})";
-
-    document doc;
-    doc.Parse(str);
-
-    std::cout << doc["type"].GetString() << std::endl;
-
-
     return UnitTest::RunAllTests();
 }

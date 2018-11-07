@@ -8,31 +8,21 @@
 
 using json = rapidjson::Value;
 
-TEST (TestPrintNumeric1) {
-    document testJson;
-    testJson.Parse(
-            R"({"token":{"value":1,"lineNumber":1,"tag":270},"tag":270,"type":"NumberLiteral"})");
-    auto node_pointer = ast_visitor.visit(testJson);
-    auto literal = std::static_pointer_cast<ast_number_literal>(node_pointer);
-    UNITTEST_CHECK(literal);
-    UNITTEST_CHECK_EQUAL(1, literal->get_value());
-}
+SUITE (TEST_FOR_COMMON_AST_NODE) {
+    TEST (TestPrintAstLeaf) {
+        document testJson;
+        testJson.Parse(
+                R"({"token":{"text":"+","lineNumber":1,"tag":264},"tag":264,"type":"ast_leaf"})");
+        auto node_pointer = ast_visitor.visit(testJson);
+        auto leaf = std::static_pointer_cast<ast_leaf>(node_pointer);
+        UNITTEST_CHECK(leaf);
+        UNITTEST_CHECK_EQUAL("+", leaf->get_text());
+    }
 
-
-TEST (TestPrintAstLeaf) {
-    document testJson;
-    testJson.Parse(
-            R"({"token":{"text":"+","lineNumber":1,"tag":264},"tag":264,"type":"ast_leaf"})");
-    auto node_pointer = ast_visitor.visit(testJson);
-    auto leaf = std::static_pointer_cast<ast_leaf>(node_pointer);
-    UNITTEST_CHECK(leaf);
-    UNITTEST_CHECK_EQUAL("+", leaf->get_text());
-}
-
-TEST (TestPrintAstList) {
-    document testJson;
-    testJson.Parse(
-            R"(
+    TEST (TestPrintAstList) {
+        document testJson;
+        testJson.Parse(
+                R"(
 {
     "afterPoint":0,
     "children":[
@@ -69,10 +59,22 @@ TEST (TestPrintAstList) {
 }
             )");
 
+        auto node_pointer = ast_visitor.visit(testJson);
+        auto list = std::static_pointer_cast<ast_list>(node_pointer);
+        UNITTEST_CHECK(list);
+        UNITTEST_CHECK_EQUAL(3, list->get_children()->size());
+    }
+
+}
+
+TEST (TestPrintNumeric1) {
+    document testJson;
+    testJson.Parse(
+            R"({"token":{"value":1,"lineNumber":1,"tag":270},"tag":270,"type":"NumberLiteral"})");
     auto node_pointer = ast_visitor.visit(testJson);
-    auto list = std::static_pointer_cast<ast_list>(node_pointer);
-    UNITTEST_CHECK(list);
-    UNITTEST_CHECK_EQUAL(3, list->get_children()->size());
+    auto literal = std::static_pointer_cast<ast_number_literal>(node_pointer);
+    UNITTEST_CHECK(literal);
+    UNITTEST_CHECK_EQUAL(1, literal->get_value());
 }
 
 TEST (TestPrintBinaryExpr) {

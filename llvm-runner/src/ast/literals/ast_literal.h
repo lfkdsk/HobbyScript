@@ -7,6 +7,7 @@
 
 
 #include "ast/common/ast_value_leaf.h"
+#include "ast/common/ast_leaf.h"
 
 class ast_literal : public ast_value_leaf {
 

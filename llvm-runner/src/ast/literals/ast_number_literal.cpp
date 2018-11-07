@@ -3,8 +3,8 @@
 //
 
 #include <iostream>
-#include <ast/common/ast_value_leaf.h>
-#include <gen/literals/generator_literals.h>
+#include "ast/common/ast_value_leaf.h"
+#include "gen/literals/generator_literals.h"
 #include "ast_number_literal.h"
 
 ast_number_literal::ast_number_literal(json &load_json)
