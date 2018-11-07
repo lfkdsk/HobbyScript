@@ -6,14 +6,14 @@
 #define LLVM_RUNNER_ASTLIST_H
 
 #include "ast_node.h"
-#include "ast_value_leaf.h"
+#include "ast_value_node.h"
 
 template<class T>
 using vector = std::vector<T>;
 using json_vector = vector<rapidjson::Value>;
 using ast_node_list = vector<pointer<ast_node>>;
 
-class ast_list : public ast_value_leaf {
+class ast_list : public ast_value_node {
 public:
     ast_list(json &load_json);
 

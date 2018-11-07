@@ -7,16 +7,16 @@
 
 ast_binary_expr::ast_binary_expr(json &load_json)
         : ast_list(load_json) {
-    this->left_node = std::dynamic_pointer_cast<ast_value_leaf>(this->get_children()->at(0));
+    this->left_node = std::dynamic_pointer_cast<ast_value_node>(this->get_children()->at(0));
     this->mid_op = std::dynamic_pointer_cast<ast_leaf>(this->get_children()->at(1));
-    this->right_node = std::dynamic_pointer_cast<ast_value_leaf>(this->get_children()->at(2));
+    this->right_node = std::dynamic_pointer_cast<ast_value_node>(this->get_children()->at(2));
 }
 
-pointer<ast_value_leaf> ast_binary_expr::get_left_node() {
+pointer<ast_value_node> ast_binary_expr::get_left_node() {
     return this->left_node;
 }
 
-pointer<ast_value_leaf> ast_binary_expr::get_right_node() {
+pointer<ast_value_node> ast_binary_expr::get_right_node() {
     return this->right_node;
 }
 

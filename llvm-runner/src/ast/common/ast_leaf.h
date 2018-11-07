@@ -6,12 +6,13 @@
 #define LLVM_RUNNER_ASTLEAF_H
 
 #include "ast_node.h"
+#include "ast_value_node.h"
 
-class ast_leaf : public ast_node {
+class ast_leaf : public ast_value_node {
 public:
     ast_leaf(json &load_json);
 
-    const rapidjson::Value &get_token();
+    const json &get_token();
 
     string &get_text();
 

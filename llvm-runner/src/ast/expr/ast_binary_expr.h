@@ -6,7 +6,7 @@
 #define LLVM_RUNNER_BINARYEXPR_H
 
 #include "ast/common/ast_leaf.h"
-#include "ast/common/ast_value_leaf.h"
+#include "ast/common/ast_value_node.h"
 #include "ast/common/ast_list.h"
 
 
@@ -14,17 +14,17 @@ class ast_binary_expr : public ast_list {
 public:
     ast_binary_expr(json &load_json);
 
-    pointer<ast_value_leaf> get_left_node();
+    pointer<ast_value_node> get_left_node();
 
-    pointer<ast_value_leaf> get_right_node();
+    pointer<ast_value_node> get_right_node();
 
     pointer<ast_leaf> get_mid_op();
 
     void generate_code() override;
 
 private:
-    pointer<ast_value_leaf> left_node;
-    pointer<ast_value_leaf> right_node;
+    pointer<ast_value_node> left_node;
+    pointer<ast_value_node> right_node;
     pointer<ast_leaf> mid_op;
 };
 

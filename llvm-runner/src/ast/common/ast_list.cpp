@@ -6,7 +6,7 @@
 #include "ast_list.h"
 
 ast_list::ast_list(json &load_json)
-        : ast_value_leaf(load_json) {
+        : ast_value_node(load_json) {
     pointer<ast_node_list> children_list(new ast_node_list());
     for (auto &child_json : this->load_json["children"].GetArray()) {
         pointer<ast_node> child = ast_visitor.visit(child_json);

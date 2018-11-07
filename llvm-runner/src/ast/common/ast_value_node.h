@@ -6,7 +6,7 @@
 #define LLVM_RUNNER_AST_VALUE_LEAF_H
 
 
-#include "ast/common/ast_leaf.h"
+#include "ast_node.h"
 
 struct value_literal {
     bool apply;
@@ -18,10 +18,10 @@ struct value_literal {
     } value;
 };
 
-class ast_value_leaf : public ast_leaf {
+class ast_value_node : public ast_node {
 public:
 
-    ast_value_leaf(json &load_json);
+    ast_value_node(json &load_json);
 
     llvm::Value *get_llvm_value() const;
 
@@ -34,6 +34,5 @@ protected:
     llvm::Value *llvm_value = nullptr;
     llvm::Value *llvm_mem = nullptr;
 };
-
 
 #endif //LLVM_RUNNER_AST_VALUE_LEAF_H

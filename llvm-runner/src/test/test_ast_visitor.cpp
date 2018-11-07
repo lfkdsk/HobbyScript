@@ -16,6 +16,7 @@ SUITE (TEST_FOR_COMMON_AST_NODE) {
         auto node_pointer = ast_visitor.visit(testJson);
         auto leaf = std::static_pointer_cast<ast_leaf>(node_pointer);
         UNITTEST_CHECK(leaf);
+        UNITTEST_CHECK_EQUAL(true, leaf->get_token().HasMember("text"));
         UNITTEST_CHECK_EQUAL("+", leaf->get_text());
     }
 

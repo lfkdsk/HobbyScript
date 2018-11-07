@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "ast/common/ast_value_leaf.h"
+#include "ast/common/ast_value_node.h"
 #include "gen/literals/generator_literals.h"
 #include "ast_number_literal.h"
 

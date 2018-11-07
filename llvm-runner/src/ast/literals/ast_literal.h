@@ -6,10 +6,10 @@
 #define LLVM_RUNNER_AST_LITERAL_H
 
 
-#include "ast/common/ast_value_leaf.h"
+#include "ast/common/ast_value_node.h"
 #include "ast/common/ast_leaf.h"
 
-class ast_literal : public ast_value_leaf {
+class ast_literal : public ast_leaf {
 
 public:
     ast_literal(json &load_json);

@@ -6,7 +6,7 @@
 #include "rapidjson/pointer.h"
 
 ast_leaf::ast_leaf(json &load_json)
-        : ast_node(load_json),
+        : ast_value_node(load_json),
           token{
                   this->load_json.HasMember("token")
                   ? this->load_json["token"].Move()

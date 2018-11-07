@@ -5,7 +5,7 @@
 #ifndef LLVM_RUNNER_STRINGLITERAL_H
 #define LLVM_RUNNER_STRINGLITERAL_H
 
-#include <ast/common/ast_value_leaf.h>
+#include <ast/common/ast_value_node.h>
 #include "ast_literal.h"
 
 using string = std::string;
