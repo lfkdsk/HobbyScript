@@ -18,6 +18,7 @@ using pointer = std::shared_ptr<T>;
 using value = llvm::Value;
 using string = std::string;
 using value_pointer = value *;
+static json nothing("nothing");
 
 struct node_type {
 
@@ -26,6 +27,8 @@ struct node_type {
 class ast_node {
 public:
     ast_node(json &load_json);
+
+    ast_node(int tag);
 
     virtual ~ast_node() {}
 

@@ -5,21 +5,23 @@
 #include "ast_leaf.h"
 #include "rapidjson/pointer.h"
 
-static json nothing("nothing");
-
 ast_leaf::ast_leaf(json &load_json)
         : ast_node(load_json),
           token{
                   this->load_json.HasMember("token")
                   ? this->load_json["token"].Move()
                   : nothing
-          } {};
+          } {
+    this->is_token_value = this->load_json.HasMember("token");
+    if (is_token_value && token.HasMember("text")) {
+        this->text = this->token["text"].GetString();
+    }
+};
 
 const json &ast_leaf::get_token() {
     return this->token;
 }
 
-string ast_leaf::get_text() {
-    string text = token["text"].GetString();
-    return text;
+string &ast_leaf::get_text() {
+    return this->text;
 }

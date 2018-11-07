@@ -8,6 +8,10 @@ ast_node::ast_node(json &load_json) : load_json(load_json.Move()) {
     this->tag = load_json["tag"].GetInt();
 }
 
+ast_node::ast_node(int tag) : load_json(nothing) {
+    this->tag = tag;
+}
+
 const rapidjson::Value &ast_node::get_json() {
     return load_json;
 }

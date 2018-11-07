@@ -13,10 +13,12 @@ public:
 
     const rapidjson::Value &get_token();
 
-    string get_text();
+    string &get_text();
 
 protected:
     json &token;
+    string text;
+    bool is_token_value;
 };
 
 #endif //LLVM_RUNNER_ASTLEAF_H
