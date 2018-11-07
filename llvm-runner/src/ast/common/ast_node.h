@@ -6,18 +6,17 @@
 #define LLVM_RUNNER_ASTNODE_H
 
 #include <rapidjson/document.h>
-#include <llvm/IR/Value.h>
-#include <llvm/IR/LLVMContext.h>
-
-using json = rapidjson::Value;
-using document = rapidjson::Document;
+#include <memory>
+#include <string>
+#include <vector>
 
 template<class T>
 using pointer = std::shared_ptr<T>;
 
-using value = llvm::Value;
+using json = rapidjson::Value;
+using document = rapidjson::Document;
+
 using string = std::string;
-using value_pointer = value *;
 static json nothing("nothing");
 
 struct node_type {

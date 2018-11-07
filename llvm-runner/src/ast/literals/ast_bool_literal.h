@@ -7,6 +7,7 @@
 
 
 #include "ast_literal.h"
+#include "ast/common/ast_value_node.h"
 
 class ast_bool_literal : ast_literal {
 

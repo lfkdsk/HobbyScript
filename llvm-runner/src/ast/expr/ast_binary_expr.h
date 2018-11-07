@@ -8,7 +8,7 @@
 #include "ast/common/ast_leaf.h"
 #include "ast/common/ast_value_node.h"
 #include "ast/common/ast_list.h"
-
+#include "gen/expr/generator_expr.h"
 
 class ast_binary_expr : public ast_list {
 public:

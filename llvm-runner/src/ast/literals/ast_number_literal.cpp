@@ -2,9 +2,6 @@
 // Created by 刘丰恺 on 2018/8/2.
 //
 
-#include <iostream>
-#include "ast/common/ast_value_node.h"
-#include "gen/literals/generator_literals.h"
 #include "ast_number_literal.h"
 
 ast_number_literal::ast_number_literal(json &load_json)

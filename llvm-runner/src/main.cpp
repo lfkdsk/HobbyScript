@@ -1,18 +1,12 @@
 #include <iostream>
 #include <fstream>
+#include <rapidjson/document.h>
 #include <gen/literals/generator_literals.h>
 #include <llvm/Support/raw_ostream.h>
-#include "spdlog/spdlog.h"
-#include "unitcpp/UnitTest++.h"
 #include "visitor/AstVisitor.h"
 #include "spdlog/sinks/stdout_sinks.h"
 #include "gen/generator_context.h"
 #include "llvm/IR/LegacyPassManager.h"
-#include <rapidjson/document.h>
-
-static pointer<ast_node> toAst(json &inputJson) {
-    return ast_visitor.visit(inputJson);
-}
 
 int main(int, const char *[]) {
 //    std::ifstream input("../result.ast");
@@ -39,7 +33,5 @@ int main(int, const char *[]) {
 //    llvm::legacy::PassManager passMan;
 //    passMan.run(llvm_module);
 
-//    return UnitTest::RunAllTests();
-
-    return UnitTest::RunAllTests();
+    return 0;
 }

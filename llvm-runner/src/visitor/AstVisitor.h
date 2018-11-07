@@ -6,8 +6,8 @@
 #define LLVM_RUNNER_ASTVISITOR_H
 
 #include <iostream>
+#include "ast/ast_nodes.hpp"
 #include "rapidjson/document.h"
-#include "ast/ast_nodes.h"
 #include "Visitor.h"
 
 static const int BINARY_EXPR = 279;

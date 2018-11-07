@@ -6,6 +6,7 @@
 #define LLVM_RUNNER_AST_VALUE_LEAF_H
 
 
+#include <llvm/IR/Value.h>
 #include "ast_node.h"
 
 struct value_literal {

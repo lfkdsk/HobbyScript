@@ -5,9 +5,10 @@
 #ifndef LLVM_RUNNER_NUMBERLITERAL_H
 #define LLVM_RUNNER_NUMBERLITERAL_H
 
+#include <iostream>
 #include "ast_literal.h"
-#include <llvm/ADT/APFloat.h>
-#include <llvm/IR/Constants.h>
+#include "ast/common/ast_value_node.h"
+#include "gen/literals/generator_literals.h"
 
 class ast_number_literal : public ast_literal {
 public:
