@@ -1,3 +1,5 @@
+project(unit_tests)
+
 AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR} MAIN_SOURCE)
 
 add_executable(
@@ -12,7 +14,7 @@ target_link_libraries(
         source
 )
 
-target_include_directories(unit_tests PUBLIC source ${llvm_libs})
+target_include_directories(unit_tests PUBLIC ${llvm_libs})
 
 add_test(
         NAME

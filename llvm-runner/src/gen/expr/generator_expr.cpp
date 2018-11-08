@@ -3,7 +3,6 @@
 //
 
 #include "generator_expr.h"
-#include "gen/generator_context.h"
 
 #define GEN_ARITH_OP(op, op_f, name) { \
     return ir_builder.op_f(value_l, value_r, name); \

@@ -7,6 +7,7 @@
 
 
 #include <llvm/IR/Value.h>
+#include "gen/generator_context.h"
 
 namespace gen {
 

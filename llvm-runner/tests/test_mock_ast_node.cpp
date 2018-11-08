@@ -3,9 +3,9 @@
 //
 
 #include <gtest/gtest.h>
-#include "ast/common/ast_node.h"
-#include "ast/common/ast_value_node.h"
 #include "ast/ast_nodes.hpp"
+//#include "gen/generator_context.h"
+//#include "visitor/AstVisitor.h"
 
 #define CHECK_NON_NULL(value) \
     do { \

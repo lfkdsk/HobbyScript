@@ -5,7 +5,7 @@
 #ifndef LLVM_RUNNER_GENERATOR_LITERALS_H
 #define LLVM_RUNNER_GENERATOR_LITERALS_H
 
-
+#include <string>
 #include <vector>
 #include <map>
 #include <llvm/IR/Value.h>
@@ -25,8 +25,8 @@ private:
 };
 
 
-namespace gen {
-    llvm::Value *get_id(const std::string &id);
-}
+//namespace gen {
+//    llvm::Value *get_id(const std::string &id);
+//}
 
 #endif //LLVM_RUNNER_GENERATOR_LITERALS_H
