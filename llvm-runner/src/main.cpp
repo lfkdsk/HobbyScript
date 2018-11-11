@@ -7,8 +7,9 @@
 #include "spdlog/sinks/stdout_sinks.h"
 #include "gen/generator_context.h"
 #include "llvm/IR/LegacyPassManager.h"
+#include "gtest/gtest.h"
 
-int main(int, const char *[]) {
+int main(int argc, char **argv) {
 //    std::ifstream input("../result.ast");
 //    for (std::string line; getline(input, line);) {
 //        json inputJson = json::parse(line);
@@ -33,5 +34,6 @@ int main(int, const char *[]) {
 //    llvm::legacy::PassManager passMan;
 //    passMan.run(llvm_module);
 
-    return 0;
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }

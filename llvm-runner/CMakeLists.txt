@@ -25,16 +25,15 @@ if (TARGET spdlog)
     add_library(spdlog::spdlog ALIAS spdlog)
 endif ()
 
-# include src
-include_directories(includes)
-add_subdirectory(includes)
-add_subdirectory(src)
-
 include(cmake/googletest.cmake)
 fetch_googletest(
         ${PROJECT_SOURCE_DIR}/cmake
         ${PROJECT_BINARY_DIR}/googletest
 )
 
-enable_testing()
-add_subdirectory(tests)
+# include src
+include_directories(includes)
+add_subdirectory(includes)
+add_subdirectory(src)
+#enable_testing()
+#add_subdirectory(tests)
