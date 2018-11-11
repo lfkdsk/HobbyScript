@@ -10,8 +10,12 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
+      - llvm-toolchain-trusty-7
     packages:
       - cmake
+      - clang
+      - libc++-dev
+      - libc++abi-dev
 
 before_install:
 - pip install --user cpp-coveralls
