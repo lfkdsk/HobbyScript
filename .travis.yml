@@ -16,7 +16,7 @@ addons:
       - clang
       - libc++-dev
       - libc++abi-dev
-      - rapidjson
+      - rapidjson-dev
 
 before_install:
 - pip install --user cpp-coveralls
