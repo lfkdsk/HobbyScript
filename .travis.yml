@@ -16,18 +16,10 @@ addons:
       - clang
       - libc++-dev
       - libc++abi-dev
+      - rapidjson
 
 before_install:
 - pip install --user cpp-coveralls
-
-before_script:
-- git clone git@github.com:Tencent/rapidjson.git
-- cd rapidjson
-- mkdir build 
-- cd build
-- cmake ..
-- make install
-- cd ..
 
 script:
 - cd llvm-runner
