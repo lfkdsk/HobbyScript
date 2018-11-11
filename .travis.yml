@@ -3,10 +3,15 @@ sudo: false
 language:
 - cpp
 
+compiler:
+- clang
+
 addons:
   apt:
     sources:
-    - ubuntu-toolchain-r-test
+      - ubuntu-toolchain-r-test
+    packages:
+      - cmake-3.11
 
 before_install:
 - pip install --user cpp-coveralls
