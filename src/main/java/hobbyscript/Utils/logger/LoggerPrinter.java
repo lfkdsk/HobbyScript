@@ -1,9 +1,8 @@
 package hobbyscript.Utils.logger;
 
 
-import hobbyscript.Utils.json.JSONArray;
-import hobbyscript.Utils.json.JSONException;
-import hobbyscript.Utils.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import hobbyscript.Utils.tools.TextUtils;
 
 import javax.xml.transform.*;
@@ -148,6 +147,8 @@ final class LoggerPrinter implements Printer {
         log(ASSERT, message, args);
     }
 
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
     /**
      * Formats the json content and print it
      *
@@ -159,21 +160,9 @@ final class LoggerPrinter implements Printer {
             d("Empty/Null json content");
             return;
         }
-        try {
-            if (json.startsWith("{")) {
-                JSONObject jsonObject = new JSONObject(json);
-                String message = jsonObject.toString(JSON_INDENT);
-                d(message);
-                return;
-            }
-            if (json.startsWith("[")) {
-                JSONArray jsonArray = new JSONArray(json);
-                String message = jsonArray.toString(JSON_INDENT);
-                d(message);
-            }
-        } catch (JSONException e) {
-            e(e.getCause().getMessage() + "\n" + json);
-        }
+
+        String jsonStr = gson.toJson(json);
+        d(jsonStr);
     }
 
     /**
