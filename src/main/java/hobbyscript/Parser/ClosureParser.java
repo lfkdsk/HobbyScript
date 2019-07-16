@@ -1,8 +1,8 @@
 package hobbyscript.Parser;
 
 import hobbyscript.ApplicationTest.CodeDialog;
-import hobbyscript.Ast.AstNode;
-import hobbyscript.Ast.Closure;
+import hobbyscript.ast.AstNode;
+import hobbyscript.ast.Closure;
 import hobbyscript.Exception.ParseException;
 import hobbyscript.Lexer.HobbyLexer;
 import hobbyscript.Token.HobbyToken;

@@ -1,8 +1,8 @@
 package hobbyscript.Compile;
 
-import hobbyscript.Ast.AstNode;
-import hobbyscript.Ast.FuncStmt;
-import hobbyscript.Ast.NullStmt;
+import hobbyscript.ast.AstNode;
+import hobbyscript.ast.FuncStmt;
+import hobbyscript.ast.NullStmt;
 import hobbyscript.Exception.ParseException;
 import hobbyscript.Lexer.HobbyLexer;
 import hobbyscript.Parser.ArrayParser;

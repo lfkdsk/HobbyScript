@@ -1,25 +1,22 @@
 package hobbyscript.LLVM.visitor;
 
-import hobbyscript.Ast.AstLeaf;
-import hobbyscript.Ast.AstList;
-import hobbyscript.Ast.AstNode;
-import hobbyscript.Literal.IdLiteral;
+import hobbyscript.ast.AstLeaf;
+import hobbyscript.ast.AstList;
+import hobbyscript.ast.AstNode;
 import hobbyscript.Literal.NumberLiteral;
 
-public interface AstVisitor<T> {
-    default T visitorAstNode(AstNode node) {
+public interface AstVisitor {
+    default Object visitorAstNode(AstNode node) {
         return null;
     }
 
-    default T visitorAstList(AstList list) {
+    default Object visitorAstList(AstList list) {
         return null;
     }
 
-    default T visitorAstLeaf(AstLeaf leaf) {
+    default Object visitorAstLeaf(AstLeaf leaf) {
         return null;
     }
 
-    T visitorNumberLiteral(NumberLiteral numberLiteral);
-
-    T visitorIdLiteral(IdLiteral idLiteral);
+    Object visitorNumberLiteral(NumberLiteral literal);
 }

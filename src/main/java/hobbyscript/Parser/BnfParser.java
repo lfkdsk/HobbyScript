@@ -1,8 +1,8 @@
 package hobbyscript.Parser;
 
-import hobbyscript.Ast.AstLeaf;
-import hobbyscript.Ast.AstList;
-import hobbyscript.Ast.AstNode;
+import hobbyscript.ast.AstLeaf;
+import hobbyscript.ast.AstList;
+import hobbyscript.ast.AstNode;
 import hobbyscript.Exception.ParseException;
 import hobbyscript.Lexer.HobbyLexer;
 import hobbyscript.Token.HobbyToken;

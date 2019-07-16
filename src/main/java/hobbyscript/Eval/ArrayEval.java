@@ -1,8 +1,8 @@
 package hobbyscript.Eval;
 
-import hobbyscript.Ast.ArrayIndex;
-import hobbyscript.Ast.AstNode;
-import hobbyscript.Ast.PrimaryExpr;
+import hobbyscript.ast.ArrayIndex;
+import hobbyscript.ast.AstNode;
+import hobbyscript.ast.PrimaryExpr;
 import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Exception.HobbyException;
 import hobbyscript.Literal.ArrayLiteral;

@@ -1,4 +1,4 @@
-package hobbyscript.Ast;
+package hobbyscript.ast;
 
 import com.google.gson.Gson;
 import hobbyscript.Compile.CodeLine;

@@ -1,6 +1,6 @@
 package hobbyscript.Literal;
 
-import hobbyscript.Ast.AstLeaf;
+import hobbyscript.ast.AstLeaf;
 import hobbyscript.Compile.CodeLine;
 import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Eval.ScriptEval;
@@ -13,10 +13,10 @@ import static hobbyscript.Eval.ScriptEval.isNum;
  * Number字面量
  *
  * @author liufengkai
- *         Created by liufengkai on 16/7/11.
+ * Created by liufengkai on 16/7/11.
  */
 public class NumberLiteral extends AstLeaf {
-    private boolean isInteger;
+    private final boolean isInteger;
 
     public NumberLiteral(HobbyToken token) {
         super(token);

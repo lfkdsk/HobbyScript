@@ -1,7 +1,7 @@
 package hobbyscript.Literal;
 
-import hobbyscript.Ast.AstList;
-import hobbyscript.Ast.AstNode;
+import hobbyscript.ast.AstList;
+import hobbyscript.ast.AstNode;
 import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Token.HobbyToken;
 

@@ -1,4 +1,4 @@
-package hobbyscript.Ast;
+package hobbyscript.ast;
 
 import hobbyscript.Compile.CodeLine;
 import hobbyscript.Eval.Env.Environment;

@@ -1,6 +1,6 @@
 package hobbyscript.Utils;
 
-import hobbyscript.Ast.AstNode;
+import hobbyscript.ast.AstNode;
 
 import java.io.File;
 import java.util.Iterator;

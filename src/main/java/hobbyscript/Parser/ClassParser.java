@@ -1,8 +1,8 @@
 package hobbyscript.Parser;
 
-import hobbyscript.Ast.ClassBody;
-import hobbyscript.Ast.ClassStmt;
-import hobbyscript.Ast.Dot;
+import hobbyscript.ast.ClassBody;
+import hobbyscript.ast.ClassStmt;
+import hobbyscript.ast.Dot;
 import hobbyscript.Token.HobbyToken;
 
 /**

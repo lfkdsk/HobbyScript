@@ -1,8 +1,8 @@
 package hobbyscript.Interpreter;
 
 import hobbyscript.ApplicationTest.CodeDialog;
-import hobbyscript.Ast.AstNode;
-import hobbyscript.Ast.NullStmt;
+import hobbyscript.ast.AstNode;
+import hobbyscript.ast.NullStmt;
 import hobbyscript.Eval.Env.BasicEnvironment;
 import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Exception.ParseException;

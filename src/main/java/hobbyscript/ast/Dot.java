@@ -1,4 +1,4 @@
-package hobbyscript.Ast;
+package hobbyscript.ast;
 
 import hobbyscript.Eval.ClassEval;
 import hobbyscript.Eval.Env.Environment;

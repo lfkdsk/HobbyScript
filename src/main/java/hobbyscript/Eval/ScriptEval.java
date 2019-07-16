@@ -1,6 +1,6 @@
 package hobbyscript.Eval;
 
-import hobbyscript.Ast.*;
+import hobbyscript.ast.*;
 import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Eval.Env.LocalEnv;
 import hobbyscript.Exception.HobbyException;

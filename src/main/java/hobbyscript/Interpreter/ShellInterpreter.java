@@ -1,9 +1,8 @@
 package hobbyscript.Interpreter;
 
-import hobbyscript.Ast.AstNode;
-import hobbyscript.Ast.NullStmt;
+import hobbyscript.ast.AstNode;
+import hobbyscript.ast.NullStmt;
 import hobbyscript.Eval.Env.Environment;
-import hobbyscript.Eval.Env.LocalEnv;
 import hobbyscript.Eval.Env.LocalEnvironment;
 import hobbyscript.Exception.ParseException;
 import hobbyscript.Lexer.HobbyLexer;

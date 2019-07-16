@@ -1,6 +1,6 @@
 package hobbyscript.Literal;
 
-import hobbyscript.Ast.AstNode;
+import hobbyscript.ast.AstNode;
 import hobbyscript.Exception.HobbyException;
 
 import java.lang.reflect.InvocationTargetException;

@@ -1,6 +1,6 @@
 package hobbyscript.Parser;
 
-import hobbyscript.Ast.ArrayIndex;
+import hobbyscript.ast.ArrayIndex;
 import hobbyscript.Literal.ArrayLiteral;
 import hobbyscript.Literal.CreateArray;
 

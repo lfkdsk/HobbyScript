@@ -1,8 +1,8 @@
 package hobbyscript.Eval;
 
-import hobbyscript.Ast.AstNode;
-import hobbyscript.Ast.Import;
-import hobbyscript.Ast.NullStmt;
+import hobbyscript.ast.AstNode;
+import hobbyscript.ast.Import;
+import hobbyscript.ast.NullStmt;
 import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Eval.Env.LocalEnv;
 import hobbyscript.Eval.Env.LocalEnvironment;

@@ -1,8 +1,8 @@
 package hobbyscript.LLVM.visitor;
 
-import hobbyscript.Ast.AstLeaf;
-import hobbyscript.Ast.AstList;
-import hobbyscript.Ast.AstNode;
+import hobbyscript.ast.AstLeaf;
+import hobbyscript.ast.AstList;
+import hobbyscript.ast.AstNode;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -22,7 +22,7 @@ public interface VisitorBinder {
     }
 
     @SuppressWarnings("unchecked")
-    default <T, E extends AstVisitor<T>> T accept(E visitor) {
+    default <T, E extends AstVisitor> T accept(E visitor) {
         Method method = findVisitorMethod(visitor, getClass());
         if (method != null) {
             try {

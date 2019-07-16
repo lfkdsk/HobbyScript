@@ -5,8 +5,9 @@ import hobbyscript.LLVM.visitor.AstVisitor;
 import hobbyscript.Literal.IdLiteral;
 import hobbyscript.Literal.NumberLiteral;
 import hobbyscript.Utils.logger.Logger;
+import org.bytedeco.llvm.global.LLVM;
 
-public class LLVMVisitor implements AstVisitor<Double> {
+public class LLVMVisitor implements AstVisitor {
 
     private Environment env;
 
@@ -15,15 +16,9 @@ public class LLVMVisitor implements AstVisitor<Double> {
         Logger.init();
     }
 
-    @Override
-    public Double visitorNumberLiteral(NumberLiteral numberLiteral) {
-        return (double) numberLiteral.eval(env);
-    }
 
     @Override
-    public Double visitorIdLiteral(IdLiteral idLiteral) {
-        return (Double) idLiteral.eval(env);
+    public Object visitorNumberLiteral(NumberLiteral literal) {
+        return LLVM.LLVMDoubleType();
     }
-
-
 }

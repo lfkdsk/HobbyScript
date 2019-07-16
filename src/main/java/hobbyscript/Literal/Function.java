@@ -1,9 +1,8 @@
 package hobbyscript.Literal;
 
-import hobbyscript.Ast.DefBlockStmnt;
-import hobbyscript.Ast.ParameterList;
+import hobbyscript.ast.DefBlockStmnt;
+import hobbyscript.ast.ParameterList;
 import hobbyscript.Eval.Env.Environment;
-import hobbyscript.Eval.Env.LocalEnv;
 import hobbyscript.Eval.Env.LocalEnvironment;
 
 /**

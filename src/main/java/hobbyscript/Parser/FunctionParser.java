@@ -1,7 +1,7 @@
 package hobbyscript.Parser;
 
 import hobbyscript.ApplicationTest.CodeDialog;
-import hobbyscript.Ast.*;
+import hobbyscript.ast.*;
 import hobbyscript.Exception.ParseException;
 import hobbyscript.Lexer.HobbyLexer;
 import hobbyscript.Token.HobbyToken;

@@ -1,7 +1,7 @@
 package hobbyscript.Literal;
 
-import hobbyscript.Ast.ClassBody;
-import hobbyscript.Ast.ClassStmt;
+import hobbyscript.ast.ClassBody;
+import hobbyscript.ast.ClassStmt;
 import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Exception.HobbyException;
 

@@ -1,9 +1,8 @@
-package hobbyscript.Ast;
+package hobbyscript.ast;
 
 import hobbyscript.Compile.CodeLine;
 import hobbyscript.Compile.ScriptCompile;
 import hobbyscript.Eval.Env.Environment;
-import hobbyscript.Eval.Env.LocalEnv;
 import hobbyscript.Eval.Env.LocalEnvironment;
 import hobbyscript.Eval.ScriptEval;
 import hobbyscript.Token.HobbyToken;

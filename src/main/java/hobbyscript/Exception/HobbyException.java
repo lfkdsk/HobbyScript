@@ -1,6 +1,6 @@
 package hobbyscript.Exception;
 
-import hobbyscript.Ast.AstNode;
+import hobbyscript.ast.AstNode;
 
 /**
  * 定义了Hobby的运行异常

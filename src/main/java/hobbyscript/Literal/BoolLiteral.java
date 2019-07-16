@@ -1,6 +1,6 @@
 package hobbyscript.Literal;
 
-import hobbyscript.Ast.AstLeaf;
+import hobbyscript.ast.AstLeaf;
 import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Token.BoolToken;
 import hobbyscript.Token.HobbyToken;
