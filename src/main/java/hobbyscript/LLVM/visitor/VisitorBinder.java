@@ -14,7 +14,7 @@ public interface VisitorBinder {
             return null;
         } else {
             try {
-                return visitor.getClass().getMethod("visit" + type.getSimpleName(), type);
+                return visitor.getClass().getDeclaredMethod("visitor" + type.getSimpleName(), type);
             } catch (NoSuchMethodException e) {
                 return findVisitorMethod(visitor, type.getSuperclass());
             }

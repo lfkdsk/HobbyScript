@@ -11,18 +11,34 @@ plugins {
     id 'java'
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', 'test/']
+        }
+    }
+}
+
+test {
+    useJUnit()
+}
+
+
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     compile 'com.google.guava:guava:23.0'
     compile 'com.google.code.gson:gson:2.8.5'
     compile 'org.bytedeco:llvm-platform:8.0.0-1.5.1'
+//    compile 'org.bytedeco:llvm-platform:7.0.1-1.4.4'
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'
+    implementation 'junit:junit:4.12'
 }
 
 // In this section you declare where to find the dependencies of your project
 repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
+    mavenCentral()
     jcenter()
 }

@@ -20,7 +20,7 @@ public class NumberLiteral extends AstLeaf {
 
     public NumberLiteral(HobbyToken token) {
         super(token);
-        this.isInteger = isNum(token.isNumber());
+        this.isInteger = isNum(((NumberToken) token).getNumber());
     }
 
     public int getTag() {
@@ -30,6 +30,14 @@ public class NumberLiteral extends AstLeaf {
     @Override
     public Object eval(Environment env) {
         return ScriptEval.NumberEval(this);
+    }
+
+    public boolean isInteger() {
+        return isInteger;
+    }
+
+    public Number number() {
+        return ((NumberToken) token()).getNumber();
     }
 
     @Override

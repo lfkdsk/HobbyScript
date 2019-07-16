@@ -17,7 +17,7 @@ import java.util.Iterator;
  * 只包含基础代码段的求值
  *
  * @author liufengkai
- *         Created by liufengkai on 16/7/14.
+ * Created by liufengkai on 16/7/14.
  */
 public class ScriptEval {
 
@@ -304,11 +304,11 @@ public class ScriptEval {
     }
 
     public static boolean isNum(Object v) {
-        return v instanceof Integer;
+        return v instanceof Integer || v instanceof Long;
     }
 
     private static boolean isFloat(Object v) {
-        return v instanceof Double;
+        return v instanceof Double | v instanceof Float;
     }
 
     private static boolean isBool(Object v) {

@@ -1,5 +1,6 @@
 package hobbyscript.LLVM.visitor;
 
+import hobbyscript.Utils.logger.Logger;
 import hobbyscript.ast.AstLeaf;
 import hobbyscript.ast.AstList;
 import hobbyscript.ast.AstNode;
@@ -19,4 +20,5 @@ public interface AstVisitor {
     }
 
     Object visitorNumberLiteral(NumberLiteral literal);
+
 }

@@ -1,24 +1,26 @@
 package hobbyscript.LLVM.generator;
 
-import hobbyscript.Eval.Env.Environment;
+import hobbyscript.LLVM.util.LLVMs;
 import hobbyscript.LLVM.visitor.AstVisitor;
-import hobbyscript.Literal.IdLiteral;
 import hobbyscript.Literal.NumberLiteral;
 import hobbyscript.Utils.logger.Logger;
-import org.bytedeco.llvm.global.LLVM;
+import org.bytedeco.llvm.LLVM.LLVMValueRef;
 
 public class LLVMVisitor implements AstVisitor {
 
-    private Environment env;
-
-    public LLVMVisitor(Environment env) {
-        this.env = env;
+    public LLVMVisitor() {
         Logger.init();
     }
 
 
     @Override
-    public Object visitorNumberLiteral(NumberLiteral literal) {
-        return LLVM.LLVMDoubleType();
+    public LLVMValueRef visitorNumberLiteral(NumberLiteral literal) {
+        final boolean isInteger = literal.isInteger();
+        final Number number = literal.number();
+        if (isInteger) {
+            return LLVMs.constInt(number.longValue());
+        } else {
+            return LLVMs.constDouble(number.doubleValue());
+        }
     }
 }
