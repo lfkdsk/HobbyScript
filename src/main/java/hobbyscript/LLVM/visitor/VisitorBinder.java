@@ -33,11 +33,11 @@ public interface VisitorBinder {
         }
 
         if (this instanceof AstNode) {
-            return visitor.visitorAstNode((AstNode) this);
+            return (T) visitor.visitorAstNode((AstNode) this);
         } else if (this instanceof AstLeaf) {
-            return visitor.visitorAstLeaf((AstLeaf) this);
+            return (T) visitor.visitorAstLeaf((AstLeaf) this);
         } else if (this instanceof AstList) {
-            return visitor.visitorAstList((AstList) this);
+            return (T) visitor.visitorAstList((AstList) this);
         }
 
         throw new UnsupportedOperationException("cannot find method : " + "visit" + getClass().getSimpleName());
