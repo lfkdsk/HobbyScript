@@ -1,7 +1,7 @@
 package hobbyscript.Ast;
 
 import hobbyscript.Compile.CodeLine;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Eval.FunctionEval;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class Arguments extends Postfix {
     }
 
     @Override
-    public Object eval(EnvironmentCallBack env, Object value) {
+    public Object eval(Environment env, Object value) {
         return FunctionEval.nativeEval(env, this, value, this);
     }
 

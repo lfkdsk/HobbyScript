@@ -1,7 +1,7 @@
 package hobbyscript.Ast;
 
 import hobbyscript.Compile.CodeLine;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Token.HobbyToken;
 
 import java.util.List;
@@ -45,7 +45,7 @@ public class BreakStmt extends AstList {
     }
 
     @Override
-    public Object eval(EnvironmentCallBack env) {
+    public Object eval(Environment env) {
         return new Object();
     }
 }

@@ -1,7 +1,7 @@
 package hobbyscript.Native;
 
-import hobbyscript.Eval.Env.EnvironmentCallBack;
-import hobbyscript.Eval.Env.LocalEnvironment;
+import hobbyscript.Eval.Env.Environment;
+import hobbyscript.Eval.Env.LocalEnv;
 import hobbyscript.Exception.HobbyException;
 import hobbyscript.Literal.HobbyObject;
 import hobbyscript.Literal.NaiveFunction;
@@ -17,7 +17,7 @@ import java.util.Scanner;
  * Created by liufengkai on 16/7/20.
  */
 public class NativeList {
-    private static LocalEnvironment topFloorEnvironment;
+    private static LocalEnv topFloorEnvironment;
 
     /**
      * 添加原声函数
@@ -27,7 +27,7 @@ public class NativeList {
      * @param clazz      需要反射拿到的类
      * @param params     参数
      */
-    public static void addNativeFunction(EnvironmentCallBack env,
+    public static void addNativeFunction(Environment env,
                                          String nativeName,
                                          Class<?> clazz,
                                          Class<?>... params) {
@@ -92,8 +92,8 @@ public class NativeList {
         return array;
     }
 
-    public static EnvironmentCallBack getLocalEnv(String name) throws HobbyObject.AssessException {
-        EnvironmentCallBack environment = topFloorEnvironment
+    public static Environment getLocalEnv(String name) throws HobbyObject.AssessException {
+        Environment environment = topFloorEnvironment
                 .foundEnv(name);
 
         if (environment == null || environment == topFloorEnvironment) {
@@ -119,8 +119,8 @@ public class NativeList {
         return Math.exp(value);
     }
 
-    public EnvironmentCallBack env(EnvironmentCallBack env) {
-        topFloorEnvironment = (LocalEnvironment) env;
+    public Environment env(Environment env) {
+        topFloorEnvironment = (LocalEnv) env;
         Logger.init();
 
         addNativeFunction(env, "logInfo", NativeList.class, String.class);

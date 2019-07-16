@@ -1,6 +1,6 @@
 package hobbyscript.Ast;
 
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Token.HobbyToken;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class ReturnStmt extends AstList {
     }
 
     @Override
-    public Object eval(EnvironmentCallBack env) {
+    public Object eval(Environment env) {
 
         if (result == null)
             this.setResult(child(0).eval(env));

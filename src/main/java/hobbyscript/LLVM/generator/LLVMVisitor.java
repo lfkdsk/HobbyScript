@@ -1,17 +1,16 @@
 package hobbyscript.LLVM.generator;
 
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.LLVM.visitor.AstVisitor;
 import hobbyscript.Literal.IdLiteral;
 import hobbyscript.Literal.NumberLiteral;
-import hobbyscript.Token.HobbyToken;
 import hobbyscript.Utils.logger.Logger;
 
 public class LLVMVisitor implements AstVisitor<Double> {
 
-    private EnvironmentCallBack env;
+    private Environment env;
 
-    public LLVMVisitor(EnvironmentCallBack env) {
+    public LLVMVisitor(Environment env) {
         this.env = env;
         Logger.init();
     }

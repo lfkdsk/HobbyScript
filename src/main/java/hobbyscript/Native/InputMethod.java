@@ -2,7 +2,8 @@ package hobbyscript.Native;
 
 import hobbyscript.Ast.AstNode;
 import hobbyscript.Ast.NullStmt;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
+import hobbyscript.Eval.Env.LocalEnv;
 import hobbyscript.Eval.Env.LocalEnvironment;
 import hobbyscript.Exception.ParseException;
 import hobbyscript.Lexer.HobbyLexer;
@@ -68,7 +69,7 @@ public class InputMethod {
 
         ArrayParser parser = new ArrayParser();
 
-        EnvironmentCallBack env = new NativeList().env(new LocalEnvironment());
+        Environment env = new NativeList().env(new LocalEnvironment());
 
         NativeList.print(">>> ");
 

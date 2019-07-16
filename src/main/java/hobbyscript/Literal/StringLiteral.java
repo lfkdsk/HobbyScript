@@ -2,7 +2,7 @@ package hobbyscript.Literal;
 
 import hobbyscript.Ast.AstLeaf;
 import hobbyscript.Compile.CodeLine;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Eval.ScriptEval;
 import hobbyscript.Token.HobbyToken;
 
@@ -25,7 +25,7 @@ public class StringLiteral extends AstLeaf {
     }
 
     @Override
-    public Object eval(EnvironmentCallBack env) {
+    public Object eval(Environment env) {
         return ScriptEval.StringEval(this);
     }
 }

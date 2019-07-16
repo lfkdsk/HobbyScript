@@ -1,6 +1,6 @@
 package hobbyscript.Ast;
 
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Exception.HobbyException;
 import hobbyscript.Token.HobbyToken;
 
@@ -54,7 +54,7 @@ public class AstLeaf extends AstNode {
     }
 
     @Override
-    public Object eval(EnvironmentCallBack env) {
+    public Object eval(Environment env) {
         throw new HobbyException("can not eval : " + toString(), this);
     }
 }

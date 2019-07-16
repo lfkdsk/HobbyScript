@@ -1,8 +1,8 @@
 package hobbyscript.Eval;
 
 import hobbyscript.Ast.*;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
-import hobbyscript.Eval.Env.LocalEnvironment;
+import hobbyscript.Eval.Env.Environment;
+import hobbyscript.Eval.Env.LocalEnv;
 import hobbyscript.Exception.HobbyException;
 import hobbyscript.Literal.*;
 import hobbyscript.Parser.ScriptParser;
@@ -26,7 +26,7 @@ public class FunctionEval {
      * @param stmt 函数定义
      * @return 函数名
      */
-    public static String functionEval(EnvironmentCallBack env, FuncStmt stmt) {
+    public static String functionEval(Environment env, FuncStmt stmt) {
         Function function;
         if (env.contains(ScriptParser.THIS_POINT)) {
             function = new ClassFunction(stmt.parameters(), stmt.body(), env);
@@ -34,7 +34,7 @@ public class FunctionEval {
             function = new Function(stmt.parameters(), stmt.body(), env);
         }
 
-        ((LocalEnvironment) env).putLocal(stmt.name(), function);
+        ((LocalEnv) env).putLocal(stmt.name(), function);
         return stmt.name();
     }
 
@@ -54,7 +54,7 @@ public class FunctionEval {
         return expr.childCount() - nest > 1;
     }
 
-    public static Object evalSubExpr(EnvironmentCallBack env,
+    public static Object evalSubExpr(Environment env,
                                      PrimaryExpr expr,
                                      int nest) {
         if (hasPostfix(expr, nest)) {
@@ -85,7 +85,7 @@ public class FunctionEval {
     // Arguments 参数
     ///////////////////////////////////////////////////////////////////////////
 
-    public static Object argumentsEval(EnvironmentCallBack parentEnv,
+    public static Object argumentsEval(Environment parentEnv,
                                        Arguments args,
                                        Object value) {
         if (!(value instanceof Function)) {
@@ -103,7 +103,7 @@ public class FunctionEval {
             throw new HobbyException("args more than define", args);
         }
 
-        LocalEnvironment newEnv = (LocalEnvironment) function.makeNewEnv();
+        LocalEnv newEnv = (LocalEnv) function.makeNewEnv();
         // 正常的函数
 //        if (parentEnv != function.getEnv()
 //                && !(function instanceof ClassFunction)) {
@@ -144,7 +144,7 @@ public class FunctionEval {
     ///////////////////////////////////////////////////////////////////////////
 
     public static Object closureEval(Closure closure,
-                                     EnvironmentCallBack env) {
+                                     Environment env) {
 
         return new ClosureFunction(closure.parameters(),
                 closure.body(), env);
@@ -163,7 +163,7 @@ public class FunctionEval {
      * @param node      所在子树
      * @return 调用结果
      */
-    public static Object nativeEval(EnvironmentCallBack parentEnv,
+    public static Object nativeEval(Environment parentEnv,
                                     Arguments args,
                                     Object value,
                                     AstNode node) {
@@ -191,7 +191,7 @@ public class FunctionEval {
         return function.invoke(newArgs, node);
     }
 
-    public static Object blockEval(EnvironmentCallBack env, DefBlockStmnt expr) {
+    public static Object blockEval(Environment env, DefBlockStmnt expr) {
         Object result = 0;
         Iterator<AstNode> iterator = expr.iterator();
         // 一句一句运行

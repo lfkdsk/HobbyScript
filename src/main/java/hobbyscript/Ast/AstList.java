@@ -1,7 +1,7 @@
 package hobbyscript.Ast;
 
 import hobbyscript.Compile.CodeLine;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Exception.HobbyException;
 
 import java.util.Iterator;
@@ -74,7 +74,7 @@ public class AstList extends AstNode {
     }
 
     @Override
-    public Object eval(EnvironmentCallBack env) {
+    public Object eval(Environment env) {
         throw new HobbyException("can not eval : " + toString(), this);
     }
 

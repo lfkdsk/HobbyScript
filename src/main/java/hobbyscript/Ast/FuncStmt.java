@@ -1,7 +1,7 @@
 package hobbyscript.Ast;
 
 import hobbyscript.Compile.CodeLine;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Eval.FunctionEval;
 import hobbyscript.Token.HobbyToken;
 
@@ -59,7 +59,7 @@ public class FuncStmt extends AstList {
     }
 
     @Override
-    public Object eval(EnvironmentCallBack env) {
+    public Object eval(Environment env) {
         return FunctionEval.functionEval(env, this);
     }
 }

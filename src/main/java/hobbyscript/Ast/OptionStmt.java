@@ -1,6 +1,6 @@
 package hobbyscript.Ast;
 
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Eval.ScriptEval;
 import hobbyscript.Token.HobbyToken;
 
@@ -18,7 +18,7 @@ public class OptionStmt extends AstList {
     }
 
     @Override
-    public Object eval(EnvironmentCallBack env) {
+    public Object eval(Environment env) {
         return ScriptEval.optionEval(env, this);
     }
 }

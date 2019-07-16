@@ -4,7 +4,7 @@ import hobbyscript.ApplicationTest.CodeDialog;
 import hobbyscript.Ast.AstNode;
 import hobbyscript.Ast.NullStmt;
 import hobbyscript.Eval.Env.BasicEnvironment;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Exception.ParseException;
 import hobbyscript.Lexer.HobbyLexer;
 import hobbyscript.Parser.ScriptParser;
@@ -22,7 +22,7 @@ import java.io.FileReader;
  */
 public class ScriptInterpreter {
 
-    static void run(String fileName, ScriptParser parser, EnvironmentCallBack env) throws ParseException, FileNotFoundException {
+    static void run(String fileName, ScriptParser parser, Environment env) throws ParseException, FileNotFoundException {
 
         HobbyLexer lexer;
         if (fileName.equals("")) {

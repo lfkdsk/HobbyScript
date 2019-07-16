@@ -3,7 +3,7 @@ package hobbyscript.Literal;
 import hobbyscript.Ast.AstList;
 import hobbyscript.Ast.AstNode;
 import hobbyscript.Eval.ArrayEval;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Token.HobbyToken;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class ArrayLiteral extends AstList {
     }
 
     @Override
-    public Object eval(EnvironmentCallBack env) {
+    public Object eval(Environment env) {
         return ArrayEval.arrayLiteralEval(env, this);
     }
 }

@@ -2,7 +2,7 @@ package hobbyscript.Literal;
 
 import hobbyscript.Ast.DefBlockStmnt;
 import hobbyscript.Ast.ParameterList;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 
 /**
  * 类函数
@@ -14,7 +14,7 @@ public class ClassFunction extends Function {
 
     public ClassFunction(ParameterList parameters,
                          DefBlockStmnt body,
-                         EnvironmentCallBack env) {
+                         Environment env) {
         super(parameters, body, env);
     }
 }

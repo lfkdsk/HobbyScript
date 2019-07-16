@@ -2,7 +2,7 @@ package hobbyscript.Literal;
 
 import hobbyscript.Ast.AstList;
 import hobbyscript.Ast.AstNode;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Token.HobbyToken;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class CreateArray extends AstList {
     }
 
     @Override
-    public Object eval(EnvironmentCallBack env) {
+    public Object eval(Environment env) {
 
         Object sizeO = child(0).eval(env);
         int size = 0;

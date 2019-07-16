@@ -8,33 +8,33 @@ import java.util.HashMap;
  * @author liufengkai
  *         Created by liufengkai on 16/7/16.
  */
-public class LocalEnvironment implements LocalEnvironmentCallBack {
+public class LocalEnvironment implements LocalEnv {
 
     protected HashMap<String, Object> values;
 
     /**
      * 外层符号表
      */
-    protected EnvironmentCallBack parentEnv;
+    protected Environment parentEnv;
 
     public LocalEnvironment() {
         this(null);
     }
 
-    public LocalEnvironment(EnvironmentCallBack parentEnv) {
+    public LocalEnvironment(Environment parentEnv) {
         this.parentEnv = parentEnv;
         this.values = new HashMap<>();
     }
 
     @Override
     public void put(String name, Object value) {
-        EnvironmentCallBack env = foundEnv(name);
+        Environment env = foundEnv(name);
 
         if (env == null) {
             env = this;
         }
 
-        ((LocalEnvironment) env).putLocal(name, value);
+        ((LocalEnv) env).putLocal(name, value);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class LocalEnvironment implements LocalEnvironmentCallBack {
     }
 
     @Override
-    public void putAll(EnvironmentCallBack env) {
+    public void putAll(Environment env) {
         values.putAll(env.getMap());
     }
 
@@ -64,12 +64,12 @@ public class LocalEnvironment implements LocalEnvironmentCallBack {
     }
 
     @Override
-    public void setParent(EnvironmentCallBack env) {
+    public void setParent(Environment env) {
         this.parentEnv = env;
     }
 
     @Override
-    public EnvironmentCallBack foundEnv(String name) {
+    public Environment foundEnv(String name) {
         if (values.get(name) != null) {
             return this;
         } else if (parentEnv == null) {
@@ -78,7 +78,7 @@ public class LocalEnvironment implements LocalEnvironmentCallBack {
             // 向上递归查找
             // 排除基础类型的困扰
             if (parentEnv instanceof BasicEnvironment) return null;
-            return ((LocalEnvironment) parentEnv).foundEnv(name);
+            return ((LocalEnv) parentEnv).foundEnv(name);
         }
     }
 
@@ -88,7 +88,7 @@ public class LocalEnvironment implements LocalEnvironmentCallBack {
     }
 
     @Override
-    public EnvironmentCallBack getParent() {
+    public Environment getParent() {
         return parentEnv;
     }
 }

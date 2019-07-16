@@ -3,7 +3,8 @@ package hobbyscript.Eval;
 import hobbyscript.Ast.AstNode;
 import hobbyscript.Ast.Import;
 import hobbyscript.Ast.NullStmt;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
+import hobbyscript.Eval.Env.LocalEnv;
 import hobbyscript.Eval.Env.LocalEnvironment;
 import hobbyscript.Exception.HobbyException;
 import hobbyscript.Exception.ParseException;
@@ -21,10 +22,10 @@ import java.io.FileReader;
  */
 public class ImportEval {
 
-    public static void importEval(EnvironmentCallBack env,
+    public static void importEval(Environment env,
                                   Import importLib) {
 
-        if (((LocalEnvironment) env).getParent() == null) {
+        if (((LocalEnv) env).getParent() == null) {
             File file = new File(importLib.importLib().toString());
             if (file.exists()) {
                 env.putAll(parseLib(file));
@@ -42,12 +43,12 @@ public class ImportEval {
 
     }
 
-    private static EnvironmentCallBack parseLib(File file) {
+    private static Environment parseLib(File file) {
 
         try {
             HobbyLexer lexer = new HobbyLexer(new FileReader(file));
             ArrayParser parser = new ArrayParser();
-            EnvironmentCallBack env = new NativeList().env(new LocalEnvironment());
+            Environment env = new NativeList().env(new LocalEnvironment());
             while (lexer.peek(0) != HobbyToken.EOF) {
                 AstNode node = parser.parse(lexer);
                 if (!(node instanceof NullStmt)) {

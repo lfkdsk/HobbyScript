@@ -1,7 +1,8 @@
 package hobbyscript.Eval;
 
 import hobbyscript.Ast.*;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
+import hobbyscript.Eval.Env.LocalEnv;
 import hobbyscript.Eval.Env.LocalEnvironment;
 import hobbyscript.Exception.HobbyException;
 import hobbyscript.Literal.ClassInfo;
@@ -21,7 +22,7 @@ public class ClassEval {
     ///////////////////////////////////////////////////////////////////////////
     // 类定义
     ///////////////////////////////////////////////////////////////////////////
-    public static String classDefineEval(EnvironmentCallBack env,
+    public static String classDefineEval(Environment env,
                                          ClassStmt stmt) {
         ClassInfo info = new ClassInfo(stmt, env);
         env.put(stmt.name(), info);
@@ -31,7 +32,7 @@ public class ClassEval {
     ///////////////////////////////////////////////////////////////////////////
     // 类函数体
     ///////////////////////////////////////////////////////////////////////////
-    public static Object classBodyEval(EnvironmentCallBack env,
+    public static Object classBodyEval(Environment env,
                                        ClassBody body) {
         for (AstNode n : body) {
             n.eval(env);
@@ -43,7 +44,7 @@ public class ClassEval {
     ///////////////////////////////////////////////////////////////////////////
     // 索引访问
     ///////////////////////////////////////////////////////////////////////////
-    public static Object dotEval(EnvironmentCallBack env,
+    public static Object dotEval(Environment env,
                                  Dot dot, Object value) {
         String member = dot.name();
         if (value instanceof ClassInfo) {
@@ -51,7 +52,7 @@ public class ClassEval {
             if (member.equals(INITIAL)) {
                 ClassInfo info = (ClassInfo) value;
                 // 注意是从body拿出来的env,classInfo的env用来获取外层的环境
-                LocalEnvironment thisEnv = new LocalEnvironment(info.env());
+                LocalEnv thisEnv = new LocalEnvironment(info.env());
                 // 创建this指针指向该对象
                 HobbyObject object = new HobbyObject(thisEnv);
                 // set class info
@@ -92,7 +93,7 @@ public class ClassEval {
      * @param env  环境
      */
     public static void initialObject(ClassInfo info,
-                                     EnvironmentCallBack env) {
+                                     Environment env) {
         if (info.getSuperClass() != null) {
 
             HobbyObject superObject = new HobbyObject(env);
@@ -106,7 +107,7 @@ public class ClassEval {
     ///////////////////////////////////////////////////////////////////////////
     // 为类元素进行赋值
     ///////////////////////////////////////////////////////////////////////////
-    public static Object computeAssignForClass(EnvironmentCallBack env,
+    public static Object computeAssignForClass(Environment env,
                                                AstNode left,
                                                Object value) {
         PrimaryExpr expr = (PrimaryExpr) left;

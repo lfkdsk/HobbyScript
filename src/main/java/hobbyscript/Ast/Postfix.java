@@ -1,6 +1,6 @@
 package hobbyscript.Ast;
 
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Token.HobbyToken;
 
 import java.util.List;
@@ -17,6 +17,6 @@ public abstract class Postfix extends AstList {
         super(children, HobbyToken.POSTFIX);
     }
 
-    public abstract Object eval(EnvironmentCallBack env, Object value);
+    public abstract Object eval(Environment env, Object value);
 
 }

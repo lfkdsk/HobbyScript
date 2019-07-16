@@ -2,7 +2,8 @@ package hobbyscript.Interpreter;
 
 import hobbyscript.Ast.AstNode;
 import hobbyscript.Ast.NullStmt;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
+import hobbyscript.Eval.Env.LocalEnv;
 import hobbyscript.Eval.Env.LocalEnvironment;
 import hobbyscript.Exception.ParseException;
 import hobbyscript.Lexer.HobbyLexer;
@@ -50,7 +51,7 @@ public class ShellInterpreter extends ImportInterpreter {
 
         ArrayParser parser = new ArrayParser();
 
-        EnvironmentCallBack env = new NativeList().env(new LocalEnvironment());
+        Environment env = new NativeList().env(new LocalEnvironment());
 
         NativeList.print(cyanPrint(HOBBY_SCRIPT));
 
@@ -65,7 +66,7 @@ public class ShellInterpreter extends ImportInterpreter {
         catchException(lexer, parser, env);
     }
 
-    static void catchException(HobbyLexer lexer, ScriptParser parser, EnvironmentCallBack env) {
+    static void catchException(HobbyLexer lexer, ScriptParser parser, Environment env) {
         try {
             parserInner(lexer, parser, env);
         } catch (ParseException e) {
@@ -73,7 +74,7 @@ public class ShellInterpreter extends ImportInterpreter {
         }
     }
 
-    static void parserInner(HobbyLexer lexer, ScriptParser parser, EnvironmentCallBack env) throws ParseException {
+    static void parserInner(HobbyLexer lexer, ScriptParser parser, Environment env) throws ParseException {
         while (lexer.peek(0) != HobbyToken.EOF) {
             try {
                 AstNode node = parser.parse(lexer);

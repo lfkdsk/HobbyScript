@@ -1,6 +1,6 @@
 package hobbyscript.Ast;
 
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Eval.ImportEval;
 import hobbyscript.Token.HobbyToken;
 
@@ -22,7 +22,7 @@ public class Import extends AstList {
     }
 
     @Override
-    public Object eval(EnvironmentCallBack env) {
+    public Object eval(Environment env) {
         ImportEval.importEval(env, this);
         return null;
     }

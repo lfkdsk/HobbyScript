@@ -1,8 +1,8 @@
 package hobbyscript.Eval;
 
 import hobbyscript.Ast.*;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
-import hobbyscript.Eval.Env.LocalEnvironment;
+import hobbyscript.Eval.Env.Environment;
+import hobbyscript.Eval.Env.LocalEnv;
 import hobbyscript.Exception.HobbyException;
 import hobbyscript.Literal.*;
 import hobbyscript.Parser.ScriptParser;
@@ -58,7 +58,7 @@ public class ScriptEval {
      * @param literal id
      * @return id-value
      */
-    public static Object IdEval(EnvironmentCallBack env, IdLiteral literal) {
+    public static Object IdEval(Environment env, IdLiteral literal) {
         Object value = env.get(literal.name());
 
         if (value == null) {
@@ -78,7 +78,7 @@ public class ScriptEval {
      * @param expr 求负节点
      * @return 负数
      */
-    public static Object negativeEval(EnvironmentCallBack env, NegativeExpr expr) {
+    public static Object negativeEval(Environment env, NegativeExpr expr) {
         Object value = expr.operand().eval(env);
 
         if (isNum(value)) {
@@ -90,7 +90,7 @@ public class ScriptEval {
         throw new HobbyException("bad type for -" + value.toString(), expr);
     }
 
-    public static Object negativeBoolEval(EnvironmentCallBack env, NegativeBoolExpr expr) {
+    public static Object negativeBoolEval(Environment env, NegativeBoolExpr expr) {
         Object value = expr.operand().eval(env);
 
         if (isBool(value)) {
@@ -111,7 +111,7 @@ public class ScriptEval {
      * @param expr binary
      * @return 返回值
      */
-    public static Object binaryEval(EnvironmentCallBack env, BinaryExpr expr) {
+    public static Object binaryEval(Environment env, BinaryExpr expr) {
         String op = expr.operator();
 
         // 赋值
@@ -137,7 +137,7 @@ public class ScriptEval {
      * @param value 右值
      * @return 右值
      */
-    private static Object computeAssign(EnvironmentCallBack env,
+    private static Object computeAssign(Environment env,
                                         BinaryExpr expr,
                                         Object value) {
         AstLeaf node;
@@ -326,7 +326,7 @@ public class ScriptEval {
      * @param expr expr
      * @return value
      */
-    public static Object blockEval(EnvironmentCallBack env, BlockStmnt expr) {
+    public static Object blockEval(Environment env, BlockStmnt expr) {
         Object result = 0;
         Iterator<AstNode> iterator = expr.iterator();
         // 一句一句运行
@@ -365,8 +365,8 @@ public class ScriptEval {
      * @param ifStmnt if
      * @return value
      */
-    public static Object ifEval(EnvironmentCallBack env,
-                                LocalEnvironment newEnv,
+    public static Object ifEval(Environment env,
+                                LocalEnv newEnv,
                                 IfStmnt ifStmnt) {
         newEnv.setParent(env);
 
@@ -400,8 +400,8 @@ public class ScriptEval {
      * @param whileStmt while
      * @return value
      */
-    public static Object whileEval(EnvironmentCallBack env,
-                                   LocalEnvironment newEnv,
+    public static Object whileEval(Environment env,
+                                   LocalEnv newEnv,
                                    WhileStmt whileStmt) {
         Object result = 0;
         newEnv.setParent(env);
@@ -430,8 +430,8 @@ public class ScriptEval {
     // for 循环
     ///////////////////////////////////////////////////////////////////////////
 
-    public static Object forEval(EnvironmentCallBack env,
-                                 LocalEnvironment newEnv,
+    public static Object forEval(Environment env,
+                                 LocalEnv newEnv,
                                  ForStmt forStmt) {
         Object result = 0;
 
@@ -474,7 +474,7 @@ public class ScriptEval {
     // Option 指 expr,expr
     ///////////////////////////////////////////////////////////////////////////
 
-    public static Object optionEval(EnvironmentCallBack env,
+    public static Object optionEval(Environment env,
                                     OptionStmt option) {
         Object result = 0;
 
@@ -485,7 +485,7 @@ public class ScriptEval {
         return result;
     }
 
-    public static Object handleBreak(AstNode node, EnvironmentCallBack newEnv) {
+    public static Object handleBreak(AstNode node, Environment newEnv) {
         Object temp = node.eval(newEnv);
 
         if (temp instanceof BreakStmt) {

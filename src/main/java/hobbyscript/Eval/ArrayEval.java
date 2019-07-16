@@ -3,7 +3,7 @@ package hobbyscript.Eval;
 import hobbyscript.Ast.ArrayIndex;
 import hobbyscript.Ast.AstNode;
 import hobbyscript.Ast.PrimaryExpr;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Exception.HobbyException;
 import hobbyscript.Literal.ArrayLiteral;
 
@@ -16,7 +16,7 @@ public class ArrayEval {
     ///////////////////////////////////////////////////////////////////////////
     // 数组初始化
     ///////////////////////////////////////////////////////////////////////////
-    public static Object arrayLiteralEval(EnvironmentCallBack env,
+    public static Object arrayLiteralEval(Environment env,
                                           ArrayLiteral array) {
         int size = array.childCount();
 
@@ -33,7 +33,7 @@ public class ArrayEval {
     ///////////////////////////////////////////////////////////////////////////
     // 数组访问
     ///////////////////////////////////////////////////////////////////////////
-    public static Object arrayIndexEval(EnvironmentCallBack env,
+    public static Object arrayIndexEval(Environment env,
                                         ArrayIndex index,
                                         Object value) {
         if (value instanceof Object[]) {
@@ -48,7 +48,7 @@ public class ArrayEval {
     }
 
 
-    public static Object arrayAccessEval(EnvironmentCallBack env,
+    public static Object arrayAccessEval(Environment env,
                                          PrimaryExpr expr,
                                          Object value) {
         Object in = FunctionEval.evalSubExpr(env, expr, 1);

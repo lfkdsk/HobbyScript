@@ -7,9 +7,8 @@ import hobbyscript.Ast.AstList;
 import hobbyscript.Ast.AstNode;
 import hobbyscript.Ast.NullStmt;
 import hobbyscript.Eval.Env.BasicEnvironment;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Exception.ParseException;
-import hobbyscript.Interpreter.ImportInterpreter;
 import hobbyscript.LLVM.visitor.AstVisitor;
 import hobbyscript.Lexer.HobbyLexer;
 import hobbyscript.Literal.IdLiteral;
@@ -17,8 +16,6 @@ import hobbyscript.Literal.NumberLiteral;
 import hobbyscript.Parser.ImportParser;
 import hobbyscript.Token.HobbyToken;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -64,7 +61,7 @@ public class TestLLVMVisitor implements AstVisitor<Object> {
     public static void main(String[] args) throws IOException, ParseException {
         HobbyLexer lexer = new HobbyLexer(new CodeDialog());
         ImportParser parser = new ImportParser();
-        EnvironmentCallBack env = new BasicEnvironment();
+        Environment env = new BasicEnvironment();
         TestLLVMVisitor visitor = new TestLLVMVisitor();
 
 

@@ -2,7 +2,7 @@ package hobbyscript.Literal;
 
 import hobbyscript.Ast.ClassBody;
 import hobbyscript.Ast.ClassStmt;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Exception.HobbyException;
 
 /**
@@ -19,14 +19,14 @@ public class ClassInfo {
      * 运行环境
      * 这个运行环境只是从外部类拿出来而已
      */
-    private EnvironmentCallBack env;
+    private Environment env;
 
     /**
      * 超类
      */
     private ClassInfo superClass = null;
 
-    public ClassInfo(ClassStmt stmt, EnvironmentCallBack env) {
+    public ClassInfo(ClassStmt stmt, Environment env) {
         this.definition = stmt;
         this.env = env;
 
@@ -57,7 +57,7 @@ public class ClassInfo {
         return definition.body();
     }
 
-    public EnvironmentCallBack env() {
+    public Environment env() {
         return env;
     }
 

@@ -2,7 +2,8 @@ package hobbyscript.Literal;
 
 import hobbyscript.Ast.DefBlockStmnt;
 import hobbyscript.Ast.ParameterList;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
+import hobbyscript.Eval.Env.LocalEnv;
 import hobbyscript.Eval.Env.LocalEnvironment;
 
 /**
@@ -14,9 +15,9 @@ public class Function {
 
     protected DefBlockStmnt body;
 
-    protected EnvironmentCallBack env;
+    protected Environment env;
 
-    public Function(ParameterList parameters, DefBlockStmnt body, EnvironmentCallBack env) {
+    public Function(ParameterList parameters, DefBlockStmnt body, Environment env) {
         this.parameters = parameters;
         this.body = body;
         this.env = env;
@@ -31,11 +32,11 @@ public class Function {
     }
 
 
-    public EnvironmentCallBack getEnv() {
+    public Environment getEnv() {
         return env;
     }
 
-    public EnvironmentCallBack makeNewEnv() {
+    public Environment makeNewEnv() {
         return new LocalEnvironment();
     }
 

@@ -1,7 +1,7 @@
 package hobbyscript.Ast;
 
-import hobbyscript.Eval.Env.EnvironmentCallBack;
-import hobbyscript.Eval.Env.LocalEnvironment;
+import hobbyscript.Eval.Env.Environment;
+import hobbyscript.Eval.Env.LocalEnv;
 import hobbyscript.Token.HobbyToken;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public class ParameterList extends AstList {
         return ((AstLeaf) children.get(i)).token().getText();
     }
 
-    public void eval(EnvironmentCallBack env, int index, Object value) {
-        ((LocalEnvironment) env).putLocal(name(index), value);
+    public void eval(Environment env, int index, Object value) {
+        ((LocalEnv) env).putLocal(name(index), value);
     }
 }

@@ -2,7 +2,8 @@ package hobbyscript.Ast;
 
 import hobbyscript.Compile.CodeLine;
 import hobbyscript.Compile.ScriptCompile;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
+import hobbyscript.Eval.Env.LocalEnv;
 import hobbyscript.Eval.Env.LocalEnvironment;
 import hobbyscript.Eval.ScriptEval;
 import hobbyscript.Token.HobbyToken;
@@ -70,7 +71,7 @@ public class ForStmt extends AstList {
     }
 
     @Override
-    public Object eval(EnvironmentCallBack env) {
+    public Object eval(Environment env) {
         return ScriptEval.forEval(env, new LocalEnvironment(), this);
     }
 }

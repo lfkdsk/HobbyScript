@@ -1,7 +1,7 @@
 package hobbyscript.Literal;
 
-import hobbyscript.Eval.Env.EnvironmentCallBack;
-import hobbyscript.Eval.Env.LocalEnvironment;
+import hobbyscript.Eval.Env.Environment;
+import hobbyscript.Eval.Env.LocalEnv;
 
 /**
  * Class类的子对象
@@ -13,7 +13,7 @@ public class HobbyObject {
     /**
      * 内层环境
      */
-    protected EnvironmentCallBack env;
+    protected Environment env;
 
     protected ClassInfo classInfoMsg;
 
@@ -25,7 +25,7 @@ public class HobbyObject {
         this.classInfoMsg = classInfoMsg;
     }
 
-    public HobbyObject(EnvironmentCallBack env) {
+    public HobbyObject(Environment env) {
         this.env = env;
     }
 
@@ -43,11 +43,11 @@ public class HobbyObject {
     }
 
     public void write(String name, Object value) throws AssessException {
-        ((LocalEnvironment) getEnvironment(name)).putLocal(name, value);
+        ((LocalEnv) getEnvironment(name)).putLocal(name, value);
     }
 
-    private EnvironmentCallBack getEnvironment(String member) throws AssessException {
-        EnvironmentCallBack environment = ((LocalEnvironment) env).foundEnv(member);
+    private Environment getEnvironment(String member) throws AssessException {
+        Environment environment = ((LocalEnv) env).foundEnv(member);
 
         if (environment == null || environment == env) {
             return env;

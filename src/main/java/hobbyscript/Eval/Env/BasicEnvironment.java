@@ -10,7 +10,7 @@ import java.util.HashMap;
  * @author liufengkai
  *         Created by liufengkai on 16/7/14.
  */
-public class BasicEnvironment implements EnvironmentCallBack {
+public class BasicEnvironment implements Environment {
 
     private HashMap<String, Object> env;
 
@@ -38,7 +38,7 @@ public class BasicEnvironment implements EnvironmentCallBack {
     }
 
     @Override
-    public void putAll(EnvironmentCallBack env) {
+    public void putAll(Environment env) {
         this.env.putAll(env.getMap());
     }
 

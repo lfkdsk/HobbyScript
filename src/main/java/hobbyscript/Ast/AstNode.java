@@ -3,7 +3,7 @@ package hobbyscript.Ast;
 import com.google.gson.Gson;
 import hobbyscript.Compile.CodeLine;
 import hobbyscript.Compile.CompileCallBack;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Eval.Env.EvalCallBack;
 import hobbyscript.LLVM.visitor.VisitorBinder;
 
@@ -68,7 +68,7 @@ public abstract class AstNode implements Iterable<AstNode>,
     }
 
     @Override
-    public Object eval(EnvironmentCallBack env) {
+    public Object eval(Environment env) {
         return this;
     }
 

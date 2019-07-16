@@ -2,7 +2,7 @@ package hobbyscript.Ast;
 
 import hobbyscript.Compile.CodeLine;
 import hobbyscript.Compile.Temp;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Eval.ScriptEval;
 import hobbyscript.Literal.IdLiteral;
 import hobbyscript.Parser.ScriptParser;
@@ -98,7 +98,7 @@ public class BinaryExpr extends AstList {
 
 
     @Override
-    public Object eval(EnvironmentCallBack env) {
+    public Object eval(Environment env) {
         return ScriptEval.binaryEval(env, this);
     }
 }

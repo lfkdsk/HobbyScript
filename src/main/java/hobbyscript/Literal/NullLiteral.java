@@ -1,7 +1,7 @@
 package hobbyscript.Literal;
 
 import hobbyscript.Ast.AstLeaf;
-import hobbyscript.Eval.Env.EnvironmentCallBack;
+import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Token.HobbyToken;
 
 /**
@@ -17,7 +17,7 @@ public class NullLiteral extends AstLeaf {
     }
 
     @Override
-    public Object eval(EnvironmentCallBack env) {
+    public Object eval(Environment env) {
         return token;
     }
 }
