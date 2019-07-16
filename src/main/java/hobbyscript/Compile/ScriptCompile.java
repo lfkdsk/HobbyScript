@@ -34,7 +34,7 @@ public class ScriptCompile {
 
 
     private static void compile(String fileName) throws ParseException, FileNotFoundException {
-        HobbyLexer lexer = new HobbyLexer(new FileReader("../HobbyScript/midTest/" + fileName));
+        HobbyLexer lexer = new HobbyLexer(new FileReader("../HobbyScript/test/midTest/" + fileName));
 
         Logger.init("ScriptParser");
 
