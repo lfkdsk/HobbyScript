@@ -20,6 +20,7 @@ import hobbyscript.Exception.ParseException;
 import hobbyscript.LLVM.env.LLVMEnv;
 import hobbyscript.LLVM.generator.LLVMVisitor;
 import hobbyscript.LLVM.test.TestLLVMVisitor;
+import hobbyscript.LLVM.util.LLVMs;
 import hobbyscript.Lexer.HobbyLexer;
 import hobbyscript.Parser.ImportParser;
 import hobbyscript.Token.HobbyToken;
@@ -76,11 +77,26 @@ public class LLVMVisitorTest {
         Assert.assertEquals(expect, LLVM.LLVMGetAsString(string, new SizeTPointer(expect.length())).getString());
     }
 
+    @Test
+    public void testIDLiteral() throws ParseException {
+        List<?> list1 = runExpr("lfkdsk;", new LLVMEnv() {{
+            put("lfkdsk", LLVMs.constString("123321"));
+        }});
+
+        Assert.assertNotNull(list1.get(0));
+        LLVMValueRef string = (LLVMValueRef) list1.get(0);
+
+        Assert.assertEquals("123321", LLVM.LLVMGetAsString(string, new SizeTPointer(6)).getString());
+    }
+
     static List<?> runExpr(String input) throws ParseException {
+        return runExpr(input, new LLVMEnv());
+    }
+
+    static List<?> runExpr(String input, LLVMEnv env) throws ParseException {
         final HobbyLexer lexer = new HobbyLexer(new StringReader(input));
         final ImportParser parser = new ImportParser();
         final TestLLVMVisitor visitor = new TestLLVMVisitor(new LLVMVisitor());
-        final LLVMEnv env = new LLVMEnv();
         final List<Object> result = Lists.newArrayList();
 
         while (lexer.peek(0) != HobbyToken.EOF) {

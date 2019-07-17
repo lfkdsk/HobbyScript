@@ -1,6 +1,7 @@
 package hobbyscript.LLVM.visitor;
 
 import hobbyscript.LLVM.env.LLVMEnv;
+import hobbyscript.Literal.IDLiteral;
 import hobbyscript.Literal.StringLiteral;
 import hobbyscript.Utils.logger.Logger;
 import hobbyscript.ast.AstLeaf;
@@ -24,4 +25,6 @@ public interface AstVisitor {
     Object visitorNumberLiteral(NumberLiteral literal, LLVMEnv env);
 
     Object visitorStringLiteral(StringLiteral literal, LLVMEnv env);
+
+    Object visitorIDLiteral(IDLiteral literal, LLVMEnv env);
 }

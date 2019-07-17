@@ -17,6 +17,8 @@ package hobbyscript.LLVM.env;/*
 
 import hobbyscript.Eval.Env.LocalEnvironment;
 
-public final class LLVMEnv extends LocalEnvironment {
-
+public class LLVMEnv extends LocalEnvironment {
+    public <T> T get(String name, Class<T> clazz) {
+        return clazz.cast(get(name));
+    }
 }

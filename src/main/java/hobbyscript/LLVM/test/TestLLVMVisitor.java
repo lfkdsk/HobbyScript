@@ -8,6 +8,7 @@ import hobbyscript.LLVM.env.LLVMEnv;
 import hobbyscript.LLVM.generator.LLVMVisitor;
 import hobbyscript.LLVM.visitor.AstVisitor;
 import hobbyscript.Lexer.HobbyLexer;
+import hobbyscript.Literal.IDLiteral;
 import hobbyscript.Literal.NumberLiteral;
 import hobbyscript.Literal.StringLiteral;
 import hobbyscript.Parser.ImportParser;
@@ -60,6 +61,12 @@ public class TestLLVMVisitor implements AstVisitor {
     public Object visitorStringLiteral(StringLiteral literal, LLVMEnv env) {
         Logger.d(literal.toJson());
         return wrapper.visitorStringLiteral(literal, env);
+    }
+
+    @Override
+    public Object visitorIDLiteral(IDLiteral literal, LLVMEnv env) {
+        Logger.d(literal.toJson());
+        return wrapper.visitorIDLiteral(literal, env);
     }
 
 

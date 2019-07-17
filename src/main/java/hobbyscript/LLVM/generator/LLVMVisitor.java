@@ -3,6 +3,7 @@ package hobbyscript.LLVM.generator;
 import hobbyscript.LLVM.env.LLVMEnv;
 import hobbyscript.LLVM.util.LLVMs;
 import hobbyscript.LLVM.visitor.AstVisitor;
+import hobbyscript.Literal.IDLiteral;
 import hobbyscript.Literal.NumberLiteral;
 import hobbyscript.Literal.StringLiteral;
 import hobbyscript.Utils.logger.Logger;
@@ -31,5 +32,8 @@ public class LLVMVisitor implements AstVisitor {
         return LLVMs.constString(literal.value());
     }
 
-
+    @Override
+    public LLVMValueRef visitorIDLiteral(IDLiteral literal, LLVMEnv env) {
+        return env.get(literal.name(), LLVMValueRef.class);
+    }
 }
