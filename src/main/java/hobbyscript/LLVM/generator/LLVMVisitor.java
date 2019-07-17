@@ -1,7 +1,9 @@
 package hobbyscript.LLVM.generator;
 
+import com.google.common.collect.Maps;
 import hobbyscript.LLVM.env.LLVMEnv;
 import hobbyscript.LLVM.instruction.IRBuilder;
+import hobbyscript.LLVM.util.ChoiceOps;
 import hobbyscript.LLVM.util.LLVMs;
 import hobbyscript.LLVM.visitor.AstVisitor;
 import hobbyscript.Literal.BoolLiteral;
@@ -11,10 +13,21 @@ import hobbyscript.Literal.StringLiteral;
 import hobbyscript.Token.HobbyToken;
 import hobbyscript.Utils.logger.Logger;
 import hobbyscript.ast.*;
+import javafx.util.Pair;
 import org.bytedeco.llvm.LLVM.LLVMValueRef;
 import org.bytedeco.llvm.global.LLVM;
 
+import java.util.Map;
+
 public class LLVMVisitor implements AstVisitor {
+
+    private static Map<String, ChoiceOps> binaryOps = Maps.newHashMap();
+    private static Map<String, String> binaryTemps = Maps.newHashMap();
+
+    static {
+        binaryOps.put("+", ChoiceOps::add);
+        binaryTemps.put("+", "add_tmp");
+    }
 
     public LLVMVisitor() {
         Logger.init();
@@ -69,14 +82,38 @@ public class LLVMVisitor implements AstVisitor {
     @Override
     public Object visitorBinaryExpr(BinaryExpr expr, LLVMEnv env) {
         final String operator = expr.operator();
+        final IRBuilder builder = env.getIrBuilder();
+
         switch (operator) {
-            case "=":
+            case "=": {
                 return visitorAssign(expr, env);
+            }
+            case "-":
+            case "+": {
+                final LLVMValueRef left = expr.left().accept(this, env);
+                final LLVMValueRef right = expr.right().accept(this, env);
+                final boolean isDouble = LLVMs.isDouble(left) || LLVMs.isDouble(right);
+                final boolean isString = LLVMs.isString(left) && LLVMs.isString(right);
+                if (isString && operator.equals("+")) {
+
+                }
+
+                final ChoiceOps op = binaryOps.getOrDefault(operator, ChoiceOps::add);
+                final String name = binaryTemps.getOrDefault(operator, "empty");
+                return builder.ops(op.apply(!isDouble), left, right, name);
+            }
         }
 
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Primary Assign
+     *
+     * @param expr xxx = xxxx;
+     * @param env  runtime env.
+     * @return return value.
+     */
     private LLVMValueRef visitorAssign(BinaryExpr expr, LLVMEnv env) {
         final IRBuilder builder = env.getIrBuilder();
         final boolean isGlobal = env.isGlobal();

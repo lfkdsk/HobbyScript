@@ -128,6 +128,15 @@ public class LLVMVisitorTest {
         Assert.assertNotNull(list1.get(0));
         LLVMValueRef var = LLVM.LLVMGetNamedGlobal(env.getModule(), "lfkdsk");
         Assert.assertEquals(123321, LLVMs.getInt(LLVM.LLVMGetInitializer(var)));
+        LLVM.LLVMDumpModule(env.getModule());
+    }
+
+    @Test
+    public void testBinaryAddDel() throws ParseException {
+        LLVMEnv env = new LLVMEnv();
+        List<?> list1 = runExpr("123.00 + 1.0000;", env);
+        LLVM.LLVMDumpModule(env.getModule());
+        LLVM.LLVMDumpValue((LLVMValueRef) list1.get(0));
     }
 
     static List<?> runExpr(String input) throws ParseException {
