@@ -1,13 +1,10 @@
 package hobbyscript.Parser;
 
 import hobbyscript.ApplicationTest.CodeDialog;
+import hobbyscript.Literal.*;
 import hobbyscript.ast.*;
 import hobbyscript.Exception.ParseException;
 import hobbyscript.Lexer.HobbyLexer;
-import hobbyscript.Literal.BoolLiteral;
-import hobbyscript.Literal.IDLiteral;
-import hobbyscript.Literal.NumberLiteral;
-import hobbyscript.Literal.StringLiteral;
 import hobbyscript.Token.HobbyToken;
 import hobbyscript.Utils.logger.Logger;
 
@@ -103,7 +100,7 @@ public class ScriptParser {
 
     BnfParser bool = BnfParser.rule().bool(BoolLiteral.class);
 
-    BnfParser Null = BnfParser.rule().Null(NumberLiteral.class);
+    BnfParser Null = BnfParser.rule().Null(NullLiteral.class);
 
     ///////////////////////////////////////////////////////////////////////////
     // primary = ( expr ) | number | id | string | bool | null

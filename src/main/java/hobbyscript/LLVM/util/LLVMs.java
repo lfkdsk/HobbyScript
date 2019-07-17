@@ -16,8 +16,12 @@ package hobbyscript.LLVM.util;
  * limitations under the License.
  */
 
+import org.bytedeco.javacpp.IntPointer;
+import org.bytedeco.javacpp.SizeTPointer;
 import org.bytedeco.llvm.LLVM.*;
 import org.bytedeco.llvm.global.LLVM;
+
+import static org.bytedeco.llvm.global.LLVM.LLVMConstantIntValueKind;
 
 public final class LLVMs {
     private LLVMs() throws IllegalAccessException {
@@ -33,7 +37,7 @@ public final class LLVMs {
     }
 
     public static LLVMValueRef constInt(long number) {
-        return LLVM.LLVMConstInt(intType(), number, 0);
+        return LLVM.LLVMConstInt(intType(), number, 1);
     }
 
     public static LLVMValueRef constDouble(double number) {
@@ -42,5 +46,33 @@ public final class LLVMs {
 
     public static LLVMValueRef constString(String value) {
         return LLVM.LLVMConstString(value, value.length(), 1);
+    }
+
+    public static LLVMValueRef constBool(boolean bool) {
+        return LLVM.LLVMConstInt(LLVM.LLVMInt1Type(), bool ? 1 : 0, 0);
+    }
+
+    public static boolean getBool(LLVMValueRef ref) {
+        return LLVM.LLVMConstIntGetSExtValue(ref) == 1;
+    }
+
+    public static double getDouble(LLVMValueRef ref) {
+        return LLVM.LLVMConstRealGetDouble(ref, new int[]{0});
+    }
+
+    public static long getInt(LLVMValueRef ref) {
+        return LLVM.LLVMConstIntGetZExtValue(ref);
+    }
+
+    public static String getString(LLVMValueRef ref, long size) {
+        return LLVM.LLVMGetAsString(ref, new SizeTPointer(size)).getString();
+    }
+
+    public static boolean isInteger(LLVMValueRef ref) {
+        return LLVM.LLVMGetIntTypeWidth(LLVM.LLVMTypeOf(ref)) == 64;
+    }
+
+    public static boolean isBool(LLVMValueRef ref) {
+        return LLVM.LLVMGetIntTypeWidth(LLVM.LLVMTypeOf(ref)) == 1;
     }
 }

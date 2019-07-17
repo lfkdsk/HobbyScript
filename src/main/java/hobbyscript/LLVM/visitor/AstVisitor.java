@@ -1,12 +1,11 @@
 package hobbyscript.LLVM.visitor;
 
 import hobbyscript.LLVM.env.LLVMEnv;
+import hobbyscript.Literal.BoolLiteral;
 import hobbyscript.Literal.IDLiteral;
 import hobbyscript.Literal.StringLiteral;
 import hobbyscript.Utils.logger.Logger;
-import hobbyscript.ast.AstLeaf;
-import hobbyscript.ast.AstList;
-import hobbyscript.ast.AstNode;
+import hobbyscript.ast.*;
 import hobbyscript.Literal.NumberLiteral;
 
 public interface AstVisitor {
@@ -27,4 +26,12 @@ public interface AstVisitor {
     Object visitorStringLiteral(StringLiteral literal, LLVMEnv env);
 
     Object visitorIDLiteral(IDLiteral literal, LLVMEnv env);
+
+    Object visitorBoolLiteral(BoolLiteral literal, LLVMEnv env);
+
+    Object visitorNegativeExpr(NegativeExpr expr, LLVMEnv env);
+
+    Object visitorNegativeBoolExpr(NegativeBoolExpr expr, LLVMEnv env);
+
+    Object visitorBinaryExpr(BinaryExpr expr, LLVMEnv env);
 }

@@ -16,9 +16,27 @@ package hobbyscript.LLVM.env;/*
  */
 
 import hobbyscript.Eval.Env.LocalEnvironment;
+import hobbyscript.LLVM.instruction.IRBuilder;
+import org.bytedeco.llvm.LLVM.LLVMModuleRef;
+import org.bytedeco.llvm.global.LLVM;
 
 public class LLVMEnv extends LocalEnvironment {
+    private static IRBuilder irBuilder = IRBuilder.of();
+    private static LLVMModuleRef module = LLVM.LLVMModuleCreateWithName("run llvm");
+
     public <T> T get(String name, Class<T> clazz) {
         return clazz.cast(get(name));
+    }
+
+    public IRBuilder getIrBuilder() {
+        return irBuilder;
+    }
+
+    public boolean isGlobal() {
+        return parentEnv == null;
+    }
+
+    public LLVMModuleRef getModule() {
+        return module;
     }
 }

@@ -19,7 +19,6 @@ import com.google.common.collect.Lists;
 import hobbyscript.Exception.ParseException;
 import hobbyscript.LLVM.env.LLVMEnv;
 import hobbyscript.LLVM.generator.LLVMVisitor;
-import hobbyscript.LLVM.test.TestLLVMVisitor;
 import hobbyscript.LLVM.util.LLVMs;
 import hobbyscript.Lexer.HobbyLexer;
 import hobbyscript.Parser.ImportParser;
@@ -38,7 +37,6 @@ import java.io.StringReader;
 import java.util.List;
 
 public class LLVMVisitorTest {
-    private TestLLVMVisitor visitor;
 
     @Before
     public void setUp() {
@@ -56,14 +54,14 @@ public class LLVMVisitorTest {
 
         LLVMValueRef number = (LLVMValueRef) list.get(0);
 
-        Assert.assertEquals(1, LLVM.LLVMConstIntGetZExtValue(number));
+        Assert.assertEquals(1, LLVM.LLVMConstIntGetSExtValue(number));
 
         List<?> list1 = runExpr("1.1;");
         Assert.assertNotNull(list1.get(0));
 
         LLVMValueRef number1 = (LLVMValueRef) list1.get(0);
 
-        Assert.assertEquals(1.1, LLVM.LLVMConstRealGetDouble(number1, new IntPointer(1)), 0.001);
+        Assert.assertEquals(1.1, LLVMs.getDouble(number1), 0.001);
     }
 
     @Test
@@ -89,6 +87,49 @@ public class LLVMVisitorTest {
         Assert.assertEquals("123321", LLVM.LLVMGetAsString(string, new SizeTPointer(6)).getString());
     }
 
+    @Test
+    public void testBoolLiteral() throws ParseException {
+        List<?> list1 = runExpr("true;");
+        Assert.assertNotNull(list1.get(0));
+
+        LLVMValueRef bool = (LLVMValueRef) list1.get(0);
+
+        Assert.assertEquals(1, LLVM.LLVMConstIntGetZExtValue(bool));
+    }
+
+    @Test
+    public void testNegativeExpr() throws ParseException {
+        List<?> list1 = runExpr("-1080;");
+        Assert.assertNotNull(list1.get(0));
+
+        LLVMValueRef expr = (LLVMValueRef) list1.get(0);
+
+        Assert.assertEquals(-1080, LLVM.LLVMConstIntGetSExtValue(expr));
+
+        List<?> list2 = runExpr("-1080.1024;");
+        LLVMValueRef expr2 = (LLVMValueRef) list2.get(0);
+        Assert.assertEquals(-1080.1024, LLVMs.getDouble(expr2), 0.0001);
+    }
+
+    @Test
+    public void testNegativeBoolExpr() throws ParseException {
+        List<?> list1 = runExpr("!true;");
+        Assert.assertNotNull(list1.get(0));
+
+        LLVMValueRef expr = (LLVMValueRef) list1.get(0);
+
+        Assert.assertEquals(0, LLVM.LLVMConstIntGetZExtValue(expr));
+    }
+
+    @Test
+    public void testBinaryExprAssign() throws ParseException {
+        LLVMEnv env = new LLVMEnv();
+        List<?> list1 = runExpr("lfkdsk = 123321;", env);
+        Assert.assertNotNull(list1.get(0));
+        LLVMValueRef var = LLVM.LLVMGetNamedGlobal(env.getModule(), "lfkdsk");
+        Assert.assertEquals(123321, LLVMs.getInt(LLVM.LLVMGetInitializer(var)));
+    }
+
     static List<?> runExpr(String input) throws ParseException {
         return runExpr(input, new LLVMEnv());
     }
@@ -96,7 +137,7 @@ public class LLVMVisitorTest {
     static List<?> runExpr(String input, LLVMEnv env) throws ParseException {
         final HobbyLexer lexer = new HobbyLexer(new StringReader(input));
         final ImportParser parser = new ImportParser();
-        final TestLLVMVisitor visitor = new TestLLVMVisitor(new LLVMVisitor());
+        final LLVMVisitor visitor = new LLVMVisitor();
         final List<Object> result = Lists.newArrayList();
 
         while (lexer.peek(0) != HobbyToken.EOF) {
