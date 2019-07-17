@@ -5,7 +5,7 @@ import hobbyscript.ast.*;
 import hobbyscript.Exception.ParseException;
 import hobbyscript.Lexer.HobbyLexer;
 import hobbyscript.Literal.BoolLiteral;
-import hobbyscript.Literal.IdLiteral;
+import hobbyscript.Literal.IDLiteral;
 import hobbyscript.Literal.NumberLiteral;
 import hobbyscript.Literal.StringLiteral;
 import hobbyscript.Token.HobbyToken;
@@ -97,7 +97,7 @@ public class ScriptParser {
 
     BnfParser number = BnfParser.rule().number(NumberLiteral.class);
 
-    BnfParser id = BnfParser.rule().identifier(IdLiteral.class, reserved);
+    BnfParser id = BnfParser.rule().identifier(IDLiteral.class, reserved);
 
     BnfParser string = BnfParser.rule().string(StringLiteral.class);
 

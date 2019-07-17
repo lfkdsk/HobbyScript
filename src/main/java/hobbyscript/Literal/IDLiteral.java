@@ -12,8 +12,8 @@ import hobbyscript.Token.HobbyToken;
  * @author liufengkai
  *         Created by liufengkai on 16/7/11.
  */
-public class IdLiteral extends AstLeaf {
-    public IdLiteral(HobbyToken token) {
+public class IDLiteral extends AstLeaf {
+    public IDLiteral(HobbyToken token) {
         super(token);
     }
 

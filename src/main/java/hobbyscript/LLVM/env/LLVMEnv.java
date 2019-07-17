@@ -1,5 +1,4 @@
-package hobbyscript.LLVM.util;
-/*
+package hobbyscript.LLVM.env;/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -16,31 +15,8 @@ package hobbyscript.LLVM.util;
  * limitations under the License.
  */
 
-import org.bytedeco.llvm.LLVM.*;
-import org.bytedeco.llvm.global.LLVM;
+import hobbyscript.Eval.Env.LocalEnvironment;
 
-public final class LLVMs {
-    private LLVMs() throws IllegalAccessException {
-        throw new IllegalAccessException("illegal constructor");
-    }
+public final class LLVMEnv extends LocalEnvironment {
 
-    public static LLVMTypeRef intType() {
-        return LLVM.LLVMInt64Type();
-    }
-
-    public static LLVMTypeRef doubleType() {
-        return LLVM.LLVMDoubleType();
-    }
-
-    public static LLVMValueRef constInt(long number) {
-        return LLVM.LLVMConstInt(intType(), number, 0);
-    }
-
-    public static LLVMValueRef constDouble(double number) {
-        return LLVM.LLVMConstReal(doubleType(), number);
-    }
-
-    public static LLVMValueRef constString(String value) {
-        return LLVM.LLVMConstString(value, value.length(), 1);
-    }
 }

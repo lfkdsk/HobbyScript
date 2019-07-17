@@ -58,7 +58,7 @@ public class ScriptEval {
      * @param literal id
      * @return id-value
      */
-    public static Object IdEval(Environment env, IdLiteral literal) {
+    public static Object IdEval(Environment env, IDLiteral literal) {
         Object value = env.get(literal.name());
 
         if (value == null) {
@@ -82,7 +82,7 @@ public class ScriptEval {
         Object value = expr.operand().eval(env);
 
         if (isNum(value)) {
-            return -(Integer) value;
+            return -(Long) value;
         } else if (isFloat(value)) {
             return -(Double) value;
         }
@@ -149,7 +149,7 @@ public class ScriptEval {
                 value = ((ReturnStmt) value).getResult();
             }
             // 重设值
-            env.put(((IdLiteral) node).name(), value);
+            env.put(((IDLiteral) node).name(), value);
             return value;
         } else {
             throw new HobbyException("bad assign ", expr);

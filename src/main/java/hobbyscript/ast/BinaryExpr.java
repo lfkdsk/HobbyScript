@@ -4,7 +4,7 @@ import hobbyscript.Compile.CodeLine;
 import hobbyscript.Compile.Temp;
 import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Eval.ScriptEval;
-import hobbyscript.Literal.IdLiteral;
+import hobbyscript.Literal.IDLiteral;
 import hobbyscript.Parser.ScriptParser;
 import hobbyscript.Token.HobbyToken;
 
@@ -41,7 +41,7 @@ public class BinaryExpr extends AstList {
         String rightCom = right().compile(line, th, nx);
 
         if (ScriptParser.ASSIGN_TOKEN.equals(op)) {
-            if (left() instanceof IdLiteral) {
+            if (left() instanceof IDLiteral) {
                 methodForTemp(line, leftCom, rightCom);
             }
         } else {

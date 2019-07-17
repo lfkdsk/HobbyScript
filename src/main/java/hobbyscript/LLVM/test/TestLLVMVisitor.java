@@ -4,10 +4,12 @@ import hobbyscript.ApplicationTest.CodeDialog;
 import hobbyscript.Eval.Env.BasicEnvironment;
 import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Exception.ParseException;
+import hobbyscript.LLVM.env.LLVMEnv;
 import hobbyscript.LLVM.generator.LLVMVisitor;
 import hobbyscript.LLVM.visitor.AstVisitor;
 import hobbyscript.Lexer.HobbyLexer;
 import hobbyscript.Literal.NumberLiteral;
+import hobbyscript.Literal.StringLiteral;
 import hobbyscript.Parser.ImportParser;
 import hobbyscript.Token.HobbyToken;
 import hobbyscript.Utils.logger.Logger;
@@ -28,37 +30,43 @@ public class TestLLVMVisitor implements AstVisitor {
     }
 
     @Override
-    public Object visitorAstNode(AstNode node) {
-        Object result = wrapper.visitorAstNode(node);
+    public Object visitorAstNode(AstNode node, LLVMEnv env) {
+        Object result = wrapper.visitorAstNode(node, env);
         System.out.println(result);
         return result;
     }
 
     @Override
-    public Object visitorAstList(AstList list) {
-        Object result = wrapper.visitorAstList(list);
+    public Object visitorAstList(AstList list, LLVMEnv env) {
+        Object result = wrapper.visitorAstList(list, env);
         System.out.println(result);
         return result;
     }
 
     @Override
-    public Object visitorAstLeaf(AstLeaf leaf) {
-        Object result = wrapper.visitorAstLeaf(leaf);
+    public Object visitorAstLeaf(AstLeaf leaf, LLVMEnv env) {
+        Object result = wrapper.visitorAstLeaf(leaf, env);
         System.out.println(result);
         return result;
     }
 
     @Override
-    public Object visitorNumberLiteral(NumberLiteral literal) {
+    public Object visitorNumberLiteral(NumberLiteral literal, LLVMEnv env) {
         Logger.d(literal.toJson());
-        return wrapper.visitorNumberLiteral(literal);
+        return wrapper.visitorNumberLiteral(literal, env);
+    }
+
+    @Override
+    public Object visitorStringLiteral(StringLiteral literal, LLVMEnv env) {
+        Logger.d(literal.toJson());
+        return wrapper.visitorStringLiteral(literal, env);
     }
 
 
     public static void main(String[] args) throws IOException, ParseException {
         HobbyLexer lexer = new HobbyLexer(new FileReader("test/"));
         ImportParser parser = new ImportParser();
-        Environment env = new BasicEnvironment();
+        LLVMEnv env = new LLVMEnv();
         TestLLVMVisitor visitor = new TestLLVMVisitor(new LLVMVisitor());
 
         while (lexer.peek(0) != HobbyToken.EOF) {
@@ -67,7 +75,7 @@ public class TestLLVMVisitor implements AstVisitor {
                 continue;
             }
 
-            node.accept(visitor);
+            node.accept(visitor, env);
         }
     }
 }

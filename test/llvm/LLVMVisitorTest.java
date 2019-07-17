@@ -16,19 +16,17 @@ package llvm;/*
  */
 
 import com.google.common.collect.Lists;
-import hobbyscript.Eval.Env.BasicEnvironment;
-import hobbyscript.Eval.Env.Environment;
 import hobbyscript.Exception.ParseException;
+import hobbyscript.LLVM.env.LLVMEnv;
 import hobbyscript.LLVM.generator.LLVMVisitor;
 import hobbyscript.LLVM.test.TestLLVMVisitor;
-import hobbyscript.LLVM.util.LLVMs;
 import hobbyscript.Lexer.HobbyLexer;
 import hobbyscript.Parser.ImportParser;
 import hobbyscript.Token.HobbyToken;
-import hobbyscript.Utils.logger.Logger;
 import hobbyscript.ast.AstNode;
 import hobbyscript.ast.NullStmt;
 import org.bytedeco.javacpp.IntPointer;
+import org.bytedeco.javacpp.SizeTPointer;
 import org.bytedeco.llvm.LLVM.LLVMValueRef;
 import org.bytedeco.llvm.global.LLVM;
 import org.junit.Assert;
@@ -48,30 +46,41 @@ public class LLVMVisitorTest {
 
     @Test
     public void testNumberLiteral() throws ParseException {
-//        List<?> list = runExpr("1;");
-//        Assert.assertNotNull(list.get(0));
-//
-//        LLVMValueRef number = (LLVMValueRef) list.get(0);
-//
-//        Assert.assertEquals(1, LLVM.LLVMConstIntGetZExtValue(number));
-
-//        List<?> list1 = runExpr("1.1;");
-//        Assert.assertNotNull(list1.get(0));
-//
-//        LLVMValueRef number1 = (LLVMValueRef) list1.get(0);
-//
-//        Assert.assertEquals(1.1, LLVM.LLVMConstRealGetDouble(number1, new IntPointer()), 0.001);
-
         LLVMValueRef value = LLVM.LLVMConstReal(LLVM.LLVMDoubleType(), 10);
         double d = LLVM.LLVMConstRealGetDouble(value, new IntPointer(1));
-        Assert.assertEquals(10, 10, 0.0001);
+        Assert.assertEquals(10, d, 0.0001);
+
+        List<?> list = runExpr("1;");
+        Assert.assertNotNull(list.get(0));
+
+        LLVMValueRef number = (LLVMValueRef) list.get(0);
+
+        Assert.assertEquals(1, LLVM.LLVMConstIntGetZExtValue(number));
+
+        List<?> list1 = runExpr("1.1;");
+        Assert.assertNotNull(list1.get(0));
+
+        LLVMValueRef number1 = (LLVMValueRef) list1.get(0);
+
+        Assert.assertEquals(1.1, LLVM.LLVMConstRealGetDouble(number1, new IntPointer(1)), 0.001);
+    }
+
+    @Test
+    public void testStringLiteral() throws ParseException {
+        List<?> list1 = runExpr("\"Test String \\\" .\";");
+        Assert.assertNotNull(list1.get(0));
+
+        LLVMValueRef string = (LLVMValueRef) list1.get(0);
+
+        final String expect = "Test String \" .";
+        Assert.assertEquals(expect, LLVM.LLVMGetAsString(string, new SizeTPointer(expect.length())).getString());
     }
 
     static List<?> runExpr(String input) throws ParseException {
         final HobbyLexer lexer = new HobbyLexer(new StringReader(input));
         final ImportParser parser = new ImportParser();
         final TestLLVMVisitor visitor = new TestLLVMVisitor(new LLVMVisitor());
-
+        final LLVMEnv env = new LLVMEnv();
         final List<Object> result = Lists.newArrayList();
 
         while (lexer.peek(0) != HobbyToken.EOF) {
@@ -80,7 +89,7 @@ public class LLVMVisitorTest {
                 continue;
             }
 
-            Object value = node.accept(visitor);
+            Object value = node.accept(visitor, env);
             result.add(value);
         }
 

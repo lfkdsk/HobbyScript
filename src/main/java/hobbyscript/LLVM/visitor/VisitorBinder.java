@@ -1,5 +1,6 @@
 package hobbyscript.LLVM.visitor;
 
+import hobbyscript.LLVM.env.LLVMEnv;
 import hobbyscript.ast.AstLeaf;
 import hobbyscript.ast.AstList;
 import hobbyscript.ast.AstNode;
@@ -14,7 +15,7 @@ public interface VisitorBinder {
             return null;
         } else {
             try {
-                return visitor.getClass().getDeclaredMethod("visitor" + type.getSimpleName(), type);
+                return visitor.getClass().getDeclaredMethod("visitor" + type.getSimpleName(), type, LLVMEnv.class);
             } catch (NoSuchMethodException e) {
                 return findVisitorMethod(visitor, type.getSuperclass());
             }
@@ -22,22 +23,22 @@ public interface VisitorBinder {
     }
 
     @SuppressWarnings("unchecked")
-    default <T, E extends AstVisitor> T accept(E visitor) {
+    default <T, E extends AstVisitor> T accept(E visitor, LLVMEnv env) {
         Method method = findVisitorMethod(visitor, getClass());
         if (method != null) {
             try {
-                return (T) method.invoke(visitor, this);
+                return (T) method.invoke(visitor, this, env);
             } catch (IllegalAccessException | InvocationTargetException e) {
                 throw new UnsupportedOperationException(e);
             }
         }
 
         if (this instanceof AstNode) {
-            return (T) visitor.visitorAstNode((AstNode) this);
+            return (T) visitor.visitorAstNode((AstNode) this, env);
         } else if (this instanceof AstLeaf) {
-            return (T) visitor.visitorAstLeaf((AstLeaf) this);
+            return (T) visitor.visitorAstLeaf((AstLeaf) this, env);
         } else if (this instanceof AstList) {
-            return (T) visitor.visitorAstList((AstList) this);
+            return (T) visitor.visitorAstList((AstList) this, env);
         }
 
         throw new UnsupportedOperationException("cannot find method : " + "visit" + getClass().getSimpleName());
