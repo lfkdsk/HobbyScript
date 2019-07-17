@@ -27,6 +27,7 @@ import hobbyscript.ast.AstNode;
 import hobbyscript.ast.NullStmt;
 import org.bytedeco.javacpp.IntPointer;
 import org.bytedeco.javacpp.SizeTPointer;
+import org.bytedeco.llvm.LLVM.LLVMTypeRef;
 import org.bytedeco.llvm.LLVM.LLVMValueRef;
 import org.bytedeco.llvm.global.LLVM;
 import org.junit.Assert;
@@ -77,14 +78,18 @@ public class LLVMVisitorTest {
 
     @Test
     public void testIDLiteral() throws ParseException {
-        List<?> list1 = runExpr("lfkdsk;", new LLVMEnv() {{
+        LLVMEnv env = new LLVMEnv() {{
             put("lfkdsk", LLVMs.constString("123321"));
-        }});
+        }};
+        List<?> list1 = runExpr("lfkdsk;", env);
 
         Assert.assertNotNull(list1.get(0));
         LLVMValueRef string = (LLVMValueRef) list1.get(0);
 
         Assert.assertEquals("123321", LLVM.LLVMGetAsString(string, new SizeTPointer(6)).getString());
+
+        LLVMTypeRef type = LLVMs.stringType();
+        LLVM.LLVMDumpModule(env.getModule());
     }
 
     @Test

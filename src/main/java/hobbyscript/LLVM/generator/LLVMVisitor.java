@@ -46,7 +46,7 @@ public class LLVMVisitor implements AstVisitor {
 
     @Override
     public LLVMValueRef visitorStringLiteral(StringLiteral literal, LLVMEnv env) {
-        return LLVMs.constString(literal.value());
+        return LLVMs.createString(literal.value());
     }
 
     @Override
