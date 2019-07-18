@@ -20,7 +20,12 @@ import org.bytedeco.javacpp.*;
 import org.bytedeco.llvm.LLVM.*;
 import org.bytedeco.llvm.global.LLVM;
 
-import static org.bytedeco.llvm.global.LLVM.LLVMDoubleTypeKind;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static org.bytedeco.llvm.global.LLVM.*;
 
 public final class LLVMs {
     private LLVMs() throws IllegalAccessException {
@@ -44,7 +49,7 @@ public final class LLVMs {
                     structure,
                     new PointerPointer<>(
                             LLVM.LLVMInt32Type(),
-                            LLVM.LLVMPointerType(LLVM.LLVMInt8Type(), 0)
+                            LLVM.LLVMPointerType(LLVMInt8Type(), 0)
                     ),
                     2,
                     0
@@ -69,11 +74,24 @@ public final class LLVMs {
     }
 
     public static LLVMValueRef createString(String value) {
-        return LLVM.LLVMConstNamedStruct(stringType(), new PointerPointer<>(
-                        LLVM.LLVMConstInt(intType(), value.length(), 1),
-                        Char
-                ),
-                2);
+//        return LLVM.LLVMConstNamedStruct(stringType(), new PointerPointer<>(
+//                        LLVM.LLVMConstInt(intType(), value.length(), 1),
+//                        new PointerPointer<>(value)
+//                ),
+//                2);
+
+        final List<LLVMValueRef> refs = value.chars()
+                .mapToObj(int8 -> LLVM.LLVMConstInt(LLVM.LLVMInt8Type(), int8, 0))
+                .collect(Collectors.toList());
+
+        return LLVM.LLVMConstStruct(new PointerPointer<>(
+                        LLVM.LLVMConstInt(LLVM.LLVMInt32Type(), value.length(), 1),
+                        LLVM.LLVMConstArray(LLVMInt8Type(), new PointerPointer<>(refs.toArray(new LLVMValueRef[]{})), value.length())),
+                2,
+                0
+        );
+
+//        return LLVM.LLVMConstArray(LLVMInt8Type(), new PointerPointer<>(refs.toArray(new LLVMValueRef[]{})), value.length());
     }
 
     public static LLVMValueRef constBool(boolean bool) {
