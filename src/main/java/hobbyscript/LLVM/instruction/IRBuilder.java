@@ -34,4 +34,7 @@ public final class IRBuilder {
         return op.apply(builderRef, lhs, rhs, name);
     }
 
+    public LLVMBuilderRef getBuilderRef() {
+        return builderRef;
+    }
 }

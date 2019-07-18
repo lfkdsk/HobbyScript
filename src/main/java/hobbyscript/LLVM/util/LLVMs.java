@@ -16,14 +16,13 @@ package hobbyscript.LLVM.util;
  * limitations under the License.
  */
 
+import hobbyscript.LLVM.env.LLVMEnv;
 import org.bytedeco.javacpp.*;
 import org.bytedeco.llvm.LLVM.*;
 import org.bytedeco.llvm.global.LLVM;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.bytedeco.llvm.global.LLVM.*;
 
@@ -73,12 +72,40 @@ public final class LLVMs {
         return LLVM.LLVMConstString(value, value.length(), 1);
     }
 
-    public static LLVMValueRef createString(String value) {
+    public static LLVMValueRef createString(String value, LLVMEnv env) {
 //        return LLVM.LLVMConstNamedStruct(stringType(), new PointerPointer<>(
 //                        LLVM.LLVMConstInt(intType(), value.length(), 1),
 //                        new PointerPointer<>(value)
 //                ),
 //                2);
+
+        LLVMTypeRef arrayType = LLVM.LLVMArrayType(LLVM.LLVMInt8Type(), value.length());
+        LLVMValueRef globalVar = LLVM.LLVMAddGlobal(
+                env.getModule(),
+                arrayType,
+                ".str"
+        );
+
+        // set alignment.
+        LLVM.LLVMSetAlignment(globalVar, 1);
+
+        // get string.
+        LLVMValueRef constArrayStr = LLVM.LLVMConstString(value, value.length(), 1);
+
+        // set global value.
+        LLVM.LLVMSetInitializer(globalVar, constArrayStr);
+
+        LLVMValueRef[] constInt8PtrIndices = {
+                LLVM.LLVMConstInt(LLVM.LLVMInt64Type(), 0, 0),
+                LLVM.LLVMConstInt(LLVM.LLVMInt64Type(), 0, 0),
+        };
+
+//        return LLVM.LLVMBuildGEP2(
+//                env.getIrBuilder().getBuilderRef(),
+//                arrayType,
+//                globalVar,
+//                new PointerPointer<>(constInt8PtrIndices), 2, "str_point"
+//        );
 
         final List<LLVMValueRef> refs = value.chars()
                 .mapToObj(int8 -> LLVM.LLVMConstInt(LLVM.LLVMInt8Type(), int8, 0))

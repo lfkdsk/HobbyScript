@@ -67,13 +67,16 @@ public class LLVMVisitorTest {
 
     @Test
     public void testStringLiteral() throws ParseException {
-        List<?> list1 = runExpr("\"Test String \\\" .\";");
+        LLVMEnv env = new LLVMEnv();
+        List<?> list1 = runExpr("\"Test String \\\" .\";", env);
         Assert.assertNotNull(list1.get(0));
 
         LLVMValueRef string = (LLVMValueRef) list1.get(0);
 
         final String expect = "Test String \" .";
 //        Assert.assertEquals(expect, LLVM.LLVMGetAsString(string, new SizeTPointer(expect.length())).getString());
+        LLVM.LLVMDumpValue(string);
+        LLVM.LLVMDumpModule(env.getModule());
     }
 
     @Test
