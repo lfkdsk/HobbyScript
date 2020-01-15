@@ -34,10 +34,7 @@ message(STATUS ${SOURCE_FILES})
 #add_library(source ${SOURCE_FILES})
 #target_include_directories(source PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-add_executable(llvm-runner main.cpp ${SOURCE_FILES})
-# Find the libraries that correspond to the LLVM components
-# that we wish to use
-llvm_map_components_to_libnames(llvm_libs support core irreader)
+add_executable(llvm-runner HobbyScript.cpp ${SOURCE_FILES})
 
 # target link lib
-TARGET_LINK_LIBRARIES(llvm-runner ${llvm_libs} gtest_main)
+TARGET_LINK_LIBRARIES(llvm-runner ${LLVM_AVAILABLE_LIBS} gtest_main)

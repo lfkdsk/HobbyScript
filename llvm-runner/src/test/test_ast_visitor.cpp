@@ -197,9 +197,7 @@ TEST (AST, FunctionDefTest1) {
     auto name = std::static_pointer_cast<ast_leaf>(func_stmt->name());
     CHECK_NON_NULL(name);
     ASSERT_EQ("fuckTest", name->
-
             get_text()
-
     );
 
     auto params_list = func_stmt->params_list();

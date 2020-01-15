@@ -18,4 +18,6 @@
 #include "ast/stmt/FuncStmt.h"
 #include "ast/stmt/DefBlockStmt.h"
 
+#include "ast/program/ast_program.h"
+
 #endif //LLVM_RUNNER_ASTNODES_H
