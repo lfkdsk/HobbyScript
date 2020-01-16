@@ -1,0 +1,1 @@
+bison -ohobby.tab.cpp hobby.yy && flex -ohobby.yy.cpp hobby.lex

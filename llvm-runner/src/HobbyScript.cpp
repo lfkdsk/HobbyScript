@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <rapidjson/document.h>
-#include "visitor/AstVisitor.h"
 #include "spdlog/sinks/stdout_sinks.h"
 #include "gen/generator_context.h"
 #include "gtest/gtest.h"
