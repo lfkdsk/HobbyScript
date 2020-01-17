@@ -5,7 +5,11 @@
 #define YYDEBUG 1
 #define YY_NO_UNISTD_H
 
-extern "C" int yylex();
+extern "C" {
+int yylex(void);
+int yyparse(void);
+}
+
 void yyerror( const char* error );
 
 %}

@@ -1,8 +1,12 @@
 #include "hobby.tab.hpp"
 
-extern "C" int yylex();
+extern "C" {
+int yylex(void);
+int yyparse(void);
+void yyerror(const char *error);
+}
 
 int main(int argc, char **argv) {
-    yylex();
+    yyparse();
     return 0;
 }

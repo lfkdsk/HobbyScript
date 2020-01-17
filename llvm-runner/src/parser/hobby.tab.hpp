@@ -173,7 +173,7 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 14 "hobby.yy"
+#line 18 "hobby.yy"
 {
 	AstType		*tp;
 	AstNode		*expr;
