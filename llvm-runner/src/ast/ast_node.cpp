@@ -4,6 +4,10 @@
 
 #include "ast_node.h"
 
-AstNode::AstNode(const std::string &n) {
+#include <utility>
 
+extern int yylineno;
+
+AstNode::AstNode(std::string n) : name(std::move(n)) {
+    line_num = yylineno;
 }

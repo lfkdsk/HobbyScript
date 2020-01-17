@@ -6,14 +6,17 @@
 #define LLVM_RUNNER_AST_NODE_H
 
 #include <string>
+#include "ast_context.h"
+#include "gen/code_gen.h"
 
 class AstNode {
 public:
-    AstNode(const std::string &n = std::string());
+    AstNode(std::string n = std::string());
+
     virtual ~AstNode() {}
 public:
     std::string name;
-
+    int line_num;
 };
 
 class AstType {
