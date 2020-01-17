@@ -5,9 +5,15 @@
 #ifndef LLVM_RUNNER_AST_NODE_H
 #define LLVM_RUNNER_AST_NODE_H
 
+#include <string>
+
 class AstNode {
 public:
-    AstNode();
+    AstNode(const std::string &n = std::string());
+    virtual ~AstNode() {}
+public:
+    std::string name;
+
 };
 
 class AstType {

@@ -46,6 +46,13 @@ git_clone(
 )
 include_directories(${rapidjson_SOURCE_DIR}/include)
 
+git_clone(
+        PROJECT_NAME imgui
+        GIT_URL https://github.com/ocornut/imgui
+        GIT_TAG v1.74
+)
+
+
 # include src
 include_directories(includes)
 add_subdirectory(includes)

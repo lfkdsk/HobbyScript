@@ -3,3 +3,7 @@
 //
 
 #include "ast_node.h"
+
+AstNode::AstNode(const std::string &n) {
+
+}
