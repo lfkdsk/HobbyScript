@@ -10,8 +10,8 @@ add_executable(
 target_link_libraries(
         unit_tests
         gtest_main
-        ${llvm_libs}
-        source
+        ${LLVM_AVAILABLE_LIBS}
+        Qt5::Core
 )
 
 target_include_directories(unit_tests PUBLIC ${llvm_libs})

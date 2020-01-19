@@ -21,8 +21,7 @@ SET(SOURCE_FILES
         ${GEN_SOURCE}
         ${VISITOR_SOURCE}
         ${UTILS_SOURCE}
-        ${MAIN_SOURCE}
-        ${TEST_SOURCE})
+        ${MAIN_SOURCE})
 
 message(STATUS ${SOURCE_FILES})
 

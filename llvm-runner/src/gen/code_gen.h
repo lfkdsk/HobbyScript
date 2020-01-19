@@ -29,7 +29,7 @@ public:
     llvm::Value *load(llvm::IRBuilder<> &builder, llvm::Value *v);
 
 protected:
-    virtual llvm::Value *gen(const Generator &generator);
+    virtual llvm::Value *gen(const Generator &generator) = 0;
 };
 
 

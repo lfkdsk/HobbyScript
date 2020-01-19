@@ -39,30 +39,6 @@ public:
     }
 };
 
-class Expression {
-public:
-    virtual std::string name() = 0;
-};
-
-template <typename T> class Constant;
-class Variable;
-
-template <typename T>
-class Constant : public Expression, public VisitableImpl<Constant<T>, Constant<T>, Variable> {
-public:
-    virtual std::string name() {
-        return "Constant";
-    }
-};
-
-
-class Variable : public Expression, public VisitableImpl<Variable, Constant<double>, Variable> {
-public:
-    virtual std::string name() {
-        return "Variable";
-    }
-};
-
 template <typename ... TList>
 class GenericVisitor;
 

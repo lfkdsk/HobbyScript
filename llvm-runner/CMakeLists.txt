@@ -57,5 +57,6 @@ git_clone(
 include_directories(includes)
 add_subdirectory(includes)
 add_subdirectory(src)
-#enable_testing()
-#add_subdirectory(tests)
+
+enable_testing()
+add_subdirectory(tests)

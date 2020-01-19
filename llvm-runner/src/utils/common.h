@@ -9,7 +9,6 @@
 #include <utility>
 #include <llvm/IR/Value.h>
 #include <llvm/Support/TargetSelect.h>
-#include <llvm/Support/Signals.h>
 #include <llvm/ExecutionEngine/JITEventListener.h>
 #include <llvm/IR/AssemblyAnnotationWriter.h>
 #include <llvm/Support/FormattedStream.h>
