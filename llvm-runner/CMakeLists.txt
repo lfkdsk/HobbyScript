@@ -40,23 +40,23 @@ fetch_googletest(
 
 include(cmake/GitUtils.cmake)
 
-git_clone(
-        PROJECT_NAME rapidjson
-        GIT_URL https://github.com/Tencent/rapidjson
-        GIT_TAG v1.1.0
-)
-include_directories(${rapidjson_SOURCE_DIR}/include)
+#git_clone(
+#        PROJECT_NAME rapidjson
+#        GIT_URL https://github.com/Tencent/rapidjson
+#        GIT_TAG v1.1.0
+#)
+#include_directories(${rapidjson_SOURCE_DIR}/include)
 
-git_clone(
-        PROJECT_NAME imgui
-        GIT_URL https://github.com/ocornut/imgui
-        GIT_TAG v1.74
-)
+#git_clone(
+#        PROJECT_NAME imgui
+#        GIT_URL https://github.com/ocornut/imgui
+#        GIT_TAG v1.74
+#)
 
 # include src
 include_directories(includes)
 add_subdirectory(includes)
 add_subdirectory(src)
 
-enable_testing()
 add_subdirectory(tests)
+enable_testing()

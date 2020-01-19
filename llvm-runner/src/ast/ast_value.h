@@ -7,7 +7,7 @@
 
 #include "ast_node.h"
 
-class AstValue : public AstNode {
+class AstValue : public AstNode, public AST_BASE(AstValue) {
 
 };
 

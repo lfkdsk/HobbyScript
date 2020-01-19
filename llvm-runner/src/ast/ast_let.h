@@ -8,7 +8,7 @@
 
 #include "ast_node.h"
 
-class AstLet : public AstNode {
+class AstLet : public AstNode, public AST_BASE(AstLet) {
 
 };
 

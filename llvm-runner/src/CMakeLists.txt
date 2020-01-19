@@ -13,22 +13,24 @@ ADD_SUBDIRECTORY(gen)
 ADD_SUBDIRECTORY(utils)
 ADD_SUBDIRECTORY(visitor)
 
-AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR} MAIN_SOURCE)
-
 SET(SOURCE_FILES
         ${LEX_SOURCE}
         ${AST_SOURCE}
         ${GEN_SOURCE}
         ${VISITOR_SOURCE}
-        ${UTILS_SOURCE}
-        ${MAIN_SOURCE})
+        ${UTILS_SOURCE})
 
-message(STATUS ${SOURCE_FILES})
+MESSAGE(STATUS ${SOURCE_FILES})
 
 #add_library(source ${SOURCE_FILES})
 #target_include_directories(source PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-add_executable(llvm-runner HobbyScript.cpp ${SOURCE_FILES})
+ADD_LIBRARY(HobbyLib STATIC ${SOURCE_FILES})
+
+ADD_EXECUTABLE(llvm-runner HobbyScript.cpp ${SOURCE_FILES})
+
+TARGET_LINK_LIBRARIES(HobbyLib Qt5::Core)
 
 # target link lib
 TARGET_LINK_LIBRARIES(llvm-runner ${LLVM_AVAILABLE_LIBS} Qt5::Core gtest_main)
+

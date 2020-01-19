@@ -5,7 +5,6 @@
 #ifndef LLVM_RUNNER_CODE_GEN_VISITOR_H
 #define LLVM_RUNNER_CODE_GEN_VISITOR_H
 
-
 class CodeGenVisitor {
 
 };

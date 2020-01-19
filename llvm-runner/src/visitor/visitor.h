@@ -8,68 +8,68 @@
 #include <iostream>
 #include <utility>
 
-template <typename ... Types>
+template<typename ... Types>
 class Visitor;
 
-template <typename T>
+template<typename T>
 class Visitor<T> {
 public:
-    virtual void visit(T & visitable) = 0;
+    virtual void visit(T &visitable) = 0;
 };
 
-template <typename T, typename ... TList>
+template<typename T, typename ... TList>
 class Visitor<T, TList ...> : public Visitor<TList ...> {
 public:
     using Visitor<TList ...>::visit;
 
-    virtual void visit(T & visitable) = 0;
+    virtual void visit(T &visitable) = 0;
 };
 
-template <typename ... TList>
+template<typename ... TList>
 class Visitable {
 public:
-    virtual void accept(Visitor<TList ...> & visitor) = 0;
+    virtual void accept(Visitor<TList ...> &visitor) = 0;
 };
 
-template <typename Derived, typename ... TList>
+template<typename Derived, typename ... TList>
 class VisitableImpl : public Visitable<TList ...> {
 public:
-    virtual void accept(Visitor<TList ...> & visitor) {
+    virtual void accept(Visitor<TList ...> &visitor) {
         visitor.visit(static_cast<Derived &>(*this));
     }
 };
 
-template <typename ... TList>
+template<typename ... TList>
 class GenericVisitor;
 
-template <typename U, typename T>
+template<typename U, typename T>
 class GenericVisitor<U, T> {
 protected:
     U u;
 
 public:
-    template <typename ... ParamList>
-    GenericVisitor(ParamList && ... plist)
-            : u(std::forward<ParamList>(plist) ...) { }
+    template<typename ... ParamList>
+    GenericVisitor(ParamList &&... plist)
+            : u(std::forward<ParamList>(plist) ...) {}
 
-    virtual void visit(T & t) {
+    virtual void visit(T &t) {
         u.visit(t);
     }
 };
 
-template <typename U, typename T, typename ... TList>
+template<typename U, typename T, typename ... TList>
 class GenericVisitor<U, T, TList ...> : public GenericVisitor<U, TList ...> {
 public:
-    template <typename ... ParamList>
-    GenericVisitor(ParamList && ... plist)
+    template<typename ... ParamList>
+    GenericVisitor(ParamList &&... plist)
             : GenericVisitor<U, TList ...>(
             std::forward<ParamList>(plist) ...
-    ) { }
+    ) {}
 
     using GenericVisitor<U, TList ...>::visit;
     using GenericVisitor<U, TList ...>::u;
 
-    virtual void visit(T & t) {
+    virtual void visit(T &t) {
         u.visit(t);
     }
 };
