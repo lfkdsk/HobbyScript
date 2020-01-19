@@ -14,5 +14,8 @@
 #include <llvm/IR/AssemblyAnnotationWriter.h>
 #include <llvm/Support/FormattedStream.h>
 #include <llvm/Support/SourceMgr.h>
+#include <llvm/IR/IRBuilder.h>
+
+using RuntimeError = std::runtime_error;
 
 #endif //LLVM_RUNNER_COMMON_H

@@ -7,5 +7,6 @@
 
 #include "ast_node.h"
 #include "ast_let.h"
+#include "ast_value.h"
 
 #endif //LLVM_RUNNER_ASTNODES_H
