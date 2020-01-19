@@ -206,7 +206,11 @@
 #define YYDEBUG 1
 #define YY_NO_UNISTD_H
 
-extern "C" int yylex();
+extern "C" {
+int yylex(void);
+int yyparse(void);
+}
+
 void yyerror( const char* error );
 
 
@@ -231,7 +235,7 @@ void yyerror( const char* error );
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 14 "hobby.yy"
+#line 18 "hobby.yy"
 {
 	AstType		*tp;
 	AstNode		*expr;
@@ -239,7 +243,7 @@ typedef union YYSTYPE
 	int			type;
 }
 /* Line 193 of yacc.c.  */
-#line 243 "hobby.tab.cpp"
+#line 247 "hobby.tab.cpp"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -252,7 +256,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 256 "hobby.tab.cpp"
+#line 260 "hobby.tab.cpp"
 
 #ifdef short
 # undef short
@@ -648,33 +652,33 @@ static const yytype_int16 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    55,    55,    62,    63,    67,    68,    78,    80,    81,
-      85,    86,    90,    91,    95,    96,    97,   101,   102,   106,
-     107,   111,   112,   116,   117,   118,   119,   120,   121,   122,
-     123,   124,   125,   126,   127,   128,   129,   130,   131,   132,
-     133,   134,   138,   141,   145,   146,   151,   152,   153,   157,
-     158,   164,   168,   169,   173,   174,   181,   182,   186,   187,
-     191,   192,   196,   198,   202,   203,   207,   208,   209,   210,
-     211,   212,   213,   214,   215,   220,   225,   226,   227,   231,
-     232,   236,   241,   242,   245,   246,   253,   257,   258,   262,
-     263,   267,   275,   279,   280,   293,   294,   295,   296,   297,
-     301,   302,   303,   304,   308,   309,   310,   314,   315,   316,
-     317,   318,   322,   330,   334,   338,   339,   346,   350,   351,
-     352,   356,   357,   367,   371,   377,   385,   389,   390,   395,
-     400,   401,   402,   403,   411,   413,   415,   420,   421,   425,
-     426,   430,   431,   435,   444,   446,   451,   453,   458,   459,
-     464,   465,   466,   467,   468,   469,   470,   471,   472,   473,
-     474,   475,   476,   477,   478,   479,   480,   481,   482,   486,
-     487,   491,   492,   500,   504,   505,   509,   510,   514,   515,
-     519,   525,   526,   530,   531,   535,   536,   543,   547,   548,
-     549,   553,   557,   558,   562,   563,   571,   574,   578,   580,
-     585,   586,   587,   588,   595,   596,   597,   598,   599,   600,
-     601,   602,   603,   604,   605,   606,   607,   608,   609,   610,
-     611,   612,   613,   614,   615,   616,   617,   618,   619,   620,
-     621,   622,   623,   624,   625,   626,   627,   628,   629,   630,
-     631,   632,   633,   634,   635,   636,   637,   638,   642,   646,
-     647,   651,   652,   653,   654,   655,   664,   672,   681,   687,
-     688,   692,   693
+       0,    59,    59,    66,    67,    71,    72,    82,    84,    85,
+      89,    90,    94,    95,    99,   100,   101,   105,   106,   110,
+     111,   115,   116,   120,   121,   122,   123,   124,   125,   126,
+     127,   128,   129,   130,   131,   132,   133,   134,   135,   136,
+     137,   138,   142,   145,   149,   150,   155,   156,   157,   161,
+     162,   168,   172,   173,   177,   178,   185,   186,   190,   191,
+     195,   196,   200,   202,   206,   207,   211,   212,   213,   214,
+     215,   216,   217,   218,   219,   224,   229,   230,   231,   235,
+     236,   240,   245,   246,   249,   250,   257,   261,   262,   266,
+     267,   271,   279,   283,   284,   297,   298,   299,   300,   301,
+     305,   306,   307,   308,   312,   313,   314,   318,   319,   320,
+     321,   322,   326,   334,   338,   342,   343,   350,   354,   355,
+     356,   360,   361,   371,   375,   381,   389,   393,   394,   399,
+     404,   405,   406,   407,   415,   417,   419,   424,   425,   429,
+     430,   434,   435,   439,   448,   450,   455,   457,   462,   463,
+     468,   469,   470,   471,   472,   473,   474,   475,   476,   477,
+     478,   479,   480,   481,   482,   483,   484,   485,   486,   490,
+     491,   495,   496,   504,   508,   509,   513,   514,   518,   519,
+     523,   529,   530,   534,   535,   539,   540,   547,   551,   552,
+     553,   557,   561,   562,   566,   567,   575,   578,   582,   584,
+     589,   590,   591,   592,   599,   600,   601,   602,   603,   604,
+     605,   606,   607,   608,   609,   610,   611,   612,   613,   614,
+     615,   616,   617,   618,   619,   620,   621,   622,   623,   624,
+     625,   626,   627,   628,   629,   630,   631,   632,   633,   634,
+     635,   636,   637,   638,   639,   640,   641,   642,   646,   650,
+     651,   655,   656,   657,   658,   659,   668,   676,   684,   690,
+     691,   695,   696
 };
 #endif
 
@@ -2256,918 +2260,918 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 58 "hobby.yy"
+#line 62 "hobby.yy"
     { setPackageLines((yyvsp[(3) - (3)].expr)); ;}
     break;
 
   case 3:
-#line 62 "hobby.yy"
+#line 66 "hobby.yy"
     { (yyval.expr)=let((yyvsp[(1) - (1)].str)); ;}
     break;
 
   case 4:
-#line 63 "hobby.yy"
+#line 67 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (3)].expr), let((yyvsp[(3) - (3)].str))); ;}
     break;
 
   case 5:
-#line 67 "hobby.yy"
+#line 71 "hobby.yy"
     { (yyval.expr)=packageName((yyvsp[(2) - (2)].expr)); ;}
     break;
 
   case 6:
-#line 68 "hobby.yy"
+#line 72 "hobby.yy"
     { (yyval.expr)=nullptr; ;}
     break;
 
   case 10:
-#line 85 "hobby.yy"
+#line 89 "hobby.yy"
     { packageImport( (yyvsp[(2) - (2)].expr) ); ;}
     break;
 
   case 11:
-#line 86 "hobby.yy"
+#line 90 "hobby.yy"
     { packageImport( (yyvsp[(3) - (4)].expr) ); ;}
     break;
 
   case 12:
-#line 90 "hobby.yy"
+#line 94 "hobby.yy"
     { (yyval.expr)=let((yyvsp[(1) - (1)].str)); ;}
     break;
 
   case 13:
-#line 91 "hobby.yy"
+#line 95 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (3)].expr), let((yyvsp[(3) - (3)].str))); ;}
     break;
 
   case 14:
-#line 95 "hobby.yy"
+#line 99 "hobby.yy"
     { (yyval.expr)=importName((yyvsp[(1) - (3)].expr), "*"); ;}
     break;
 
   case 15:
-#line 96 "hobby.yy"
+#line 100 "hobby.yy"
     { (yyval.expr)=importName((yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].str)); ;}
     break;
 
   case 16:
-#line 97 "hobby.yy"
+#line 101 "hobby.yy"
     { (yyval.expr)=importName((yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].str), true); ;}
     break;
 
   case 18:
-#line 102 "hobby.yy"
+#line 106 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (2)].expr), (yyvsp[(2) - (2)].expr)); ;}
     break;
 
   case 19:
-#line 106 "hobby.yy"
+#line 110 "hobby.yy"
     { (yyval.expr)=makeEmpty(); ;}
     break;
 
   case 20:
-#line 107 "hobby.yy"
+#line 111 "hobby.yy"
     { (yyval.expr)=(yyvsp[(2) - (3)].expr); ;}
     break;
 
   case 22:
-#line 112 "hobby.yy"
+#line 116 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (2)].expr),(yyvsp[(2) - (2)].expr)); ;}
     break;
 
   case 42:
-#line 138 "hobby.yy"
+#line 142 "hobby.yy"
     { (yyval.expr)=makeConst((yyvsp[(2) - (4)].str),(yyvsp[(4) - (4)].expr)); ;}
     break;
 
   case 43:
-#line 141 "hobby.yy"
+#line 145 "hobby.yy"
     { (yyval.expr)=let((yyvsp[(1) - (3)].str),(yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 45:
-#line 146 "hobby.yy"
+#line 150 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr)); ;}
     break;
 
   case 46:
-#line 151 "hobby.yy"
+#line 155 "hobby.yy"
     { (yyval.expr)=let((yyvsp[(1) - (2)].tp), (yyvsp[(2) - (2)].str)); ;}
     break;
 
   case 47:
-#line 152 "hobby.yy"
+#line 156 "hobby.yy"
     { (yyval.expr)=let((yyvsp[(1) - (4)].tp), (yyvsp[(2) - (4)].str), (yyvsp[(4) - (4)].expr)); ;}
     break;
 
   case 48:
-#line 153 "hobby.yy"
+#line 157 "hobby.yy"
     { (yyval.expr)=let((yyvsp[(1) - (2)].tp), (yyvsp[(2) - (2)].str)); ;}
     break;
 
   case 50:
-#line 158 "hobby.yy"
+#line 162 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr)); ;}
     break;
 
   case 51:
-#line 164 "hobby.yy"
+#line 168 "hobby.yy"
     { (yyval.expr)=createEnum((yyvsp[(2) - (5)].str), (yyvsp[(4) - (5)].expr)); ;}
     break;
 
   case 53:
-#line 169 "hobby.yy"
+#line 173 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (3)].expr),(yyvsp[(3) - (3)].expr)); ;}
     break;
 
   case 54:
-#line 173 "hobby.yy"
+#line 177 "hobby.yy"
     { (yyval.expr)=let((yyvsp[(1) - (3)].str),(yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 55:
-#line 174 "hobby.yy"
+#line 178 "hobby.yy"
     { (yyval.expr)=let((yyvsp[(1) - (1)].str),nullptr); ;}
     break;
 
   case 56:
-#line 181 "hobby.yy"
+#line 185 "hobby.yy"
     { (yyval.tp)=nullptr; ;}
     break;
 
   case 57:
-#line 182 "hobby.yy"
+#line 186 "hobby.yy"
     { (yyval.tp)=(yyvsp[(2) - (2)].tp); ;}
     break;
 
   case 58:
-#line 186 "hobby.yy"
+#line 190 "hobby.yy"
     { (yyval.expr)=nullptr; ;}
     break;
 
   case 59:
-#line 187 "hobby.yy"
+#line 191 "hobby.yy"
     { (yyval.expr)=(yyvsp[(2) - (3)].expr); ;}
     break;
 
   case 60:
-#line 191 "hobby.yy"
+#line 195 "hobby.yy"
     { (yyval.expr)=createNode((yyvsp[(1) - (1)].str)); ;}
     break;
 
   case 61:
-#line 192 "hobby.yy"
+#line 196 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (3)].expr), createNode((yyvsp[(3) - (3)].str))); ;}
     break;
 
   case 62:
-#line 197 "hobby.yy"
+#line 201 "hobby.yy"
     { (yyval.expr)=makeClass((yyvsp[(1) - (5)].type),(yyvsp[(2) - (5)].str), (yyvsp[(3) - (5)].expr), (yyvsp[(4) - (5)].tp), (yyvsp[(5) - (5)].expr) ); ;}
     break;
 
   case 63:
-#line 198 "hobby.yy"
+#line 202 "hobby.yy"
     { (yyval.expr)=annotationdClass((yyvsp[(1) - (2)].expr),(yyvsp[(2) - (2)].expr)); ;}
     break;
 
   case 64:
-#line 202 "hobby.yy"
+#line 206 "hobby.yy"
     { (yyval.type)=0; ;}
     break;
 
   case 65:
-#line 203 "hobby.yy"
+#line 207 "hobby.yy"
     { (yyval.type)=1; ;}
     break;
 
   case 73:
-#line 214 "hobby.yy"
+#line 218 "hobby.yy"
     { (yyval.expr)=setProtected(); ;}
     break;
 
   case 75:
-#line 221 "hobby.yy"
+#line 225 "hobby.yy"
     { (yyval.expr)=createFunction(2, "Init", (yyvsp[(3) - (5)].expr), nullptr, (yyvsp[(5) - (5)].expr)); ;}
     break;
 
   case 76:
-#line 225 "hobby.yy"
+#line 229 "hobby.yy"
     { (yyval.expr)=nullptr; ;}
     break;
 
   case 77:
-#line 226 "hobby.yy"
+#line 230 "hobby.yy"
     { (yyval.expr)=makeEmpty(); ;}
     break;
 
   case 78:
-#line 227 "hobby.yy"
+#line 231 "hobby.yy"
     { (yyval.expr)=(yyvsp[(2) - (3)].expr); ;}
     break;
 
   case 79:
-#line 231 "hobby.yy"
+#line 235 "hobby.yy"
     { (yyval.expr)=makeCall("Init", (yyvsp[(3) - (4)].expr)); ;}
     break;
 
   case 81:
-#line 237 "hobby.yy"
+#line 241 "hobby.yy"
     { (yyval.expr)=createFunction(3, "Finalize", nullptr, nullptr, (yyvsp[(2) - (2)].expr)); ;}
     break;
 
   case 83:
-#line 242 "hobby.yy"
+#line 246 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (2)].expr), (yyvsp[(2) - (2)].expr)); ;}
     break;
 
   case 84:
-#line 245 "hobby.yy"
+#line 249 "hobby.yy"
     { (yyval.expr)=(yyvsp[(2) - (3)].expr); ;}
     break;
 
   case 86:
-#line 253 "hobby.yy"
+#line 257 "hobby.yy"
     { (yyval.tp)=createInterface((yyvsp[(2) - (5)].str), (yyvsp[(4) - (5)].expr)); ;}
     break;
 
   case 90:
-#line 263 "hobby.yy"
+#line 267 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (2)].expr), (yyvsp[(2) - (2)].expr)); ;}
     break;
 
   case 91:
-#line 268 "hobby.yy"
+#line 272 "hobby.yy"
     { (yyval.expr)=createFunction(0, (yyvsp[(2) - (6)].str), (yyvsp[(4) - (6)].expr), (yyvsp[(6) - (6)].expr), nullptr); ;}
     break;
 
   case 92:
-#line 275 "hobby.yy"
+#line 279 "hobby.yy"
     { (yyval.expr)=makeGet((yyvsp[(2) - (3)].str),(yyvsp[(3) - (3)].expr)); ;}
     break;
 
   case 93:
-#line 279 "hobby.yy"
+#line 283 "hobby.yy"
     { (yyval.expr)=makeSet((yyvsp[(2) - (7)].str), (yyvsp[(4) - (7)].tp), (yyvsp[(5) - (7)].str), (yyvsp[(7) - (7)].expr)); ;}
     break;
 
   case 94:
-#line 280 "hobby.yy"
+#line 284 "hobby.yy"
     { (yyval.expr)=makeSet((yyvsp[(2) - (3)].str), nullptr, nullptr, (yyvsp[(3) - (3)].expr)); ;}
     break;
 
   case 95:
-#line 293 "hobby.yy"
+#line 297 "hobby.yy"
     { (yyval.tp)=getClassType((yyvsp[(1) - (1)].str)); ;}
     break;
 
   case 96:
-#line 294 "hobby.yy"
+#line 298 "hobby.yy"
     { (yyval.tp)=getClassType((yyvsp[(1) - (4)].str), (yyvsp[(3) - (4)].tp)); ;}
     break;
 
   case 97:
-#line 295 "hobby.yy"
+#line 299 "hobby.yy"
     { (yyval.tp)=getType((yyvsp[(1) - (1)].type)); ;}
     break;
 
   case 98:
-#line 296 "hobby.yy"
+#line 300 "hobby.yy"
     { (yyval.tp)=makeArray((yyvsp[(1) - (3)].tp)); ;}
     break;
 
   case 99:
-#line 297 "hobby.yy"
+#line 301 "hobby.yy"
     { (yyval.tp)=nullAble((yyvsp[(1) - (2)].tp)); ;}
     break;
 
   case 100:
-#line 301 "hobby.yy"
+#line 305 "hobby.yy"
     { (yyval.tp)=getFuncType(); ;}
     break;
 
   case 101:
-#line 302 "hobby.yy"
+#line 306 "hobby.yy"
     { (yyval.tp)=getFuncType(NULL); ;}
     break;
 
   case 102:
-#line 303 "hobby.yy"
+#line 307 "hobby.yy"
     { (yyval.tp)=getFuncType((yyvsp[(3) - (4)].tp), NULL); ;}
     break;
 
   case 103:
-#line 304 "hobby.yy"
+#line 308 "hobby.yy"
     { (yyval.tp)=getFuncType((yyvsp[(3) - (6)].tp), (yyvsp[(6) - (6)].tp)); ;}
     break;
 
   case 106:
-#line 310 "hobby.yy"
+#line 314 "hobby.yy"
     { (yyval.tp)=link((yyvsp[(1) - (3)].tp), (yyvsp[(3) - (3)].tp)); ;}
     break;
 
   case 107:
-#line 314 "hobby.yy"
+#line 318 "hobby.yy"
     { (yyval.expr)=createDef((yyvsp[(1) - (1)].expr)); ;}
     break;
 
   case 108:
-#line 315 "hobby.yy"
+#line 319 "hobby.yy"
     { (yyval.expr)=appendDef((yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].str)); ;}
     break;
 
   case 109:
-#line 316 "hobby.yy"
+#line 320 "hobby.yy"
     { (yyval.expr)=appendDef((yyvsp[(1) - (5)].expr), (yyvsp[(3) - (5)].str), (yyvsp[(5) - (5)].expr)); ;}
     break;
 
   case 110:
-#line 317 "hobby.yy"
+#line 321 "hobby.yy"
     { (yyval.expr)=tupleResolve(let((yyvsp[(2) - (4)].str)), (yyvsp[(4) - (4)].expr), true); ;}
     break;
 
   case 111:
-#line 318 "hobby.yy"
+#line 322 "hobby.yy"
     { (yyval.expr)=tupleResolve((yyvsp[(3) - (6)].expr), (yyvsp[(5) - (6)].expr), true); ;}
     break;
 
   case 112:
-#line 322 "hobby.yy"
+#line 326 "hobby.yy"
     { (yyval.expr)=makeSequence( (yyvsp[(2) - (3)].expr) ); ;}
     break;
 
   case 113:
-#line 330 "hobby.yy"
+#line 334 "hobby.yy"
     { (yyval.expr)=makeTuple((yyvsp[(4) - (5)].expr), (yyvsp[(2) - (5)].expr)); ;}
     break;
 
   case 114:
-#line 334 "hobby.yy"
+#line 338 "hobby.yy"
     { (yyval.expr)=tupleResolve((yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr)); ;}
     break;
 
   case 115:
-#line 338 "hobby.yy"
+#line 342 "hobby.yy"
     { (yyval.expr)=link(let((yyvsp[(1) - (3)].str)), let((yyvsp[(3) - (3)].str))); ;}
     break;
 
   case 116:
-#line 339 "hobby.yy"
+#line 343 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (3)].expr), let((yyvsp[(3) - (3)].str))); ;}
     break;
 
   case 117:
-#line 346 "hobby.yy"
+#line 350 "hobby.yy"
     { (yyval.expr)=makeCall((yyvsp[(1) - (4)].str), (yyvsp[(3) - (4)].expr)); ;}
     break;
 
   case 118:
-#line 350 "hobby.yy"
+#line 354 "hobby.yy"
     { (yyval.expr)=nullptr; ;}
     break;
 
   case 120:
-#line 352 "hobby.yy"
+#line 356 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr)); ;}
     break;
 
   case 123:
-#line 367 "hobby.yy"
+#line 371 "hobby.yy"
     { (yyval.expr)=createNew((yyvsp[(1) - (5)].tp), (yyvsp[(2) - (5)].str), (yyvsp[(4) - (5)].expr)); ;}
     break;
 
   case 124:
-#line 371 "hobby.yy"
+#line 375 "hobby.yy"
     { (yyval.expr)=makeDelete((yyvsp[(2) - (2)].expr)); ;}
     break;
 
   case 125:
-#line 377 "hobby.yy"
+#line 381 "hobby.yy"
     { (yyval.expr)=createNewArray((yyvsp[(1) - (4)].tp), (yyvsp[(3) - (4)].expr)); ;}
     break;
 
   case 126:
-#line 385 "hobby.yy"
+#line 389 "hobby.yy"
     { (yyval.expr)=addFunctionBlock((yyvsp[(1) - (2)].expr), (yyvsp[(2) - (2)].expr)); ;}
     break;
 
   case 127:
-#line 389 "hobby.yy"
+#line 393 "hobby.yy"
     { (yyval.expr)=NULL; ;}
     break;
 
   case 129:
-#line 395 "hobby.yy"
+#line 399 "hobby.yy"
     { (yyval.expr)=let((yyvsp[(1) - (3)].tp), (yyvsp[(3) - (3)].str), nullptr, 1); ;}
     break;
 
   case 130:
-#line 400 "hobby.yy"
+#line 404 "hobby.yy"
     { (yyval.expr)=nullptr; ;}
     break;
 
   case 132:
-#line 402 "hobby.yy"
+#line 406 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr)); ;}
     break;
 
   case 134:
-#line 412 "hobby.yy"
+#line 416 "hobby.yy"
     { (yyval.expr)=createOperator((yyvsp[(2) - (7)].type), (yyvsp[(4) - (7)].expr), (yyvsp[(6) - (7)].expr), (yyvsp[(7) - (7)].expr)); ;}
     break;
 
   case 135:
-#line 414 "hobby.yy"
+#line 418 "hobby.yy"
     { (yyval.expr)=createOperator(BBRACKETS, (yyvsp[(5) - (8)].expr), (yyvsp[(7) - (8)].expr), (yyvsp[(8) - (8)].expr)); ;}
     break;
 
   case 136:
-#line 416 "hobby.yy"
+#line 420 "hobby.yy"
     { (yyval.expr)=createOperator(ARRAY, (yyvsp[(4) - (7)].expr), (yyvsp[(6) - (7)].expr), (yyvsp[(7) - (7)].expr)); ;}
     break;
 
   case 137:
-#line 420 "hobby.yy"
+#line 424 "hobby.yy"
     { (yyval.expr)=nullptr; ;}
     break;
 
   case 138:
-#line 421 "hobby.yy"
+#line 425 "hobby.yy"
     { (yyval.expr)=(yyvsp[(2) - (2)].expr); ;}
     break;
 
   case 140:
-#line 426 "hobby.yy"
+#line 430 "hobby.yy"
     { (yyval.expr)=let((yyvsp[(1) - (1)].tp)); ;}
     break;
 
   case 142:
-#line 431 "hobby.yy"
+#line 435 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (3)].expr),(yyvsp[(3) - (3)].expr)); ;}
     break;
 
   case 143:
-#line 436 "hobby.yy"
+#line 440 "hobby.yy"
     { (yyval.expr)=createFunction(6, "", (yyvsp[(3) - (6)].expr), (yyvsp[(5) - (6)].expr), (yyvsp[(6) - (6)].expr)); ;}
     break;
 
   case 144:
-#line 445 "hobby.yy"
+#line 449 "hobby.yy"
     { (yyval.expr)=makeArrayCall((yyvsp[(1) - (3)].expr), createFunction(6, "", NULL, NULL, (yyvsp[(3) - (3)].expr))); ;}
     break;
 
   case 145:
-#line 447 "hobby.yy"
+#line 451 "hobby.yy"
     { (yyval.expr)=makeArrayCall((yyvsp[(1) - (7)].expr), createFunction(6, "", (yyvsp[(4) - (7)].expr), (yyvsp[(6) - (7)].expr), (yyvsp[(7) - (7)].expr))); ;}
     break;
 
   case 146:
-#line 452 "hobby.yy"
+#line 456 "hobby.yy"
     { (yyval.expr)=createGo(createFunction(6, "", nullptr, (yyvsp[(2) - (3)].expr), (yyvsp[(3) - (3)].expr))); ;}
     break;
 
   case 147:
-#line 453 "hobby.yy"
+#line 457 "hobby.yy"
     { (yyval.expr)=createGo((yyvsp[(2) - (2)].expr)); ;}
     break;
 
   case 148:
-#line 458 "hobby.yy"
+#line 462 "hobby.yy"
     { (yyval.expr)=callReturn(); ;}
     break;
 
   case 149:
-#line 459 "hobby.yy"
+#line 463 "hobby.yy"
     { (yyval.expr)=callReturn( (yyvsp[(2) - (2)].expr) ); ;}
     break;
 
   case 150:
-#line 464 "hobby.yy"
+#line 468 "hobby.yy"
     { (yyval.type)='+'; ;}
     break;
 
   case 151:
-#line 465 "hobby.yy"
+#line 469 "hobby.yy"
     { (yyval.type)='-'; ;}
     break;
 
   case 152:
-#line 466 "hobby.yy"
+#line 470 "hobby.yy"
     { (yyval.type)='*'; ;}
     break;
 
   case 153:
-#line 467 "hobby.yy"
+#line 471 "hobby.yy"
     { (yyval.type)='/'; ;}
     break;
 
   case 154:
-#line 468 "hobby.yy"
+#line 472 "hobby.yy"
     { (yyval.type)='&'; ;}
     break;
 
   case 155:
-#line 469 "hobby.yy"
+#line 473 "hobby.yy"
     { (yyval.type)='|'; ;}
     break;
 
   case 156:
-#line 470 "hobby.yy"
+#line 474 "hobby.yy"
     { (yyval.type)='!'; ;}
     break;
 
   case 157:
-#line 471 "hobby.yy"
+#line 475 "hobby.yy"
     { (yyval.type)='<'; ;}
     break;
 
   case 158:
-#line 472 "hobby.yy"
+#line 476 "hobby.yy"
     { (yyval.type)='>'; ;}
     break;
 
   case 159:
-#line 473 "hobby.yy"
+#line 477 "hobby.yy"
     { (yyval.type)='%'; ;}
     break;
 
   case 160:
-#line 474 "hobby.yy"
+#line 478 "hobby.yy"
     { (yyval.type)='.'; ;}
     break;
 
   case 161:
-#line 475 "hobby.yy"
+#line 479 "hobby.yy"
     { (yyval.type)=LEFTMOVE; ;}
     break;
 
   case 162:
-#line 476 "hobby.yy"
+#line 480 "hobby.yy"
     { (yyval.type)=RIGHTMOVE; ;}
     break;
 
   case 163:
-#line 477 "hobby.yy"
+#line 481 "hobby.yy"
     { (yyval.type)=URIGHTMOVE; ;}
     break;
 
   case 164:
-#line 478 "hobby.yy"
+#line 482 "hobby.yy"
     { (yyval.type)=LEQ; ;}
     break;
 
   case 165:
-#line 479 "hobby.yy"
+#line 483 "hobby.yy"
     { (yyval.type)=REQ; ;}
     break;
 
   case 166:
-#line 480 "hobby.yy"
+#line 484 "hobby.yy"
     { (yyval.type)=RGO; ;}
     break;
 
   case 167:
-#line 481 "hobby.yy"
+#line 485 "hobby.yy"
     { (yyval.type)=OR; ;}
     break;
 
   case 168:
-#line 482 "hobby.yy"
+#line 486 "hobby.yy"
     { (yyval.type)=AND; ;}
     break;
 
   case 169:
-#line 486 "hobby.yy"
+#line 490 "hobby.yy"
     { (yyval.type)='^'; ;}
     break;
 
   case 170:
-#line 487 "hobby.yy"
+#line 491 "hobby.yy"
     { (yyval.type)='~'; ;}
     break;
 
   case 173:
-#line 500 "hobby.yy"
+#line 504 "hobby.yy"
     { (yyval.expr)=makeIf( (yyvsp[(3) - (5)].expr), (yyvsp[(5) - (5)].expr) ); ;}
     break;
 
   case 174:
-#line 504 "hobby.yy"
+#line 508 "hobby.yy"
     { (yyval.expr)=setElse((yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr)); ;}
     break;
 
   case 180:
-#line 521 "hobby.yy"
+#line 525 "hobby.yy"
     { (yyval.expr)=createSwitch((yyvsp[(2) - (5)].expr), (yyvsp[(4) - (5)].expr)); ;}
     break;
 
   case 182:
-#line 526 "hobby.yy"
+#line 530 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (2)].expr), (yyvsp[(2) - (2)].expr)); ;}
     break;
 
   case 183:
-#line 530 "hobby.yy"
+#line 534 "hobby.yy"
     { (yyval.expr)=createCase((yyvsp[(2) - (4)].expr), (yyvsp[(4) - (4)].expr)); ;}
     break;
 
   case 184:
-#line 531 "hobby.yy"
+#line 535 "hobby.yy"
     { (yyval.expr)=createCase(nullptr, (yyvsp[(3) - (3)].expr)); ;}
     break;
 
   case 186:
-#line 536 "hobby.yy"
+#line 540 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr)); ;}
     break;
 
   case 187:
-#line 543 "hobby.yy"
+#line 547 "hobby.yy"
     { (yyval.expr)=createTry( (yyvsp[(2) - (4)].expr), (yyvsp[(3) - (4)].expr), (yyvsp[(4) - (4)].expr) ); ;}
     break;
 
   case 188:
-#line 547 "hobby.yy"
+#line 551 "hobby.yy"
     { (yyval.expr)=nullptr; ;}
     break;
 
   case 190:
-#line 549 "hobby.yy"
+#line 553 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (2)].expr),(yyvsp[(2) - (2)].expr)); ;}
     break;
 
   case 191:
-#line 553 "hobby.yy"
+#line 557 "hobby.yy"
     { (yyval.expr)=makeCatch((yyvsp[(3) - (6)].expr), (yyvsp[(4) - (6)].str), (yyvsp[(6) - (6)].expr)); ;}
     break;
 
   case 192:
-#line 557 "hobby.yy"
+#line 561 "hobby.yy"
     { (yyval.expr)=let((yyvsp[(1) - (1)].tp)); ;}
     break;
 
   case 193:
-#line 558 "hobby.yy"
+#line 562 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (3)].expr),let((yyvsp[(3) - (3)].tp))); ;}
     break;
 
   case 194:
-#line 562 "hobby.yy"
+#line 566 "hobby.yy"
     { (yyval.expr)=nullptr; ;}
     break;
 
   case 195:
-#line 563 "hobby.yy"
+#line 567 "hobby.yy"
     { (yyval.expr)=(yyvsp[(2) - (2)].expr); ;}
     break;
 
   case 196:
-#line 571 "hobby.yy"
+#line 575 "hobby.yy"
     { (yyval.expr)=makeWhile((yyvsp[(3) - (5)].expr), (yyvsp[(5) - (5)].expr)); ;}
     break;
 
   case 197:
-#line 575 "hobby.yy"
+#line 579 "hobby.yy"
     { (yyval.expr)=makeFor( (yyvsp[(3) - (9)].expr), (yyvsp[(5) - (9)].expr), (yyvsp[(7) - (9)].expr), (yyvsp[(9) - (9)].expr)); ;}
     break;
 
   case 200:
-#line 585 "hobby.yy"
+#line 589 "hobby.yy"
     { (yyval.expr)=let((yyvsp[(1) - (3)].str), (yyvsp[(3) - (3)].expr)); ;}
     break;
 
   case 201:
-#line 586 "hobby.yy"
+#line 590 "hobby.yy"
     { (yyval.expr)=let((yyvsp[(1) - (3)].str), createFunction(6, "", nullptr, nullptr, (yyvsp[(3) - (3)].expr))); ;}
     break;
 
   case 202:
-#line 587 "hobby.yy"
+#line 591 "hobby.yy"
     { (yyval.expr)=tupleResolve((yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr)); ;}
     break;
 
   case 203:
-#line 588 "hobby.yy"
+#line 592 "hobby.yy"
     { (yyval.expr)=binary('=', (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr)); ;}
     break;
 
   case 211:
-#line 602 "hobby.yy"
+#line 606 "hobby.yy"
     { (yyval.expr)=makeNull(); ;}
     break;
 
   case 212:
-#line 603 "hobby.yy"
+#line 607 "hobby.yy"
     { (yyval.expr)=getVar((yyvsp[(1) - (1)].str)); ;}
     break;
 
   case 213:
-#line 604 "hobby.yy"
+#line 608 "hobby.yy"
     { (yyval.expr)=(yyvsp[(2) - (3)].expr); ;}
     break;
 
   case 214:
-#line 605 "hobby.yy"
+#line 609 "hobby.yy"
     { (yyval.expr)=unary((yyvsp[(1) - (2)].type), (yyvsp[(2) - (2)].expr)); ;}
     break;
 
   case 215:
-#line 606 "hobby.yy"
+#line 610 "hobby.yy"
     { (yyval.expr)=unaryAfter((yyvsp[(2) - (2)].type), (yyvsp[(1) - (2)].expr)); ;}
     break;
 
   case 220:
-#line 611 "hobby.yy"
+#line 615 "hobby.yy"
     { (yyval.expr)=makeInc((yyvsp[(1) - (2)].expr)); ;}
     break;
 
   case 221:
-#line 612 "hobby.yy"
+#line 616 "hobby.yy"
     { (yyval.expr)=makeInc((yyvsp[(1) - (2)].expr), false); ;}
     break;
 
   case 222:
-#line 613 "hobby.yy"
+#line 617 "hobby.yy"
     { (yyval.expr)=makeIIF(makeIsNull((yyvsp[(1) - (3)].expr)), (yyvsp[(3) - (3)].expr)); ;}
     break;
 
   case 223:
-#line 614 "hobby.yy"
+#line 618 "hobby.yy"
     { (yyval.expr)=makeIIF((yyvsp[(1) - (5)].expr), (yyvsp[(3) - (5)].expr), (yyvsp[(5) - (5)].expr));;}
     break;
 
   case 224:
-#line 615 "hobby.yy"
+#line 619 "hobby.yy"
     { (yyval.expr)=makeGetConstValue((yyvsp[(1) - (3)].str),(yyvsp[(3) - (3)].str)); ;}
     break;
 
   case 225:
-#line 616 "hobby.yy"
+#line 620 "hobby.yy"
     { (yyval.expr)=makeGetConstValue((yyvsp[(1) - (3)].str),(yyvsp[(3) - (3)].str)); ;}
     break;
 
   case 226:
-#line 617 "hobby.yy"
+#line 621 "hobby.yy"
     { (yyval.expr)=createNew((yyvsp[(1) - (4)].tp), NULL, (yyvsp[(3) - (4)].expr)); ;}
     break;
 
   case 227:
-#line 618 "hobby.yy"
+#line 622 "hobby.yy"
     { (yyval.expr)=binary('+', (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 228:
-#line 619 "hobby.yy"
+#line 623 "hobby.yy"
     { (yyval.expr)=binary('-', (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 229:
-#line 620 "hobby.yy"
+#line 624 "hobby.yy"
     { (yyval.expr)=binary('*', (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 230:
-#line 621 "hobby.yy"
+#line 625 "hobby.yy"
     { (yyval.expr)=binary('/', (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 231:
-#line 622 "hobby.yy"
+#line 626 "hobby.yy"
     { (yyval.expr)=binary('&', (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 232:
-#line 623 "hobby.yy"
+#line 627 "hobby.yy"
     { (yyval.expr)=binary('|', (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 233:
-#line 624 "hobby.yy"
+#line 628 "hobby.yy"
     { (yyval.expr)=binary('<', (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 234:
-#line 625 "hobby.yy"
+#line 629 "hobby.yy"
     { (yyval.expr)=binary('>', (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 235:
-#line 626 "hobby.yy"
+#line 630 "hobby.yy"
     { (yyval.expr)=binary('%', (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 236:
-#line 627 "hobby.yy"
+#line 631 "hobby.yy"
     { (yyval.expr)=binary('.', (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 237:
-#line 628 "hobby.yy"
+#line 632 "hobby.yy"
     { (yyval.expr)=binary(LEFTMOVE, (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 238:
-#line 629 "hobby.yy"
+#line 633 "hobby.yy"
     { (yyval.expr)=binary(RIGHTMOVE, (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 239:
-#line 630 "hobby.yy"
+#line 634 "hobby.yy"
     { (yyval.expr)=binary(URIGHTMOVE, (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 240:
-#line 631 "hobby.yy"
+#line 635 "hobby.yy"
     { (yyval.expr)=binary(LEQ, (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 241:
-#line 632 "hobby.yy"
+#line 636 "hobby.yy"
     { (yyval.expr)=binary(REQ, (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 242:
-#line 633 "hobby.yy"
+#line 637 "hobby.yy"
     { (yyval.expr)=binary(RGO, (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 243:
-#line 634 "hobby.yy"
+#line 638 "hobby.yy"
     { (yyval.expr)=binary(EQ, (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 244:
-#line 635 "hobby.yy"
+#line 639 "hobby.yy"
     { (yyval.expr)=binary(AEQ, (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 245:
-#line 636 "hobby.yy"
+#line 640 "hobby.yy"
     { (yyval.expr)=binary(OR, (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 246:
-#line 637 "hobby.yy"
+#line 641 "hobby.yy"
     { (yyval.expr)=binary(AND, (yyvsp[(1) - (3)].expr), (yyvsp[(3) - (3)].expr));  ;}
     break;
 
   case 247:
-#line 638 "hobby.yy"
+#line 642 "hobby.yy"
     { (yyval.expr)=(yyvsp[(1) - (1)].expr); ;}
     break;
 
   case 248:
-#line 642 "hobby.yy"
+#line 646 "hobby.yy"
     { (yyval.expr)=binaryIs((yyvsp[(1) - (3)].expr), getType((yyvsp[(3) - (3)].type)));  ;}
     break;
 
   case 250:
-#line 647 "hobby.yy"
+#line 651 "hobby.yy"
     {(yyval.expr)=stringCat((yyvsp[(1) - (2)].expr), (yyvsp[(2) - (2)].expr));;}
     break;
 
   case 255:
-#line 655 "hobby.yy"
+#line 659 "hobby.yy"
     { (yyval.expr)=(yyval.expr); ;}
     break;
 
   case 256:
-#line 664 "hobby.yy"
+#line 668 "hobby.yy"
     { (yyval.expr)=makeSplice((yyvsp[(1) - (6)].expr), (yyvsp[(3) - (6)].expr), (yyvsp[(5) - (6)].expr)); ;}
     break;
 
   case 257:
-#line 672 "hobby.yy"
+#line 676 "hobby.yy"
     { (yyval.expr)=makeIndex((yyvsp[(1) - (4)].expr), (yyvsp[(3) - (4)].expr)); ;}
     break;
 
   case 258:
-#line 681 "hobby.yy"
+#line 684 "hobby.yy"
     { (yyval.expr)=makeBased((yyvsp[(1) - (2)].expr), (yyvsp[(2) - (2)].expr)); ;}
     break;
 
   case 259:
-#line 687 "hobby.yy"
+#line 690 "hobby.yy"
     { (yyval.expr)=makeAnnotation((yyvsp[(2) - (5)].str), (yyvsp[(4) - (5)].expr)); ;}
     break;
 
   case 260:
-#line 688 "hobby.yy"
+#line 691 "hobby.yy"
     { (yyval.expr)=makeAnnotation((yyvsp[(2) - (5)].str), (yyvsp[(4) - (5)].expr)); ;}
     break;
 
   case 261:
-#line 692 "hobby.yy"
+#line 695 "hobby.yy"
     { (yyval.expr)=let((yyvsp[(1) - (3)].str),(yyvsp[(3) - (3)].expr)); ;}
     break;
 
   case 262:
-#line 693 "hobby.yy"
+#line 696 "hobby.yy"
     { (yyval.expr)=link((yyvsp[(1) - (5)].expr), let((yyvsp[(3) - (5)].str),(yyvsp[(5) - (5)].expr))); ;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 3171 "hobby.tab.cpp"
+#line 3175 "hobby.tab.cpp"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -3381,5 +3385,5 @@ yyreturn:
 }
 
 
-#line 696 "hobby.yy"
+#line 699 "hobby.yy"
 
