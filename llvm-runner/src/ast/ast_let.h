@@ -6,6 +6,8 @@
 #define LLVM_RUNNER_AST_LET_H
 
 
+#include "ast_node.h"
+
 class AstLet : public AstNode {
 
 };

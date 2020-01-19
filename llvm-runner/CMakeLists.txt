@@ -13,6 +13,7 @@ set(CMAKE_MODULE_PATH
 # import llvm
 find_package(LLVM REQUIRED CONFIG)
 find_package(RapidJSON)
+find_package(Qt5 COMPONENTS Core REQUIRED)
 
 message(STATUS "Found LLVM! ${LLVM_PACKAGE_VERSION}")
 message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
@@ -51,7 +52,6 @@ git_clone(
         GIT_URL https://github.com/ocornut/imgui
         GIT_TAG v1.74
 )
-
 
 # include src
 include_directories(includes)

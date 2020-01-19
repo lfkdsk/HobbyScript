@@ -6,21 +6,30 @@
 #define LLVM_RUNNER_AST_NODE_H
 
 #include <string>
+#include <utility>
 #include "ast_context.h"
 #include "gen/code_gen.h"
+#include "utils/common.h"
+
+class AstType;
+
+class AstContext;
+
+class CodeGen;
+
+extern int yylineno;
 
 class AstNode {
 public:
-    AstNode(std::string n = std::string());
+    AstNode(QString n = QString()) : name(std::move(n)) {
+        this->line_num = yylineno;
+    };
 
     virtual ~AstNode() {}
+
 public:
-    std::string name;
+    QString name;
     int line_num;
-};
-
-class AstType {
-
 };
 
 #endif //LLVM_RUNNER_AST_NODE_H
