@@ -18,6 +18,6 @@
 
 using RuntimeError = std::runtime_error;
 
-RuntimeError createRuntimeError(const QString &message);
+RuntimeError create_runtime_error(const QString &message);
 
 #endif //LLVM_RUNNER_COMMON_H

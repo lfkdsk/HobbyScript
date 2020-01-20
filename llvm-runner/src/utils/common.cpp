@@ -4,6 +4,6 @@
 
 #include "common.h"
 
-RuntimeError createRuntimeError(const QString &message) {
+RuntimeError create_runtime_error(const QString &message) {
     return RuntimeError(message.toStdString());
 }

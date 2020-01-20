@@ -4,6 +4,8 @@
 
 #include "code_gen_visitor.h"
 
+CodeGenVisitor::CodeGenVisitor(AstContext *context) : context(context) {}
+
 void CodeGenVisitor::visit(const AstNode &node) {
 
 }
@@ -39,5 +41,3 @@ void CodeGenVisitor::visit(const AstList &node) {
 void CodeGenVisitor::visit(const AstPackage &node) {
 
 }
-
-CodeGenVisitor::CodeGenVisitor(AstContext *context) : context(context) {}

@@ -111,11 +111,11 @@ function(git_clone)
             message(STATUS "${PARGS_PROJECT_NAME} directory found, pulling...")
         endif()
 
-        execute_process(
-                COMMAND             ${GIT_EXECUTABLE} pull origin master
-                COMMAND             ${GIT_EXECUTABLE} submodule update --remote
-                WORKING_DIRECTORY   ${${SOURCE_DIR}}
-                OUTPUT_VARIABLE     git_output)
+#        execute_process(
+#                COMMAND             ${GIT_EXECUTABLE} pull origin master
+#                COMMAND             ${GIT_EXECUTABLE} submodule update --remote
+#                WORKING_DIRECTORY   ${${SOURCE_DIR}}
+#                OUTPUT_VARIABLE     git_output)
     else()
         if(NOT PARGS_QUIET)
             message(STATUS "${PARGS_PROJECT_NAME} directory not found, cloning...")

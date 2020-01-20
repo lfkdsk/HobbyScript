@@ -18,10 +18,10 @@ AstContext *test_parse(const QString &fileName, llvm::Module *module) {
     // set open file.
     yyin = fopen(fileName.toUtf8().constData(), "r");
     if (!yyin) {
-        throw createRuntimeError(TAG + "could not open file name: " + fileName);
+        throw create_runtime_error(TAG + "could not open file name: " + fileName);
     }
     if (0 != yyparse()) {
-        throw createRuntimeError(TAG + "parse " + fileName + "error");
+        throw create_runtime_error(TAG + "parse " + fileName + "error");
     }
 
     fclose(yyin);
