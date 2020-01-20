@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <rapidjson/document.h>
 #include <llvm/Support/raw_ostream.h>
 #include "spdlog/sinks/stdout_sinks.h"
 #include "llvm/IR/LegacyPassManager.h"
@@ -17,21 +16,19 @@
 #include <llvm/Support/DynamicLibrary.h>
 #include <llvm/Support/FormattedStream.h>
 #include <llvm/Support/SourceMgr.h>
+#include "ast/ast_nodes.hpp"
+#include "runtime/runtime.h"
 
-
-llvm::LLVMContext llvmContext;
-std::unique_ptr<llvm::Module> module;
-extern int yydebug, yylineno;
 
 int main(int argc, char **argv) {
-//    atexit(llvm::llvm_shutdown);
+    atexit(llvm::llvm_shutdown);
 //    ::testing::InitGoogleTest(&argc, argv);
     llvm::InitializeNativeTarget();
     llvm::InitializeNativeTargetAsmPrinter();
     llvm::InitializeNativeTargetAsmParser();
 
-    auto *m = new llvm::Module("TOP", llvmContext);
-    module.reset(m);
+    auto *m = new llvm::Module("TOP", llvm_global_context);
+    llvm_module.reset(m);
 
     return 0;
 }

@@ -7,7 +7,7 @@
 
 #include <cstdint>
 #include <string>
-#include "ast/ast_let.h"
+#include <ast/ast_let.h>
 
 enum status_t {
     prog,
@@ -49,9 +49,9 @@ AstNode *makeEmpty();
 
 AstNode *makeNull();
 
-AstLet *let(AstType *type, char *name = nullptr, AstNode *value = nullptr, int flag = 0);
+AstNode *let(AstType *type, char *name = nullptr, AstNode *value = nullptr, int flag = 0);
 
-AstLet *let(char *name = nullptr, AstNode *value = nullptr, int flag = 0);
+AstNode *let(char *name = nullptr, AstNode *value = nullptr, int flag = 0);
 
 AstNode *unary(int op, AstNode *v);
 

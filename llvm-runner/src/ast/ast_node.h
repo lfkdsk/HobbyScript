@@ -7,27 +7,13 @@
 
 #include <string>
 #include <utility>
-#include "ast_context.h"
+#include "runtime/ast_context.h"
 #include "gen/code_gen.h"
 #include "utils/common.h"
 #include "visitor/visitor.h"
-
-class AstType;
-
-class AstContext;
-
-class CodeGen;
+#include "utils/ast_common.h"
 
 extern int yylineno;
-
-class AstNode;
-
-class AstLet;
-
-class AstValue;
-
-#define AST_BASE(Type) \
-    VisitableImpl<Type, AstNode, AstLet, AstValue>
 
 class AstNode : public AST_BASE(AstNode) {
 public:
@@ -40,6 +26,17 @@ public:
 public:
     QString name;
     int line_num;
+
+    inline void set_codegen_result(CodeGen *result) {
+        this->code_gen_result = result;
+    }
+
+    inline CodeGen *codegen_result() {
+        return code_gen_result;
+    }
+
+protected:
+    CodeGen *code_gen_result = nullptr;
 };
 
 

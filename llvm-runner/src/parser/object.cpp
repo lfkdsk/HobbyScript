@@ -2,7 +2,102 @@
 // Created by 刘丰恺 on 16/1/2020.
 //
 
+#include "ast/ast_nodes.hpp"
+#include "ast/ast_constant.h"
 #include "object.h"
+
+extern AstPackage *ast_current_package;
+
+template<typename T = AstLet, typename L>
+inline bool forEach(AstNode *node, L func, bool autoDelete = false) {
+    if (!node) {
+        return false;
+    }
+    auto *p = dynamic_cast<AstList *>(node);
+    if (p) {
+        for (auto *i : p->lines) {
+            if (auto x = dynamic_cast<T *>(i); x) {
+                func(x);
+                if (autoDelete) {
+                    delete x;
+                }
+            }
+        }
+        delete p;
+        return true;
+    } else {
+        auto x = dynamic_cast<T *>(node);
+        if (x) {
+            func(x);
+            if (autoDelete) {
+                delete x;
+            }
+        }
+        return false;
+    }
+}
+
+template<typename T>
+inline void transLinesToBlock(QVector<T *> &block, AstNode *x) {
+    forEach(x, [block](T *i) {
+        block.push_back(i);
+    });
+}
+
+inline void transLinesToBlock(QVector<AstNode *> &block, AstNode *x) {
+    if (x) {
+        auto *p = dynamic_cast<AstList *>(x);
+        if (p) {
+            block = std::move(p->lines);
+            delete x;
+        } else {
+            block.push_back(x);
+        }
+    }
+}
+
+/**
+ * Ast int Value.
+ * @param name value name.
+ * @param v int 32 bit value.
+ * @return AstConstant
+ */
+AstNode *makeValue(const char *name, int32_t v) {
+    auto a = new AstIntegerConstant(name);
+    a->set_value(v);
+    return a;
+}
+
+/**
+ * Ast int Value.
+ * @param name value name.
+ * @param v int 64 bit value.
+ * @return AstConstant
+ */
+AstNode *makeValue(const char *name, int64_t v) {
+    auto constant = new AstIntegerConstant(QString(name));
+    constant->set_value(v);
+    return constant;
+}
+
+AstNode *makeValue(const char *name, float v) {
+    auto constant = new AstFloatConstant(QString(name), v, false);
+    return constant;
+}
+
+AstNode *makeValue(const char *name, double v) {
+    auto constant = new AstFloatConstant(QString(name), v, true);
+    return constant;
+}
+
+AstNode *makeValue(const char *name, bool v) {
+    auto constant = new AstBoolConstant(QString(name), v);
+    return constant;
+}
+
+AstNode *makeValue(const char *v) {
+    return nullptr;
+}
 
 AstNode *packageName(AstNode *name) {
     return nullptr;
@@ -13,7 +108,7 @@ void packageImport(AstNode *n) {
 }
 
 void setPackageLines(AstNode *n) {
-
+    transLinesToBlock(ast_current_package->lines, n);
 }
 
 AstNode *importName(AstNode *n, char *name, bool isFunc) {
@@ -56,11 +151,11 @@ AstNode *makeNull() {
     return nullptr;
 }
 
-AstLet *let(AstType *type, char *name, AstNode *value, int flag) {
+AstNode *let(AstType *type, char *name, AstNode *value, int flag) {
     return nullptr;
 }
 
-AstLet *let(char *name, AstNode *value, int flag) {
+AstNode *let(char *name, AstNode *value, int flag) {
     return nullptr;
 }
 
@@ -85,30 +180,6 @@ AstNode *link(AstNode *left, AstNode *right) {
 }
 
 AstType *link(AstType *left, AstType *right) {
-    return nullptr;
-}
-
-AstNode *makeValue(const char *name, int32_t v) {
-    return nullptr;
-}
-
-AstNode *makeValue(const char *name, int64_t v) {
-    return nullptr;
-}
-
-AstNode *makeValue(const char *name, float v) {
-    return nullptr;
-}
-
-AstNode *makeValue(const char *name, double v) {
-    return nullptr;
-}
-
-AstNode *makeValue(const char *name, bool v) {
-    return nullptr;
-}
-
-AstNode *makeValue(const char *v) {
     return nullptr;
 }
 

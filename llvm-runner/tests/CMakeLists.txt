@@ -1,5 +1,9 @@
 project(unit_tests)
 
+add_definitions(-DPROJECT_SOURCE_DIR=${PROJECT_SOURCE_DIR})
+configure_file(test_config.h.in ${CMAKE_BINARY_DIR}/generated/test_config.h)
+include_directories(${CMAKE_BINARY_DIR}/generated/)
+
 find_package(Qt5 COMPONENTS Core Test REQUIRED)
 
 AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR} MAIN_SOURCE)

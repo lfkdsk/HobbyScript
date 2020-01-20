@@ -3,3 +3,7 @@
 //
 
 #include "common.h"
+
+RuntimeError createRuntimeError(const QString &message) {
+    return RuntimeError(message.toStdString());
+}
