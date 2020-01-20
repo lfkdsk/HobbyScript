@@ -4,6 +4,34 @@
 
 #include "object.h"
 
+template< typename T = AstLet, typename L>
+inline bool forEach(AstNode* node, L func, bool autoDelete = false)
+{
+    if (!node) {
+        return false;
+    }
+    auto* p = dynamic_cast<AstList*>(node);
+    if (p) {
+        for (auto* i : p->lines) {
+            if (auto x = dynamic_cast<T*>(i); x) {
+                func(x);
+                if (autoDelete) delete x;
+            }
+        }
+        delete p;
+        return true;
+    }
+    else {
+        auto x = dynamic_cast<T*>(node);
+        if (x) {
+            func(x);
+            if (autoDelete) delete x;
+        }
+        return false;
+    }
+    return false;
+}
+
 AstNode *packageName(AstNode *name) {
     return nullptr;
 }
@@ -56,11 +84,11 @@ AstNode *makeNull() {
     return nullptr;
 }
 
-AstLet *let(AstType *type, char *name, AstNode *value, int flag) {
+AstNode *let(AstType *type, char *name, AstNode *value, int flag) {
     return nullptr;
 }
 
-AstLet *let(char *name, AstNode *value, int flag) {
+AstNode *let(char *name, AstNode *value, int flag) {
     return nullptr;
 }
 

@@ -12,22 +12,24 @@
 #include "utils/common.h"
 #include "visitor/visitor.h"
 
+extern int yylineno;
+
+/* Type && Context */
 class AstType;
 
 class AstContext;
 
+/* Code Gen */
 class CodeGen;
 
-extern int yylineno;
-
+/* AstNodes */
 class AstNode;
-
 class AstLet;
-
 class AstValue;
+class AstPackage;
 
 #define AST_BASE(Type) \
-    VisitableImpl<Type, AstNode, AstLet, AstValue>
+    VisitableImpl<Type, AstNode, AstLet, AstValue, AstPackage>
 
 class AstNode : public AST_BASE(AstNode) {
 public:
