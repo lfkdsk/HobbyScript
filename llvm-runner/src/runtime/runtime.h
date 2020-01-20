@@ -5,11 +5,11 @@
 #ifndef LLVM_RUNNER_RUNTIME_H
 #define LLVM_RUNNER_RUNTIME_H
 
-#include "utils/common.h"
-#include "ast_context.h"
-#include "ast/ast_nodes.hpp"
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
+#include "common/common.h"
+#include "ast_context.h"
+#include "ast/ast_nodes.hpp"
 
 /* LLVM Runtime */
 extern llvm::LLVMContext llvm_global_context;

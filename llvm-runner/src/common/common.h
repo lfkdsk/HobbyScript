@@ -8,6 +8,7 @@
 #include <QString>
 #include <QVector>
 #include <utility>
+#include <ostream>
 #include <llvm/IR/Value.h>
 #include <llvm/Support/TargetSelect.h>
 #include <llvm/ExecutionEngine/JITEventListener.h>
@@ -18,6 +19,8 @@
 
 using RuntimeError = std::runtime_error;
 
-RuntimeError createRuntimeError(const QString &message);
+RuntimeError create_runtime_error(const QString &message);
+
+QString point_to_str(void *p);
 
 #endif //LLVM_RUNNER_COMMON_H

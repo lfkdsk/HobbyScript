@@ -5,7 +5,7 @@
 #ifndef LLVM_RUNNER_CODE_GEN_H
 #define LLVM_RUNNER_CODE_GEN_H
 
-#include "utils/common.h"
+#include "common/common.h"
 
 struct Generator {
 
@@ -13,7 +13,7 @@ struct Generator {
 
 class CodeGen {
 public:
-    CodeGen(llvm::Type *t = nullptr);
+    explicit CodeGen(llvm::Type *t = nullptr);
 
     virtual ~ CodeGen() {}
 

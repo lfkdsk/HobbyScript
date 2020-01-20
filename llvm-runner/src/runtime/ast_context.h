@@ -5,7 +5,7 @@
 #ifndef LLVM_RUNNER_AST_CONTEXT_H
 #define LLVM_RUNNER_AST_CONTEXT_H
 
-#include "utils/common.h"
+#include "common/common.h"
 
 class AstContext {
 public:

@@ -10,7 +10,7 @@
 // #define xxxxx
 
 // alternatively you could add your global method here
-QString get_test_project_dir() {
+static QString get_test_project_dir() {
     return "@PROJECT_SOURCE_DIR@";
 }
 

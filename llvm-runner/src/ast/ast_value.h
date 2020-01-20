@@ -8,7 +8,8 @@
 #include "ast_node.h"
 
 class AstValue : public AstNode, public AST_BASE(AstValue) {
-
+public:
+    AstNode* value = nullptr;
 };
 
 

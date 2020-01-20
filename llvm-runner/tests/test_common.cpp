@@ -18,10 +18,10 @@ AstContext *test_parse(const QString &fileName, llvm::Module *module) {
     // set open file.
     yyin = fopen(fileName.toUtf8().constData(), "r");
     if (!yyin) {
-        throw createRuntimeError(TAG + "could not open file name: " + fileName);
+        throw create_runtime_error(TAG + "could not open file name: " + fileName);
     }
     if (0 != yyparse()) {
-        throw createRuntimeError(TAG + "parse " + fileName + "error");
+        throw create_runtime_error(TAG + "parse " + fileName + "error");
     }
 
     fclose(yyin);
@@ -30,4 +30,16 @@ AstContext *test_parse(const QString &fileName, llvm::Module *module) {
     auto *now_package = ast_current_package;
     ast_current_package = old_package;
     return global_packages[fileName] = now_package->compile(module);
+}
+
+std::ofstream create_test_output(const QString &fileName) {
+    return std::ofstream(fileName.toStdString());
+}
+
+QString get_graph_gen_path() {
+    return get_test_project_dir() + separator + "test_graph_gen";
+}
+
+QString get_test_parse_input() {
+    return get_test_project_dir() + separator + "test_parse_input";
 }

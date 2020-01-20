@@ -9,9 +9,9 @@
 #include <utility>
 #include "runtime/ast_context.h"
 #include "gen/code_gen.h"
-#include "utils/common.h"
+#include "common/common.h"
 #include "visitor/visitor.h"
-#include "utils/ast_common.h"
+#include "common/ast_common.h"
 
 extern int yylineno;
 
@@ -26,6 +26,8 @@ public:
 public:
     QString name;
     int line_num;
+    const QString node_id = point_to_str(this);
+    const std::string node_id_str = node_id.toStdString();
 
     inline void set_codegen_result(CodeGen *result) {
         this->code_gen_result = result;
@@ -34,9 +36,9 @@ public:
     inline CodeGen *codegen_result() {
         return code_gen_result;
     }
-
 protected:
     CodeGen *code_gen_result = nullptr;
+
 };
 
 
