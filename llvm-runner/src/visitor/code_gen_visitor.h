@@ -35,7 +35,7 @@ public:
 private:
     AstContext *context = nullptr;
 private:
-    inline void set_codegen_result(AstNode &node, CodeGen *gen) {
+    inline static void set_codegen_result(AstNode &node, CodeGen *gen) {
         node.set_codegen_result(gen);
     }
 };
