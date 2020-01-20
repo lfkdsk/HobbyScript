@@ -3,6 +3,7 @@
 //
 
 #include <gtest/gtest.h>
+#include "utils/common.h"
 #include "test_common.h"
 #include "test_config.h"
 

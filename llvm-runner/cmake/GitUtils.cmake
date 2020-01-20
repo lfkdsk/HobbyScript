@@ -133,12 +133,21 @@ function(git_clone)
 
     # now checkout the right commit
     if(PARGS_GIT_TAG)
+        message("git fetch --all --tags --prune")
         execute_process(
                 COMMAND             ${GIT_EXECUTABLE} fetch --all --tags --prune
-                COMMAND             ${GIT_EXECUTABLE} fetch origin refs/tags/${PARGS_GIT_TAG}
+                WORKING_DIRECTORY   ${${SOURCE_DIR}}
+                OUTPUT_VARIABLE     git_output
+        )
+        message("${git_output}")
+        execute_process(
+                COMMAND             ${GIT_EXECUTABLE} fetch --all --tags --prune
+                COMMAND             ${GIT_EXECUTABLE} fetch origin refs/tags/${PARGS_GIT_TAG}:refs/tags/${PARGS_GIT_TAG}
                 COMMAND             ${GIT_EXECUTABLE} checkout tags/${PARGS_GIT_TAG} -b tag_${PARGS_GIT_TAG}
                 WORKING_DIRECTORY   ${${SOURCE_DIR}}
                 OUTPUT_VARIABLE     git_output)
+
+        message("${git_output}")
     elseif(PARGS_GIT_BRANCH OR PARGS_GIT_COMMIT)
         execute_process(
                 COMMAND             ${GIT_EXECUTABLE} checkout ${PARGS_GIT_BRANCH}

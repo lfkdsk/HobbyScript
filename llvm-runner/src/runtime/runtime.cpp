@@ -10,3 +10,5 @@ std::map<QString, AstContext *> global_packages;
 
 /* Ast Runtime */
 AstPackage *ast_current_package = new AstPackage();
+
+std::shared_ptr<spdlog::logger> console = spdlog::stdout_color_mt("console");

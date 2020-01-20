@@ -8,6 +8,8 @@
 #include "utils/common.h"
 #include "ast_context.h"
 #include "ast/ast_nodes.hpp"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
 
 /* LLVM Runtime */
 extern llvm::LLVMContext llvm_global_context;
@@ -20,5 +22,5 @@ extern AstPackage *ast_current_package;
 /* Lex & Yacc RunTime */
 extern int yydebug, yylineno;
 
-
+extern std::shared_ptr<spdlog::logger> console;
 #endif //LLVM_RUNNER_RUNTIME_H
