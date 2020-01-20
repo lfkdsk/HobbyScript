@@ -10,25 +10,25 @@
 class BaseVisitor {
 public:
     // base
-    virtual void visit(const AstNode &node) = 0;
+    virtual void visit(AstNode &node) = 0;
 
     // constant value.
-    virtual void visit(const AstValue &node) = 0;
+    virtual void visit(AstValue &node) = 0;
 
-    virtual void visit(const AstStringLiteral &node) = 0;
+    virtual void visit(AstStringLiteral &node) = 0;
 
-    virtual void visit(const AstIntegerConstant &node) = 0;
+    virtual void visit(AstIntegerConstant &node) = 0;
 
-    virtual void visit(const AstBoolConstant &node) = 0;
+    virtual void visit(AstBoolConstant &node) = 0;
 
-    virtual void visit(const AstFloatConstant &node) = 0;
+    virtual void visit(AstFloatConstant &node) = 0;
 
     // package.
-    virtual void visit(const AstLet &node) = 0;
+    virtual void visit(AstLet &node) = 0;
 
-    virtual void visit(const AstList &node) = 0;
+    virtual void visit(AstList &node) = 0;
 
-    virtual void visit(const AstPackage &node) = 0;
+    virtual void visit(AstPackage &node) = 0;
 };
 
 #endif //LLVM_RUNNER_BASE_VISITOR_H

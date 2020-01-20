@@ -6,38 +6,38 @@
 
 CodeGenVisitor::CodeGenVisitor(AstContext *context) : context(context) {}
 
-void CodeGenVisitor::visit(const AstNode &node) {
+void CodeGenVisitor::visit(AstNode &node) {
+    this->set_codegen_result(node, new TypeOnlyGen(nullptr));
+}
+
+void CodeGenVisitor::visit(AstValue &node) {
 
 }
 
-void CodeGenVisitor::visit(const AstValue &node) {
+void CodeGenVisitor::visit(AstStringLiteral &node) {
 
 }
 
-void CodeGenVisitor::visit(const AstStringLiteral &node) {
+void CodeGenVisitor::visit(AstIntegerConstant &node) {
 
 }
 
-void CodeGenVisitor::visit(const AstIntegerConstant &node) {
+void CodeGenVisitor::visit(AstBoolConstant &node) {
 
 }
 
-void CodeGenVisitor::visit(const AstBoolConstant &node) {
+void CodeGenVisitor::visit(AstFloatConstant &node) {
 
 }
 
-void CodeGenVisitor::visit(const AstFloatConstant &node) {
+void CodeGenVisitor::visit(AstLet &node) {
 
 }
 
-void CodeGenVisitor::visit(const AstLet &node) {
+void CodeGenVisitor::visit(AstList &node) {
 
 }
 
-void CodeGenVisitor::visit(const AstList &node) {
-
-}
-
-void CodeGenVisitor::visit(const AstPackage &node) {
+void CodeGenVisitor::visit(AstPackage &node) {
 
 }

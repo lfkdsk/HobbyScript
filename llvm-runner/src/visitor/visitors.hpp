@@ -6,5 +6,6 @@
 #define LLVM_RUNNER_VISITORS_H
 
 #include "code_gen_visitor.h"
+#include "graph_gen_visitor.h"
 
 #endif //LLVM_RUNNER_VISITORS_H
