@@ -37,6 +37,12 @@ inline bool forEach(AstNode *node, L func, bool autoDelete = false) {
     }
 }
 
+/**
+ * Trans Lines To Block.
+ * @tparam T
+ * @param block vector.
+ * @param origin node.
+ */
 template<typename T>
 inline void transLinesToBlock(QVector<T *> &block, AstNode *x) {
     forEach(x, [block](T *i) {
@@ -44,26 +50,43 @@ inline void transLinesToBlock(QVector<T *> &block, AstNode *x) {
     });
 }
 
+/**
+ * Trans Lines To Block.
+ * @tparam T
+ * @param block vector.
+ * @param origin node.
+ */
 inline void transLinesToBlock(QVector<AstNode *> &block, AstNode *x) {
-    if (x) {
-        auto *p = dynamic_cast<AstList *>(x);
-        if (p) {
-            block = std::move(p->lines);
-            delete x;
-        } else {
-            block.push_back(x);
-        }
+    if (!x) {
+        return;
     }
+
+    auto *p = dynamic_cast<AstList *>(x);
+    if (p) {
+        block = std::move(p->lines);
+        delete x;
+    } else {
+        block.push_back(x);
+    }
+}
+
+/**
+ * Ast create node.
+ * @param name str name.
+ * @return AstNode.
+ */
+AstNode *createNode(char *name) {
+    return new AstNode(name);
 }
 
 /**
  * Ast int Value.
  * @param name value name.
  * @param v int 32 bit value.
- * @return AstConstant
+ * @return AstIntegerConstant.
  */
 AstNode *makeValue(const char *name, int32_t v) {
-    auto a = new AstIntegerConstant(name);
+    auto *a = new AstIntegerConstant(name);
     a->set_value(v);
     return a;
 }
@@ -72,31 +95,55 @@ AstNode *makeValue(const char *name, int32_t v) {
  * Ast int Value.
  * @param name value name.
  * @param v int 64 bit value.
- * @return AstConstant
+ * @return AstIntegerConstant.
  */
 AstNode *makeValue(const char *name, int64_t v) {
-    auto constant = new AstIntegerConstant(QString(name));
+    auto *constant = new AstIntegerConstant(QString(name));
     constant->set_value(v);
     return constant;
 }
 
+/**
+ * Ast float Value.
+ * @param name value name.
+ * @param float value.
+ * @return AstFloatConstant.
+ */
 AstNode *makeValue(const char *name, float v) {
-    auto constant = new AstFloatConstant(QString(name), v, false);
+    auto *constant = new AstFloatConstant(QString(name), v, false);
     return constant;
 }
 
+/**
+ * Ast double Value.
+ * @param name value name.
+ * @param double value.
+ * @return AstFloatConstant.
+ */
 AstNode *makeValue(const char *name, double v) {
-    auto constant = new AstFloatConstant(QString(name), v, true);
+    auto *constant = new AstFloatConstant(QString(name), v, true);
     return constant;
 }
 
+/**
+ * Ast double Value.
+ * @param name value name.
+ * @param bool value.
+ * @return AstBoolConstant.
+ */
 AstNode *makeValue(const char *name, bool v) {
-    auto constant = new AstBoolConstant(QString(name), v);
+    auto *constant = new AstBoolConstant(QString(name), v);
     return constant;
 }
 
+/**
+ * Ast string Value.
+ * @param name value name.
+ * @param string value.
+ * @return AstStringLiteral.
+ */
 AstNode *makeValue(const char *v) {
-    return nullptr;
+    return new AstStringLiteral(v);
 }
 
 AstNode *packageName(AstNode *name) {
@@ -332,10 +379,6 @@ AstNode *makeIIF(AstNode *cond, AstNode *thenValue, AstNode *elseValue) {
 }
 
 AstNode *createGo(AstNode *node) {
-    return nullptr;
-}
-
-AstNode *createNode(char *name) {
     return nullptr;
 }
 

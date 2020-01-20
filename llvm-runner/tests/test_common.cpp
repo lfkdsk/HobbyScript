@@ -31,3 +31,15 @@ AstContext *test_parse(const QString &fileName, llvm::Module *module) {
     ast_current_package = old_package;
     return global_packages[fileName] = now_package->compile(module);
 }
+
+std::ofstream create_test_output(const QString &fileName) {
+    return std::ofstream(fileName.toStdString());
+}
+
+QString get_graph_gen_path() {
+    return get_test_project_dir() + separator + "test_graph_gen";
+}
+
+QString get_test_parse_input() {
+    return get_test_project_dir() + separator + "test_parse_input";
+}

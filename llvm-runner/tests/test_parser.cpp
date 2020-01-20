@@ -3,12 +3,11 @@
 //
 
 #include <gtest/gtest.h>
-#include "utils/common.h"
+#include "common/common.h"
 #include "test_common.h"
-#include "test_config.h"
 
 extern "C" int yyparse(void);
 
 TEST(MY_TEST, ParserTest) {
-    auto *context = test_parse(get_test_project_dir() + "/test_parse_input/constant_value.hobby", llvm_module.get());
+    auto *context = test_parse(get_test_parse_input() + separator + "constant_value.hobby", llvm_module.get());
 }

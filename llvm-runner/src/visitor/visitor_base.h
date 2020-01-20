@@ -5,7 +5,7 @@
 #ifndef LLVM_RUNNER_BASE_VISITOR_H
 #define LLVM_RUNNER_BASE_VISITOR_H
 
-#include "utils/ast_common.h"
+#include "common/ast_common.h"
 
 class BaseVisitor {
 public:

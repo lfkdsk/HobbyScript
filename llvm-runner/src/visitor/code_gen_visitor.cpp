@@ -11,7 +11,7 @@ void CodeGenVisitor::visit(AstNode &node) {
 }
 
 void CodeGenVisitor::visit(AstValue &node) {
-
+    this->set_codegen_result(node, node.value ? node.codegen_result() : nullptr);
 }
 
 void CodeGenVisitor::visit(AstStringLiteral &node) {

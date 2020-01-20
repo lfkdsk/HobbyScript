@@ -6,7 +6,7 @@
 #define LLVM_RUNNER_AST_PACKAGE_H
 
 #include "ast_node.h"
-#include "utils/visitor_common.h"
+#include "common/visitor_common.h"
 
 class AstPackage : public AstNode, public AST_BASE(AstPackage) {
 public:
