@@ -6,13 +6,18 @@
 #define LLVM_RUNNER_AST_PACKAGE_H
 
 #include "ast_node.h"
+#include "utils/visitor_common.h"
 
 class AstPackage : public AstNode, public AST_BASE(AstPackage) {
 public:
-    std::vector<QString> names;
-    std::vector<AstNode*> lines;
+    QVector<QString> names;
+    QVector<AstNode *> lines;
+public:
+    AstContext *compile(llvm::Module *m);
+
 private:
-    std::vector<CodeGen *> codegens;
+    QVector<CodeGen *> codegens;
+    CodeGenVisitor *code_gen_visitor = nullptr;
 };
 
 

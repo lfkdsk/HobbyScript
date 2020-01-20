@@ -18,7 +18,7 @@ llvm::Value *CodeGen::generate(const Generator &generator) {
 
 llvm::Value *CodeGen::load(llvm::IRBuilder<> &builder, llvm::Value *v) {
     if (v == nullptr) {
-        throw RuntimeError("Load: can't load null ptr.");
+        throw createRuntimeError("Load: can't load null ptr.");
     }
 
     auto *t = v->getType();

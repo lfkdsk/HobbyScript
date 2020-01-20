@@ -7,36 +7,13 @@
 
 #include <string>
 #include <utility>
-#include "ast_context.h"
+#include "runtime/ast_context.h"
 #include "gen/code_gen.h"
 #include "utils/common.h"
 #include "visitor/visitor.h"
+#include "utils/ast_common.h"
 
 extern int yylineno;
-
-/* Type && Context */
-class AstType;
-
-class AstContext;
-
-/* Code Gen */
-class CodeGen;
-
-/* AstNodes */
-class AstNode;
-class AstValue; class AstIntegerConstant; class AstFloatConstant; class AstBoolConstant; class AstStringLiteral;
-class AstLet;
-class AstList;
-class AstPackage;
-
-#define AST_BASE(Type) \
-    VisitableImpl<\
-            Type, \
-            AstNode, /* Ast Base Node */ \
-            AstValue, AstIntegerConstant, AstFloatConstant, AstBoolConstant, AstStringLiteral, /* Ast Value Nodes */ \
-            AstLet, AstList, AstPackage \
-    >\
-
 
 class AstNode : public AST_BASE(AstNode) {
 public:
@@ -49,6 +26,17 @@ public:
 public:
     QString name;
     int line_num;
+
+    inline void set_codegen_result(CodeGen *result) {
+        this->code_gen_result = result;
+    }
+
+    inline CodeGen *codegen_result() {
+        return code_gen_result;
+    }
+
+protected:
+    CodeGen *code_gen_result = nullptr;
 };
 
 

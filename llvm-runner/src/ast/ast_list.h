@@ -9,7 +9,7 @@
 
 class AstList : public AstNode, AST_BASE(AstList) {
 public:
-    std::vector<AstNode*> lines;
+    QVector<AstNode*> lines;
 };
 
 

@@ -3,7 +3,7 @@
 //
 
 #include <gtest/gtest.h>
-#include "parser/hobby.tab.hpp"
+#include "test_common.h"
 
 extern "C" int yyparse(void);
 

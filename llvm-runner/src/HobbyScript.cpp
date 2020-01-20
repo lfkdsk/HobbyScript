@@ -17,16 +17,8 @@
 #include <llvm/Support/FormattedStream.h>
 #include <llvm/Support/SourceMgr.h>
 #include "ast/ast_nodes.hpp"
+#include "runtime/runtime.h"
 
-/* LLVM Runtime */
-llvm::LLVMContext llvm_global_context;
-std::unique_ptr<llvm::Module> llvm_module;
-
-/* Ast Runtime */
-AstPackage *ast_current_package = new AstPackage();
-
-/* Lex & Yacc RunTime */
-extern int yydebug, yylineno;
 
 int main(int argc, char **argv) {
     atexit(llvm::llvm_shutdown);

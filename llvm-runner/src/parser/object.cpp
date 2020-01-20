@@ -38,17 +38,17 @@ inline bool forEach(AstNode *node, L func, bool autoDelete = false) {
 }
 
 template<typename T>
-inline void transLinesToBlock(std::vector<T *> &block, AstNode *x) {
+inline void transLinesToBlock(QVector<T *> &block, AstNode *x) {
     forEach(x, [block](T *i) {
         block.push_back(i);
     });
 }
 
-inline void transLinesToBlock(std::vector<AstNode *> &block, AstNode *x) {
+inline void transLinesToBlock(QVector<AstNode *> &block, AstNode *x) {
     if (x) {
         auto *p = dynamic_cast<AstList *>(x);
         if (p) {
-            block = move(p->lines);
+            block = std::move(p->lines);
             delete x;
         } else {
             block.push_back(x);
