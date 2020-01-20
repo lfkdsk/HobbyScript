@@ -7,7 +7,7 @@
 
 #include "ast_node.h"
 
-class AstPackage : public AstNode, AST_BASE(AstPackage) {
+class AstPackage : public AstNode, public AST_BASE(AstPackage) {
 public:
     std::vector<QString> names;
     std::vector<AstNode*> lines;

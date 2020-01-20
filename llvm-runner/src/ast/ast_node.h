@@ -24,12 +24,19 @@ class CodeGen;
 
 /* AstNodes */
 class AstNode;
+class AstValue; class AstIntegerConstant; class AstFloatConstant; class AstBoolConstant; class AstStringLiteral;
 class AstLet;
-class AstValue;
+class AstList;
 class AstPackage;
 
 #define AST_BASE(Type) \
-    VisitableImpl<Type, AstNode, AstLet, AstValue, AstPackage>
+    VisitableImpl<\
+            Type, \
+            AstNode, /* Ast Base Node */ \
+            AstValue, AstIntegerConstant, AstFloatConstant, AstBoolConstant, AstStringLiteral, /* Ast Value Nodes */ \
+            AstLet, AstList, AstPackage \
+    >\
+
 
 class AstNode : public AST_BASE(AstNode) {
 public:
