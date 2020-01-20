@@ -13,8 +13,8 @@ public:
     QVector<QString> names;
     QVector<AstNode *> lines;
 public:
-    AstContext *compile(llvm::Module *m);
-
+    AstContext *compile(llvm::Module *module);
+    void codegen(llvm::Module *module);
 private:
     QVector<CodeGen *> codegens;
     CodeGenVisitor *code_gen_visitor = nullptr;

@@ -8,7 +8,7 @@ extern "C" FILE *yyin;
 extern "C" int yyparse(void);
 const QString TAG = "[Test Common]: ";
 
-AstContext *parse(const QString &fileName, llvm::Module *module) {
+AstContext *test_parse(const QString &fileName, llvm::Module *module) {
     // save context.
     auto *old_package = ast_current_package;
     ast_current_package = new AstPackage();

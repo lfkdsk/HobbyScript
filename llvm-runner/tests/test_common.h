@@ -10,7 +10,7 @@
 #include "parser/hobby.tab.hpp"
 #include "runtime/runtime.h"
 
-AstContext *parse(const QString &fileName, llvm::Module *module);
+AstContext *test_parse(const QString &fileName, llvm::Module *module);
 
 
 #endif //LLVM_RUNNER_TEST_COMMON_H

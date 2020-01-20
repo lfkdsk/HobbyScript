@@ -6,14 +6,16 @@
 #define LLVM_RUNNER_RUNTIME_H
 
 #include "utils/common.h"
+#include "ast_context.h"
+#include "ast/ast_nodes.hpp"
 
 /* LLVM Runtime */
-llvm::LLVMContext llvm_global_context;
-std::unique_ptr<llvm::Module> llvm_module;
-std::map<QString, AstContext *> global_packages;
+extern llvm::LLVMContext llvm_global_context;
+extern std::unique_ptr<llvm::Module> llvm_module;
+extern std::map<QString, AstContext *> global_packages;
 
 /* Ast Runtime */
-AstPackage *ast_current_package = new AstPackage();
+extern AstPackage *ast_current_package;
 
 /* Lex & Yacc RunTime */
 extern int yydebug, yylineno;

@@ -21,3 +21,7 @@ AstContext *AstPackage::compile(llvm::Module *module) {
     }
     return block;
 }
+
+void AstPackage::codegen(llvm::Module *module) {
+
+}
