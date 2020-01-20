@@ -1,0 +1,4 @@
+digraph ast {
+rankdir=LR;
+dot1[label="test_node_0" ]
+}
