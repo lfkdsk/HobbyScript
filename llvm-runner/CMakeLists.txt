@@ -53,6 +53,13 @@ include(cmake/GitUtils.cmake)
 #        GIT_TAG v1.74
 #)
 
+git_clone(
+        PROJECT_NAME spdlog
+        GIT_URL https://github.com/gabime/spdlog.git
+        GIT_TAG v1.4.2
+)
+include_directories(${spdlog_SOURCE_DIR}/include)
+
 # include src
 include_directories(includes)
 add_subdirectory(includes)

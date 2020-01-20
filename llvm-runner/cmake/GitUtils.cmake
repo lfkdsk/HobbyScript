@@ -135,6 +135,7 @@ function(git_clone)
     if(PARGS_GIT_TAG)
         execute_process(
                 COMMAND             ${GIT_EXECUTABLE} fetch --all --tags --prune
+                COMMAND             ${GIT_EXECUTABLE} fetch origin refs/tags/${PARGS_GIT_TAG}
                 COMMAND             ${GIT_EXECUTABLE} checkout tags/${PARGS_GIT_TAG} -b tag_${PARGS_GIT_TAG}
                 WORKING_DIRECTORY   ${${SOURCE_DIR}}
                 OUTPUT_VARIABLE     git_output)
