@@ -7,6 +7,7 @@
 
 #include <QString>
 #include <QVector>
+#include <QMap>
 #include <utility>
 #include <ostream>
 #include <llvm/IR/Value.h>

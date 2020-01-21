@@ -13,6 +13,8 @@ class CodeGenVisitor : public BaseVisitor {
 public:
     explicit CodeGenVisitor(AstContext *context);
 
+    explicit CodeGenVisitor(CodeGenVisitor *parent);
+
 public:
     void visit(AstNode &node) override;
 
@@ -34,6 +36,7 @@ public:
 
 private:
     AstContext *context = nullptr;
+    CodeGenVisitor *parent = nullptr;
 private:
     inline static void set_codegen_result(AstNode &node, CodeGen *gen) {
         node.set_codegen_result(gen);

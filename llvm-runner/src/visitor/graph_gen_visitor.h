@@ -38,9 +38,9 @@ private:
 private:
     void to_graph(const QString &name, AstNode &node);
 
-    void to_dot_label(const QString &v, const QString &shape, AstNode &node);
+    void to_dot_label(AstNode &node, const QString &v, const QString &shape = "");
 
-    void to_dot_point_to(AstNode &from, AstNode &to, bool array);
+    void to_dot_point_to(AstNode &from, AstNode &to, bool array = false);
 
     void to_dot_point_to(AstNode &from, const QVector<AstNode *> &nodes, bool array);
 

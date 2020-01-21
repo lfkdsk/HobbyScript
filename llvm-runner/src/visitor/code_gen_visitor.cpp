@@ -6,12 +6,14 @@
 
 CodeGenVisitor::CodeGenVisitor(AstContext *context) : context(context) {}
 
+CodeGenVisitor::CodeGenVisitor(CodeGenVisitor *parent) : parent(parent), context(new AstContext(parent->context)) {}
+
 void CodeGenVisitor::visit(AstNode &node) {
-    this->set_codegen_result(node, new TypeOnlyGen(nullptr));
+    set_codegen_result(node, new TypeOnlyGen(nullptr));
 }
 
 void CodeGenVisitor::visit(AstValue &node) {
-    this->set_codegen_result(node, node.value ? node.codegen_result() : nullptr);
+    set_codegen_result(node, node.value ? node.codegen_result() : nullptr);
 }
 
 void CodeGenVisitor::visit(AstStringLiteral &node) {

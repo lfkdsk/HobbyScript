@@ -88,8 +88,8 @@ H		[a-fA-F0-9]
 "init"				return INIT_TOKEN;
 "finalize"			return FINALIZE_TOKEN;
 
-[a-z][a-zA-Z0-9]*		SAVETOKEN(L_IDENTIFIER);
-[A-Z][a-zA-Z0-9]*		SAVETOKEN(U_IDENTIFIER);
+[a-z][a-zA-Z0-9_]*		SAVETOKEN(L_IDENTIFIER);
+[A-Z][a-zA-Z0-9_]*		SAVETOKEN(U_IDENTIFIER);
 
 \"(\\.|[^\\"\n])*\"		yylval.expr=makeValue(yytext); return STRING_LITERAL;
 "<<"					return LEFTMOVE;

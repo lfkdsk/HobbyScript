@@ -6,7 +6,8 @@
 
 llvm::LLVMContext llvm_global_context;
 std::unique_ptr<llvm::Module> llvm_module;
-std::map<QString, AstContext *> global_packages;
+QMap<QString, AstContext *> global_packages_contexts;
+QMap<QString, AstPackage *> global_packages;
 
 /* Ast Runtime */
 AstPackage *ast_current_package = new AstPackage();

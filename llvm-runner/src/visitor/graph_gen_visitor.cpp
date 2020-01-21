@@ -29,7 +29,8 @@ void GraphGenVisitor::visit(AstFloatConstant &node) {
 }
 
 void GraphGenVisitor::visit(AstLet &node) {
-
+    this->to_dot_label(node, node.name + "=");
+    this->to_dot_point_to(node, *node.var_expr);
 }
 
 void GraphGenVisitor::visit(AstList &node) {
@@ -41,13 +42,13 @@ void GraphGenVisitor::visit(AstPackage &node) {
 }
 
 void GraphGenVisitor::to_graph(const QString &name, AstNode &node) {
-    this->to_dot_label(name, "", node);
+    this->to_dot_label(node, name);
 }
 
 void GraphGenVisitor::to_dot_label(
+        AstNode &node,
         const QString &v,
-        const QString &shape,
-        AstNode &node
+        const QString &shape
 ) {
     std::string sz = v.toStdString();
     while (sz.find('\r') != -1)
@@ -58,8 +59,9 @@ void GraphGenVisitor::to_dot_label(
         sz.erase(sz.find('\0'));
 
     os << get_node_index(node) << "[label=\"" + sz + "\" ";
-    if (!shape.isEmpty())
+    if (!shape.isEmpty()) {
         os << "shape=" << shape.toStdString();
+    }
     os << "]" << std::endl;
 }
 

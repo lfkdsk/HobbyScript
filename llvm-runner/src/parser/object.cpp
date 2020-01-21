@@ -146,8 +146,37 @@ AstNode *makeValue(const char *v) {
     return new AstStringLiteral(v);
 }
 
-AstNode *packageName(AstNode *name) {
+/**
+ * Insert AstNode Into
+ * @param names
+ * @return
+ */
+AstNode *packageName(AstNode *names) {
+    forEach(names, [](AstNode *item) {
+        ast_current_package->names.push_back(std::move(item->name));
+    }, true);
     return nullptr;
+}
+
+/**
+ * Create Lexical Var
+ * @param type AstType
+ * @param name Var Name
+ * @param value Value
+ * @param flag
+ * @return AstLet
+ */
+AstNode *let(AstType *type, char *name, AstNode *value, int flag) {
+    auto *let = new AstLet();
+    let->var_type = type;
+    let->var_expr = value;
+    let->name = QString(name);
+    let->flag = flag;
+    return let;
+}
+
+AstNode *let(char *name, AstNode *value, int flag) {
+    return let(nullptr, name, value, flag);
 }
 
 void packageImport(AstNode *n) {
@@ -195,14 +224,6 @@ AstNode *makeEmpty() {
 }
 
 AstNode *makeNull() {
-    return nullptr;
-}
-
-AstNode *let(AstType *type, char *name, AstNode *value, int flag) {
-    return nullptr;
-}
-
-AstNode *let(char *name, AstNode *value, int flag) {
     return nullptr;
 }
 

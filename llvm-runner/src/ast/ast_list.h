@@ -7,7 +7,7 @@
 
 #include "ast/ast_node.h"
 
-class AstList : public AstNode, AST_BASE(AstList) {
+class AstList : public AstNode, public AST_BASE(AstList) {
 public:
     QVector<AstNode*> lines;
 };

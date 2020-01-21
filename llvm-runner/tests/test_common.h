@@ -41,7 +41,9 @@ static AstContext *test_parse(const QString &fileName, llvm::Module *module) {
     // restore context;
     auto *now_package = ast_current_package;
     ast_current_package = old_package;
-    return global_packages[fileName] = now_package->compile(module);
+    // save package message.
+    global_packages[fileName] = now_package;
+    return global_packages_contexts[fileName] = now_package->compile(module);
 }
 
 static std::ofstream create_test_output(const QString &fileName) {
