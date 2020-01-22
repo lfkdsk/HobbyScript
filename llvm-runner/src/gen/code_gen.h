@@ -9,24 +9,6 @@
 #include "common/gen_common.h"
 #include "visitor/llvm_gen_visitor.h"
 
-struct LLVMGenerator {
-    llvm::Module *module;
-    llvm::Function *func;
-    llvm::IRBuilder<> *ir_builder;
-    llvm::BasicBlock *deallocate;
-public:
-    [[nodiscard]] llvm::LLVMContext &context() const { return ir_builder->getContext(); }
-
-    [[nodiscard]] llvm::IRBuilder<> &builder() const { return *ir_builder; }
-
-    // alloc var memory in function first block
-    inline llvm::Value *alloc(llvm::Type *ty, const QString &name = "", llvm::Value *sz = nullptr) const {
-        auto &block = func->getEntryBlock();
-        llvm::IRBuilder<> b(&block);
-        return b.CreateAlloca(ty, sz, name.toUtf8().toStdString());
-    }
-};
-
 class CodeGen : public GEN_BASE(CodeGen) {
 public:
     explicit CodeGen(llvm::Type *t = nullptr) : type(t) {};

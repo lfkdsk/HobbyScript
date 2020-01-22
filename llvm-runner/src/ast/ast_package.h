@@ -6,7 +6,10 @@
 #define LLVM_RUNNER_AST_PACKAGE_H
 
 #include "ast_node.h"
+#include "common/common.h"
+#include "runtime/runtime.h"
 #include "common/visitor_common.h"
+#include "gen/llvm_generator.h"
 
 class AstPackage : public AstNode, public AST_BASE(AstPackage) {
 public:
@@ -14,9 +17,12 @@ public:
     QVector<AstNode *> lines;
 public:
     AstContext *compile(llvm::Module *module);
-    void codegen(llvm::Module *module);
+
+    void codegen(llvm::LLVMContext &llvm_context, llvm::Module *module);
+
 private:
-    QVector<CodeGen *> codegens;
+    QVector<CodeGen *> code_gens;
+    llvm::Function *package_func = nullptr;
     CodeGenVisitor *code_gen_visitor = nullptr;
 };
 

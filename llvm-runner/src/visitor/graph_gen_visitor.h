@@ -9,6 +9,9 @@
 #include "ast/ast_nodes.hpp"
 #include "common/common.h"
 
+/**
+ * Convert Ast Node => Dot Graph
+ */
 class GraphGenVisitor : public AstBaseVisitor {
 public:
     explicit GraphGenVisitor(std::ostream &os = std::cout, bool with_global_index = false) :

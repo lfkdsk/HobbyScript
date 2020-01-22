@@ -3,10 +3,8 @@
 //
 
 #include "ast/ast_nodes.hpp"
-#include "ast/ast_constant.h"
+#include "type/ast_types.hpp"
 #include "object.h"
-
-extern AstPackage *ast_current_package;
 
 template<typename T = AstLet, typename L>
 inline bool forEach(AstNode *node, L func, bool autoDelete = false) {
@@ -187,15 +185,72 @@ void setPackageLines(AstNode *n) {
     transLinesToBlock(ast_current_package->lines, n);
 }
 
+AstNode *link(AstNode *left, AstNode *right) {
+    auto *p = dynamic_cast<AstList *>(left);
+    if (!p) {
+        p = new AstList();
+        p->lines.push_back(left);
+    }
+    p->lines.push_back(right);
+    return p;
+}
+
+AstType *link(AstType *left, AstType *right) {
+    return nullptr;
+}
+
+AstType *getType(int type_id) {
+    //"var"	        yylval.type = 0;	return ITYPE;
+    //"bool"		yylval.type = 1;	return ITYPE;
+    //"byte"		yylval.type = 2;	return ITYPE;
+    //"char"		yylval.type = 3;	return ITYPE;
+    //"short"		yylval.type = 4;	return ITYPE;
+    //"int"		    yylval.type = 5;	return ITYPE;
+    //"long"		yylval.type = 6;	return ITYPE;
+    //"float"		yylval.type = 7;	return ITYPE;
+    //"double"	    yylval.type = 8;	return ITYPE;
+    //"string"	    yylval.type = 9;	return ITYPE;
+    //"any"		    yylval.type = 10;	return ITYPE;
+
+    switch (type_id) {
+        case 0:
+            return new AutoType();
+        case 1:// bool
+            return IntegerType::get(1);
+        case 2:// byte
+            return IntegerType::get(8, true);
+        case 3:// char
+            return IntegerType::get(8);    // unsigned
+        case 4:// short
+            return IntegerType::get(16);
+        case 5:// int
+            return IntegerType::get(32);
+        case 6:// long
+            return IntegerType::get(64);
+        case 7:// float
+            return float_type;
+        case 8:// double
+            return double_type;
+        case 9:// string
+            return string_type;
+        case 10:// any
+            return any_type;
+        case 11:// ushort
+            return IntegerType::get(16, true);
+        case 12:// uint
+            return IntegerType::get(32, true);
+        case 13:// ulong
+            return IntegerType::get(64, true);
+        default:
+            throw create_runtime_error("unknown type: " + QString(type_id));
+    }
+}
+
 AstNode *importName(AstNode *n, char *name, bool isFunc) {
     return nullptr;
 }
 
 AstNode *stringCat(AstNode *left, AstNode *right) {
-    return nullptr;
-}
-
-AstType *getType(int type_id) {
     return nullptr;
 }
 
@@ -240,14 +295,6 @@ AstNode *binary(int op, AstNode *left, AstNode *right) {
 }
 
 AstNode *binaryIs(AstNode *left, AstType *right) {
-    return nullptr;
-}
-
-AstNode *link(AstNode *left, AstNode *right) {
-    return nullptr;
-}
-
-AstType *link(AstType *left, AstType *right) {
     return nullptr;
 }
 

@@ -10,6 +10,9 @@
 #include "visitor_base.h"
 #include "common/common.h"
 
+/**
+ * Convert Ast Node => Code Gen Node.
+ */
 class CodeGenVisitor : public AstBaseVisitor {
 public:
     explicit CodeGenVisitor(AstContext *context);

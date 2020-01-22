@@ -23,5 +23,7 @@ extern AstPackage *ast_current_package;
 /* Lex & Yacc RunTime */
 extern int yydebug, yylineno;
 
+/* logger console */
 extern std::shared_ptr<spdlog::logger> console;
+
 #endif //LLVM_RUNNER_RUNTIME_H

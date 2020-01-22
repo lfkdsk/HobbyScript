@@ -1,1 +1,3 @@
+package test
+
 int test_var = 1000

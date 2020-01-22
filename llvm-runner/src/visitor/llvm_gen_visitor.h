@@ -6,8 +6,12 @@
 #define LLVM_RUNNER_LLVM_GEN_VISITOR_H
 
 #include "visitor_base.h"
-#include "gen/code_gen.h"
+#include "common/gen_common.h"
+#include "gen/llvm_generator.h"
 
+/**
+ * Convect CodeGen => LLVM Value.
+ */
 class LLVMCodeGenVisitor : public GenBaseVisitor {
 public:
     explicit LLVMCodeGenVisitor(LLVMGenerator *generator) : llvm_gen(generator) {}
