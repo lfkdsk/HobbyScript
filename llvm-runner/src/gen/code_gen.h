@@ -6,14 +6,14 @@
 #define LLVM_RUNNER_CODE_GEN_H
 
 #include "common/common.h"
+#include "common/gen_common.h"
+#include "visitor/llvm_gen_visitor.h"
 
-struct Generator {
-
-};
-
-class CodeGen {
+class CodeGen : public GEN_BASE(CodeGen) {
 public:
-    explicit CodeGen(llvm::Type *t = nullptr);
+    explicit CodeGen(llvm::Type *t = nullptr) : type(t) {};
+
+    explicit CodeGen(llvm::Value *v) : value(v), type(v == nullptr ? nullptr : v->getType()) {};
 
     virtual ~ CodeGen() {}
 
@@ -24,12 +24,9 @@ public:
     bool isParams = false;
     bool isEscape = false;
 public:
-    virtual llvm::Value *generate(const Generator &generator);
+    virtual llvm::Value *generate(LLVMCodeGenVisitor &visitor);
 
     llvm::Value *load(llvm::IRBuilder<> &builder, llvm::Value *v);
-
-protected:
-    virtual llvm::Value *gen(const Generator &generator) = 0;
 };
 
 

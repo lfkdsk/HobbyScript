@@ -9,7 +9,10 @@
 #include "ast_node.h"
 
 class AstLet : public AstNode, public AST_BASE(AstLet) {
-
+public:
+    AstType* var_type = nullptr;
+    AstNode* var_expr = nullptr;
+    int flag = 0;
 };
 
 

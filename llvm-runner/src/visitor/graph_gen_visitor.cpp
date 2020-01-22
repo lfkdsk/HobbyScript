@@ -29,7 +29,8 @@ void GraphGenVisitor::visit(AstFloatConstant &node) {
 }
 
 void GraphGenVisitor::visit(AstLet &node) {
-
+    this->to_dot_label(node, node.name + "=");
+    this->to_dot_point_to(node, *node.var_expr);
 }
 
 void GraphGenVisitor::visit(AstList &node) {
@@ -41,15 +42,15 @@ void GraphGenVisitor::visit(AstPackage &node) {
 }
 
 void GraphGenVisitor::to_graph(const QString &name, AstNode &node) {
-    this->to_dot_label(name, "", node);
+    this->to_dot_label(node, name);
 }
 
 void GraphGenVisitor::to_dot_label(
+        AstNode &node,
         const QString &v,
-        const QString &shape,
-        AstNode &node
+        const QString &shape
 ) {
-    std::string sz = v.toStdString();
+    std::string sz = v.toUtf8().toStdString();
     while (sz.find('\r') != -1)
         sz.erase(sz.find('\r'));
     while (sz.find('\n') != -1)
@@ -57,14 +58,15 @@ void GraphGenVisitor::to_dot_label(
     while (sz.find('\0') != -1)
         sz.erase(sz.find('\0'));
 
-    os << node.node_id_str << "[label=\"" + sz + "\" ";
-    if (!shape.isEmpty())
-        os << "shape=" << shape.toStdString();
+    os << get_node_index(node) << "[label=\"" + sz + "\" ";
+    if (!shape.isEmpty()) {
+        os << "shape=" << shape.toUtf8().toStdString();
+    }
     os << "]" << std::endl;
 }
 
 void GraphGenVisitor::to_dot_point_to(AstNode &from, AstNode &to, bool array) {
-    os << from.node_id_str << " -> " << to.node_id_str << std::endl;
+    os << get_node_index(from) << " -> " << get_node_index(to) << std::endl;
     this->visit(from);
 }
 
@@ -72,4 +74,8 @@ void GraphGenVisitor::to_dot_point_to(AstNode &from, const QVector<AstNode *> &n
     for (auto item : nodes) {
         to_dot_point_to(from, *item, array);
     }
+}
+
+std::string GraphGenVisitor::get_node_index(AstNode &node) {
+    return "dot" + (this->with_global_index ? QString::number(++node_total_index).toUtf8().toStdString() : node.node_id_str);
 }

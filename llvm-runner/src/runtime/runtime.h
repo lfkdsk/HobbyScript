@@ -14,7 +14,8 @@
 /* LLVM Runtime */
 extern llvm::LLVMContext llvm_global_context;
 extern std::unique_ptr<llvm::Module> llvm_module;
-extern std::map<QString, AstContext *> global_packages;
+extern QMap<QString, AstContext *> global_packages_contexts;
+extern QMap<QString, AstPackage *> global_packages;
 
 /* Ast Runtime */
 extern AstPackage *ast_current_package;
@@ -22,5 +23,7 @@ extern AstPackage *ast_current_package;
 /* Lex & Yacc RunTime */
 extern int yydebug, yylineno;
 
+/* logger console */
 extern std::shared_ptr<spdlog::logger> console;
+
 #endif //LLVM_RUNNER_RUNTIME_H

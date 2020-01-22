@@ -27,7 +27,7 @@ public:
     QString name;
     int line_num;
     const QString node_id = point_to_str(this);
-    const std::string node_id_str = node_id.toStdString();
+    const std::string node_id_str = node_id.toUtf8().toStdString();
 
     inline void set_codegen_result(CodeGen *result) {
         this->code_gen_result = result;
@@ -36,6 +36,10 @@ public:
     inline CodeGen *codegen_result() {
         return code_gen_result;
     }
+
+    std::string std_name() {
+        return name.toUtf8().toStdString();
+    };
 protected:
     CodeGen *code_gen_result = nullptr;
 

@@ -6,8 +6,9 @@
 #define LLVM_RUNNER_BASE_VISITOR_H
 
 #include "common/ast_common.h"
+#include "common/gen_common.h"
 
-class BaseVisitor {
+class AstBaseVisitor {
 public:
     // base
     virtual void visit(AstNode &node) = 0;
@@ -29,6 +30,17 @@ public:
     virtual void visit(AstList &node) = 0;
 
     virtual void visit(AstPackage &node) = 0;
+};
+
+class GenBaseVisitor {
+public:
+    virtual void visit(CodeGen &gen) = 0;
+
+    virtual void visit(TypeOnlyGen &gen) = 0;
+
+    virtual void visit(LetGen &gen) = 0;
+
+    virtual void visit(ValueGen &gen) = 0;
 };
 
 #endif //LLVM_RUNNER_BASE_VISITOR_H

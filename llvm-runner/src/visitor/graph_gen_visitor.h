@@ -9,10 +9,13 @@
 #include "ast/ast_nodes.hpp"
 #include "common/common.h"
 
-class GraphGenVisitor : public BaseVisitor {
+/**
+ * Convert Ast Node => Dot Graph
+ */
+class GraphGenVisitor : public AstBaseVisitor {
 public:
-    explicit GraphGenVisitor(std::ostream &os = std::cout) : os(os) {};
-
+    explicit GraphGenVisitor(std::ostream &os = std::cout, bool with_global_index = false) :
+            os(os), with_global_index(with_global_index) {};
 public:
     void visit(AstNode &node) override;
 
@@ -34,14 +37,21 @@ public:
 
 private:
     std::ostream &os;
-
+    const bool with_global_index;
+private:
     void to_graph(const QString &name, AstNode &node);
 
-    void to_dot_label(const QString &v, const QString &shape, AstNode &node);
+    void to_dot_label(AstNode &node, const QString &v, const QString &shape = "");
 
-    void to_dot_point_to(AstNode &from, AstNode &to, bool array);
+    void to_dot_point_to(AstNode &from, AstNode &to, bool array = false);
 
     void to_dot_point_to(AstNode &from, const QVector<AstNode *> &nodes, bool array);
+
+    std::string get_node_index(AstNode &node);
+
+private:
+    long node_total_index = 0;
 };
+
 
 #endif //LLVM_RUNNER_GRAPH_GEN_VISITOR_H

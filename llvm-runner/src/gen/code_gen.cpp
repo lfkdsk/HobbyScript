@@ -4,14 +4,13 @@
 
 #include "code_gen.h"
 
-CodeGen::CodeGen(llvm::Type *t) : type(t) {}
-
-llvm::Value *CodeGen::generate(const Generator &generator) {
+llvm::Value *CodeGen::generate(LLVMCodeGenVisitor &visitor) {
     if (value) {
         return value;
     }
 
-    value = gen(generator);
+    // save value in visitor.
+    visitor.visit(*this);
     return value;
 }
 

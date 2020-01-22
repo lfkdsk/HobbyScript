@@ -7,15 +7,9 @@
 
 #include "code_gen.h"
 
-class TypeOnlyGen : public CodeGen {
+class TypeOnlyGen : public CodeGen, public GEN_BASE(TypeOnlyGen) {
 public:
-    TypeOnlyGen(llvm::Type *t) {
-        this->type = t;
-    }
-
-    llvm::Value *gen(const Generator &generator) override {
-        return nullptr;
-    }
+    explicit TypeOnlyGen(llvm::Type *t) : CodeGen(t) {};
 };
 
 

@@ -18,3 +18,21 @@ AstContext::AstContext(AstContext *p) {
 llvm::LLVMContext & AstContext::context() {
     return module ? module->getContext() : parent->context();
 }
+
+CodeGen *AstContext::find_symbol_value(const QString &var_name, bool recursive) {
+    auto *p = get_map_value(symbols, var_name);
+    if (p) {
+        return p;
+    }
+
+    if (recursive && parent) {
+        return parent->find_symbol_value(var_name, recursive);
+    }
+
+    auto *value = module->getGlobalVariable(var_name.toUtf8().toStdString());
+    if (!value) {
+        return nullptr;
+    }
+
+    return nullptr;
+}

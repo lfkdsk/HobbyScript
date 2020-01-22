@@ -33,8 +33,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#include "object.h"
 /* Tokens.  */
+#include "object.h"
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
    /* Put the tokens into the symbol table, so that GDB and other debuggers
