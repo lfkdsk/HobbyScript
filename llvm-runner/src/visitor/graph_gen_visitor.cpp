@@ -50,7 +50,7 @@ void GraphGenVisitor::to_dot_label(
         const QString &v,
         const QString &shape
 ) {
-    std::string sz = v.toStdString();
+    std::string sz = v.toUtf8().toStdString();
     while (sz.find('\r') != -1)
         sz.erase(sz.find('\r'));
     while (sz.find('\n') != -1)
@@ -60,7 +60,7 @@ void GraphGenVisitor::to_dot_label(
 
     os << get_node_index(node) << "[label=\"" + sz + "\" ";
     if (!shape.isEmpty()) {
-        os << "shape=" << shape.toStdString();
+        os << "shape=" << shape.toUtf8().toStdString();
     }
     os << "]" << std::endl;
 }
@@ -77,5 +77,5 @@ void GraphGenVisitor::to_dot_point_to(AstNode &from, const QVector<AstNode *> &n
 }
 
 std::string GraphGenVisitor::get_node_index(AstNode &node) {
-    return "dot" + (this->with_global_index ? QString::number(++node_total_index).toStdString() : node.node_id_str);
+    return "dot" + (this->with_global_index ? QString::number(++node_total_index).toUtf8().toStdString() : node.node_id_str);
 }

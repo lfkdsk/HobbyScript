@@ -16,6 +16,9 @@ TEST(MY_TEST, ParserConstantTest) {
 
 TEST(MY_TEST, ParserVarTest) {
     auto *context = test_parse(get_test_parse_input() + separator + "assign_var_simple.hobby", llvm_module.get());
-    print_llvm_modules(llvm_module.get());
+    for (int i = 0; i < context->symbols.keys().size(); ++i) {
+        console->debug(context->symbols.keys().at(i).toStdString());
+    }
+//    print_llvm_modules(llvm_module.get());
 }
 

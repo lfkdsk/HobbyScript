@@ -5,7 +5,7 @@
 #include "common.h"
 
 RuntimeError create_runtime_error(const QString &message) {
-    return RuntimeError(message.toStdString());
+    return RuntimeError(message.toUtf8().toStdString());
 }
 
 QString point_to_str(void *p) {

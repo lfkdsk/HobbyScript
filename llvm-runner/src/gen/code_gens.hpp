@@ -7,5 +7,7 @@
 
 #include "code_gen.h"
 #include "type_only_gen.h"
+#include "value_gen.h"
+#include "let_gen.h"
 
 #endif //LLVM_RUNNER_CODE_GENS_H

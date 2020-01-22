@@ -6,6 +6,8 @@
 #define LLVM_RUNNER_AST_CONTEXT_H
 
 #include "common/common.h"
+#include "gen/code_gens.hpp"
+#include "common/utility.h"
 
 class AstContext {
 public:
@@ -17,9 +19,12 @@ public:
     AstContext *parent = nullptr;
     llvm::Module *module = nullptr;
     QString path_name;
+    QHash<QString, CodeGen *> symbols;
 
 public:
     llvm::LLVMContext &context();
+
+    CodeGen *find_symbol_value(const QString &var_name, bool recursive = true);
 };
 
 

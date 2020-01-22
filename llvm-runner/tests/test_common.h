@@ -47,7 +47,7 @@ static AstContext *test_parse(const QString &fileName, llvm::Module *module) {
 }
 
 static std::ofstream create_test_output(const QString &fileName) {
-    return std::ofstream(fileName.toStdString());
+    return std::ofstream(fileName.toUtf8().toStdString());
 }
 
 static QString get_graph_gen_path() {

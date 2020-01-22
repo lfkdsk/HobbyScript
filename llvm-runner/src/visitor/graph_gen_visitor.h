@@ -9,7 +9,7 @@
 #include "ast/ast_nodes.hpp"
 #include "common/common.h"
 
-class GraphGenVisitor : public BaseVisitor {
+class GraphGenVisitor : public AstBaseVisitor {
 public:
     explicit GraphGenVisitor(std::ostream &os = std::cout, bool with_global_index = false) :
             os(os), with_global_index(with_global_index) {};
