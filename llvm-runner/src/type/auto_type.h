@@ -10,7 +10,10 @@
 class AutoType : public AstType {
 public:
     explicit AutoType() : AstType(AutoTyId) {};
-};
 
+    inline static bool is_auto_type(AstType *type) {
+        return !type || dynamic_cast<AutoType *>(type);
+    }
+};
 
 #endif //LLVM_RUNNER_AUTO_TYPE_H

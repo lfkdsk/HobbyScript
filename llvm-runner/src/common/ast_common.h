@@ -6,8 +6,6 @@
 #define LLVM_RUNNER_AST_COMMON_H
 
 /* Type && Context */
-class AstType;
-
 class AstContext;
 
 /* Code Gen */
@@ -15,6 +13,8 @@ class CodeGen;
 
 /* AstNodes */
 class AstNode;
+
+class AstCommonNode;
 
 class AstValue;
 
@@ -30,14 +30,19 @@ class AstLet;
 
 class AstList;
 
+class AstDef;
+
+class AstDefClass;
+
 class AstPackage;
 
-#define AST_BASE(Type) \
-    VisitableImpl<\
-            Type, \
-            AstNode, /* Ast Base Node */ \
+#define AST_BASE_LIST() \
             AstValue, AstIntegerConstant, AstFloatConstant, AstBoolConstant, AstStringLiteral, /* Ast Value Nodes */ \
-            AstLet, AstList, AstPackage \
-    >\
+            AstLet, AstList, \
+            AstDef, AstDefClass, AstPackage, \
+            AstCommonNode, AstNode /* Ast Base Node */ \
+
+#define AST_BASE(Type) \
+    VisitableImpl<Type, AST_BASE_LIST()>\
 
 #endif //LLVM_RUNNER_AST_COMMON_H

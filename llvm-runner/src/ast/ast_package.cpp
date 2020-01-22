@@ -11,7 +11,7 @@ AstContext *AstPackage::compile(llvm::Module *module) {
     block->module = module;
     block->path_name = name;
     // TODO: solve imports.
-    this->code_gen_visitor = new CodeGenVisitor(block);
+    this->code_gen_visitor = new CODEGEN_VISITOR(block);
     for (auto line: lines) {
         this->code_gen_visitor->visit(*line);
         auto *v = line->codegen_result();

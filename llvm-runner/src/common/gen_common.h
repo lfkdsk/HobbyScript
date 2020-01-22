@@ -15,11 +15,14 @@ class ValueGen;
 
 class LetGen;
 
+class DefGen;
+
 #define GEN_BASE(Type) \
     VisitableImpl<\
             Type, \
             CodeGen, /* CodeGen Base Node */ \
-            ValueGen, LetGen, TypeOnlyGen \
+            ValueGen, LetGen, TypeOnlyGen, \
+            DefGen \
     >\
 
 

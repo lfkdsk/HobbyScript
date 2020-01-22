@@ -6,6 +6,7 @@
 #define LLVM_RUNNER_CODE_GEN_VISITOR_H
 
 #include "ast/ast_nodes.hpp"
+#include "common/ast_common.h"
 #include "common/gen_common.h"
 #include "visitor_base.h"
 #include "common/common.h"
@@ -38,6 +39,10 @@ public:
 
     void visit(AstPackage &node) override;
 
+    void visit(AstDef &node) override;
+
+    void visit(AstDefClass &node) override;
+
 private:
     AstContext *context = nullptr;
     CodeGenVisitor *parent_visitor = nullptr;
@@ -47,6 +52,5 @@ private:
         node.set_codegen_result(gen);
     }
 };
-
 
 #endif //LLVM_RUNNER_CODE_GEN_VISITOR_H

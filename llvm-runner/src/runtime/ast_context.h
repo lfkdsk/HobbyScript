@@ -24,7 +24,13 @@ public:
 public:
     llvm::LLVMContext &context();
 
+    // symbols
     CodeGen *find_symbol_value(const QString &var_name, bool recursive = true);
+
+    void set_symbol_value(const QString &var_name, CodeGen *value);
+
+    // classes
+    AstDefClass *find_class(const QString &name);
 };
 
 

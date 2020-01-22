@@ -41,6 +41,14 @@ void GraphGenVisitor::visit(AstPackage &node) {
 
 }
 
+void GraphGenVisitor::visit(AstDef &node) {
+
+}
+
+void GraphGenVisitor::visit(AstDefClass &node) {
+
+}
+
 void GraphGenVisitor::to_graph(const QString &name, AstNode &node) {
     this->to_dot_label(node, name);
 }

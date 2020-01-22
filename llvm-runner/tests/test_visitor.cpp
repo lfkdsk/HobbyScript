@@ -78,7 +78,7 @@ TEST(MY_TEST, VISITOR) {
     v.visit(con);
 }
 
-class AstVisitor {
+class TestAstVisitor {
 public:
     void visit(const AstNode& node) {
         std::cout << "node \n ";
@@ -96,8 +96,62 @@ public:
 TEST(MY_TEST, AST_VISITOR) {
     AstNode node = AstNode();
     AstLet let = AstLet();
-    GenericVisitor<AstVisitor, AstNode, AstLet, AstValue> v;
+    GenericVisitor<TestAstVisitor, AstNode, AstLet, AstValue> v;
     v.visit(node);
+    v.visit(let);
 }
 
+class TestGraphVisitor : public AstBaseVisitor {
+public:
+    void visit(AstNode &node) override {
+        std::cout << "node \n ";
+    }
 
+    void visit(AstValue &node) override {
+        std::cout << "ast value \n ";
+    }
+
+    void visit(AstStringLiteral &node) override {
+        std::cout << "string literal \n ";
+    }
+
+    void visit(AstIntegerConstant &node) override {
+
+    }
+
+    void visit(AstBoolConstant &node) override {
+
+    }
+
+    void visit(AstFloatConstant &node) override {
+
+    }
+
+    void visit(AstLet &node) override {
+        std::cout << "let \n ";
+    }
+
+    void visit(AstDef &node) override {
+
+    }
+
+    void visit(AstDefClass &node) override {
+
+    }
+
+    void visit(AstList &node) override {
+
+    }
+
+    void visit(AstPackage &node) override {
+
+    }
+};
+
+TEST(MY_TEST, TestGraphVisitor) {
+    AstNode node = AstNode();
+    AstNode let = AstLet();
+    auto *v = new GenericVisitor<TestGraphVisitor, AST_BASE_LIST()>();
+    auto a = let;
+    v->visit(let);
+}

@@ -7,5 +7,7 @@
 
 #include "code_gen_visitor.h"
 #include "graph_gen_visitor.h"
+#include "llvm_gen_visitor.h"
+#include "type_llvm_visitor.h"
 
 #endif //LLVM_RUNNER_VISITORS_H

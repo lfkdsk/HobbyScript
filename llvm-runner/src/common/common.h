@@ -9,6 +9,7 @@
 #include <QVector>
 #include <QMap>
 #include <QHash>
+#include <QPair>
 #include <utility>
 #include <ostream>
 #include <llvm/IR/Value.h>

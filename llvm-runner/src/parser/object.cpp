@@ -2,8 +2,6 @@
 // Created by 刘丰恺 on 16/1/2020.
 //
 
-#include "ast/ast_nodes.hpp"
-#include "type/ast_types.hpp"
 #include "object.h"
 
 template<typename T = AstLet, typename L>
@@ -246,6 +244,15 @@ AstType *getType(int type_id) {
     }
 }
 
+AstNode *createDef(AstNode *def) {
+    auto *let = dynamic_cast<AstLet *>(def);
+    auto *p = new AstDef();
+    p->type = let->var_type;
+    p->vars.append(qMakePair(let->name, let->var_expr));
+    delete def; // remove origin let node.
+    return p;
+}
+
 AstNode *importName(AstNode *n, char *name, bool isFunc) {
     return nullptr;
 }
@@ -415,10 +422,6 @@ AstNode *makeDelete(AstNode *expr) {
 }
 
 AstNode *createNew(AstType *type, char *name, AstNode *block) {
-    return nullptr;
-}
-
-AstNode *createDef(AstNode *def) {
     return nullptr;
 }
 

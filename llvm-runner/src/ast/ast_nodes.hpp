@@ -12,5 +12,8 @@
 #include "ast_literal.h"
 #include "ast_constant.h"
 #include "ast_package.h"
+#include "ast_defs.h"
+#include "ast_class.h"
+#include "ast_common_node.h"
 
 #endif //LLVM_RUNNER_ASTNODES_H

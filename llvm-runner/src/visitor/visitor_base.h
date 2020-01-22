@@ -7,6 +7,8 @@
 
 #include "common/ast_common.h"
 #include "common/gen_common.h"
+#include "common/type_common.h"
+#include "visitor.h"
 
 class AstBaseVisitor {
 public:
@@ -27,6 +29,10 @@ public:
     // package.
     virtual void visit(AstLet &node) = 0;
 
+    virtual void visit(AstDef &node) = 0;
+
+    virtual void visit(AstDefClass &node) = 0;
+
     virtual void visit(AstList &node) = 0;
 
     virtual void visit(AstPackage &node) = 0;
@@ -41,6 +47,17 @@ public:
     virtual void visit(LetGen &gen) = 0;
 
     virtual void visit(ValueGen &gen) = 0;
+};
+
+class TypeBaseVisitor {
+public:
+    virtual void visit(AstType &gen) = 0;
+
+    virtual void visit(AutoType &gen) = 0;
+
+    virtual void visit(IntegerType &gen) = 0;
+
+    virtual void visit(ClassType &gen) = 0;
 };
 
 #endif //LLVM_RUNNER_BASE_VISITOR_H

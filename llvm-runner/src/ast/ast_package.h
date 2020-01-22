@@ -23,7 +23,7 @@ public:
 private:
     QVector<CodeGen *> code_gens;
     llvm::Function *package_func = nullptr;
-    CodeGenVisitor *code_gen_visitor = nullptr;
+    CODEGEN_VISITOR *code_gen_visitor = nullptr;
 };
 
 

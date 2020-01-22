@@ -9,5 +9,6 @@
 #include "type_only_gen.h"
 #include "value_gen.h"
 #include "let_gen.h"
+#include "def_gen.h"
 
 #endif //LLVM_RUNNER_CODE_GENS_H

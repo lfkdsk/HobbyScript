@@ -8,5 +8,6 @@
 #include "ast_type.h"
 #include "auto_type.h"
 #include "integer_type.h"
+#include "class_type.h"
 
 #endif //LLVM_RUNNER_AST_TYPES_H

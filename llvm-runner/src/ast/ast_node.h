@@ -40,6 +40,7 @@ public:
     std::string std_name() {
         return name.toUtf8().toStdString();
     };
+
 protected:
     CodeGen *code_gen_result = nullptr;
 
