@@ -49,3 +49,7 @@ void AstContext::set_symbol_value(const QString &var_name, CodeGen *value) {
     // save value in symbols
     symbols[var_name] = value;
 }
+
+AstDefClass *AstContext::find_class(const QString &name) {
+    return nullptr;
+}

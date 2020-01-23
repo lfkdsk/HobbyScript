@@ -10,6 +10,7 @@
 #include "common/gen_common.h"
 #include "visitor_base.h"
 #include "common/common.h"
+#include "type/ast_types.hpp"
 
 /**
  * Convert Ast Node => Code Gen Node.

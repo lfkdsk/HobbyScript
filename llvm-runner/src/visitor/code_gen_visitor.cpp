@@ -97,12 +97,19 @@ void CodeGenVisitor::visit(AstDef &node) {
 //
 //        return list;
 //    }
-//    auto *type = AutoType::is_auto_type(node.type) ? nullptr : node.type;
+    auto *type = AutoType::is_auto_type(node.type) ? nullptr : node.type;
     auto vars = node.vars;
     if (vars.length() == 1) {
         auto pair = vars.at(0);
-//        auto code_gen =
+        auto code_gen = node.make_def_gen(context, type, pair.first, pair.second);
+        if (!code_gen) {
+            throw create_runtime_error("couldn't def " + pair.first);
+        }
+
+        context->set_symbol_value(pair.first, code_gen);
     }
+
+//    auto list = new
 }
 
 void CodeGenVisitor::visit(AstDefClass &node) {

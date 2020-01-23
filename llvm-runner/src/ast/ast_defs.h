@@ -8,9 +8,12 @@
 #include "ast_node.h"
 #include "common/common.h"
 #include "common/type_common.h"
+#include "ast/ast_class.h"
 
 class AstDef : public AstNode, public AST_BASE(AstDef) {
 public:
+    AstDef();
+
     AstType *type;
     QVector<QPair<QString, AstNode *>> vars;
 public:

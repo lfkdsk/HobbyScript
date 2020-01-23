@@ -3,9 +3,9 @@
 //
 
 #include "ast_defs.h"
-#include "ast/ast_class.h"
 #include "visitor/visitors.hpp"
 #include "type/ast_types.hpp"
+#include "common/ast_common.h"
 
 static QString emptyString;
 
@@ -16,7 +16,8 @@ CodeGen *AstDef::make_def_gen(
         AstNode *var
 ) {
     if (var != nullptr) {
-        CODEGEN_VISITOR(parent).visit(*var);
+        auto visitor = new CODEGEN_VISITOR(parent);
+        TYPE_AUTO_DOWNCAST(var,  visitor);
     }
 
     CodeGen *v = var ? var->codegen_result() : nullptr;
@@ -47,4 +48,8 @@ CodeGen *AstDef::make_def_gen(
         t = v->type;
 
     return new DefGen(n, t, v);
+}
+
+AstDef::AstDef() {
+    this->runtime_type = AstDefTy;
 }

@@ -13,7 +13,8 @@ AstContext *AstPackage::compile(llvm::Module *module) {
     // TODO: solve imports.
     this->code_gen_visitor = new CODEGEN_VISITOR(block);
     for (auto line: lines) {
-        this->code_gen_visitor->visit(*line);
+        TYPE_AUTO_DOWNCAST(line, this->code_gen_visitor)
+//        this->code_gen_visitor->visit(*line);
         auto *v = line->codegen_result();
         if (v) {
             this->code_gens.push_back(v);
