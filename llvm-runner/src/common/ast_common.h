@@ -36,6 +36,20 @@ class AstDefClass;
 
 class AstPackage;
 
+enum AstRuntimeType {
+    AstNodeTy,
+    AstValueTy,
+    AstIntegerConstantTy,
+    AstFloatConstantTy,
+    AstBoolConstantTy,
+    AstStringLiteralTy,
+    AstLetTy,
+    AstListTy,
+    AstDefTy,
+    AstDefClassTy,
+    AstPackageTy
+};
+
 #define AST_BASE_LIST() \
             AstValue, AstIntegerConstant, AstFloatConstant, AstBoolConstant, AstStringLiteral, /* Ast Value Nodes */ \
             AstLet, AstList, \
