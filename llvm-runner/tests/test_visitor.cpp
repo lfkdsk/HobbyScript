@@ -80,15 +80,15 @@ TEST(MY_TEST, VISITOR) {
 
 class TestAstVisitor {
 public:
-    void visit(const AstNode& node) {
+    void visit(const AstNode &node) {
         std::cout << "node \n ";
     }
 
-    void visit(const AstLet& node) {
+    void visit(const AstLet &node) {
         std::cout << "let \n ";
     }
 
-    void visit(const AstValue& value) {
+    void visit(const AstValue &value) {
         std::cout << "value \n ";
     }
 };
