@@ -19,6 +19,9 @@
 #include <llvm/Support/FormattedStream.h>
 #include <llvm/Support/SourceMgr.h>
 #include <llvm/IR/IRBuilder.h>
+#include <llvm/ExecutionEngine/Interpreter.h>
+#include <llvm/ExecutionEngine/MCJIT.h>
+#include <llvm/Support/CommandLine.h>
 
 using RuntimeError = std::runtime_error;
 

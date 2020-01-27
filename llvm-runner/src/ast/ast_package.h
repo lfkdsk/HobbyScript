@@ -20,6 +20,10 @@ public:
 
     void codegen(llvm::LLVMContext &llvm_context, llvm::Module *module);
 
+    inline llvm::Function *package_function() {
+        return package_func;
+    };
+
 private:
     QVector<CodeGen *> code_gens;
     llvm::Function *package_func = nullptr;

@@ -7,6 +7,7 @@
 
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
+#include <llvm/ExecutionEngine/ExecutionEngine.h>
 #include "common/common.h"
 #include "ast_context.h"
 #include "ast/ast_nodes.hpp"
@@ -25,5 +26,7 @@ extern int yydebug, yylineno;
 
 /* logger console */
 extern std::shared_ptr<spdlog::logger> console;
+
+extern llvm::ExecutionEngine *build_llvm_engine(std::unique_ptr<llvm::Module> module);
 
 #endif //LLVM_RUNNER_RUNTIME_H

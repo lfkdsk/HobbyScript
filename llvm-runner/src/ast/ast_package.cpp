@@ -13,7 +13,7 @@ AstContext *AstPackage::compile(llvm::Module *module) {
     // TODO: solve imports.
     this->code_gen_visitor = new CODEGEN_VISITOR(block);
     for (auto line: lines) {
-        TYPE_AUTO_DOWNCAST(line, this->code_gen_visitor)
+        TYPE_AUTO_DOWNCAST(line, this->code_gen_visitor);
 //        this->code_gen_visitor->visit(*line);
         auto *v = line->codegen_result();
         if (v) {
@@ -34,5 +34,15 @@ void AstPackage::codegen(llvm::LLVMContext &llvm_context, llvm::Module *module) 
 
     llvm::IRBuilder<> ir_builder(basic_block);
     auto llvm_generator = LLVMGenerator{module, package_func, &ir_builder, deallocate};
+    auto llvm_gen_visitor = new LLVMCodeGenVisitor(&llvm_generator);
+    // gen code_gens.
+    for (auto gen : code_gens) {
+        gen->generate(*llvm_gen_visitor);
+    }
 
+    ir_builder.CreateBr(deallocate);
+    ir_builder.SetInsertPoint(alloc);
+    ir_builder.CreateBr(basic_block);
+    ir_builder.SetInsertPoint(deallocate);
+    ir_builder.CreateRetVoid();
 }

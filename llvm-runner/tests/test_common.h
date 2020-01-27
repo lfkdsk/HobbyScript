@@ -9,6 +9,7 @@
 #include <iterator>
 #include <string>
 #include <algorithm>
+#include <llvm/ExecutionEngine/ExecutionEngine.h>
 #include "common/common.h"
 #include "ast/ast_nodes.hpp"
 #include "parser/hobby.tab.hpp"
@@ -19,6 +20,12 @@ extern "C" FILE *yyin;
 extern "C" int yyparse(void);
 const QString TAG = "[Test Common]: ";
 const constexpr auto separator = std::filesystem::path::preferred_separator;
+
+static void llvm_init() {
+    llvm::InitializeNativeTarget();
+    llvm::InitializeNativeTargetAsmPrinter();
+    llvm::InitializeNativeTargetAsmParser();
+}
 
 static AstContext *test_parse(const QString &fileName, llvm::Module *module) {
     // save context.
@@ -44,6 +51,23 @@ static AstContext *test_parse(const QString &fileName, llvm::Module *module) {
     // save package message.
     global_packages[fileName] = now_package;
     return global_packages_contexts[fileName] = now_package->compile(module);
+}
+
+static void test_llvm_run(AstPackage *package, std::unique_ptr<llvm::Module> module, char *const *envp) {
+    if (!package) {
+        console->error(QString(TAG + " package is null.").toStdString());
+        return;
+    }
+
+    llvm::Function *package_func = package->package_function();
+    llvm::ExecutionEngine *engine = build_llvm_engine(std::move(module));
+    if (!engine) {
+        console->error(QString(TAG + " build execute engine is null.").toStdString());
+        return;
+    }
+
+    std::vector<std::string> noargs;
+    engine->runFunctionAsMain(package_func, noargs, envp);
 }
 
 static std::ofstream create_test_output(const QString &fileName) {

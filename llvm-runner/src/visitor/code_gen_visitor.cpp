@@ -107,6 +107,7 @@ void CodeGenVisitor::visit(AstDef &node) {
         }
 
         context->set_symbol_value(pair.first, code_gen);
+        set_codegen_result(node, code_gen);
     }
 
 //    auto list = new
