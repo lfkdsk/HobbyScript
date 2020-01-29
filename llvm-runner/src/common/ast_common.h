@@ -89,10 +89,14 @@ inline QString tag(AstRuntimeType type) {
     VisitableImpl<Type, AST_BASE_LIST()>\
 
 
-#define TYPE_AUTO_DOWNCAST(node, visitor) \
+#define AST_TYPE_AUTO_DOWNCAST(node, visitor) \
     switch (node->runtime_type) { \
         case AstDefTy: { \
             visitor->visit(*dynamic_cast<AstDef *>(node)); \
+            break; \
+        } \
+        case AstIntegerConstantTy: { \
+            visitor->visit(*dynamic_cast<AstIntegerConstant *>(node)); \
             break; \
         } \
     } \

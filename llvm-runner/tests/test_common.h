@@ -15,6 +15,7 @@
 #include "parser/hobby.tab.hpp"
 #include "runtime/runtime.h"
 #include "test_config.h"
+#include "common/gen_graph.h"
 
 extern "C" FILE *yyin;
 extern "C" int yyparse(void);
@@ -54,6 +55,10 @@ static AstContext *test_parse(const QString &fileName, llvm::Module *module) {
 }
 
 static void test_llvm_run(AstPackage *package, std::unique_ptr<llvm::Module> module, char *const *envp) {
+    atexit(llvm::llvm_shutdown); // Call llvm_shutdown() on exit.
+
+    print_llvm_modules(module.get());
+
     if (!package) {
         console->error(QString(TAG + " package is null.").toStdString());
         return;

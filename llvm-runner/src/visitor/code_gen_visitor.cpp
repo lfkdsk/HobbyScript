@@ -22,7 +22,11 @@ void CodeGenVisitor::visit(AstStringLiteral &node) {
 }
 
 void CodeGenVisitor::visit(AstIntegerConstant &node) {
-
+    auto &that = node;
+    auto &_llvm_context = context->context();
+    auto type = llvm::IntegerType::get(_llvm_context, that._bits);
+    auto *value = llvm::ConstantInt::get(type, that._value);
+    set_codegen_result(node, new ValueGen(value));
 }
 
 void CodeGenVisitor::visit(AstBoolConstant &node) {

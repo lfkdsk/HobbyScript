@@ -22,6 +22,7 @@
 #include <llvm/ExecutionEngine/Interpreter.h>
 #include <llvm/ExecutionEngine/MCJIT.h>
 #include <llvm/Support/CommandLine.h>
+#include <iostream>
 
 using RuntimeError = std::runtime_error;
 

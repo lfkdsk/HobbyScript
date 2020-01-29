@@ -5,17 +5,21 @@
 #ifndef LLVM_RUNNER_DEF_GEN_H
 #define LLVM_RUNNER_DEF_GEN_H
 
+#include <utility>
+
 #include "code_gen.h"
 
 class DefGen : public CodeGen, public GEN_BASE(DefGen) {
 public:
-    DefGen(const QString &n, llvm::Type *t, CodeGen *value = nullptr, int array_size = 1) {}
+    DefGen(QString n, llvm::Type *t, CodeGen *value = nullptr, int array_size = 1)
+            : name(std::move(n)), array_size(array_size), gen_value(value) {
+        this->type = t;
+        this->runtime_type = DefGenTy;
+    }
 
 public:
     QString name;
-
-private:
-    CodeGen *value = nullptr;
+    CodeGen *gen_value = nullptr;
     bool is_class = false;
     int array_size = 0;
 };

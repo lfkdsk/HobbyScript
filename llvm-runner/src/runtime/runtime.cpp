@@ -20,9 +20,9 @@ llvm::ExecutionEngine *build_llvm_engine(std::unique_ptr<llvm::Module> module) {
     builder.setErrorStr(&err_msg);
 //    builder.setEngineKind(llvm::EngineKind::Interpreter);
 
-//    llvm::StringRef MCPU = llvm::sys::getHostCPUName();
-//    console->debug(QString("MCPU: " + QString(MCPU.str().c_str())).toStdString());
-//    console->debug(QString("Triple: " + QString(llvm::sys::getDefaultTargetTriple().c_str())).toStdString());
+    llvm::StringRef MCPU = llvm::sys::getHostCPUName();
+    console->debug(QString("MCPU: " + QString(MCPU.str().c_str())).toStdString());
+    console->debug(QString("Triple: " + QString(llvm::sys::getDefaultTargetTriple().c_str())).toStdString());
 
     auto *engine = builder.create();
     if (!engine) {

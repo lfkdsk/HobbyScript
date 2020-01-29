@@ -23,4 +23,6 @@ class LLVMTypeVisitor;
 
 #define LLVM_CODEGEN_VISITOR GenericVisitor<LLVMCodeGenVisitor, TYPE_BASE_LIST()>
 
+#define LLVM_TYPE_VISITOR GenericVisitor<LLVMTypeVisitor, TYPE_BASE_LIST()>
+
 #endif //LLVM_RUNNER_VISITOR_COMMON_H

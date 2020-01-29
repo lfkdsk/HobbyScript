@@ -17,6 +17,14 @@ class LetGen;
 
 class DefGen;
 
+enum GenType {
+    CodeGenTy,
+    TypeOnlyTy,
+    ValueGenTy,
+    LetGenTy,
+    DefGenTy,
+};
+
 #define GEN_BASE(Type) \
     VisitableImpl<\
             Type, \
@@ -24,6 +32,14 @@ class DefGen;
             ValueGen, LetGen, TypeOnlyGen, \
             DefGen \
     >\
+
+#define GEN_TYPE_AUTO_DOWNCAST(node, visitor) \
+    switch (node->runtime_type) { \
+        case DefGenTy: { \
+            visitor->visit(*dynamic_cast<DefGen *>(node)); \
+            break; \
+        } \
+    } \
 
 
 #endif //LLVM_RUNNER_GEN_COMMON_H

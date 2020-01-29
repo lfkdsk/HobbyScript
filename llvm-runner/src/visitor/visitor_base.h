@@ -47,6 +47,8 @@ public:
     virtual void visit(LetGen &gen) = 0;
 
     virtual void visit(ValueGen &gen) = 0;
+
+    virtual void visit(DefGen &gen) = 0;
 };
 
 class TypeBaseVisitor {

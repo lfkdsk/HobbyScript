@@ -17,7 +17,7 @@ CodeGen *AstDef::make_def_gen(
 ) {
     if (var != nullptr) {
         auto visitor = new CODEGEN_VISITOR(parent);
-        TYPE_AUTO_DOWNCAST(var,  visitor);
+        AST_TYPE_AUTO_DOWNCAST(var, visitor);
     }
 
     CodeGen *v = var ? var->codegen_result() : nullptr;
@@ -42,10 +42,12 @@ CodeGen *AstDef::make_def_gen(
             return get_class_def->make_new_class(parent, args);
         }
     } else if (ast_type) {
-        LLVMTypeVisitor(parent->context()).visit(*ast_type);
+        auto visitor = new LLVM_TYPE_VISITOR(parent->context());
+        TYPE_TYPE_AUTO_DOWNCAST(ast_type, visitor);
         t = ast_type->codegen_result();
-    } else if (v)
+    } else if (v) {
         t = v->type;
+    }
 
     return new DefGen(n, t, v);
 }

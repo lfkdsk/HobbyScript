@@ -14,7 +14,7 @@ class AstDef : public AstNode, public AST_BASE(AstDef) {
 public:
     AstDef();
 
-    AstType *type;
+    AstType *type{};
     QVector<QPair<QString, AstNode *>> vars;
 public:
     CodeGen *make_def_gen(

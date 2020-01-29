@@ -15,7 +15,7 @@ public:
 
     void set_value(int64_t v);
 
-private:
+public:
     int64_t _value = 0;
     int _bits = 0;
 };
