@@ -9,15 +9,15 @@
 
 class IntegerType : public AstType {
 public:
-    IntegerType(int bit_width, bool is_unsigned) ;
+    IntegerType(int bit_width, bool is_unsigned);
 
 public:
     int bit_width;
     bool is_unsigned = false;
 public:
-    static IntegerType* get(int bit_width, bool is_unsigned=false);
+    static IntegerType *get(int bit_width, bool is_unsigned = false);
 
-    QString unique_name() override;
+    QString unique_name();
 };
 
 

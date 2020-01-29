@@ -19,6 +19,7 @@ class AstNode : public AST_BASE(AstNode) {
 public:
     AstNode(QString n = QString()) : name(std::move(n)) {
         this->line_num = yylineno;
+        this->runtime_type = AstNodeTy;
     };
 
     virtual ~AstNode() {}
@@ -27,6 +28,7 @@ public:
     QString name;
     int line_num;
     const QString node_id = point_to_str(this);
+    AstRuntimeType runtime_type;
     const std::string node_id_str = node_id.toUtf8().toStdString();
 
     inline void set_codegen_result(CodeGen *result) {
@@ -40,6 +42,7 @@ public:
     std::string std_name() {
         return name.toUtf8().toStdString();
     };
+
 protected:
     CodeGen *code_gen_result = nullptr;
 

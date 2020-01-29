@@ -11,9 +11,13 @@
 
 class CodeGen : public GEN_BASE(CodeGen) {
 public:
-    explicit CodeGen(llvm::Type *t = nullptr) : type(t) {};
+    explicit CodeGen(llvm::Type *t = nullptr) : type(t) {
+        this->runtime_type = CodeGenTy;
+    };
 
-    explicit CodeGen(llvm::Value *v) : value(v), type(v == nullptr ? nullptr : v->getType()) {};
+    explicit CodeGen(llvm::Value *v) : value(v), type(v == nullptr ? nullptr : v->getType()) {
+        this->runtime_type = CodeGenTy;
+    };
 
     virtual ~ CodeGen() {}
 
@@ -23,8 +27,10 @@ public:
 
     bool isParams = false;
     bool isEscape = false;
+
+    GenType runtime_type;
 public:
-    virtual llvm::Value *generate(LLVMCodeGenVisitor &visitor);
+    virtual llvm::Value *generate(LLVMCodeGenVisitor *visitor);
 
     llvm::Value *load(llvm::IRBuilder<> &builder, llvm::Value *v);
 };

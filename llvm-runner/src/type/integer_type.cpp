@@ -14,6 +14,8 @@ IntegerType *sLong = nullptr;
 IntegerType *uLong = nullptr;
 
 IntegerType::IntegerType(int bit_width, bool is_unsigned) : AstType(IntegerTyID) {
+    this->bit_width = bit_width;
+    this->is_unsigned = is_unsigned;
     switch (bit_width) {
         case 1:
             name = "boolean";

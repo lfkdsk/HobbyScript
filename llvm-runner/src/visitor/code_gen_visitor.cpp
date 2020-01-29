@@ -22,7 +22,11 @@ void CodeGenVisitor::visit(AstStringLiteral &node) {
 }
 
 void CodeGenVisitor::visit(AstIntegerConstant &node) {
-
+    auto &that = node;
+    auto &_llvm_context = context->context();
+    auto type = llvm::IntegerType::get(_llvm_context, that._bits);
+    auto *value = llvm::ConstantInt::get(type, that._value);
+    set_codegen_result(node, new ValueGen(value));
 }
 
 void CodeGenVisitor::visit(AstBoolConstant &node) {
@@ -71,5 +75,48 @@ void CodeGenVisitor::visit(AstList &node) {
 }
 
 void CodeGenVisitor::visit(AstPackage &node) {
+
+}
+
+void CodeGenVisitor::visit(AstDef &node) {
+//    CodeGen * AstDef::makeGen(AstContext * parent)
+//    {
+//        AstType* p = AutoType::isAuto(type) ? nullptr : type;
+//
+//        if (vars.size() == 1) {
+//            auto x=vars.at(0);
+//            auto gen= makeDefGen(parent, p, x.first, x.second);
+//            if (!gen)
+//                throw std::runtime_error("Can't def " + x.first);
+//            parent->setSymbolValue(x.first, gen );
+//            return gen;
+//        }
+//
+//        auto list = new GenList();
+//        for (auto &i : vars) {
+//            auto gen = makeDefGen(parent, p, i.first, i.second);
+//            list->generates.push_back(gen);
+//            parent->setSymbolValue(i.first, gen);
+//        }
+//
+//        return list;
+//    }
+    auto *type = AutoType::is_auto_type(node.type) ? nullptr : node.type;
+    auto vars = node.vars;
+    if (vars.length() == 1) {
+        auto pair = vars.at(0);
+        auto code_gen = node.make_def_gen(context, type, pair.first, pair.second);
+        if (!code_gen) {
+            throw create_runtime_error("couldn't def " + pair.first);
+        }
+
+        context->set_symbol_value(pair.first, code_gen);
+        set_codegen_result(node, code_gen);
+    }
+
+//    auto list = new
+}
+
+void CodeGenVisitor::visit(AstDefClass &node) {
 
 }

@@ -9,7 +9,9 @@
 /**
  * Ast Integer Constant.
  */
-AstIntegerConstant::AstIntegerConstant(QString name) : AstNode(std::move(name)) {}
+AstIntegerConstant::AstIntegerConstant(QString name) : AstNode(std::move(name)) {
+    this->runtime_type = AstIntegerConstantTy;
+}
 
 void AstIntegerConstant::set_value(int32_t v) {
     this->_bits = 32;

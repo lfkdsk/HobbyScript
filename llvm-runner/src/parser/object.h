@@ -8,6 +8,10 @@
 #include <cstdint>
 #include <string>
 #include <ast/ast_let.h>
+#include "common/ast_common.h"
+#include "common/type_common.h"
+#include "ast/ast_nodes.hpp"
+#include "type/ast_types.hpp"
 
 enum status_t {
     prog,
@@ -16,10 +20,6 @@ enum status_t {
     func_def_ret,
     AstCall_func
 };
-
-class AstNode;
-
-class AstType;
 
 class TupleType;
 

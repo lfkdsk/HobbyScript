@@ -35,6 +35,10 @@ public:
 
     void visit(AstPackage &node) override;
 
+    void visit(AstDef &node) override;
+
+    void visit(AstDefClass &node) override;
+
 private:
     std::ostream &os;
     const bool with_global_index;

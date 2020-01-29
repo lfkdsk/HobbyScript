@@ -8,6 +8,7 @@
 #include "visitor_base.h"
 #include "common/gen_common.h"
 #include "gen/llvm_generator.h"
+#include "common/llvm_common.h"
 
 /**
  * Convect CodeGen => LLVM Value.
@@ -21,13 +22,15 @@ public:
         return *llvm_gen;
     }
 
-    void visit(CodeGen &gen) override;
-
     void visit(TypeOnlyGen &gen) override;
 
     void visit(LetGen &gen) override;
 
     void visit(ValueGen &gen) override;
+
+    void visit(CodeGen &gen) override;
+
+    void visit(DefGen &gen) override;
 
 private:
     LLVMGenerator *llvm_gen;

@@ -9,6 +9,7 @@
 #include <QVector>
 #include <QMap>
 #include <QHash>
+#include <QPair>
 #include <utility>
 #include <ostream>
 #include <llvm/IR/Value.h>
@@ -18,6 +19,10 @@
 #include <llvm/Support/FormattedStream.h>
 #include <llvm/Support/SourceMgr.h>
 #include <llvm/IR/IRBuilder.h>
+#include <llvm/ExecutionEngine/Interpreter.h>
+#include <llvm/ExecutionEngine/MCJIT.h>
+#include <llvm/Support/CommandLine.h>
+#include <iostream>
 
 using RuntimeError = std::runtime_error;
 

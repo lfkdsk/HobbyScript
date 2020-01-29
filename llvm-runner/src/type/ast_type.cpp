@@ -47,4 +47,8 @@ CodeGen *AstType::malloc(AstContext *context) {
     return nullptr;
 }
 
+VMTypeID AstType::get_type_id() const {
+    return _type_id;
+}
+
 

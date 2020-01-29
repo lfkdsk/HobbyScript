@@ -15,7 +15,7 @@ AstContext::AstContext(AstContext *p) {
     this->path_name = p->path_name;
 }
 
-llvm::LLVMContext & AstContext::context() {
+llvm::LLVMContext &AstContext::context() {
     return module ? module->getContext() : parent->context();
 }
 
@@ -34,5 +34,22 @@ CodeGen *AstContext::find_symbol_value(const QString &var_name, bool recursive) 
         return nullptr;
     }
 
+    return nullptr;
+}
+
+void AstContext::set_symbol_value(const QString &var_name, CodeGen *value) {
+    auto iter = symbols.find(var_name);
+    if (iter != symbols.end()) {
+        auto *type = iter.value()->type;
+        if (!type) {
+            throw create_runtime_error("duplicate variable: " + var_name);
+        }
+        delete iter.value();
+    }
+    // save value in symbols
+    symbols[var_name] = value;
+}
+
+AstDefClass *AstContext::find_class(const QString &name) {
     return nullptr;
 }

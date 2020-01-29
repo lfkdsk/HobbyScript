@@ -9,7 +9,9 @@
 
 class TypeOnlyGen : public CodeGen, public GEN_BASE(TypeOnlyGen) {
 public:
-    explicit TypeOnlyGen(llvm::Type *t) : CodeGen(t) {};
+    explicit TypeOnlyGen(llvm::Type *t) : CodeGen(t) {
+        this->runtime_type = TypeOnlyTy;
+    };
 };
 
 

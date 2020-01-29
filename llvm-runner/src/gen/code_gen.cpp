@@ -3,14 +3,15 @@
 //
 
 #include "code_gen.h"
+#include "code_gens.hpp"
 
-llvm::Value *CodeGen::generate(LLVMCodeGenVisitor &visitor) {
+llvm::Value *CodeGen::generate(LLVMCodeGenVisitor *visitor) {
     if (value) {
         return value;
     }
 
     // save value in visitor.
-    visitor.visit(*this);
+    GEN_TYPE_AUTO_DOWNCAST(this, visitor);
     return value;
 }
 

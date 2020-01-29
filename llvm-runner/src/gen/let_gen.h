@@ -9,7 +9,9 @@
 
 class LetGen : public CodeGen, public GEN_BASE(LetGen) {
 public:
-    explicit LetGen(CodeGen *left, CodeGen *right) : left(left), right(right) {};
+    explicit LetGen(CodeGen *left, CodeGen *right) : left(left), right(right) {
+        this->runtime_type = LetGenTy;
+    };
 
 public:
     CodeGen *left = nullptr;

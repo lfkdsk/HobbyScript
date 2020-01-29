@@ -9,7 +9,9 @@
 
 class ValueGen : public CodeGen, public GEN_BASE(ValueGen) {
 public:
-    explicit ValueGen(llvm::Value *v) : CodeGen(v) {}
+    explicit ValueGen(llvm::Value *v) : CodeGen(v) {
+        this->runtime_type = ValueGenTy;
+    }
 };
 
 
