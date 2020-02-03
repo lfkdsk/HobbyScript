@@ -7,7 +7,7 @@
 
 #include "common/common.h"
 
-struct LLVMGenerator {
+struct LLVMGenContext {
     llvm::Module *module;
     llvm::Function *func;
     llvm::IRBuilder<> *ir_builder;

@@ -99,6 +99,10 @@ inline QString tag(AstRuntimeType type) {
             visitor->visit(*dynamic_cast<AstIntegerConstant *>(node)); \
             break; \
         } \
+        case AstStringLiteralTy: { \
+            visitor->visit(*dynamic_cast<AstStringLiteral *>(node)); \
+            break; \
+        } \
     } \
 
 #endif //LLVM_RUNNER_AST_COMMON_H

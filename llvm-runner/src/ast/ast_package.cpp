@@ -33,7 +33,7 @@ void AstPackage::codegen(llvm::LLVMContext &llvm_context, llvm::Module *module) 
     auto deallocate = llvm::BasicBlock::Create(llvm_context, "dealloc", package_func);
 
     llvm::IRBuilder<> ir_builder(basic_block);
-    auto llvm_generator = LLVMGenerator{module, package_func, &ir_builder, deallocate};
+    auto llvm_generator = LLVMGenContext{module, package_func, &ir_builder, deallocate};
     auto llvm_gen_visitor = new LLVMCodeGenVisitor(&llvm_generator);
     // gen code_gens.
     for (auto gen : code_gens) {

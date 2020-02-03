@@ -4,11 +4,12 @@
 
 #include "ast_literal.h"
 
-AstStringLiteral::AstStringLiteral(const QString& value) {
+AstStringLiteral::AstStringLiteral(const QString &value) {
     if (value.startsWith('"')) {
         this->name = value.mid(1, value.length() - 2);
     } else {
         this->name = value;
     }
+    this->runtime_type = AstStringLiteralTy;
     // TODO: escape string.
 }
