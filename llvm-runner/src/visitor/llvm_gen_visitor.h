@@ -30,6 +30,8 @@ public:
 
     void visit(CodeGen &gen) override;
 
+    void visit(StringLiteGen &gen) override;
+
     void visit(DefGen &gen) override;
 
 private:

@@ -8,6 +8,7 @@
 #include "common/common.h"
 #include "gen/code_gens.hpp"
 #include "common/utility.h"
+#include <llvm/IRReader/IRReader.h>
 
 class AstContext {
 public:
@@ -28,7 +29,6 @@ public:
     CodeGen *find_symbol_value(const QString &var_name, bool recursive = true);
 
     void set_symbol_value(const QString &var_name, CodeGen *value);
-
     // classes
     AstDefClass *find_class(const QString &name);
 };

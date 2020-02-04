@@ -8,7 +8,25 @@
 #include "code_gen.h"
 
 class StringLiteGen : public CodeGen, public GEN_BASE(StringLiteGen) {
+public:
+    StringLiteGen(llvm::LLVMContext &llvm_context, QString string) :
+            llvm_context(llvm_context),
+            source_string(std::move(string)) {
+        this->runtime_type = StringLiteGenTy;
+    }
 
+public:
+    llvm::LLVMContext &context() {
+        return llvm_context;
+    }
+
+    QString str() {
+        return source_string;
+    }
+
+private:
+    llvm::LLVMContext &llvm_context;
+    QString source_string;
 };
 
 

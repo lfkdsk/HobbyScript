@@ -27,8 +27,8 @@ public:
 public:
     QString name;
     int line_num;
-    const QString node_id = point_to_str(this);
     AstRuntimeType runtime_type;
+    const QString node_id = point_to_str(this);
     const std::string node_id_str = node_id.toUtf8().toStdString();
 
     inline void set_codegen_result(CodeGen *result) {

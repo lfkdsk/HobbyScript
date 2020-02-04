@@ -40,9 +40,12 @@ void AstPackage::codegen(llvm::LLVMContext &llvm_context, llvm::Module *module) 
         gen->generate(llvm_gen_visitor);
     }
 
+    // basic block => deallocate
     ir_builder.CreateBr(deallocate);
+    // alloca => basic block
     ir_builder.SetInsertPoint(alloc);
     ir_builder.CreateBr(basic_block);
+    // return void main.
     ir_builder.SetInsertPoint(deallocate);
     ir_builder.CreateRetVoid();
 }

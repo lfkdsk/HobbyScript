@@ -23,6 +23,7 @@
 #include <llvm/ExecutionEngine/MCJIT.h>
 #include <llvm/Support/CommandLine.h>
 #include <iostream>
+#include <spdlog/common.h>
 
 using RuntimeError = std::runtime_error;
 
