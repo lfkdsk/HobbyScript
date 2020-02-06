@@ -20,7 +20,7 @@
 extern "C" FILE *yyin;
 extern "C" int yyparse(void);
 const QString TAG = "[Test Common]: ";
-const constexpr auto separator = std::filesystem::path::preferred_separator;
+//const constexpr auto separator = std::filesystem::path::preferred_separator;
 
 static void llvm_init() {
     llvm::InitializeNativeTarget();
@@ -71,7 +71,12 @@ static void test_llvm_run(AstPackage *package, std::unique_ptr<llvm::Module> mod
         return;
     }
 
-    std::vector<std::string> noargs;
+    Plugins::link_plugins(engine);
+
+    engine->RegisterJITEventListener(llvm::JITEventListener::createOProfileJITEventListener());
+    engine->RegisterJITEventListener(llvm::JITEventListener::createIntelJITEventListener());
+
+    std::vector<std::string> noargs = {};
     engine->runFunctionAsMain(package_func, noargs, envp);
 }
 

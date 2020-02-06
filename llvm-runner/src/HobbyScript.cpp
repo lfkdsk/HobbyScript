@@ -20,7 +20,7 @@
 #include "runtime/runtime.h"
 
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv, char *const *envp) {
     atexit(llvm::llvm_shutdown);
 //    ::testing::InitGoogleTest(&argc, argv);
     llvm::InitializeNativeTarget();

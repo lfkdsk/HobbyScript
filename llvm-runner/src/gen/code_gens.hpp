@@ -10,5 +10,6 @@
 #include "value_gen.h"
 #include "let_gen.h"
 #include "def_gen.h"
+#include "call_gen.h"
 
 #endif //LLVM_RUNNER_CODE_GENS_H

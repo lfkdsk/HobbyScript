@@ -15,6 +15,7 @@ TEST(MY_TEST, ParserConstantTest) {
 }
 
 TEST(MY_TEST, ParserVarTest) {
+    llvm_init();
     auto *m = new llvm::Module("TOP", llvm_global_context);
     llvm_module.reset(m);
     auto *context = test_parse(get_test_parse_input() + separator + "assign_var_simple.hobby", llvm_module.get());

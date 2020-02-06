@@ -17,12 +17,18 @@ class LetGen;
 
 class DefGen;
 
+class StringLiteGen;
+
+class CallGen;
+
 enum GenType {
     CodeGenTy,
     TypeOnlyTy,
     ValueGenTy,
     LetGenTy,
     DefGenTy,
+    StringLiteGenTy,
+    CallGenTy,
 };
 
 #define GEN_BASE(Type) \
@@ -30,7 +36,7 @@ enum GenType {
             Type, \
             CodeGen, /* CodeGen Base Node */ \
             ValueGen, LetGen, TypeOnlyGen, \
-            DefGen \
+            DefGen, StringLiteGen \
     >\
 
 #define GEN_TYPE_AUTO_DOWNCAST(node, visitor) \

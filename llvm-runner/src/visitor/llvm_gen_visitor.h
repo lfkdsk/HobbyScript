@@ -15,10 +15,10 @@
  */
 class LLVMCodeGenVisitor : public GenBaseVisitor {
 public:
-    explicit LLVMCodeGenVisitor(LLVMGenerator *generator) : llvm_gen(generator) {}
+    explicit LLVMCodeGenVisitor(LLVMGenContext *generator) : llvm_gen(generator) {}
 
 public:
-    inline LLVMGenerator &generator() {
+    inline LLVMGenContext &generator() {
         return *llvm_gen;
     }
 
@@ -30,10 +30,12 @@ public:
 
     void visit(CodeGen &gen) override;
 
+    void visit(StringLiteGen &gen) override;
+
     void visit(DefGen &gen) override;
 
 private:
-    LLVMGenerator *llvm_gen;
+    LLVMGenContext *llvm_gen;
 };
 
 

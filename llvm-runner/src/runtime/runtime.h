@@ -18,6 +18,10 @@ extern std::unique_ptr<llvm::Module> llvm_module;
 extern QMap<QString, AstContext *> global_packages_contexts;
 extern QMap<QString, AstPackage *> global_packages;
 
+/* C Plugin Runtime */
+extern std::map<QString, std::unique_ptr<llvm::Module>> loaded_modules;
+extern QMap<QString, llvm::StructType *> loaded_structs;
+
 /* Ast Runtime */
 extern AstPackage *ast_current_package;
 

@@ -19,4 +19,12 @@ inline static T *get_map_value(const QHash<QString, T *> &map, const QString &na
     return has ? map.find(name).value() : nullptr;
 }
 
+template<typename T>
+inline llvm::Value *to_llvm_value(T v);
+
+template<typename T>
+inline llvm::Value *to_llvm_value(T *v) {
+    return v;
+}
+
 #endif //LLVM_RUNNER_UTILITY_H

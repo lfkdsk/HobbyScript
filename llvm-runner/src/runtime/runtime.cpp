@@ -9,6 +9,9 @@ std::unique_ptr<llvm::Module> llvm_module;
 QMap<QString, AstContext *> global_packages_contexts;
 QMap<QString, AstPackage *> global_packages;
 
+std::map<QString, std::unique_ptr<llvm::Module>> loaded_modules;
+QMap<QString, llvm::StructType *> loaded_structs;
+
 /* Ast Runtime */
 AstPackage *ast_current_package = new AstPackage();
 
@@ -18,7 +21,8 @@ llvm::ExecutionEngine *build_llvm_engine(std::unique_ptr<llvm::Module> module) {
     llvm::EngineBuilder builder(std::move(module));
     std::string err_msg;
     builder.setErrorStr(&err_msg);
-//    builder.setEngineKind(llvm::EngineKind::Interpreter);
+    builder.setEngineKind(llvm::EngineKind::JIT);
+    builder.setUseOrcMCJITReplacement(false);
 
     llvm::StringRef MCPU = llvm::sys::getHostCPUName();
     console->debug(QString("MCPU: " + QString(MCPU.str().c_str())).toStdString());

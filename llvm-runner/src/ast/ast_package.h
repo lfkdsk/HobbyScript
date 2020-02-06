@@ -10,6 +10,9 @@
 #include "runtime/runtime.h"
 #include "common/visitor_common.h"
 #include "gen/llvm_generator.h"
+#include "runtime/plugins.h"
+#include "common/llvm_common.h"
+#include "plugins/plugin_core.h"
 
 class AstPackage : public AstNode, public AST_BASE(AstPackage) {
 public:

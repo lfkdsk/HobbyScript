@@ -25,10 +25,19 @@ public:
     llvm::Type *type = nullptr;
     llvm::Value *value = nullptr;
 
-    bool isParams = false;
-    bool isEscape = false;
+    bool is_params = false;
+    bool is_escape = false;
 
     GenType runtime_type;
+
+public:
+    inline void set_codegen_result(llvm::Value *result) {
+        this->value = result;
+    }
+
+    inline llvm::Value *codegen_result() {
+        return value;
+    }
 public:
     virtual llvm::Value *generate(LLVMCodeGenVisitor *visitor);
 

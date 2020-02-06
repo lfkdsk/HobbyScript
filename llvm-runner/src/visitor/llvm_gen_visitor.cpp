@@ -2,11 +2,12 @@
 // Created by 刘丰恺 on 21/1/2020.
 //
 
+#include <runtime/runtime.h>
 #include "llvm_gen_visitor.h"
 #include "gen/code_gens.hpp"
 
 void LLVMCodeGenVisitor::visit(TypeOnlyGen &gen) {
-
+    
 }
 
 void LLVMCodeGenVisitor::visit(LetGen &gen) {
@@ -38,9 +39,13 @@ void LLVMCodeGenVisitor::visit(DefGen &gen) {
     if (that.gen_value) { // contains value.
         llvm::Value *v = that.gen_value->generate(this);
         v = that.load(b, v);
-        v = llvm_type_cast(b, that.type, v);
-
+        v = llvm_type_cast(b, that.type, v); // reset llvm type
+        // alloca ptr and save store
         that.value = b.CreateAlloca(that.type, nullptr, that.name.toUtf8().toStdString());
         builder.CreateStore(v, that.value);
     }
+}
+
+void LLVMCodeGenVisitor::visit(StringLiteGen &gen) {
+
 }
