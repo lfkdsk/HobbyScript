@@ -16,5 +16,7 @@ int plugin_exclude() {
     return
             (int) (void *) &hyobject_malloc +
             (int) (void *) &hyobject_realloc +
+            (int) (void *) &start_gc +
+            (int) (void *) &stop_gc +
             (int) (void *) &hyobject_free;
 }

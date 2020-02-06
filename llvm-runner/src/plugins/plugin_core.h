@@ -7,6 +7,7 @@
 
 #include <stddef.h>
 #include "tgc.h"
+#include "stdio.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -14,7 +15,7 @@ extern "C" {
 
 static tgc_t gc;
 
-void start_gc(int argc);
+void start_gc();
 
 void stop_gc();
 

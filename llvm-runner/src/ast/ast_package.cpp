@@ -38,9 +38,6 @@ void AstPackage::codegen(llvm::LLVMContext &llvm_context, llvm::Module *module) 
         type_iter->setName(name_iter->toStdString());
     }
 
-    llvm::Module *core = Plugins::load_plugin_core();
-    llvm::Function *start_gc = Plugins::get_function("start_gc");
-
     auto alloc = llvm::BasicBlock::Create(llvm_context, name.toUtf8().toStdString(), package_func);
     auto basic_block = llvm::BasicBlock::Create(llvm_context, name.toUtf8().toStdString(), package_func);
     auto deallocate = llvm::BasicBlock::Create(llvm_context, "dealloc", package_func);
@@ -48,6 +45,20 @@ void AstPackage::codegen(llvm::LLVMContext &llvm_context, llvm::Module *module) 
     llvm::IRBuilder<> ir_builder(basic_block);
     auto llvm_generator = LLVMGenContext{module, package_func, &ir_builder, deallocate};
     auto llvm_gen_visitor = new LLVMCodeGenVisitor(&llvm_generator);
+
+    Plugins::load_plugin_package();
+    llvm::Module *core = Plugins::load_plugin_core();
+    link_to(core, llvm_module.get(), "start_gc");
+
+    llvm::Function *start_gc = Plugins::get_function("start_gc");
+    auto args_iter = package_func->arg_begin();
+    llvm::Value *argc_ptr = args_iter++;
+
+    ir_builder.SetInsertPoint(alloc);
+    CallGen::call(ir_builder, start_gc);
+
+    ir_builder.SetInsertPoint(basic_block);
+
     // gen code_gens.
     for (auto gen : code_gens) {
         gen->generate(llvm_gen_visitor);

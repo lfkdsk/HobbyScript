@@ -19,6 +19,8 @@ class DefGen;
 
 class StringLiteGen;
 
+class CallGen;
+
 enum GenType {
     CodeGenTy,
     TypeOnlyTy,
@@ -26,6 +28,7 @@ enum GenType {
     LetGenTy,
     DefGenTy,
     StringLiteGenTy,
+    CallGenTy,
 };
 
 #define GEN_BASE(Type) \

@@ -25,6 +25,7 @@
 #include <iostream>
 #include <spdlog/common.h>
 #include <filesystem>
+#include <llvm/Support/raw_os_ostream.h>
 #include "config.h"
 
 using RuntimeError = std::runtime_error;

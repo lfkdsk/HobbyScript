@@ -8,7 +8,6 @@
 
 #include "common/common.h"
 #include "runtime.h"
-#include "config.h"
 
 class Plugins {
 public:
@@ -16,14 +15,15 @@ public:
 
     static llvm::Module *load_plugin_core();
 
+    static void load_package(const QString &package_name, const QString &package_path = nullptr);
+
+    static void load_plugin_package();
+
+    static void link_plugins(llvm::ExecutionEngine * engine);
+
     static llvm::Function *get_function(const QString &name);
 
     static llvm::Function *get_function(llvm::Module *module, const QString &name);
-};
-
-class Modules {
-public:
-
 };
 
 #endif //LLVM_RUNNER_PLUGINS_H

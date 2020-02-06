@@ -71,7 +71,12 @@ static void test_llvm_run(AstPackage *package, std::unique_ptr<llvm::Module> mod
         return;
     }
 
-    std::vector<std::string> noargs;
+    Plugins::link_plugins(engine);
+
+    engine->RegisterJITEventListener(llvm::JITEventListener::createOProfileJITEventListener());
+    engine->RegisterJITEventListener(llvm::JITEventListener::createIntelJITEventListener());
+
+    std::vector<std::string> noargs = {};
     engine->runFunctionAsMain(package_func, noargs, envp);
 }
 

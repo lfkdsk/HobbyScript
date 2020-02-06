@@ -4,8 +4,9 @@
 
 #include "plugin_core.h"
 
-void start_gc(int argc) {
-    tgc_start(&gc, &argc);
+void start_gc() {
+//    tgc_start(&gc, 0);
+    printf("hello world");
 }
 
 void stop_gc() {

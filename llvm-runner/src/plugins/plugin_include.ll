@@ -1,5 +1,5 @@
-; ModuleID = 'plugin_include.c'
-source_filename = "plugin_include.c"
+; ModuleID = '/Users/liufengkai/Documents/Code/HobbyScript/llvm-runner/src/plugins/plugin_include.c'
+source_filename = "/Users/liufengkai/Documents/Code/HobbyScript/llvm-runner/src/plugins/plugin_include.c"
 target datalayout = "e-m:o-i64:64-f80:128-n8:16:32:64-S128"
 target triple = "x86_64-apple-macosx10.15.0"
 
@@ -19,12 +19,16 @@ declare void @tgc_stop(%struct.tgc_t*) #1
 
 ; Function Attrs: noinline nounwind optnone ssp uwtable
 define i32 @plugin_exclude() #0 {
-  ret i32 add nsw (i32 add nsw (i32 ptrtoint (i8* (i64)* @hyobject_malloc to i32), i32 ptrtoint (i8* (i8*, i64)* @hyobject_realloc to i32)), i32 ptrtoint (void (i8*)* @hyobject_free to i32))
+  ret i32 add nsw (i32 add nsw (i32 add nsw (i32 add nsw (i32 ptrtoint (i8* (i64)* @hyobject_malloc to i32), i32 ptrtoint (i8* (i8*, i64)* @hyobject_realloc to i32)), i32 ptrtoint (void (...)* @start_gc to i32)), i32 ptrtoint (void (...)* @stop_gc to i32)), i32 ptrtoint (void (i8*)* @hyobject_free to i32))
 }
 
 declare i8* @hyobject_malloc(i64) #1
 
 declare i8* @hyobject_realloc(i8*, i64) #1
+
+declare void @start_gc(...) #1
+
+declare void @stop_gc(...) #1
 
 declare void @hyobject_free(i8*) #1
 
