@@ -10,6 +10,7 @@ addons:
 
 before_install:
 - pip install --user cpp-coveralls
+- sudo apt-get install -y qt5-default rapidjson-dev
 
 script:
 - cmake -H. -Bbuild
