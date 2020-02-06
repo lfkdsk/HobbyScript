@@ -20,7 +20,7 @@
 extern "C" FILE *yyin;
 extern "C" int yyparse(void);
 const QString TAG = "[Test Common]: ";
-const constexpr auto separator = std::filesystem::path::preferred_separator;
+//const constexpr auto separator = std::filesystem::path::preferred_separator;
 
 static void llvm_init() {
     llvm::InitializeNativeTarget();

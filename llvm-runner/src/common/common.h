@@ -24,11 +24,18 @@
 #include <llvm/Support/CommandLine.h>
 #include <iostream>
 #include <spdlog/common.h>
+#include <filesystem>
+#include "config.h"
 
 using RuntimeError = std::runtime_error;
+const constexpr auto separator = std::__fs::filesystem::path::preferred_separator;
 
 RuntimeError create_runtime_error(const QString &message);
 
 QString point_to_str(void *p);
+
+static QString get_plugin_dir() {
+    return get_project_dir() + separator + "plugins";
+}
 
 #endif //LLVM_RUNNER_COMMON_H

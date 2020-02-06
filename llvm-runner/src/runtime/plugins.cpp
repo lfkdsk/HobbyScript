@@ -2,10 +2,10 @@
 // Created by 刘丰恺 on 4/2/2020.
 //
 
-#include "cplugins.h"
+#include "plugins.h"
 
 
-llvm::Module *CPlugins::load_llvm_ir(const QString &ir_file_name) {
+llvm::Module *Plugins::load_llvm_ir(const QString &ir_file_name) {
     auto iter = loaded_modules.find(ir_file_name);
     if (iter != loaded_modules.end()) {
         return iter.value();
@@ -28,4 +28,31 @@ llvm::Module *CPlugins::load_llvm_ir(const QString &ir_file_name) {
 
     loaded_modules.insert(ir_file_name, load_module.get());
     return load_module.get();
+}
+
+llvm::Module *Plugins::load_plugin_core() {
+    return Plugins::load_llvm_ir(get_plugin_dir() + separator + "plugin_include.ll");
+}
+
+llvm::Function *Plugins::get_function(llvm::Module *module, const QString &name) {
+    auto *f = module->getFunction(name.toStdString());
+    if (f) {
+        return f;
+    }
+
+    for (auto &iter : loaded_modules) {
+        auto func = iter->getFunction(name.toStdString());
+        if (func) {
+            return llvm::Function::Create(
+                    func->getFunctionType(),
+                    llvm::Function::ExternalLinkage, func->getName(),
+                    llvm_module.get()
+            );
+        }
+    }
+    return nullptr;
+}
+
+llvm::Function *Plugins::get_function(const QString &name) {
+    return Plugins::get_function(llvm_module.get(), name);
 }

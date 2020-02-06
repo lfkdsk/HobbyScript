@@ -9,7 +9,7 @@ std::unique_ptr<llvm::Module> llvm_module;
 QMap<QString, AstContext *> global_packages_contexts;
 QMap<QString, AstPackage *> global_packages;
 
-QMap<QString, std::unique_ptr<llvm::Module>> modules;
+QMap<QString, llvm::Module *> loaded_modules;
 QMap<QString, llvm::StructType *> loaded_structs;
 
 /* Ast Runtime */

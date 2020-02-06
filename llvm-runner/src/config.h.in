@@ -1,0 +1,17 @@
+//
+// Created by 刘丰恺 on 20/1/2020.
+//
+
+#ifndef LLVM_RUNNER__CONFIG_H
+#define LLVM_RUNNER__CONFIG_H
+
+#include <QString>
+// define your var
+// #define xxxxx
+
+// alternatively you could add your global method here
+static QString get_project_dir() {
+    return "@PROJECT_SOURCE_DIR@";
+}
+
+#endif //LLVM_RUNNER__CONFIG_H
