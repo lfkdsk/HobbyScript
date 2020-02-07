@@ -6,14 +6,14 @@
 #define LLVM_RUNNER_PLUGIN_CORE_H
 
 #include <stddef.h>
-#include "tgc.h"
+#include "gc.h"
 #include "stdio.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-static tgc_t gc;
+static gc_t gc;
 
 void start_gc();
 
