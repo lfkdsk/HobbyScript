@@ -3,19 +3,19 @@ source_filename = "/Users/liufengkai/Documents/Code/HobbyScript/llvm-runner/src/
 target datalayout = "e-m:o-i64:64-f80:128-n8:16:32:64-S128"
 target triple = "x86_64-apple-macosx10.15.0"
 
-%struct.tgc_t = type { i8*, i32, i64, i64, %struct.tgc_ptr_t*, %struct.tgc_ptr_t*, double, double, i64, i64, i64, i64 }
-%struct.tgc_ptr_t = type { i8*, i32, i64, i64, void (i8*)* }
+%struct.gc_t = type { i8*, i32, i64, i64, %struct.gc_ptr_t*, %struct.gc_ptr_t*, double, double, i64, i64, i64, i64 }
+%struct.gc_ptr_t = type { i8*, i32, i64, i64, void (i8*)* }
 
 ; Function Attrs: noinline nounwind optnone ssp uwtable
 define i32 @tgc_exclude() #0 {
-  ret i32 add nsw (i32 add nsw (i32 ptrtoint (i8* (%struct.tgc_t*, i64)* @tgc_alloc to i32), i32 ptrtoint (void (%struct.tgc_t*, i8*)* @tgc_start to i32)), i32 ptrtoint (void (%struct.tgc_t*)* @tgc_stop to i32))
+  ret i32 add nsw (i32 add nsw (i32 ptrtoint (i8* (%struct.gc_t*, i64)* @gc_alloc to i32), i32 ptrtoint (void (%struct.gc_t*, i8*)* @gc_start to i32)), i32 ptrtoint (void (%struct.gc_t*)* @gc_stop to i32))
 }
 
-declare i8* @tgc_alloc(%struct.tgc_t*, i64) #1
+declare i8* @gc_alloc(%struct.gc_t*, i64) #1
 
-declare void @tgc_start(%struct.tgc_t*, i8*) #1
+declare void @gc_start(%struct.gc_t*, i8*) #1
 
-declare void @tgc_stop(%struct.tgc_t*) #1
+declare void @gc_stop(%struct.gc_t*) #1
 
 ; Function Attrs: noinline nounwind optnone ssp uwtable
 define i32 @plugin_exclude() #0 {
