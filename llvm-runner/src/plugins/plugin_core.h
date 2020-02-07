@@ -15,7 +15,9 @@ extern "C" {
 
 static gc_t gc;
 
-void start_gc();
+void init_log();
+
+void start_gc(int argc);
 
 void stop_gc();
 

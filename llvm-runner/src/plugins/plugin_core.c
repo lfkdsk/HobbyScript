@@ -4,9 +4,12 @@
 
 #include "plugin_core.h"
 
-void start_gc() {
-//    gc_start(&gc, 0);
-    printf("hello world");
+void init_log() {
+    printf("init plugin core");
+}
+
+void start_gc(int argc) {
+    gc_start(&gc, &argc);
 }
 
 void stop_gc() {

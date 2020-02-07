@@ -19,14 +19,14 @@ declare void @gc_stop(%struct.gc_t*) #1
 
 ; Function Attrs: noinline nounwind optnone ssp uwtable
 define i32 @plugin_exclude() #0 {
-  ret i32 add nsw (i32 add nsw (i32 add nsw (i32 add nsw (i32 ptrtoint (i8* (i64)* @hyobject_malloc to i32), i32 ptrtoint (i8* (i8*, i64)* @hyobject_realloc to i32)), i32 ptrtoint (void (...)* @start_gc to i32)), i32 ptrtoint (void (...)* @stop_gc to i32)), i32 ptrtoint (void (i8*)* @hyobject_free to i32))
+  ret i32 add nsw (i32 add nsw (i32 add nsw (i32 add nsw (i32 ptrtoint (i8* (i64)* @hyobject_malloc to i32), i32 ptrtoint (i8* (i8*, i64)* @hyobject_realloc to i32)), i32 ptrtoint (void (i32)* @start_gc to i32)), i32 ptrtoint (void (...)* @stop_gc to i32)), i32 ptrtoint (void (i8*)* @hyobject_free to i32))
 }
 
 declare i8* @hyobject_malloc(i64) #1
 
 declare i8* @hyobject_realloc(i8*, i64) #1
 
-declare void @start_gc(...) #1
+declare void @start_gc(i32) #1
 
 declare void @stop_gc(...) #1
 
