@@ -11,9 +11,10 @@ HyStringObject *HNI_StringObject_FromString(char *str, uint64_t size) {
     len = size * sizeof(wchar_t);
     this = (HyStringObject *) malloc(sizeof(HyStringObject));
     HyObject_INIT_VAR(this, (int32_t) CharactersTyId, size);
-    this->length = len;
-    this->data = (wchar_t *) str;
-//    memcpy(this->data, str, len + 1);
+    this->length = size;
+//    this->data = (wchar_t *) str;
+    this->data = malloc((size + 1)  * sizeof(wchar_t));
+    memcpy(this->data, str, len + 1);
 
     if (is_debug) {
         wprintf(L"\r\nCreate String(data, %lld): %.*ls From String\r\n", this->length, (int) this->length, this->data);
