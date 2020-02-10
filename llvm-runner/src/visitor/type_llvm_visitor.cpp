@@ -21,3 +21,11 @@ void LLVMTypeVisitor::visit(IntegerType &gen) {
     gen.set_codegen_result(llvm::IntegerType::get(this->context, gen.bit_width));
 }
 
+void LLVMTypeVisitor::visit(LLVMStructType &gen) {
+    gen.set_codegen_result(gen.llvm_type());
+}
+
+void LLVMTypeVisitor::visit(StringType &gen) {
+    gen.set_codegen_result(Plugins::get_struct("HyStringObject"));
+}
+

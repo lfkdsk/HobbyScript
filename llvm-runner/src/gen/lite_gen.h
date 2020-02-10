@@ -26,6 +26,8 @@ public:
         return source_string;
     }
 
+    QString name;
+
 private:
     llvm::LLVMContext &llvm_context;
     QString source_string;

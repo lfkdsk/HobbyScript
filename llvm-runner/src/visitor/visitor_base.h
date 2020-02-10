@@ -53,6 +53,8 @@ public:
     virtual void visit(StringLiteGen &gen) = 0;
 
     virtual void visit(NewGen &gen) = 0;
+
+    virtual void visit(CallGen &gen) = 0;
 };
 
 class TypeBaseVisitor {
@@ -64,6 +66,10 @@ public:
     virtual void visit(IntegerType &gen) = 0;
 
     virtual void visit(ClassType &gen) = 0;
+
+    virtual void visit(LLVMStructType &gen) = 0;
+
+    virtual void visit(StringType &gen) = 0;
 };
 
 #endif //LLVM_RUNNER_BASE_VISITOR_H

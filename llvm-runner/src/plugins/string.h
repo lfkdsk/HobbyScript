@@ -19,7 +19,7 @@ typedef struct {
     wchar_t *data;
 } HyStringObject;
 
-HyVarObject *HNI_StringObject_FromString(const char *str);
+HyStringObject *HNI_StringObject_FromString(const char *str, uint64_t size);
 
 HyVarObject *HNI_StringObject_FromSize(size_t len);
 

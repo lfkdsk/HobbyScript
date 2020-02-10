@@ -9,7 +9,8 @@ void init_log() {
 }
 
 void start_gc(int argc) {
-    gc_start(&gc, &argc);
+    int i = 0;
+    gc_start(&gc, &i);
 }
 
 void stop_gc() {

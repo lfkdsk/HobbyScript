@@ -4,12 +4,17 @@
 
 #include "string.h"
 
-HyVarObject *HNI_StringObject_FromString(const char *str) {
-    size_t len = strlen(str);
-    HyStringObject *this = hyobject_malloc(sizeof(HyStringObject) + len);
-    HyObject_INIT_VAR(this, (int32_t) CharactersTyId, len);
+HyStringObject *HNI_StringObject_FromString(const char *str, uint64_t size) {
+    size_t len = size * sizeof(wchar_t);
+    HyStringObject *this = (HyStringObject *) hyobject_malloc(sizeof(HyStringObject) + len);
+    HyObject_INIT_VAR(this, (int32_t) CharactersTyId, size);
     memcpy(this->data, str, len + 1);
-    return (HyVarObject *) this;
+
+    if (is_debug) {
+        wprintf(L"\r\nCreate String(data, %lld): %.*ls From String\r\n", this->length, (int) this->length, this->data);
+    }
+
+    return this;
 }
 
 HyVarObject *HNI_StringObject_FromSize(size_t len) {
@@ -27,8 +32,7 @@ HyVarObject *HNI_StringObject_FromHyString(HyStringObject *that) {
 
 void HNI_StringObject_Init(HyStringObject *this, char *data, uint64_t length) {
     HyObject_INIT_VAR(this, (int32_t) CharactersTyId, length);
-    memcpy(this->data, data, length + 1);
-
+    this->data = (wchar_t *) data;
     if (is_debug) {
         wprintf(L"\r\nInit String(data, %lld): %.*ls\r\n", length, (int) length, this->data);
     }
@@ -39,9 +43,5 @@ void HNI_StringObject_Finalize(HyStringObject *this) {
 }
 
 void HNI_StringObject_Print(HyStringObject *this) {
-    if (!this || this->length) {
-        return;
-    }
-
     wprintf(L"%.*ls", (int) this->length, this->data);
 }

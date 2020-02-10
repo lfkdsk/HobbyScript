@@ -47,11 +47,7 @@ llvm::Function *Plugins::get_function(llvm::Module *module, const QString &name)
     for (auto &iter : loaded_modules) {
         auto func = iter.second->getFunction(name.toStdString());
         if (func) {
-            return llvm::Function::Create(
-                    func->getFunctionType(),
-                    llvm::Function::ExternalLinkage, func->getName(),
-                    iter.second.get()
-            );
+            return func;
         }
     }
     return nullptr;
@@ -85,7 +81,7 @@ void Plugins::load_plugin_package() {
 void Plugins::link_plugins(llvm::ExecutionEngine *engine) {
     for (auto &i : loaded_modules) {
         auto &v = i.second;
-        std::clog << "Load module:" << v->getName().str() << std::endl;
+//        std::clog << "Load module:" << v->getName().str() << std::endl;
         engine->addModule(std::move(v));
     }
 }

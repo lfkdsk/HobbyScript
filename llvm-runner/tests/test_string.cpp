@@ -14,7 +14,7 @@ TEST(MY_TEST, ParseStringASTVar) {
     auto *context = test_ast_parse(get_test_parse_input() + separator + "assign_var_string_literal.hobby");
     ASSERT_EQ(1, context->lines.size());
     ASSERT_TRUE(dynamic_cast<AstDef *>(context->lines.first()));
-    ASSERT_EQ("1000", (dynamic_cast<AstDef *>(context->lines.first()))->vars.first().second->name);
+    ASSERT_EQ("lfkdsk", (dynamic_cast<AstDef *>(context->lines.first()))->vars.first().second->name);
 }
 
 TEST(MY_TEST, ParseStringVar) {

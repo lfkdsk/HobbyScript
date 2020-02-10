@@ -28,8 +28,7 @@ CodeGen *AstDef::make_def_gen(
     llvm::Type *t = nullptr;
     llvm::LLVMContext &c = parent->context();
 
-    auto *ast_type_gen = dynamic_cast<ClassType *>(ast_type);
-    if (ast_type_gen) {
+    if (auto *ast_type_gen = dynamic_cast<ClassType *>(ast_type)) {
         ast_type_gen->context = parent;
         auto *get_class_def = parent->find_class(ast_type_gen->name);
         if (get_class_def) {
@@ -41,6 +40,10 @@ CodeGen *AstDef::make_def_gen(
             QVector<QPair<QString, CodeGen *>> args;
             return get_class_def->make_new_class(parent, args);
         }
+    } else if (dynamic_cast<StringType *>(ast_type) && v) {
+//        v = new NewGen(str_type->llvm_type(parent->context()));
+        ((StringLiteGen *) v)->name = n;
+        t = v->type;
     } else if (ast_type) {
         auto visitor = new LLVM_TYPE_VISITOR(parent->context());
         TYPE_TYPE_AUTO_DOWNCAST(ast_type, visitor);

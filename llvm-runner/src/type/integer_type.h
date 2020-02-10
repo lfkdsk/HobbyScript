@@ -7,7 +7,7 @@
 
 #include "ast_type.h"
 
-class IntegerType : public AstType {
+class IntegerType : public AstType, public TYPE_BASE(IntegerType) {
 public:
     IntegerType(int bit_width, bool is_unsigned);
 

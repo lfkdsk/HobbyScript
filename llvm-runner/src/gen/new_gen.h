@@ -11,11 +11,14 @@
 
 class NewGen : public CodeGen, public GEN_BASE(NewGen) {
 public:
-    explicit NewGen(llvm::Type *type = nullptr) : CodeGen(type) {};
+    explicit NewGen(llvm::Type *type = nullptr) : CodeGen(type) {
+        this->runtime_type = NewGenTy;
+    };
 
 public:
     CodeGen *constructor;
-    CodeGen *finalizer;
+    CodeGen *finalizer = nullptr;
+    QString name;
 };
 
 

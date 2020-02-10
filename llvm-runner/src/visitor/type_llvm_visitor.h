@@ -11,6 +11,7 @@
 class LLVMTypeVisitor : public TypeBaseVisitor {
 public:
     explicit LLVMTypeVisitor(llvm::LLVMContext &context) : context(context) {}
+
 public:
     void visit(AstType &gen) override;
 
@@ -19,6 +20,10 @@ public:
     void visit(ClassType &gen) override;
 
     void visit(IntegerType &gen) override;
+
+    void visit(LLVMStructType &gen) override;
+
+    void visit(StringType &gen) override;
 
 private:
     llvm::LLVMContext &context;

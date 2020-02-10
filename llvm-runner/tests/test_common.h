@@ -62,6 +62,7 @@ static void test_llvm_run(AstPackage *package, std::unique_ptr<llvm::Module> mod
     atexit(llvm::llvm_shutdown); // Call llvm_shutdown() on exit.
 
     print_llvm_modules(module.get());
+//    output_llvm_modules(module.get());
 
     if (!package) {
         console->error(QString(TAG + " package is null.").toStdString());

@@ -48,9 +48,14 @@ void AstPackage::codegen(llvm::LLVMContext &llvm_context, llvm::Module *module) 
 
     Plugins::load_plugin_package();
     llvm::Module *core = Plugins::load_plugin_core();
+    llvm::Module *string =  Plugins::load_llvm_ir(get_plugin_dir() + separator + "string.ll");
     link_to(core, llvm_module.get(), "start_gc");
     link_to(core, llvm_module.get(), "init_log");
     link_to(core, llvm_module.get(), "stop_gc");
+//    link_to(string, llvm_module.get(), "HNI_StringObject_Finalize");
+//    link_to(string, llvm_module.get(), "HNI_StringObject_Init");
+//    link_to(string, llvm_module.get(), "HNI_StringObject_Print");
+//    link_to(string, llvm_module.get(), "HNI_StringObject_FromString");
 
     llvm::Function *start_gc = Plugins::get_function("start_gc");
     llvm::Function *init_log = Plugins::get_function("init_log");

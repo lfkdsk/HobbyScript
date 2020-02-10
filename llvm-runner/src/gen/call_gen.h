@@ -30,31 +30,11 @@ public:
     static llvm::CallInst *call(llvm::IRBuilder<> &builder, llvm::Function *func, Params... func_params) {
         std::vector<llvm::Value *> values;
         convert_value(values, func_params...);
-
-        std::vector<llvm::Value *> args_array;
-        auto args = func->arg_begin();
-
-        for (auto *i : values) {
-            if (args != func->arg_end()) {
-                auto *tp = args->getType();
-                auto *to = llvm_type_cast(builder, tp, i);
-                args_array.push_back(to);
-                args++;
-            } else if (func->isVarArg()) {
-                args_array.push_back(i);
-            } else {
-                throw std::runtime_error("to many params for " + func->getName().str());
-            }
-        }
-        auto call = builder.CreateCall(func, args_array);
-//
-//        llvm::raw_os_ostream os(std::cout);
-//        call->print(os);
-//        os.flush();
-
-        return call;
-//        return CallGen::call_func(builder, func, values);
+        return CallGen::call_func(builder, func, values);
     }
+
+public:
+    CodeGen *object = nullptr;
 };
 
 

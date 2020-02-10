@@ -18,7 +18,12 @@
 #include <llvm/Support/SourceMgr.h>
 #include "ast/ast_nodes.hpp"
 #include "runtime/runtime.h"
+#include "plugins/plugin_core.h"
 
+static void example_function() {
+    char *message = static_cast<char *>(hyobject_malloc(64));
+    strcpy(message, "No More Memory Leaks!");
+}
 
 int main(int argc, char **argv, char *const *envp) {
     atexit(llvm::llvm_shutdown);
@@ -30,5 +35,8 @@ int main(int argc, char **argv, char *const *envp) {
     auto *m = new llvm::Module("TOP", llvm_global_context);
     llvm_module.reset(m);
 
+    start_gc(argc);
+    example_function();
+    stop_gc();
     return 0;
 }
