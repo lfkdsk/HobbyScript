@@ -34,6 +34,8 @@ public:
 
     void visit(DefGen &gen) override;
 
+    void visit(NewGen &gen) override;
+
 private:
     LLVMGenContext *llvm_gen;
 };

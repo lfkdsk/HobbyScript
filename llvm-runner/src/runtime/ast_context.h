@@ -6,9 +6,9 @@
 #define LLVM_RUNNER_AST_CONTEXT_H
 
 #include "common/common.h"
-#include "gen/code_gens.hpp"
-#include "common/utility.h"
+#include "gen/code_gen.h"
 #include <llvm/IRReader/IRReader.h>
+#include "common/utility.h"
 
 class AstContext {
 public:

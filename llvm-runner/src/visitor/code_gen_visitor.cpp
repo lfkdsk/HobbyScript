@@ -18,7 +18,7 @@ void CodeGenVisitor::visit(AstValue &node) {
 }
 
 void CodeGenVisitor::visit(AstStringLiteral &node) {
-
+    set_codegen_result(node, new StringLiteGen(context->context(), node.name));
 }
 
 void CodeGenVisitor::visit(AstIntegerConstant &node) {

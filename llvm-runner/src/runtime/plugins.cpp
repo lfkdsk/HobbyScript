@@ -88,5 +88,8 @@ void Plugins::link_plugins(llvm::ExecutionEngine *engine) {
         std::clog << "Load module:" << v->getName().str() << std::endl;
         engine->addModule(std::move(v));
     }
-//    loaded_modules.clear();
+}
+
+llvm::StructType *Plugins::get_struct(const QString &name) {
+    return loaded_structs["struct." + name];
 }

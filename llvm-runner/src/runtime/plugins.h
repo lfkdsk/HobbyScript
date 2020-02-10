@@ -24,6 +24,8 @@ public:
     static llvm::Function *get_function(const QString &name);
 
     static llvm::Function *get_function(llvm::Module *module, const QString &name);
+
+    static llvm::StructType *get_struct(const QString &name);
 };
 
 #endif //LLVM_RUNNER_PLUGINS_H

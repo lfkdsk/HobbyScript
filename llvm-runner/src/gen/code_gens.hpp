@@ -11,5 +11,7 @@
 #include "let_gen.h"
 #include "def_gen.h"
 #include "call_gen.h"
+#include "lite_gen.h"
+#include "new_gen.h"
 
 #endif //LLVM_RUNNER_CODE_GENS_H

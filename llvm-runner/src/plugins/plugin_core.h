@@ -9,12 +9,15 @@
 #include <assert.h>
 #include "gc.h"
 #include "stdio.h"
+#include <stdbool.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 static gc_t gc;
+
+static bool is_debug = true;
 
 void init_log();
 

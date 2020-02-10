@@ -51,6 +51,8 @@ public:
     virtual void visit(DefGen &gen) = 0;
 
     virtual void visit(StringLiteGen &gen) = 0;
+
+    virtual void visit(NewGen &gen) = 0;
 };
 
 class TypeBaseVisitor {

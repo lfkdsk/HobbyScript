@@ -28,7 +28,7 @@ static void llvm_init() {
     llvm::InitializeNativeTargetAsmParser();
 }
 
-static AstContext *test_parse(const QString &fileName, llvm::Module *module) {
+static AstPackage *test_ast_parse(const QString &fileName) {
     // save context.
     auto *old_package = ast_current_package;
     ast_current_package = new AstPackage();
@@ -51,7 +51,11 @@ static AstContext *test_parse(const QString &fileName, llvm::Module *module) {
     ast_current_package = old_package;
     // save package message.
     global_packages[fileName] = now_package;
-    return global_packages_contexts[fileName] = now_package->compile(module);
+    return now_package;
+}
+
+static AstContext *test_parse(const QString &fileName, llvm::Module *module) {
+    return global_packages_contexts[fileName] = test_ast_parse(fileName)->compile(module);
 }
 
 static void test_llvm_run(AstPackage *package, std::unique_ptr<llvm::Module> module, char *const *envp) {
