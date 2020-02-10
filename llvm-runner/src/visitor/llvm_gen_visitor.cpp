@@ -78,7 +78,7 @@ void LLVMCodeGenVisitor::visit(StringLiteGen &gen) {
     new_gen.name = that.name;
 //    new_gen.finalizer = new ValueGen(finalize);
 //    auto *new_obj = new_gen.generate(this);
-    auto *new_obj = CallGen::call(builder, create, string_ptr);
+    auto *new_obj = CallGen::call(builder, create, string_ptr, (uint64_t) that.str().toStdWString().size());
 
 //    CallGen::call(builder, init, new_obj, string_ptr, (uint64_t) that.str().toStdWString().size());
 //    CallGen::call(builder, print, new_obj);
