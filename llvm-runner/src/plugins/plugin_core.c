@@ -4,23 +4,27 @@
 
 #include "plugin_core.h"
 
-void start_gc() {
-//    tgc_start(&gc, 0);
-    printf("hello world");
+void init_log() {
+    printf("init plugin core");
+}
+
+void start_gc(int argc) {
+    int i = 0;
+    gc_start(&gc, &i);
 }
 
 void stop_gc() {
-    tgc_stop(&gc);
+    gc_stop(&gc);
 }
 
 void *hyobject_malloc(size_t size) {
-    return tgc_alloc(&gc, size);
+    return gc_alloc(&gc, size);
 }
 
 void *hyobject_realloc(void *ptr, size_t size) {
-    return tgc_realloc(&gc, ptr, size);
+    return gc_realloc(&gc, ptr, size);
 }
 
 void hyobject_free(void *ptr) {
-    tgc_free(&gc, ptr);
+    gc_free(&gc, ptr);
 }

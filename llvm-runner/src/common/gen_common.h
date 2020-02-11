@@ -21,6 +21,8 @@ class StringLiteGen;
 
 class CallGen;
 
+class NewGen;
+
 enum GenType {
     CodeGenTy,
     TypeOnlyTy,
@@ -29,6 +31,7 @@ enum GenType {
     DefGenTy,
     StringLiteGenTy,
     CallGenTy,
+    NewGenTy,
 };
 
 #define GEN_BASE(Type) \
@@ -36,13 +39,25 @@ enum GenType {
             Type, \
             CodeGen, /* CodeGen Base Node */ \
             ValueGen, LetGen, TypeOnlyGen, \
-            DefGen, StringLiteGen \
+            DefGen, StringLiteGen, NewGen \
     >\
 
 #define GEN_TYPE_AUTO_DOWNCAST(node, visitor) \
     switch (node->runtime_type) { \
         case DefGenTy: { \
             visitor->visit(*dynamic_cast<DefGen *>(node)); \
+            break; \
+        } \
+        case NewGenTy: { \
+            visitor->visit(*dynamic_cast<NewGen *>(node)); \
+            break; \
+        } \
+        case CallGenTy: { \
+            visitor->visit(*dynamic_cast<CallGen *>(node)); \
+            break; \
+        } \
+        case StringLiteGenTy: { \
+            visitor->visit(*dynamic_cast<StringLiteGen *>(node)); \
             break; \
         } \
     } \

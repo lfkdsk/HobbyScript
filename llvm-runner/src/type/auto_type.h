@@ -7,7 +7,7 @@
 
 #include "ast_type.h"
 
-class AutoType : public AstType {
+class AutoType : public AstType, public TYPE_BASE(AutoType) {
 public:
     explicit AutoType() : AstType(AutoTyId) {};
 

@@ -5,6 +5,7 @@
 #ifndef LLVM_RUNNER_LITE_GEN_H
 #define LLVM_RUNNER_LITE_GEN_H
 
+#include "runtime/plugins.h"
 #include "code_gen.h"
 
 class StringLiteGen : public CodeGen, public GEN_BASE(StringLiteGen) {
@@ -13,6 +14,7 @@ public:
             llvm_context(llvm_context),
             source_string(std::move(string)) {
         this->runtime_type = StringLiteGenTy;
+        this->type = Plugins::get_struct("HyStringObject");
     }
 
 public:
@@ -23,6 +25,8 @@ public:
     QString str() {
         return source_string;
     }
+
+    QString name;
 
 private:
     llvm::LLVMContext &llvm_context;

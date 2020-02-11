@@ -65,7 +65,6 @@ static QString llvm_type_dump(llvm::Type *type) {
 }
 
 inline static llvm::Function *link_to(llvm::Module *from, llvm::Module *to, llvm::StringRef name) {
-    auto size = from->getFunctionList().size();
     auto *f = from->getFunction(name);
     assert(f);
     return llvm::Function::Create(f->getFunctionType(), llvm::GlobalValue::ExternalLinkage, name, to);

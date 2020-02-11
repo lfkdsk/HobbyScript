@@ -12,7 +12,7 @@
 
 static uint32_t type_id_cal = 0;
 
-class AstType {
+class AstType : public TYPE_BASE(AstType) {
 
 public:
     explicit AstType(VMTypeID type = AutoTyId) : _type_id(type), id(type_id_cal++), name(type_name(type)) {}
@@ -125,14 +125,5 @@ public:
         return name;
     }
 };
-
-static AstType *static_true;
-static AstType *static_false;
-static AstType *string_type;
-static AstType *any_type;
-static AstType *void_type;
-static AstType *float_type;
-static AstType *double_type;
-static AstType *null_type;
 
 #endif //LLVM_RUNNER_AST_TYPE_H

@@ -18,7 +18,7 @@
 #include <llvm/Support/SourceMgr.h>
 #include "ast/ast_nodes.hpp"
 #include "runtime/runtime.h"
-
+#include "plugins/string.h"
 
 int main(int argc, char **argv, char *const *envp) {
     atexit(llvm::llvm_shutdown);
@@ -30,5 +30,9 @@ int main(int argc, char **argv, char *const *envp) {
     auto *m = new llvm::Module("TOP", llvm_global_context);
     llvm_module.reset(m);
 
+    start_gc(argc);
+    auto *var = HNI_StringObject_FromString("lfkdsk", 6);
+    HNI_StringObject_Finalize(var);
+    stop_gc();
     return 0;
 }

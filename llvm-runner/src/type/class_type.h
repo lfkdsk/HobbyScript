@@ -7,7 +7,7 @@
 
 #include "ast_type.h"
 
-class ClassType : public AstType {
+class ClassType : public AstType, public TYPE_BASE(ClassType) {
 public:
     QVector<AstType *> template_vars;
     AstContext *context = nullptr;

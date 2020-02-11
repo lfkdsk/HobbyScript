@@ -48,14 +48,24 @@ void AstPackage::codegen(llvm::LLVMContext &llvm_context, llvm::Module *module) 
 
     Plugins::load_plugin_package();
     llvm::Module *core = Plugins::load_plugin_core();
+    llvm::Module *string =  Plugins::load_llvm_ir(get_plugin_dir() + separator + "string.ll");
     link_to(core, llvm_module.get(), "start_gc");
+    link_to(core, llvm_module.get(), "init_log");
+    link_to(core, llvm_module.get(), "stop_gc");
+//    link_to(string, llvm_module.get(), "HNI_StringObject_Finalize");
+//    link_to(string, llvm_module.get(), "HNI_StringObject_Init");
+//    link_to(string, llvm_module.get(), "HNI_StringObject_Print");
+//    link_to(string, llvm_module.get(), "HNI_StringObject_FromString");
 
     llvm::Function *start_gc = Plugins::get_function("start_gc");
+    llvm::Function *init_log = Plugins::get_function("init_log");
+    llvm::Function *stop_gc = Plugins::get_function("stop_gc");
     auto args_iter = package_func->arg_begin();
     llvm::Value *argc_ptr = args_iter++;
 
     ir_builder.SetInsertPoint(alloc);
-    CallGen::call(ir_builder, start_gc);
+    CallGen::call(ir_builder, init_log);
+    CallGen::call(ir_builder, start_gc, argc_ptr);
 
     ir_builder.SetInsertPoint(basic_block);
 
@@ -71,5 +81,7 @@ void AstPackage::codegen(llvm::LLVMContext &llvm_context, llvm::Module *module) 
     ir_builder.CreateBr(basic_block);
     // return void main.
     ir_builder.SetInsertPoint(deallocate);
+    // stop gc
+    CallGen::call(ir_builder, stop_gc);
     ir_builder.CreateRetVoid();
 }

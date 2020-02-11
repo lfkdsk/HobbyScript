@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_MODULE_PATH
         ${CMAKE_MODULE_PATH}
         ${CMAKE_SOURCE_DIR}/cmake
-        )
+)
 
 # import llvm
 find_package(LLVM REQUIRED CONFIG)
@@ -58,6 +58,7 @@ git_clone(
         GIT_URL https://github.com/gabime/spdlog.git
         GIT_TAG v1.4.2
 )
+
 include_directories(${spdlog_SOURCE_DIR}/include)
 
 # include src

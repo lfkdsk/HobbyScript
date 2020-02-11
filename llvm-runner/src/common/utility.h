@@ -20,11 +20,16 @@ inline static T *get_map_value(const QHash<QString, T *> &map, const QString &na
 }
 
 template<typename T>
-inline llvm::Value *to_llvm_value(T v);
+inline llvm::Value *to_llvm_value(llvm::LLVMContext &context, T v);
 
 template<typename T>
-inline llvm::Value *to_llvm_value(T *v) {
+inline llvm::Value *to_llvm_value(llvm::LLVMContext &context, T *v) {
     return v;
+}
+
+inline llvm::Value *to_llvm_value(llvm::LLVMContext &context, uint64_t v) {
+    auto *type = llvm::IntegerType::get(context, 32);
+    return llvm::ConstantInt::get(type, v, true);
 }
 
 #endif //LLVM_RUNNER_UTILITY_H

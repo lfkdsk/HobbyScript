@@ -8,6 +8,7 @@
 #include "ast/ast_nodes.hpp"
 #include "common/ast_common.h"
 #include "common/gen_common.h"
+#include "gen/code_gens.hpp"
 #include "visitor_base.h"
 #include "common/common.h"
 #include "type/ast_types.hpp"

@@ -21,4 +21,7 @@ tests/test_graph_gen/*.png
 src/plugins/*.ll
 test.c
 test.ll
+tests/test.c
+tests/test.ll
+main.ll
 # End of https://www.gitignore.io/api/cmake
