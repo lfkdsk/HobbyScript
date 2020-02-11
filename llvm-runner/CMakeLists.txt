@@ -58,6 +58,7 @@ git_clone(
         GIT_URL https://github.com/gabime/spdlog.git
         GIT_TAG v1.4.2
 )
+
 include_directories(${spdlog_SOURCE_DIR}/include)
 
 # include src

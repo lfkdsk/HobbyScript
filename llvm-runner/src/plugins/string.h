@@ -23,13 +23,13 @@ HyStringObject *HNI_StringObject_FromString(char *str, uint64_t size);
 
 HyVarObject *HNI_StringObject_FromSize(size_t len);
 
-HyVarObject *HNI_StringObject_FromHyString(HyStringObject *that);
+HyVarObject *HNI_StringObject_FromHyString(HyStringObject *self);
 
-void HNI_StringObject_Init(HyStringObject *this, char *data, uint64_t length);
+void HNI_StringObject_Init(HyStringObject *self, char *data, uint64_t length);
 
-void HNI_StringObject_Finalize(HyStringObject *this);
+void HNI_StringObject_Finalize(HyStringObject *self);
 
-void HNI_StringObject_Print(HyStringObject *this);
+void HNI_StringObject_Print(HyStringObject *self);
 
 #ifdef __cplusplus
 }

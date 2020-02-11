@@ -41,6 +41,14 @@ void LLVMCodeGenVisitor::visit(DefGen &gen) {
             new_gen->name = that.name;
         }
 
+        if (auto *str_gen = dynamic_cast<StringLiteGen *>(that.gen_value)) {
+            that.value = b.CreateAlloca(llvm::PointerType::getUnqual(that.type), nullptr,
+                                        that.name.toUtf8().toStdString());
+            auto *new_obj = str_gen->generate(this);
+            builder.CreateStore(new_obj, that.value);
+            return;
+        }
+
 
         llvm::Value *v = that.gen_value->generate(this);
 
@@ -74,16 +82,15 @@ void LLVMCodeGenVisitor::visit(StringLiteGen &gen) {
     auto *print = Plugins::get_function("HNI_StringObject_Print");
 
     auto new_gen = NewGen(that.type);
-    new_gen.is_escape = false;
+    new_gen.is_escape = true;
     new_gen.name = that.name;
-//    new_gen.finalizer = new ValueGen(finalize);
-//    auto *new_obj = new_gen.generate(this);
-    auto *new_obj = CallGen::call(builder, create, string_ptr, (uint64_t) that.str().toStdWString().size());
-
-//    CallGen::call(builder, init, new_obj, string_ptr, (uint64_t) that.str().toStdWString().size());
-//    CallGen::call(builder, print, new_obj);
-//    auto *v = CallGen::call(builder, create, string_ptr);
-//    builder.CreateStore(v, new_obj);
+    new_gen.finalizer = new ValueGen(finalize);
+    // alloc var name;
+    auto *new_obj = new_gen.generate(this);
+    // call init string value.
+    CallGen::call(builder, init, new_obj, string_ptr, (uint64_t) that.str().toStdWString().size());
+    // call print for debug
+    CallGen::call(builder, print, new_obj);
     that.set_codegen_result(new_obj);
 }
 
@@ -103,7 +110,11 @@ void LLVMCodeGenVisitor::visit(NewGen &gen) {
     if (that.is_escape) {
         that.value = CallGen::call(builder, Plugins::get_function("hyobject_malloc"), alloc_size);
         that.value = builder.CreateBitCast(that.value, ptr_type);
-        CallGen::call(bd, Plugins::get_function("hyobject_free"), that.value);
+        if (that.finalizer) {
+            CallGen::call(bd, llvm::dyn_cast<llvm::Function>(that.finalizer->generate(this)), that.value);
+        } else {
+            CallGen::call(bd, Plugins::get_function("hyobject_free"), that.value);
+        }
     } else {
         auto &alloc_block = func->getBasicBlockList().front();
         llvm::IRBuilder<> alloc(&alloc_block);

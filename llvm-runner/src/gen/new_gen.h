@@ -16,7 +16,7 @@ public:
     };
 
 public:
-    CodeGen *constructor;
+    CodeGen *constructor = nullptr;
     CodeGen *finalizer = nullptr;
     QString name;
 };

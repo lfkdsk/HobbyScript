@@ -5,22 +5,21 @@
 #include "string.h"
 
 HyStringObject *HNI_StringObject_FromString(char *str, uint64_t size) {
-    HyStringObject *this;
+    HyStringObject *self;
     size_t len;
 
     len = size * sizeof(wchar_t);
-    this = (HyStringObject *) malloc(sizeof(HyStringObject));
-    HyObject_INIT_VAR(this, (int32_t) CharactersTyId, size);
-    this->length = size;
-//    this->data = (wchar_t *) str;
-    this->data = malloc((size + 1)  * sizeof(wchar_t));
-    memcpy(this->data, str, len + 1);
+    self = (HyStringObject *) hyobject_malloc(sizeof(HyStringObject));
+    HyObject_INIT_VAR(self, (int32_t) CharactersTyId, size);
+    self->length = size;
+    self->data = malloc((size + 1) * sizeof(wchar_t));
+    memcpy(self->data, str, len + 1);
 
     if (is_debug) {
-        wprintf(L"\r\nCreate String(data, %lld): %.*ls From String\r\n", this->length, (int) this->length, this->data);
+        wprintf(L"\r\nCreate String(data, %lld): %.*ls From String\r\n", self->length, (int) self->length, self->data);
     }
 
-    return this;
+    return self;
 }
 
 HyVarObject *HNI_StringObject_FromSize(size_t len) {
@@ -30,24 +29,32 @@ HyVarObject *HNI_StringObject_FromSize(size_t len) {
 }
 
 HyVarObject *HNI_StringObject_FromHyString(HyStringObject *that) {
-    HyStringObject *this = hyobject_malloc(sizeof(HyStringObject) + that->length);
-    HyObject_INIT_VAR(this, (int32_t) CharactersTyId, that->length);
-    memcpy(this->data, that->data, that->length + 1);
-    return (HyVarObject *) this;
+    HyStringObject *self = hyobject_malloc(sizeof(HyStringObject) + that->length);
+    HyObject_INIT_VAR(self, (int32_t) CharactersTyId, that->length);
+    memcpy(self->data, that->data, that->length + 1);
+    return (HyVarObject *) self;
 }
 
-void HNI_StringObject_Init(HyStringObject *this, char *data, uint64_t length) {
-    HyObject_INIT_VAR(this, (int32_t) CharactersTyId, length);
-//    this->data = (wchar_t *) data;
+void HNI_StringObject_Init(HyStringObject *self, char *data, uint64_t length) {
+    size_t len = length * sizeof(wchar_t);
+    HyObject_INIT_VAR(self, (int32_t) CharactersTyId, length);
+    self->data = malloc((length + 1) * sizeof(wchar_t));
+    memcpy(self->data, data, len + 1);
+    self->length = length;
     if (is_debug) {
-        wprintf(L"\r\nInit String(data, %lld): %.*ls\r\n", length, (int) length, this->data);
+        wprintf(L"\r\nInit String(data, %lld): %.*ls\r\n", length, (int) length, self->data);
     }
 }
 
-void HNI_StringObject_Finalize(HyStringObject *this) {
-    hyobject_free(this);
+void HNI_StringObject_Finalize(HyStringObject *self) {
+    if (self && self->data) {
+        free(self->data);
+    }
+    hyobject_free(self);
 }
 
-void HNI_StringObject_Print(HyStringObject *this) {
-    wprintf(L"%.*ls", (int) this->length, this->data);
+void HNI_StringObject_Print(HyStringObject *self) {
+    wchar_t *data = (wchar_t *) self->data;
+    uint64_t len = self->length;
+    wprintf(L"%.*ls\r\n", (int) len, data);
 }

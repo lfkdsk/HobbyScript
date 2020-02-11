@@ -15,9 +15,21 @@ set(SOURCES ${TEST_SOURCES})
 get_filename_component(PARENT_DIR ../ ABSOLUTE)
 include_directories(${PARENT_DIR}/src)
 
+git_clone(
+        PROJECT_NAME llvmcppapi
+        GIT_URL git@github.com:zhangjiantao/llvm-cxxapi.git
+        GIT_BRANCH master
+)
+
+AUX_SOURCE_DIRECTORY(${llvmcppapi_SOURCE_DIR} CPP_END_SOURCE)
+SET(CPPEND ${CPP_END_SOURCE})
+LIST(REMOVE_ITEM CPPEND ${llvmcppapi_SOURCE_DIR}/llvm-cxxapi.cpp)
+INCLUDE_DIRECTORIES(${llvmcppapi_SOURCE_DIR})
+
 add_executable(
         unit_tests
         ${MAIN_SOURCE}
+        ${CPPEND}
 )
 
 target_link_libraries(
