@@ -24,10 +24,10 @@ before_install:
 
 script:
 - cd llvm-runner
-- cmake -H. -Bbuild
-- cd build
-- cmake --build .
-- ./src/llvm-runner # run test
+# - cmake -H. -Bbuild
+# - cd build
+# - cmake --build .
+# - ./src/llvm-runner # run test
 
 after_success:
 - coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"
